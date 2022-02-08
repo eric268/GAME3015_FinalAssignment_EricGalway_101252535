@@ -21,10 +21,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Week4-1-ShapesAppUsingDescriptorTable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FrameResource.cpp">
+    <ClCompile Include="Source\DirectX12Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D3DCommon\Camera.cpp">
@@ -48,11 +45,23 @@
     <ClCompile Include="D3DCommon\MathHelper.cpp">
       <Filter>D3DCommon</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DCommon\FrameResource.cpp">
+      <Filter>D3DCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\FrameResource.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="D3DCommon\Camera.h">
       <Filter>D3DCommon</Filter>
     </ClInclude>
@@ -79,6 +88,27 @@
     </ClInclude>
     <ClInclude Include="D3DCommon\UploadBuffer.h">
       <Filter>D3DCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DirectX12Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DCommon\FrameResource.h">
+      <Filter>D3DCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ResourceHolder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ResourceIdentifiers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ResourceManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

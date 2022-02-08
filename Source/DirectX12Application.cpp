@@ -4,188 +4,27 @@
 // Hold down '1' key to view scene in wireframe mode.
 //***************************************************************************************
 
-#include "../D3DCommon/d3dApp.h"
-#include "../D3DCommon/MathHelper.h"
-#include "../D3DCommon/UploadBuffer.h"
-#include "../D3DCommon/GeometryGenerator.h"
-#include "FrameResource.h"
-
-using Microsoft::WRL::ComPtr;
-using namespace DirectX;
-using namespace DirectX::PackedVector;
-
-const int gNumFrameResources = 3;
+#include "DirectX12Application.h"
+#include "ResourceManager.h"
+#include "Game.h"
 
 // Lightweight structure stores parameters to draw a shape.  This will
 // vary from app-to-app.
-struct RenderItem
-{
-	RenderItem() = default;
 
-    // World matrix of the shape that describes the object's local space
-    // relative to the world space, which defines the position, orientation,
-    // and scale of the object in the world.
-    XMFLOAT4X4 World = MathHelper::Identity4x4();
+const int gNumFrameResources = 3;
 
-    XMFLOAT4X4 TexTransform = MathHelper::Identity4x4();
-
-	// Dirty flag indicating the object data has changed and we need to update the constant buffer.
-	// Because we have an object cbuffer for each FrameResource, we have to apply the
-	// update to each FrameResource.  Thus, when we modify obect data we should set 
-	// NumFramesDirty = gNumFrameResources so that each frame resource gets the update.
-	int NumFramesDirty = gNumFrameResources;
-
-	// Index into GPU constant buffer corresponding to the ObjectCB for this render item.
-	UINT ObjCBIndex = -1;
-
-    Material* Mat = nullptr;
-	MeshGeometry* Geo = nullptr;
-
-    // Primitive topology.
-    D3D12_PRIMITIVE_TOPOLOGY PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-
-    // DrawIndexedInstanced parameters.
-    UINT IndexCount = 0;
-    UINT StartIndexLocation = 0;
-    int BaseVertexLocation = 0;
-};
-
-enum class RenderLayer : int
-{
-    Opaque = 0,
-    //step1
-    Transparent,
-    Count
-};
-
-class ShapesApp : public D3DApp
-{
-public:
-    ShapesApp(HINSTANCE hInstance);
-    ShapesApp(const ShapesApp& rhs) = delete;
-    ShapesApp& operator=(const ShapesApp& rhs) = delete;
-    ~ShapesApp();
-
-    virtual bool Initialize()override;
-
-private:
-    virtual void OnResize()override;
-    virtual void Update(const GameTimer& gt)override;
-    virtual void Draw(const GameTimer& gt)override;
-
-    virtual void OnMouseDown(WPARAM btnState, int x, int y)override;
-    virtual void OnMouseUp(WPARAM btnState, int x, int y)override;
-    virtual void OnMouseMove(WPARAM btnState, int x, int y)override;
-
-    void OnKeyboardInput(const GameTimer& gt);
-	void UpdateCamera(const GameTimer& gt);
-    void AnimateMaterials(const GameTimer& gt);
-	void UpdateObjectCBs(const GameTimer& gt);
-    void UpdateMaterialCBs(const GameTimer& gt);
-	void UpdateMainPassCB(const GameTimer& gt);
-
-
-    void LoadTextures();
-    void BuildRootSignature();
-    void BuildDescriptorHeaps();
-    void BuildShadersAndInputLayout();
-    void BuildConstantBufferViews();
-    void BuildLandGeometry();
-
-    void BuildShapeGeometry();
-    void BuildPSOs();
-    void BuildFrameResources();
-    void BuildMaterials();
-    void BuildRenderItems();
-    void DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems);
-
-    void createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, XMFLOAT3 translation, XMFLOAT3 angle, std::string shapeName, std::string materialName);
-
-
-    std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> GetStaticSamplers();
- 
-private:
-
-    std::vector<std::unique_ptr<FrameResource>> mFrameResources;
-    FrameResource* mCurrFrameResource = nullptr;
-    int mCurrFrameResourceIndex = 0;
-
-    UINT mCbvSrvDescriptorSize = 0;
-
-    ComPtr<ID3D12RootSignature> mRootSignature = nullptr;
-    //ComPtr<ID3D12DescriptorHeap> mCbvHeap = nullptr;
-
-	ComPtr<ID3D12DescriptorHeap> mSrvDescriptorHeap = nullptr;
-
-	std::unordered_map<std::string, std::unique_ptr<MeshGeometry>> mGeometries;
-    std::unordered_map<std::string, std::unique_ptr<Material>> mMaterials;
-    std::unordered_map<std::string, std::unique_ptr<Texture>> mTextures;
-	std::unordered_map<std::string, ComPtr<ID3DBlob>> mShaders;
-    std::unordered_map<std::string, ComPtr<ID3D12PipelineState>> mPSOs;
-
-    std::vector<D3D12_INPUT_ELEMENT_DESC> mInputLayout;
-
-    RenderItem* mWavesRitem = nullptr;
-
-	// List of all the render items.
-	std::vector<std::unique_ptr<RenderItem>> mAllRitems;
-
-	// Render items divided by PSO.
-	std::vector<RenderItem*> mOpaqueRitems;
-
-
-    PassConstants mMainPassCB;
-
-    UINT mPassCbvOffset = 0;
-
-    bool mIsWireframe = false;
-
-	XMFLOAT3 mEyePos = { 0.0f, 0.0f, 0.0f };
-	XMFLOAT4X4 mView = MathHelper::Identity4x4();
-	XMFLOAT4X4 mProj = MathHelper::Identity4x4();
-
-    float mTheta = 1.5f*XM_PI;
-    float mPhi = 0.2f*XM_PI;
-    float mRadius = 15.0f;
-    XMVECTOR target = XMVectorZero();
-    POINT mLastMousePos;
-};
-
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance,
-    PSTR cmdLine, int showCmd)
-{
-    // Enable run-time memory check for debug builds.
-#if defined(DEBUG) | defined(_DEBUG)
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-#endif
-
-    try
-    {
-        ShapesApp theApp(hInstance);
-        if(!theApp.Initialize())
-            return 0;
-
-        return theApp.Run();
-    }
-    catch(DxException& e)
-    {
-        MessageBox(nullptr, e.ToString().c_str(), L"HR Failed", MB_OK);
-        return 0;
-    }
-}
-
-ShapesApp::ShapesApp(HINSTANCE hInstance)
+DirectX12Application::DirectX12Application(HINSTANCE hInstance)
     : D3DApp(hInstance)
 {
 }
 
-ShapesApp::~ShapesApp()
+DirectX12Application::~DirectX12Application()
 {
     if(md3dDevice != nullptr)
         FlushCommandQueue();
 }
 
-bool ShapesApp::Initialize()
+bool DirectX12Application::Initialize()
 {
     if(!D3DApp::Initialize())
         return false;
@@ -195,7 +34,6 @@ bool ShapesApp::Initialize()
 
     mCbvSrvDescriptorSize = md3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
-    LoadTextures();
     BuildRootSignature();
     BuildDescriptorHeaps();
     BuildShadersAndInputLayout();
@@ -219,7 +57,7 @@ bool ShapesApp::Initialize()
     return true;
 }
  
-void ShapesApp::OnResize()
+void DirectX12Application::OnResize()
 {
     D3DApp::OnResize();
 
@@ -228,8 +66,9 @@ void ShapesApp::OnResize()
     XMStoreFloat4x4(&mProj, P);
 }
 
-void ShapesApp::Update(const GameTimer& gt)
+void DirectX12Application::Update(const GameTimer& gt)
 {
+    game.Update(gt);
     OnKeyboardInput(gt);
 	UpdateCamera(gt);
 
@@ -247,31 +86,21 @@ void ShapesApp::Update(const GameTimer& gt)
         CloseHandle(eventHandle);
     }
 
-    AnimateMaterials(gt);
 	UpdateObjectCBs(gt);
     UpdateMaterialCBs(gt);
 	UpdateMainPassCB(gt);
 
 }
 
-void ShapesApp::Draw(const GameTimer& gt)
+void DirectX12Application::Draw(const GameTimer& gt)
 {
+
+
     auto cmdListAlloc = mCurrFrameResource->CmdListAlloc;
 
     // Reuse the memory associated with command recording.
     // We can only reset when the associated command lists have finished execution on the GPU.
     ThrowIfFailed(cmdListAlloc->Reset());
-
-    // A command list can be reset after it has been added to the command queue via ExecuteCommandList.
-    // Reusing the command list reuses memory.
-    if(mIsWireframe)
-    {
-        ThrowIfFailed(mCommandList->Reset(cmdListAlloc.Get(), mPSOs["opaque_wireframe"].Get()));
-    }
-    else
-    {
-        ThrowIfFailed(mCommandList->Reset(cmdListAlloc.Get(), mPSOs["opaque"].Get()));
-    }
 
     mCommandList->RSSetViewports(1, &mScreenViewport);
     mCommandList->RSSetScissorRects(1, &mScissorRect);
@@ -326,7 +155,7 @@ void ShapesApp::Draw(const GameTimer& gt)
     mCommandQueue->Signal(mFence.Get(), mCurrentFence);
 }
 
-void ShapesApp::OnMouseDown(WPARAM btnState, int x, int y)
+void DirectX12Application::OnMouseDown(WPARAM btnState, int x, int y)
 {
     mLastMousePos.x = x;
     mLastMousePos.y = y;
@@ -334,12 +163,12 @@ void ShapesApp::OnMouseDown(WPARAM btnState, int x, int y)
     SetCapture(mhMainWnd);
 }
 
-void ShapesApp::OnMouseUp(WPARAM btnState, int x, int y)
+void DirectX12Application::OnMouseUp(WPARAM btnState, int x, int y)
 {
     ReleaseCapture();
 }
 
-void ShapesApp::OnMouseMove(WPARAM btnState, int x, int y)
+void DirectX12Application::OnMouseMove(WPARAM btnState, int x, int y)
 {
     if((btnState & MK_LBUTTON) != 0)
     {
@@ -371,7 +200,7 @@ void ShapesApp::OnMouseMove(WPARAM btnState, int x, int y)
     mLastMousePos.y = y;
 }
  
-void ShapesApp::OnKeyboardInput(const GameTimer& gt)
+void DirectX12Application::OnKeyboardInput(const GameTimer& gt)
 {
     if(GetAsyncKeyState('1') & 0x8000)
         mIsWireframe = true;
@@ -379,7 +208,7 @@ void ShapesApp::OnKeyboardInput(const GameTimer& gt)
         mIsWireframe = false;
 }
  
-void ShapesApp::UpdateCamera(const GameTimer& gt)
+void DirectX12Application::UpdateCamera(const GameTimer& gt)
 {
     XMVECTOR right = XMVectorSet(0.01f, 0.0f, 0.0f, 1.0f);
     XMVECTOR upward = XMVectorSet(0.00f, 0.01f, 0.0f, 1.0f);
@@ -399,31 +228,13 @@ void ShapesApp::UpdateCamera(const GameTimer& gt)
 	XMStoreFloat4x4(&mView, view);
 }
 
-void ShapesApp::AnimateMaterials(const GameTimer& gt)
+void DirectX12Application::AnimateMaterials(const GameTimer& gt)
 {
-    // Scroll the water material texture coordinates.
-    auto waterMat = mMaterials["water"].get();
-
-    float& tu = waterMat->MatTransform(3, 0);
-    float& tv = waterMat->MatTransform(3, 1);
-
-    tu += 0.1f * gt.DeltaTime();
-    tv += 0.02f * gt.DeltaTime();
-
-    if (tu >= 1.0f)
-        tu -= 1.0f;
-
-    if (tv >= 1.0f)
-        tv -= 1.0f;
-
-    waterMat->MatTransform(3, 0) = tu;
-    waterMat->MatTransform(3, 1) = tv;
-
-    // Material has changed, so need to update cbuffer.
-    waterMat->NumFramesDirty = gNumFrameResources;
 }
 
-void ShapesApp::UpdateObjectCBs(const GameTimer& gt)
+
+
+void DirectX12Application::UpdateObjectCBs(const GameTimer& gt)
 {
 	auto currObjectCB = mCurrFrameResource->ObjectCB.get();
 	for(auto& e : mAllRitems)
@@ -447,7 +258,7 @@ void ShapesApp::UpdateObjectCBs(const GameTimer& gt)
 	}
 }
 
-void ShapesApp::UpdateMaterialCBs(const GameTimer& gt)
+void DirectX12Application::UpdateMaterialCBs(const GameTimer& gt)
 {
     auto currMaterialCB = mCurrFrameResource->MaterialCB.get();
     for (auto& e : mMaterials)
@@ -473,7 +284,7 @@ void ShapesApp::UpdateMaterialCBs(const GameTimer& gt)
     }
 }
 
-void ShapesApp::UpdateMainPassCB(const GameTimer& gt)
+void DirectX12Application::UpdateMainPassCB(const GameTimer& gt)
 {
 	XMMATRIX view = XMLoadFloat4x4(&mView);
 	XMMATRIX proj = XMLoadFloat4x4(&mProj);
@@ -505,215 +316,42 @@ void ShapesApp::UpdateMainPassCB(const GameTimer& gt)
 	currPassCB->CopyData(0, mMainPassCB);
 }
 
-void ShapesApp::LoadTextures()
+
+void DirectX12Application::BuildDescriptorHeaps()
 {
-    auto grassTex = std::make_unique<Texture>();
-    grassTex->Name = "grassTex";
-    grassTex->Filename = L"Media/grass.dds";
-    ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-        mCommandList.Get(), grassTex->Filename.c_str(),
-        grassTex->Resource, grassTex->UploadHeap));
-
-    auto sandbrickTex = std::make_unique<Texture>();
-    sandbrickTex->Name = "sandbrickTex";
-    sandbrickTex->Filename = L"Media/sandbrick.dds";
-    ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-        mCommandList.Get(), sandbrickTex->Filename.c_str(),
-        sandbrickTex->Resource, sandbrickTex->UploadHeap));
-
-    auto ironTex = std::make_unique<Texture>();
-    ironTex->Name = "ironTex";
-    ironTex->Filename = L"Media/iron.dds";
-    ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-        mCommandList.Get(), ironTex->Filename.c_str(),
-        ironTex->Resource, ironTex->UploadHeap));
-
-    auto shingleTex = std::make_unique<Texture>();
-    shingleTex->Name = "shingleTex";
-    shingleTex->Filename = L"Media/shingle.dds";
-    ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-        mCommandList.Get(), shingleTex->Filename.c_str(),
-        shingleTex->Resource, shingleTex->UploadHeap));
-
-    auto stoneTex = std::make_unique<Texture>();
-    stoneTex->Name = "stoneTex";
-    stoneTex->Filename = L"Media/stone.dds";
-    ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-        mCommandList.Get(), stoneTex->Filename.c_str(),
-        stoneTex->Resource, stoneTex->UploadHeap));
-
-    auto stonebrickTex = std::make_unique<Texture>();
-    stonebrickTex->Name = "stonebrickTex";
-    stonebrickTex->Filename = L"Media/stonebrick.dds";
-    ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-        mCommandList.Get(), stonebrickTex->Filename.c_str(),
-        stonebrickTex->Resource, stonebrickTex->UploadHeap));
-        
-    auto woodVTex = std::make_unique<Texture>();
-    woodVTex->Name = "woodVTex";
-    woodVTex->Filename = L"Media/woodV.dds";
-    ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-        mCommandList.Get(), woodVTex->Filename.c_str(),
-        woodVTex->Resource, woodVTex->UploadHeap));
-
-    auto waterTex = std::make_unique<Texture>();
-    waterTex->Name = "waterTex";
-    waterTex->Filename = L"Media/water1.dds";
-    ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-        mCommandList.Get(), waterTex->Filename.c_str(),
-        waterTex->Resource, waterTex->UploadHeap));
-
-    auto wroughtIronTex = std::make_unique<Texture>();
-    wroughtIronTex->Name = "wroughtIronTex";
-    wroughtIronTex->Filename = L"Media/wroughtIronTexture.dds";
-    ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-        mCommandList.Get(), wroughtIronTex->Filename.c_str(),
-        wroughtIronTex->Resource, wroughtIronTex->UploadHeap));
-
-    auto flameTex = std::make_unique<Texture>();
-    flameTex->Name = "flameTex";
-    flameTex->Filename = L"Media/FlameTexture.dds";
-    ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-        mCommandList.Get(), flameTex->Filename.c_str(),
-        flameTex->Resource, flameTex->UploadHeap));
-
-    //auto crystalTex = std::make_unique<Texture>();
-    //crystalTex->Name = "crystalTex";
-    //crystalTex->Filename = L"../../Textures/crystal.dds";
-    //ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-    //    mCommandList.Get(), crystalTex->Filename.c_str(),
-    //    crystalTex->Resource, crystalTex->UploadHeap));
-
-    mTextures[grassTex->Name] = std::move(grassTex);
-    mTextures[sandbrickTex->Name] = std::move(sandbrickTex);
-    mTextures[ironTex->Name] = std::move(ironTex);
-    mTextures[shingleTex->Name] = std::move(shingleTex);
-    mTextures[stoneTex->Name] = std::move(stoneTex);
-    mTextures[stonebrickTex->Name] = std::move(stonebrickTex);
-    mTextures[woodVTex->Name] = std::move(woodVTex);
-    mTextures[waterTex->Name] = std::move(waterTex);
-    mTextures[wroughtIronTex->Name] = std::move(wroughtIronTex);
-    mTextures[flameTex->Name] = std::move(flameTex);
-    //mTextures[crystalTex->Name] = std::move(crystalTex);
-}
-//If we have 3 frame resources and n render items, then we have three 3n object constant
-//buffers and 3 pass constant buffers.Hence we need 3(n + 1) constant buffer views(CBVs).
-//Thus we will need to modify our CBV heap to include the additional descriptors :
-
-
-void ShapesApp::BuildDescriptorHeaps()
-{
-   // UINT objCount = (UINT)mOpaqueRitems.size();
-   //
-   // // Need a CBV descriptor for each object for each frame resource,
-   // // +1 for the perPass CBV for each frame resource.
-   // UINT numDescriptors = (objCount+1) * gNumFrameResources;
-   //
-   // // Save an offset to the start of the pass CBVs.  These are the last 3 descriptors.
-   // mPassCbvOffset = objCount * gNumFrameResources;
-   //
-   // D3D12_DESCRIPTOR_HEAP_DESC cbvHeapDesc;
-   // cbvHeapDesc.NumDescriptors = numDescriptors;
-   // cbvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-   // cbvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-   // cbvHeapDesc.NodeMask = 0;
-   // ThrowIfFailed(md3dDevice->CreateDescriptorHeap(&cbvHeapDesc,
-   //     IID_PPV_ARGS(&mCbvHeap)));
-
-    //
-    // Create the SRV heap.
-    //
     D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
-    srvHeapDesc.NumDescriptors = 10;
+    srvHeapDesc.NumDescriptors = 4;
     srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
     srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
     ThrowIfFailed(md3dDevice->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&mSrvDescriptorHeap)));
 
-    //
-    // Fill out the heap with actual descriptors.
-    //
     CD3DX12_CPU_DESCRIPTOR_HANDLE hDescriptor(mSrvDescriptorHeap->GetCPUDescriptorHandleForHeapStart());
 
-    auto grassTex = mTextures["grassTex"]->Resource;
-    auto sandbrickTex = mTextures["sandbrickTex"]->Resource;
-    auto ironTex = mTextures["ironTex"]->Resource;
-    auto shingleTex = mTextures["shingleTex"]->Resource;
-    auto stoneTex = mTextures["stoneTex"]->Resource;
-    auto stonebrickTex = mTextures["stonebrickTex"]->Resource;
-    auto woodVTex = mTextures["woodVTex"]->Resource;
-    auto waterTex = mTextures["waterTex"]->Resource;
-    auto wroughtIronTex = mTextures["wroughtIronTex"]->Resource;
-    auto flameTex = mTextures["flameTex"]->Resource;
-    //auto crystalTex = mTextures["crystalTex"]->Resource;
+	//auto desertTex = ResourceManager::GetInstance()->GetTextureHolder().get(Textures::Desert).Resource;
+	//auto eagleTex = ResourceManager::GetInstance()->GetTextureHolder().get(Textures::Eagle).Resource;
+	//auto raptorTex = ResourceManager::GetInstance()->GetTextureHolder().get(Textures::Raptor).Resource;
 
-    D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
-    srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+  
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 
-    srvDesc.Format = grassTex->GetDesc().Format;
-    srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-    srvDesc.Texture2D.MostDetailedMip = 0;
-    srvDesc.Texture2D.MipLevels = -1;
-    md3dDevice->CreateShaderResourceView(grassTex.Get(), &srvDesc, hDescriptor);
+	//srvDesc.Format = desertTex->GetDesc().Format;
+ //   md3dDevice->CreateShaderResourceView(desertTex.Get(), &srvDesc, hDescriptor);
 
-    // next descriptor
-    hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+ //   // next descriptor
+ //   hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 
-    srvDesc.Format = sandbrickTex->GetDesc().Format;
-    md3dDevice->CreateShaderResourceView(sandbrickTex.Get(), &srvDesc, hDescriptor);
+	//srvDesc.Format = eagleTex->GetDesc().Format;
+	//md3dDevice->CreateShaderResourceView(eagleTex.Get(), &srvDesc, hDescriptor);
 
-    // next descriptor
-    hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	//// next descriptor
+	//hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 
-    srvDesc.Format = ironTex->GetDesc().Format;
-    md3dDevice->CreateShaderResourceView(ironTex.Get(), &srvDesc, hDescriptor);
+	//srvDesc.Format = raptorTex->GetDesc().Format;
+	//md3dDevice->CreateShaderResourceView(raptorTex.Get(), &srvDesc, hDescriptor);
 
-    // next descriptor
-    hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-
-    srvDesc.Format = shingleTex->GetDesc().Format;
-    md3dDevice->CreateShaderResourceView(shingleTex.Get(), &srvDesc, hDescriptor);
-
-    // next descriptor
-    hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-
-    srvDesc.Format = stoneTex->GetDesc().Format;
-    md3dDevice->CreateShaderResourceView(stoneTex.Get(), &srvDesc, hDescriptor);
-
-    // next descriptor
-    hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-
-    srvDesc.Format = stonebrickTex->GetDesc().Format;
-    md3dDevice->CreateShaderResourceView(stonebrickTex.Get(), &srvDesc, hDescriptor);
-
-    //// next descriptor
-    //hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-
-    //srvDesc.Format = crystalTex->GetDesc().Format;
-    //md3dDevice->CreateShaderResourceView(crystalTex.Get(), &srvDesc, hDescriptor);
-
-    // next descriptor
-    hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-
-    srvDesc.Format = woodVTex->GetDesc().Format;
-    md3dDevice->CreateShaderResourceView(woodVTex.Get(), &srvDesc, hDescriptor);
-
-    // next descriptor
-    hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-
-    srvDesc.Format = waterTex->GetDesc().Format;
-    md3dDevice->CreateShaderResourceView(waterTex.Get(), &srvDesc, hDescriptor);
-
-    // next descriptor
-    hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-
-    srvDesc.Format = wroughtIronTex->GetDesc().Format;
-    md3dDevice->CreateShaderResourceView(wroughtIronTex.Get(), &srvDesc, hDescriptor);
-
-    // next descriptor
-    hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-
-    srvDesc.Format = flameTex->GetDesc().Format;
-    md3dDevice->CreateShaderResourceView(flameTex.Get(), &srvDesc, hDescriptor);
+	// next descriptor
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 }
 
 //assuming we have n renter items, we can populate the CBV heap with the following code where descriptors 0 to n-
@@ -780,7 +418,7 @@ void ShapesApp::BuildDescriptorHeaps()
 
 //A root signature defines what resources need to be bound to the pipeline before issuing a draw call and
 //how those resources get mapped to shader input registers. there is a limit of 64 DWORDs that can be put in a root signature.
-void ShapesApp::BuildRootSignature()
+void DirectX12Application::BuildRootSignature()
 {
     //CD3DX12_DESCRIPTOR_RANGE cbvTable0;
     //cbvTable0.Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 0);
@@ -855,7 +493,7 @@ void ShapesApp::BuildRootSignature()
         IID_PPV_ARGS(mRootSignature.GetAddressOf())));
 }
 
-void ShapesApp::BuildShadersAndInputLayout()
+void DirectX12Application::BuildShadersAndInputLayout()
 {
 	mShaders["standardVS"] = d3dUtil::CompileShader(L"Shaders\\Default.hlsl", nullptr, "VS", "vs_5_1");
 	mShaders["opaquePS"] = d3dUtil::CompileShader(L"Shaders\\Default.hlsl", nullptr, "PS", "ps_5_1");
@@ -868,7 +506,7 @@ void ShapesApp::BuildShadersAndInputLayout()
     };
 }
 
-void ShapesApp::BuildLandGeometry()
+void DirectX12Application::BuildLandGeometry()
 {
     GeometryGenerator geoGen;
     GeometryGenerator::MeshData grid = geoGen.CreateGrid(160.0f, 160.0f, 50, 50);
@@ -924,7 +562,7 @@ void ShapesApp::BuildLandGeometry()
     mGeometries["landGeo"] = std::move(geo);
 }
 
-void ShapesApp::BuildShapeGeometry()
+void DirectX12Application::BuildShapeGeometry()
 {
     GeometryGenerator geoGen;
 	GeometryGenerator::MeshData box = geoGen.CreateBox(1.0f, 1.0f, 1.0f, 3, 0.5, 0.5);
@@ -1262,7 +900,7 @@ void ShapesApp::BuildShapeGeometry()
 	mGeometries[geo->Name] = std::move(geo);
 }
 
-void ShapesApp::BuildPSOs()
+void DirectX12Application::BuildPSOs()
 {
     D3D12_GRAPHICS_PIPELINE_STATE_DESC opaquePsoDesc;
 
@@ -1305,7 +943,7 @@ void ShapesApp::BuildPSOs()
     ThrowIfFailed(md3dDevice->CreateGraphicsPipelineState(&opaqueWireframePsoDesc, IID_PPV_ARGS(&mPSOs["opaque_wireframe"])));
 }
 
-void ShapesApp::BuildFrameResources()
+void DirectX12Application::BuildFrameResources()
 {
     for(int i = 0; i < gNumFrameResources; ++i)
     {
@@ -1314,10 +952,10 @@ void ShapesApp::BuildFrameResources()
     }
 }
 
-void ShapesApp::BuildMaterials()
+void DirectX12Application::BuildMaterials()
 {
     auto grass = std::make_unique<Material>();
-    grass->Name = "grass";
+    grass->Name = "desert";
     grass->MatCBIndex = 0;
     grass->DiffuseSrvHeapIndex = 0;
     grass->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
@@ -1325,7 +963,7 @@ void ShapesApp::BuildMaterials()
     grass->Roughness = 0.25f;
 
     auto sandbrick = std::make_unique<Material>();
-    sandbrick->Name = "sandbrick";
+    sandbrick->Name = "eagle";
     sandbrick->MatCBIndex = 1;
     sandbrick->DiffuseSrvHeapIndex = 1;
     sandbrick->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
@@ -1333,86 +971,20 @@ void ShapesApp::BuildMaterials()
     sandbrick->Roughness = 1.0f;
 
     auto iron = std::make_unique<Material>();
-    iron->Name = "iron";
+    iron->Name = "raptor";
     iron->MatCBIndex = 2;
     iron->DiffuseSrvHeapIndex = 2;
     iron->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     iron->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
     iron->Roughness = 0.7f;
 
-    auto shingle = std::make_unique<Material>();
-    shingle->Name = "shingle";
-    shingle->MatCBIndex = 3;
-    shingle->DiffuseSrvHeapIndex = 3;
-    shingle->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-    shingle->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-    shingle->Roughness = 1.0f;
-
-    auto stone = std::make_unique<Material>();
-    stone->Name = "stone";
-    stone->MatCBIndex = 4;
-    stone->DiffuseSrvHeapIndex = 4;
-    stone->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-    stone->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-    stone->Roughness = 1.0f;
-
-    auto stonebrick = std::make_unique<Material>();
-    stonebrick->Name = "stonebrick";
-    stonebrick->MatCBIndex = 5;
-    stonebrick->DiffuseSrvHeapIndex = 5;
-    stonebrick->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-    stonebrick->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-    stonebrick->Roughness = 1.0f;
-    
-    auto woodV = std::make_unique<Material>();
-    woodV->Name = "woodV";
-    woodV->MatCBIndex = 6;
-    woodV->DiffuseSrvHeapIndex = 6;
-    woodV->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-    woodV->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-    woodV->Roughness = 0.9f;
-
-    auto water = std::make_unique<Material>();
-    water->Name = "water";
-    water->MatCBIndex = 7;
-    water->DiffuseSrvHeapIndex = 7;
-    //step 6: what happens if you change the alpha to 1.0? 100% water and no blending?
-    water->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.6f);
-    water->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-    water->Roughness = 0.0f;
-
-    auto wroughtIron = std::make_unique<Material>();
-    wroughtIron->Name = "wroughtIron";
-    wroughtIron->MatCBIndex = 8;
-    wroughtIron->DiffuseSrvHeapIndex = 8;
-    //step 6: what happens if you change the alpha to 1.0? 100% water and no blending?
-    wroughtIron->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.6f);
-    wroughtIron->FresnelR0 = XMFLOAT3(0.9f, 0.9f, 0.9f);
-    wroughtIron->Roughness = 1.0f;
-
-    auto flames = std::make_unique<Material>();
-    flames->Name = "flames";
-    flames->MatCBIndex = 9;
-    flames->DiffuseSrvHeapIndex = 9;
-    //step 6: what happens if you change the alpha to 1.0? 100% water and no blending?
-    flames->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.6f);
-    flames->FresnelR0 = XMFLOAT3(0.3f, 0.3f, 0.3f);
-    flames->Roughness = 0.2f;
-
-    mMaterials["grass"] = std::move(grass);
-    mMaterials["sandbrick"] = std::move(sandbrick);
-    mMaterials["iron"] = std::move(iron);
-    mMaterials["shingle"] = std::move(shingle);
-    mMaterials["stone"] = std::move(stone);
-    mMaterials["stonebrick"] = std::move(stonebrick);
-    mMaterials["woodV"] = std::move(woodV);
-    mMaterials["water"] = std::move(water);
-    mMaterials["wroughtIron"] = std::move(wroughtIron);
-    mMaterials["flames"] = std::move(flames);
+    mMaterials["desert"] = std::move(grass);
+    mMaterials["eagle"] = std::move(sandbrick);
+    mMaterials["raptor"] = std::move(iron);
 }
 
 //This function allows for rotation on all axis
-void ShapesApp::createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, XMFLOAT3 translation, XMFLOAT3 angle, std::string shapeName, std::string materialName)
+void DirectX12Application::createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, XMFLOAT3 translation, XMFLOAT3 angle, std::string shapeName, std::string materialName)
 {
     auto temp = std::make_unique<RenderItem>();
     XMStoreFloat4x4(&temp->World, XMMatrixScaling(scaling.x, scaling.y, scaling.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(angle.x), 
@@ -1428,7 +1000,7 @@ void ShapesApp::createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, XMFLOAT3 tr
     mAllRitems.push_back(std::move(temp));
 }
 
-void ShapesApp::BuildRenderItems()
+void DirectX12Application::BuildRenderItems()
 {
 	UINT objCBIndex = 0;
 
@@ -1477,7 +1049,7 @@ void ShapesApp::BuildRenderItems()
 
 
 //The DrawRenderItems method is invoked in the main Draw call:
-void ShapesApp::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems)
+void DirectX12Application::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems)
 {
     UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
     UINT matCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(MaterialConstants));
@@ -1516,73 +1088,7 @@ void ShapesApp::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::v
     }
 }
 
-//void ShapesApp::createTower(UINT& objIndex, XMFLOAT3 location)
-//{
-//    //Creates main tower structure
-//    createShapeInWorld(objIndex, XMFLOAT3(2.0f, 7.0f, 2.0f), XMFLOAT3(location.x, location.y + 1.0f, location.z), 45.0f, "cylinder", "sandbrick");
-//    //Creates gray stone foundation 
-//    createShapeInWorld(objIndex, XMFLOAT3(3.0f, 1.0f, 3.0f), XMFLOAT3(location.x, location.y, location.z), 0.0f, "grayBox", "stonebrick");
-//    //Creates platform at top of towers 
-//    createShapeInWorld(objIndex, XMFLOAT3(3.0f, 0.5f, 3.0f), XMFLOAT3(location.x, location.y + 8.0f, location.z), 0.0f, "box", "sandbrick");
-//    //Creates thin platform "walkway" for better color variety
-//   createShapeInWorld(objIndex, XMFLOAT3(2.5f, 0.5f, 2.5f), XMFLOAT3(location.x, location.y + 8.1f, location.z), 0.0f, "box", "woodV");
-//
-//    //Creates pirapits for tops of towers
-//    for (int i = 0; i < 7; i++)
-//    {
-//        float temp = i;
-//
-//        if (i % 2 == 0)
-//        {
-//            createShapeInWorld(objIndex, XMFLOAT3(0.5f, 1.0f, 0.5f), XMFLOAT3(location.x - 1.5f + (temp / 2), location.y + 8.5f, location.z - 1.5f), 0.0f, "box", "sandbrick");
-//            createShapeInWorld(objIndex, XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT3(location.x - 1.5f + (temp / 2), location.y + 9.5f, location.z - 1.5f), 45.0f, "pyramid", "stone");
-//        }
-//        else
-//            createShapeInWorld(objIndex, XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT3(location.x - 1.5f + (temp / 2), location.y + 8.5f, location.z - 1.5f), 0.0f, "box", "sandbrick");
-//
-//    }
-//    for (int i = 0; i < 7; i++)
-//    {
-//        float temp = i;
-//
-//        if (i % 2 == 0)
-//        {
-//            createShapeInWorld(objIndex, XMFLOAT3(0.5f, 1.0f, 0.5f), XMFLOAT3(location.x - 1.5f + (temp / 2), location.y + 8.5f, location.z + 1.5f), 0.0f, "box", "sandbrick");
-//            createShapeInWorld(objIndex, XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT3(location.x - 1.5f + (temp / 2), location.y + 9.5f, location.z + 1.5f), 45.0f, "pyramid", "stone");
-//        }
-//        else
-//            createShapeInWorld(objIndex, XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT3(location.x - 1.5f + (temp / 2), location.y + 8.5f, location.z + 1.5f), 0.0f, "box", "sandbrick");
-//    }
-//
-//    for (int i = 0; i < 5; i++)
-//    {
-//        float temp = i;
-//
-//        if (i % 2 == 0)
-//            createShapeInWorld(objIndex, XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT3(location.x - 1.5f , location.y + 8.5f, location.z - 1.0f + (temp / 2)), 0.0f, "box", "sandbrick");
-//        else
-//        {
-//            createShapeInWorld(objIndex, XMFLOAT3(0.5f, 1.0f, 0.5f), XMFLOAT3(location.x - 1.5f, location.y + 8.5f, location.z - 1.0f + (temp / 2)), 0.0f, "box", "sandbrick");
-//            createShapeInWorld(objIndex, XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT3(location.x - 1.5f, location.y + 9.5f, location.z - 1.0f + (temp/2)), 45.0f, "pyramid", "stone");
-//        }
-//    }
-//
-//    for (int i = 0; i < 5; i++)
-//    {
-//        float temp = i;
-//
-//        if (i % 2 == 0)
-//            createShapeInWorld(objIndex, XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT3(location.x + 1.5f, location.y + 8.5f, location.z - 1.0f + (temp / 2)), 0.0f, "box", "sandbrick");
-//        else
-//        {
-//            createShapeInWorld(objIndex, XMFLOAT3(0.5f, 1.0f, 0.5f), XMFLOAT3(location.x + 1.5f, location.y + 8.5f, location.z - 1.0f + (temp / 2)), 0.0f, "box", "sandbrick");
-//            createShapeInWorld(objIndex, XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT3(location.x + 1.5f, location.y + 9.5f, location.z - 1.0f + (temp / 2)), 45.0f, "pyramid", "stone");
-//        }
-//    }
-//}
-
-
-std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> ShapesApp::GetStaticSamplers()
+std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> DirectX12Application::GetStaticSamplers()
 {
     // Applications usually only need a handful of samplers.  So just define them all up front
     // and keep them available as part of the root signature.  
