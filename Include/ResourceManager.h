@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "ResourceHolder.h"
 #include "ResourceIdentifiers.h"
 #include "../D3DCommon/d3dApp.h"
@@ -9,11 +10,11 @@ public:
 	ResourceManager();
 
 	static ResourceManager* GetInstance();
-	ResourceHolder <Texture, Textures::ID>& GetTextureHolder();
+	std::map<Textures::ID, std::wstring>& GetTextureHolder();
 
 private:
 	static ResourceManager* mInstance;
 
-	ResourceHolder <Texture, Textures::ID> mTextureHolder;
+	std::map<Textures::ID,std::wstring> mTextureHolder;
 };
 

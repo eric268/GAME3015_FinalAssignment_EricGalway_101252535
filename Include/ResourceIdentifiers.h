@@ -12,6 +12,7 @@ namespace Textures
 		Eagle,
 		Raptor,
 		Desert,
+		NUM_TEXTURE_IDS
 	};
 }
 

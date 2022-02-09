@@ -15,8 +15,10 @@ ResourceManager* ResourceManager::GetInstance()
 	return mInstance;
 }
 
-ResourceHolder<Texture, Textures::ID>& ResourceManager::GetTextureHolder()
+std::map<Textures::ID, std::wstring>& ResourceManager::GetTextureHolder()
 {
 	return mTextureHolder;
 }
+
+
 
