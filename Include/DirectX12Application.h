@@ -23,14 +23,15 @@ public:
 	~DirectX12Application();
 
 	Game game;
-
+	std::unordered_map<std::string, std::unique_ptr<Material>> mMaterials;
 	virtual bool Initialize()override;
-	void createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, XMFLOAT3 translation, XMFLOAT3 angle, std::string shapeName, Textures::ID materialID);
+	void CreateShapeInWorld(UINT objIndex, XMFLOAT3 scaling, XMFLOAT3 translation, XMFLOAT3 angle, std::string shapeName, Textures::ID materialID);
 	void DrawRenderItem(RenderItem* ritems);
-
+	void BuildRenderItem();
+	void BuildRenderItem(RenderItem* renderItems);
 	static UINT objCBIndex;
 
-
+	std::unordered_map<std::string, std::unique_ptr<MeshGeometry>> mGeometries;
 private:
 	virtual void OnResize()override;
 	virtual void Update(const GameTimer& gt)override;
@@ -56,7 +57,7 @@ private:
 	void BuildPSOs();
 	void BuildFrameResources();
 	void BuildMaterials();
-	void BuildRenderItems();
+
 	void DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems);
 
 
@@ -65,6 +66,7 @@ private:
 	std::vector<std::unique_ptr<RenderItem>> mAllRitems;
 	// Render items divided by PSO.
 	std::vector<RenderItem*> mOpaqueRitems;
+
 
 private:
 
@@ -78,8 +80,6 @@ private:
 	//ComPtr<ID3D12DescriptorHeap> mCbvHeap = nullptr;
 
 	ComPtr<ID3D12DescriptorHeap> mSrvDescriptorHeap = nullptr;
-
-	std::unordered_map<std::string, std::unique_ptr<MeshGeometry>> mGeometries;
 	//std::unordered_map<std::string, std::unique_ptr<Material>> mMaterials;
 	std::unordered_map<std::string, std::unique_ptr<Texture>> mTextures;
 	std::unordered_map<std::string, ComPtr<ID3DBlob>> mShaders;

@@ -45,11 +45,11 @@ bool DirectX12Application::Initialize()
 	BuildMaterials();
 	
 	game.GetWorld().BuildScene();
-	BuildRenderItems();
+	BuildRenderItem();
 	BuildFrameResources();
 	//BuildConstantBufferViews();
 	BuildPSOs();
-	//game.GetWorld().BuildScene();
+
 
 	// Execute the initialization commands.
 	ThrowIfFailed(mCommandList->Close());
@@ -136,9 +136,8 @@ void DirectX12Application::Draw(const GameTimer& gt)
 	auto passCB = mCurrFrameResource->PassCB->Resource();
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
-	game.Draw(gt);
-	DrawRenderItem(mOpaqueRitems[0]);
-	//DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
+	//game.Draw(gt);
+	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
 	// Indicate a state transition on the resource usage.
 	mCommandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
@@ -380,7 +379,6 @@ void DirectX12Application::BuildDescriptorHeaps()
 
 	assert(Textures::NUM_TEXTURE_IDS > 0);
 
-
 	for (int i = 0; i < Textures::NUM_TEXTURE_IDS; i++)
 	{
 		auto text = mTextures[std::to_string(i)]->Resource;
@@ -398,6 +396,7 @@ void DirectX12Application::BuildDescriptorHeaps()
 			srvDesc.Format = text->GetDesc().Format;
 			md3dDevice->CreateShaderResourceView(text.Get(), &srvDesc, hDescriptor);
 		}
+		hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	}
 }
 
@@ -582,12 +581,11 @@ void DirectX12Application::BuildMaterials()
 }
 
 //This function allows for rotation on all axis
-void DirectX12Application::createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, XMFLOAT3 translation, XMFLOAT3 angle, std::string shapeName, Textures::ID materialName)
+void DirectX12Application::CreateShapeInWorld(UINT objIndex, XMFLOAT3 scaling, XMFLOAT3 translation, XMFLOAT3 angle, std::string shapeName, Textures::ID materialName)
 {
 	auto temp = std::make_unique<RenderItem>();
 	XMStoreFloat4x4(&temp->World, XMMatrixScaling(scaling.x, scaling.y, scaling.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(angle.x),
-		XMConvertToRadians(angle.y), XMConvertToRadians(angle.z)) * XMMatrixTranslation(translation.x, translation.y + (0.5 * scaling.y), translation.z));
-
+	XMConvertToRadians(angle.y), XMConvertToRadians(angle.z)) * XMMatrixTranslation(translation.x, translation.y + (0.5 * scaling.y), translation.z));
 	temp->ObjCBIndex = objIndex;
 	temp->Geo = mGeometries["shapeGeo"].get();
 	temp->material = ResourceManager::GetInstance()->GetMaterials()[materialName].get();
@@ -596,17 +594,19 @@ void DirectX12Application::createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, 
 	temp->StartIndexLocation = temp->Geo->DrawArgs[shapeName].StartIndexLocation;
 	temp->BaseVertexLocation = temp->Geo->DrawArgs[shapeName].BaseVertexLocation;
 	mAllRitems.push_back(std::move(temp));
-
 }
 
-void DirectX12Application::BuildRenderItems()
+void DirectX12Application::BuildRenderItem()
 {
+	CreateShapeInWorld(1, XMFLOAT3(5.0f, 5.0f, 5.0f), XMFLOAT3(0.0, -15.0, -20.0), XMFLOAT3(), "grid", Textures::ID::Eagle);
 
-	createShapeInWorld(objCBIndex, XMFLOAT3(5.0f, 5.0f, 5.0f), XMFLOAT3(0.0, -10.0, -20.0), XMFLOAT3(), "grid",Textures::ID::Eagle);
-
-	// All the render items are opaque.
 	for (auto& e : mAllRitems)
 		mOpaqueRitems.push_back(e.get());
+}
+
+void DirectX12Application::BuildRenderItem(RenderItem* renderItems)
+{
+	mAllRitems.push_back(std::make_unique<RenderItem>(*renderItems));
 }
 
 
@@ -644,10 +644,6 @@ void DirectX12Application::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, c
 
 void DirectX12Application::DrawRenderItem(RenderItem* ritems)
 {
-
-	if (ritems->Geo == nullptr)
-		ritems->Geo = mGeometries["shapeGeo"].get();
-
 	UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
 	UINT matCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(MaterialConstants));
 
