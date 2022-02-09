@@ -26,15 +26,13 @@ void Game::OnKeyboardInput(const GameTimer& gt)
 {
 	if (GetAsyncKeyState('1') & 0x8000)
 	{
-		
+
 	}
 
 }
 
 void Game::Initalize()
 {
-	gameWorld.LoadTextures();
-	gameWorld.BuildScene();
 }
 
 void Game::Draw(const GameTimer& gt)
@@ -42,7 +40,7 @@ void Game::Draw(const GameTimer& gt)
 	gameWorld.Draw(gt);
 }
 
-World Game::GetWorld()
+World& Game::GetWorld()
 {
 	return gameWorld;
 }

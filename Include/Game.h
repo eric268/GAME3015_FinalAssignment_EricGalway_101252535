@@ -9,7 +9,6 @@
 class Game
 {
 public:
-
 	World gameWorld;
 	static const float playerSpeed;
 	static const float timePerFrame;
@@ -25,7 +24,7 @@ public:
 	void Draw(const GameTimer& gt);
 	//Texture tex;
 
-	World GetWorld();
+	World& GetWorld();
 private:
 
 };

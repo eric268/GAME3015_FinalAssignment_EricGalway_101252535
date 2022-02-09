@@ -12,7 +12,7 @@
 // vary from app-to-app.
 
 const int gNumFrameResources = 3;
-
+UINT DirectX12Application::objCBIndex = 0;
 DirectX12Application::DirectX12Application(HINSTANCE hInstance)
     : D3DApp(hInstance)
 {
@@ -43,10 +43,13 @@ bool DirectX12Application::Initialize()
 	BuildShadersAndInputLayout();
 	BuildShapeGeometry();
 	BuildMaterials();
+	
+	game.GetWorld().BuildScene();
 	BuildRenderItems();
 	BuildFrameResources();
 	//BuildConstantBufferViews();
 	BuildPSOs();
+	//game.GetWorld().BuildScene();
 
 	// Execute the initialization commands.
 	ThrowIfFailed(mCommandList->Close());
@@ -134,7 +137,8 @@ void DirectX12Application::Draw(const GameTimer& gt)
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
 	game.Draw(gt);
-	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
+	DrawRenderItem(mOpaqueRitems[0]);
+	//DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
 	// Indicate a state transition on the resource usage.
 	mCommandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
@@ -584,9 +588,9 @@ void DirectX12Application::createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, 
 	XMStoreFloat4x4(&temp->World, XMMatrixScaling(scaling.x, scaling.y, scaling.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(angle.x),
 		XMConvertToRadians(angle.y), XMConvertToRadians(angle.z)) * XMMatrixTranslation(translation.x, translation.y + (0.5 * scaling.y), translation.z));
 
-	temp->ObjCBIndex = objIndex++;
+	temp->ObjCBIndex = objIndex;
 	temp->Geo = mGeometries["shapeGeo"].get();
-	temp->Mat = ResourceManager::GetInstance()->GetMaterials()[materialName].get();
+	temp->material = ResourceManager::GetInstance()->GetMaterials()[materialName].get();
 	temp->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 	temp->IndexCount = temp->Geo->DrawArgs[shapeName].IndexCount;
 	temp->StartIndexLocation = temp->Geo->DrawArgs[shapeName].StartIndexLocation;
@@ -597,7 +601,6 @@ void DirectX12Application::createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, 
 
 void DirectX12Application::BuildRenderItems()
 {
-	UINT objCBIndex = 0;
 
 	createShapeInWorld(objCBIndex, XMFLOAT3(5.0f, 5.0f, 5.0f), XMFLOAT3(0.0, -10.0, -20.0), XMFLOAT3(), "grid",Textures::ID::Eagle);
 
@@ -626,10 +629,10 @@ void DirectX12Application::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, c
 		cmdList->IASetPrimitiveTopology(ri->PrimitiveType);
 
 		CD3DX12_GPU_DESCRIPTOR_HANDLE tex(mSrvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
-		tex.Offset(ri->Mat->DiffuseSrvHeapIndex, mCbvSrvDescriptorSize);
+		tex.Offset(ri->material->DiffuseSrvHeapIndex, mCbvSrvDescriptorSize);
 
 		D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = objectCB->GetGPUVirtualAddress() + ri->ObjCBIndex * objCBByteSize;
-		D3D12_GPU_VIRTUAL_ADDRESS matCBAddress = matCB->GetGPUVirtualAddress() + ri->Mat->MatCBIndex * matCBByteSize;
+		D3D12_GPU_VIRTUAL_ADDRESS matCBAddress = matCB->GetGPUVirtualAddress() + ri->material->MatCBIndex * matCBByteSize;
 
 		cmdList->SetGraphicsRootDescriptorTable(0, tex);
 		cmdList->SetGraphicsRootConstantBufferView(1, objCBAddress);
@@ -637,6 +640,35 @@ void DirectX12Application::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, c
 
 		cmdList->DrawIndexedInstanced(ri->IndexCount, 1, ri->StartIndexLocation, ri->BaseVertexLocation, 0);
 	}
+}
+
+void DirectX12Application::DrawRenderItem(RenderItem* ritems)
+{
+
+	if (ritems->Geo == nullptr)
+		ritems->Geo = mGeometries["shapeGeo"].get();
+
+	UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
+	UINT matCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(MaterialConstants));
+
+	auto objectCB = mCurrFrameResource->ObjectCB->Resource();
+	auto matCB = mCurrFrameResource->MaterialCB->Resource();
+
+	mCommandList->IASetVertexBuffers(0, 1, &ritems->Geo->VertexBufferView());
+	mCommandList->IASetIndexBuffer(&ritems->Geo->IndexBufferView());
+	mCommandList->IASetPrimitiveTopology(ritems->PrimitiveType);
+
+	CD3DX12_GPU_DESCRIPTOR_HANDLE tex(mSrvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
+	tex.Offset(ritems->material->DiffuseSrvHeapIndex, mCbvSrvDescriptorSize);
+
+	D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = objectCB->GetGPUVirtualAddress() + ritems->ObjCBIndex * objCBByteSize;
+	D3D12_GPU_VIRTUAL_ADDRESS matCBAddress = matCB->GetGPUVirtualAddress() + ritems->material->MatCBIndex * matCBByteSize;
+
+	mCommandList->SetGraphicsRootDescriptorTable(0, tex);
+	mCommandList->SetGraphicsRootConstantBufferView(1, objCBAddress);
+	mCommandList->SetGraphicsRootConstantBufferView(3, matCBAddress);
+
+	mCommandList->DrawIndexedInstanced(ritems->IndexCount, 1, ritems->StartIndexLocation, ritems->BaseVertexLocation, 0);
 }
 
 

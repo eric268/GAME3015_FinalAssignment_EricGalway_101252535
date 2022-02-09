@@ -154,6 +154,7 @@
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\ResourceManager.cpp" />
     <ClCompile Include="Source\SceneNode.cpp" />
+    <ClCompile Include="Source\SpriteNode.cpp" />
     <ClCompile Include="Source\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +174,7 @@
     <ClInclude Include="Include\ResourceIdentifiers.h" />
     <ClInclude Include="Include\ResourceManager.h" />
     <ClInclude Include="Include\SceneNode.h" />
+    <ClInclude Include="Include\SpriteNode.h" />
     <ClInclude Include="Include\World.h" />
   </ItemGroup>
   <ItemGroup>

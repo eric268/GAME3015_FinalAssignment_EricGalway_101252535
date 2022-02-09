@@ -47,12 +47,18 @@ void SceneNode::UpdateChildren(const GameTimer& gt)
 
 void SceneNode::Draw(const GameTimer& gt) const
 {
+	DrawCurrent(gt);
+	DrawChildren(gt);
 }
 
-void SceneNode::DrawCurrent(const GameTimer& gt)
+void SceneNode::DrawCurrent(const GameTimer& gt) const
 {
 }
 
-void SceneNode::DrawChildren(const GameTimer& gt)
+void SceneNode::DrawChildren(const GameTimer& gt) const
 {
+	for (const Ptr& child : mChildren)
+	{
+		child->Draw(gt);
+	}
 }

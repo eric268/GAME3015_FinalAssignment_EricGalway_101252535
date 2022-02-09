@@ -26,6 +26,10 @@ public:
 
 	virtual bool Initialize()override;
 	void createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, XMFLOAT3 translation, XMFLOAT3 angle, std::string shapeName, Textures::ID materialID);
+	void DrawRenderItem(RenderItem* ritems);
+
+	static UINT objCBIndex;
+
 
 private:
 	virtual void OnResize()override;
@@ -57,6 +61,10 @@ private:
 
 
 	std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> GetStaticSamplers();
+	// List of all the render items.
+	std::vector<std::unique_ptr<RenderItem>> mAllRitems;
+	// Render items divided by PSO.
+	std::vector<RenderItem*> mOpaqueRitems;
 
 private:
 
@@ -80,12 +88,6 @@ private:
 	std::vector<D3D12_INPUT_ELEMENT_DESC> mInputLayout;
 
 	RenderItem* mWavesRitem = nullptr;
-
-	// List of all the render items.
-	std::vector<std::unique_ptr<RenderItem>> mAllRitems;
-
-	// Render items divided by PSO.
-	std::vector<RenderItem*> mOpaqueRitems;
 
 
 	PassConstants mMainPassCB;

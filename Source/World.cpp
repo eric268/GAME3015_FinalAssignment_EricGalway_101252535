@@ -2,11 +2,11 @@
 #include <string.h>
 #include "ResourceManager.h"
 #include "DirectX12Application.h"
+#include "SpriteNode.h"
 
 World::World()
 {
 	LoadTextures();
-	BuildScene();
 }
 
 void World::Update(const GameTimer& gt)
@@ -15,7 +15,7 @@ void World::Update(const GameTimer& gt)
 
 void World::Draw(const GameTimer& gt)
 {
-	
+	mSceneGraph.Draw(gt);
 }
 
 void World::LoadTextures()
@@ -28,7 +28,15 @@ void World::LoadTextures()
 
 void World::BuildScene()
 {
-	//static_cast<DirectX12Application*>(D3DApp::GetApp())->createShapeInWorld(objIndex, XMFLOAT3(5.0f, 5.0f, 5.0f), XMFLOAT3(0.0, -10.0, -20.0), XMFLOAT3(), "grid", Textures::ID::Eagle);
+	// Initialize the different layers
+	for (std::size_t i = 0; i < LayerCount; ++i)
+	{
+		SceneNode::Ptr layer(new SceneNode());
+		mSceneLayers[i] = layer.get();
+		mSceneGraph.AttachChild(std::move(layer));
+	}
+	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode());
+	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
 }
 
 void World::AddTexture(Textures::ID id, std::wstring fileName)
