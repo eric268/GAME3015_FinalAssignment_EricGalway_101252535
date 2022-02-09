@@ -101,9 +101,6 @@
     <ClInclude Include="Include\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\ResourceHolder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Include\ResourceIdentifiers.h">
       <Filter>Header Files</Filter>
     </ClInclude>

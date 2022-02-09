@@ -2,7 +2,7 @@
 
  ResourceManager* ResourceManager::mInstance = nullptr;
 
-ResourceManager::ResourceManager() : mTextureHolder()
+ResourceManager::ResourceManager() : mTextureHolder(), mMaterials()
 {
 }
 
@@ -19,6 +19,12 @@ std::map<Textures::ID, std::wstring>& ResourceManager::GetTextureHolder()
 {
 	return mTextureHolder;
 }
+
+std::unordered_map<Textures::ID, std::unique_ptr<Material>>& ResourceManager::GetMaterials()
+{
+	return mMaterials;
+}
+
 
 
 

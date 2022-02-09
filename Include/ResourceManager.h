@@ -11,10 +11,11 @@ public:
 
 	static ResourceManager* GetInstance();
 	std::map<Textures::ID, std::wstring>& GetTextureHolder();
-
+	std::unordered_map<Textures::ID, std::unique_ptr<Material>>& GetMaterials();
 private:
 	static ResourceManager* mInstance;
 
 	std::map<Textures::ID,std::wstring> mTextureHolder;
+	std::unordered_map<Textures::ID, std::unique_ptr<Material>> mMaterials;
 };
 

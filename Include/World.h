@@ -4,7 +4,6 @@
 #include "../D3DCommon/MathHelper.h"
 #include "../D3DCommon/UploadBuffer.h"
 #include "../D3DCommon/GeometryGenerator.h"
-#include "ResourceHolder.h"
 #include "ResourceIdentifiers.h"
 
 using Microsoft::WRL::ComPtr;
@@ -19,7 +18,7 @@ public:
 
 	void BuildScene();
 	void LoadTextures();
-
+	UINT objIndex;
 private:
 
 };

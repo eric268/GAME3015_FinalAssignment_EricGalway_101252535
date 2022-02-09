@@ -41,7 +41,6 @@ bool DirectX12Application::Initialize()
 	BuildRootSignature();
 	BuildDescriptorHeaps();
 	BuildShadersAndInputLayout();
-	BuildLandGeometry();
 	BuildShapeGeometry();
 	BuildMaterials();
 	BuildRenderItems();
@@ -96,7 +95,6 @@ void DirectX12Application::Update(const GameTimer& gt)
 
 void DirectX12Application::Draw(const GameTimer& gt)
 {
-	game.Draw(gt);
 	auto cmdListAlloc = mCurrFrameResource->CmdListAlloc;
 
 	// Reuse the memory associated with command recording.
@@ -105,14 +103,8 @@ void DirectX12Application::Draw(const GameTimer& gt)
 
 	// A command list can be reset after it has been added to the command queue via ExecuteCommandList.
 	// Reusing the command list reuses memory.
-	if (mIsWireframe)
-	{
-		ThrowIfFailed(mCommandList->Reset(cmdListAlloc.Get(), mPSOs["opaque_wireframe"].Get()));
-	}
-	else
-	{
-		ThrowIfFailed(mCommandList->Reset(cmdListAlloc.Get(), mPSOs["opaque"].Get()));
-	}
+
+	ThrowIfFailed(mCommandList->Reset(cmdListAlloc.Get(), mPSOs["opaque"].Get()));
 
 	mCommandList->RSSetViewports(1, &mScreenViewport);
 	mCommandList->RSSetScissorRects(1, &mScissorRect);
@@ -141,6 +133,7 @@ void DirectX12Application::Draw(const GameTimer& gt)
 	auto passCB = mCurrFrameResource->PassCB->Resource();
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
+	game.Draw(gt);
 	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
 	// Indicate a state transition on the resource usage.
@@ -243,25 +236,25 @@ void DirectX12Application::UpdateCamera(const GameTimer& gt)
 void DirectX12Application::AnimateMaterials(const GameTimer& gt)
 {
 	// Scroll the water material texture coordinates.
-	auto waterMat = mMaterials["water"].get();
+	//auto waterMat = mMaterials["water"].get();
 
-	float& tu = waterMat->MatTransform(3, 0);
-	float& tv = waterMat->MatTransform(3, 1);
+	//float& tu = waterMat->MatTransform(3, 0);
+	//float& tv = waterMat->MatTransform(3, 1);
 
-	tu += 0.1f * gt.DeltaTime();
-	tv += 0.02f * gt.DeltaTime();
+	//tu += 0.1f * gt.DeltaTime();
+	//tv += 0.02f * gt.DeltaTime();
 
-	if (tu >= 1.0f)
-		tu -= 1.0f;
+	//if (tu >= 1.0f)
+	//	tu -= 1.0f;
 
-	if (tv >= 1.0f)
-		tv -= 1.0f;
+	//if (tv >= 1.0f)
+	//	tv -= 1.0f;
 
-	waterMat->MatTransform(3, 0) = tu;
-	waterMat->MatTransform(3, 1) = tv;
+	//waterMat->MatTransform(3, 0) = tu;
+	//waterMat->MatTransform(3, 1) = tv;
 
-	// Material has changed, so need to update cbuffer.
-	waterMat->NumFramesDirty = gNumFrameResources;
+	//// Material has changed, so need to update cbuffer.
+	//waterMat->NumFramesDirty = gNumFrameResources;
 }
 
 void DirectX12Application::UpdateObjectCBs(const GameTimer& gt)
@@ -291,7 +284,7 @@ void DirectX12Application::UpdateObjectCBs(const GameTimer& gt)
 void DirectX12Application::UpdateMaterialCBs(const GameTimer& gt)
 {
 	auto currMaterialCB = mCurrFrameResource->MaterialCB.get();
-	for (auto& e : mMaterials)
+	for (auto& e : ResourceManager::GetInstance()->GetMaterials())
 	{
 		// Only update the cbuffer data if the constants have changed.  If the cbuffer
 		// data changes, it needs to be updated for each FrameResource.
@@ -338,9 +331,7 @@ void DirectX12Application::UpdateMainPassCB(const GameTimer& gt)
 	mMainPassCB.TotalTime = gt.TotalTime();
 	mMainPassCB.DeltaTime = gt.DeltaTime();
 
-	mMainPassCB.AmbientLight = { 0.15f, 0.15f, 0.15f, 1.0f };
-	mMainPassCB.Lights[0].Direction = { -0.5, -0.5, 3.0 };
-	mMainPassCB.Lights[0].Strength = { 0.1,0.1,0.1 };
+	//mMainPassCB.AmbientLight = { 0.4f, 0.4f, 0.4f, 1.0f };
 
 	auto currPassCB = mCurrFrameResource->PassCB.get();
 	currPassCB->CopyData(0, mMainPassCB);
@@ -362,95 +353,6 @@ void DirectX12Application::LoadTextures()
 
 		mTextures[temp->Name] = std::move(temp);
 	}
-
-	//auto grassTex = std::make_unique<Texture>();
-	//grassTex->Name = "grassTex";
-	//grassTex->Filename = L"Media/grass.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), grassTex->Filename.c_str(),
-	//	grassTex->Resource, grassTex->UploadHeap));
-
-	//auto sandbrickTex = std::make_unique<Texture>();
-	//sandbrickTex->Name = "sandbrickTex";
-	//sandbrickTex->Filename = L"Media/sandbrick.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), sandbrickTex->Filename.c_str(),
-	//	sandbrickTex->Resource, sandbrickTex->UploadHeap));
-
-	//auto ironTex = std::make_unique<Texture>();
-	//ironTex->Name = "ironTex";
-	//ironTex->Filename = L"Media/iron.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), ironTex->Filename.c_str(),
-	//	ironTex->Resource, ironTex->UploadHeap));
-
-	//auto shingleTex = std::make_unique<Texture>();
-	//shingleTex->Name = "shingleTex";
-	//shingleTex->Filename = L"Media/shingle.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), shingleTex->Filename.c_str(),
-	//	shingleTex->Resource, shingleTex->UploadHeap));
-
-	//auto stoneTex = std::make_unique<Texture>();
-	//stoneTex->Name = "stoneTex";
-	//stoneTex->Filename = L"Media/stone.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), stoneTex->Filename.c_str(),
-	//	stoneTex->Resource, stoneTex->UploadHeap));
-
-	//auto stonebrickTex = std::make_unique<Texture>();
-	//stonebrickTex->Name = "stonebrickTex";
-	//stonebrickTex->Filename = L"Media/stonebrick.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), stonebrickTex->Filename.c_str(),
-	//	stonebrickTex->Resource, stonebrickTex->UploadHeap));
-
-	//auto woodVTex = std::make_unique<Texture>();
-	//woodVTex->Name = "woodVTex";
-	//woodVTex->Filename = L"Media/woodV.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), woodVTex->Filename.c_str(),
-	//	woodVTex->Resource, woodVTex->UploadHeap));
-
-	//auto waterTex = std::make_unique<Texture>();
-	//waterTex->Name = "waterTex";
-	//waterTex->Filename = L"Media/water1.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), waterTex->Filename.c_str(),
-	//	waterTex->Resource, waterTex->UploadHeap));
-
-	//auto wroughtIronTex = std::make_unique<Texture>();
-	//wroughtIronTex->Name = "wroughtIronTex";
-	//wroughtIronTex->Filename = L"Media/wroughtIronTexture.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), wroughtIronTex->Filename.c_str(),
-	//	wroughtIronTex->Resource, wroughtIronTex->UploadHeap));
-
-	//auto flameTex = std::make_unique<Texture>();
-	//flameTex->Name = "flameTex";
-	//flameTex->Filename = L"Media/FlameTexture.dds";
-	//ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//	mCommandList.Get(), flameTex->Filename.c_str(),
-	//	flameTex->Resource, flameTex->UploadHeap));
-
-	////auto crystalTex = std::make_unique<Texture>();
-	////crystalTex->Name = "crystalTex";
-	////crystalTex->Filename = L"../../Textures/crystal.dds";
-	////ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	////    mCommandList.Get(), crystalTex->Filename.c_str(),
-	////    crystalTex->Resource, crystalTex->UploadHeap));
-
-	//mTextures[grassTex->Name] = std::move(grassTex);
-	//mTextures[sandbrickTex->Name] = std::move(sandbrickTex);
-	//mTextures[ironTex->Name] = std::move(ironTex);
-	//mTextures[shingleTex->Name] = std::move(shingleTex);
-	//mTextures[stoneTex->Name] = std::move(stoneTex);
-	//mTextures[stonebrickTex->Name] = std::move(stonebrickTex);
-	//mTextures[woodVTex->Name] = std::move(woodVTex);
-	//mTextures[waterTex->Name] = std::move(waterTex);
-	//mTextures[wroughtIronTex->Name] = std::move(wroughtIronTex);
-	//mTextures[flameTex->Name] = std::move(flameTex);
-	//mTextures[crystalTex->Name] = std::move(crystalTex);
 }
 //If we have 3 frame resources and n render items, then we have three 3n object constant
 //buffers and 3 pass constant buffers.Hence we need 3(n + 1) constant buffer views(CBVs).
@@ -460,7 +362,7 @@ void DirectX12Application::LoadTextures()
 void DirectX12Application::BuildDescriptorHeaps()
 {
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
-	srvHeapDesc.NumDescriptors = 10;
+	srvHeapDesc.NumDescriptors = Textures::NUM_TEXTURE_IDS;
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	ThrowIfFailed(md3dDevice->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&mSrvDescriptorHeap)));
@@ -550,72 +452,13 @@ void DirectX12Application::BuildShadersAndInputLayout()
 	};
 }
 
-void DirectX12Application::BuildLandGeometry()
-{
-	GeometryGenerator geoGen;
-	GeometryGenerator::MeshData grid = geoGen.CreateGrid(160.0f, 160.0f, 50, 50);
-
-	//
-	// Extract the vertex elements we are interested and apply the height function to
-	// each vertex.  In addition, color the vertices based on their height so we have
-	// sandy looking beaches, grassy low hills, and snow mountain peaks.
-	//
-
-	std::vector<Vertex> vertices(grid.Vertices.size());
-	for (size_t i = 0; i < grid.Vertices.size(); ++i)
-	{
-		auto& p = grid.Vertices[i].Position;
-		vertices[i].Pos = p;
-		vertices[i].Pos.y = 0;
-		vertices[i].Normal = XMFLOAT3(0.0f, 0.0f, 0.0f);
-		vertices[i].TexC = grid.Vertices[i].TexC;
-	}
-
-	const UINT vbByteSize = (UINT)vertices.size() * sizeof(Vertex);
-
-	std::vector<std::uint16_t> indices = grid.GetIndices16();
-	const UINT ibByteSize = (UINT)indices.size() * sizeof(std::uint16_t);
-
-	auto geo = std::make_unique<MeshGeometry>();
-	geo->Name = "landGeo";
-
-	ThrowIfFailed(D3DCreateBlob(vbByteSize, &geo->VertexBufferCPU));
-	CopyMemory(geo->VertexBufferCPU->GetBufferPointer(), vertices.data(), vbByteSize);
-
-	ThrowIfFailed(D3DCreateBlob(ibByteSize, &geo->IndexBufferCPU));
-	CopyMemory(geo->IndexBufferCPU->GetBufferPointer(), indices.data(), ibByteSize);
-
-	geo->VertexBufferGPU = d3dUtil::CreateDefaultBuffer(md3dDevice.Get(),
-		mCommandList.Get(), vertices.data(), vbByteSize, geo->VertexBufferUploader);
-
-	geo->IndexBufferGPU = d3dUtil::CreateDefaultBuffer(md3dDevice.Get(),
-		mCommandList.Get(), indices.data(), ibByteSize, geo->IndexBufferUploader);
-
-	geo->VertexByteStride = sizeof(Vertex);
-	geo->VertexBufferByteSize = vbByteSize;
-	geo->IndexFormat = DXGI_FORMAT_R16_UINT;
-	geo->IndexBufferByteSize = ibByteSize;
-
-	SubmeshGeometry submesh;
-	submesh.IndexCount = (UINT)indices.size();
-	submesh.StartIndexLocation = 0;
-	submesh.BaseVertexLocation = 0;
-
-	geo->DrawArgs["grid"] = submesh;
-
-	mGeometries["landGeo"] = std::move(geo);
-}
 
 void DirectX12Application::BuildShapeGeometry()
 {
 	GeometryGenerator geoGen;
-
 	GeometryGenerator::MeshData grid = geoGen.CreateGrid(160.0f, 160.0f, 50, 50);
-
 	UINT gridVertexOffset = 0;
-
 	UINT gridIndexOffset = 0;
-
 
 	SubmeshGeometry gridSubmesh;
 	gridSubmesh.IndexCount = (UINT)grid.Indices32.size();
@@ -624,9 +467,7 @@ void DirectX12Application::BuildShapeGeometry()
 
 	auto totalVertexCount =
 		grid.Vertices.size();
-
 	std::vector<Vertex> vertices(totalVertexCount);
-
 	UINT k = 0;
 
 	for (size_t i = 0; i < grid.Vertices.size(); ++i, ++k)
@@ -663,7 +504,6 @@ void DirectX12Application::BuildShapeGeometry()
 	geo->VertexBufferByteSize = vbByteSize;
 	geo->IndexFormat = DXGI_FORMAT_R16_UINT;
 	geo->IndexBufferByteSize = ibByteSize;
-
 	geo->DrawArgs["grid"] = gridSubmesh;
 
 	mGeometries[geo->Name] = std::move(geo);
@@ -717,109 +557,28 @@ void DirectX12Application::BuildFrameResources()
 	for (int i = 0; i < gNumFrameResources; ++i)
 	{
 		mFrameResources.push_back(std::make_unique<FrameResource>(md3dDevice.Get(),
-			1, (UINT)mAllRitems.size(), (UINT)mMaterials.size()));
+			1, (UINT)mAllRitems.size(), (UINT)ResourceManager::GetInstance()->GetMaterials().size()));
 	}
 }
 
 void DirectX12Application::BuildMaterials()
 {
-	auto grass = std::make_unique<Material>();
-	grass->Name = "grass";
-	grass->MatCBIndex = 0;
-	grass->DiffuseSrvHeapIndex = 0;
-	grass->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	grass->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-	grass->Roughness = 0.25f;
+	for (int i = 0; i < Textures::NUM_TEXTURE_IDS; i++)
+	{
+		auto mat = std::make_unique<Material>();
+		mat->Name = std::to_string(i);
+		mat->MatCBIndex = i;
+		mat->DiffuseSrvHeapIndex = i;
+		mat->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+		mat->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
+		mat->Roughness = 1.0f;
 
-	auto sandbrick = std::make_unique<Material>();
-	sandbrick->Name = "sandbrick";
-	sandbrick->MatCBIndex = 1;
-	sandbrick->DiffuseSrvHeapIndex = 1;
-	sandbrick->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	sandbrick->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-	sandbrick->Roughness = 1.0f;
-
-	auto iron = std::make_unique<Material>();
-	iron->Name = "iron";
-	iron->MatCBIndex = 2;
-	iron->DiffuseSrvHeapIndex = 2;
-	iron->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	iron->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-	iron->Roughness = 0.7f;
-
-	auto shingle = std::make_unique<Material>();
-	shingle->Name = "shingle";
-	shingle->MatCBIndex = 3;
-	shingle->DiffuseSrvHeapIndex = 3;
-	shingle->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	shingle->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-	shingle->Roughness = 1.0f;
-
-	auto stone = std::make_unique<Material>();
-	stone->Name = "stone";
-	stone->MatCBIndex = 4;
-	stone->DiffuseSrvHeapIndex = 4;
-	stone->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	stone->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-	stone->Roughness = 1.0f;
-
-	auto stonebrick = std::make_unique<Material>();
-	stonebrick->Name = "stonebrick";
-	stonebrick->MatCBIndex = 5;
-	stonebrick->DiffuseSrvHeapIndex = 5;
-	stonebrick->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	stonebrick->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-	stonebrick->Roughness = 1.0f;
-
-	auto woodV = std::make_unique<Material>();
-	woodV->Name = "woodV";
-	woodV->MatCBIndex = 6;
-	woodV->DiffuseSrvHeapIndex = 6;
-	woodV->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	woodV->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-	woodV->Roughness = 0.9f;
-
-	auto water = std::make_unique<Material>();
-	water->Name = "water";
-	water->MatCBIndex = 7;
-	water->DiffuseSrvHeapIndex = 7;
-	//step 6: what happens if you change the alpha to 1.0? 100% water and no blending?
-	water->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.6f);
-	water->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-	water->Roughness = 0.0f;
-
-	auto wroughtIron = std::make_unique<Material>();
-	wroughtIron->Name = "wroughtIron";
-	wroughtIron->MatCBIndex = 8;
-	wroughtIron->DiffuseSrvHeapIndex = 8;
-	//step 6: what happens if you change the alpha to 1.0? 100% water and no blending?
-	wroughtIron->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.6f);
-	wroughtIron->FresnelR0 = XMFLOAT3(0.9f, 0.9f, 0.9f);
-	wroughtIron->Roughness = 1.0f;
-
-	auto flames = std::make_unique<Material>();
-	flames->Name = "flames";
-	flames->MatCBIndex = 9;
-	flames->DiffuseSrvHeapIndex = 9;
-	//step 6: what happens if you change the alpha to 1.0? 100% water and no blending?
-	flames->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.6f);
-	flames->FresnelR0 = XMFLOAT3(0.3f, 0.3f, 0.3f);
-	flames->Roughness = 0.2f;
-
-	mMaterials["grass"] = std::move(grass);
-	mMaterials["sandbrick"] = std::move(sandbrick);
-	mMaterials["iron"] = std::move(iron);
-	mMaterials["shingle"] = std::move(shingle);
-	mMaterials["stone"] = std::move(stone);
-	mMaterials["stonebrick"] = std::move(stonebrick);
-	mMaterials["woodV"] = std::move(woodV);
-	mMaterials["water"] = std::move(water);
-	mMaterials["wroughtIron"] = std::move(wroughtIron);
-	mMaterials["flames"] = std::move(flames);
+		ResourceManager::GetInstance()->GetMaterials()[static_cast<Textures::ID>(i)] = std::move(mat);
+	}
 }
 
 //This function allows for rotation on all axis
-void DirectX12Application::createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, XMFLOAT3 translation, XMFLOAT3 angle, std::string shapeName, std::string materialName)
+void DirectX12Application::createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, XMFLOAT3 translation, XMFLOAT3 angle, std::string shapeName, Textures::ID materialName)
 {
 	auto temp = std::make_unique<RenderItem>();
 	XMStoreFloat4x4(&temp->World, XMMatrixScaling(scaling.x, scaling.y, scaling.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(angle.x),
@@ -827,34 +586,20 @@ void DirectX12Application::createShapeInWorld(UINT& objIndex, XMFLOAT3 scaling, 
 
 	temp->ObjCBIndex = objIndex++;
 	temp->Geo = mGeometries["shapeGeo"].get();
-	temp->Mat = mMaterials[materialName].get();
+	temp->Mat = ResourceManager::GetInstance()->GetMaterials()[materialName].get();
 	temp->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 	temp->IndexCount = temp->Geo->DrawArgs[shapeName].IndexCount;
 	temp->StartIndexLocation = temp->Geo->DrawArgs[shapeName].StartIndexLocation;
 	temp->BaseVertexLocation = temp->Geo->DrawArgs[shapeName].BaseVertexLocation;
 	mAllRitems.push_back(std::move(temp));
+
 }
 
 void DirectX12Application::BuildRenderItems()
 {
 	UINT objCBIndex = 0;
 
-	//auto gridRitem = std::make_unique<RenderItem>();
-	//XMStoreFloat4x4(&gridRitem->World, XMMatrixTranslation(-10.0f, -1.5f, 0.0f));
-	//XMStoreFloat4x4(&gridRitem->TexTransform, XMMatrixScaling(5.0f, 5.0f, 1.0f));
-	//gridRitem->ObjCBIndex = objCBIndex++;
-	//gridRitem->Mat = mMaterials["grass"].get();
-	//gridRitem->Geo = mGeometries["landGeo"].get();
-	//gridRitem->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	//gridRitem->IndexCount = gridRitem->Geo->DrawArgs["grid"].IndexCount;
-	//gridRitem->StartIndexLocation = gridRitem->Geo->DrawArgs["grid"].StartIndexLocation;
-	//gridRitem->BaseVertexLocation = gridRitem->Geo->DrawArgs["grid"].BaseVertexLocation;
-	//mAllRitems.push_back(std::move(gridRitem));
-
-	//Test shape for lighting
-	createShapeInWorld(objCBIndex, XMFLOAT3(5.0f, 5.0f, 5.0f), XMFLOAT3(0.0, 10.0, -20.0), XMFLOAT3(), "grid", "grass");
-
-
+	createShapeInWorld(objCBIndex, XMFLOAT3(5.0f, 5.0f, 5.0f), XMFLOAT3(0.0, -10.0, -20.0), XMFLOAT3(), "grid",Textures::ID::Eagle);
 
 	// All the render items are opaque.
 	for (auto& e : mAllRitems)

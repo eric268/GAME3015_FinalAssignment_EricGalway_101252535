@@ -167,7 +167,6 @@
     <ClInclude Include="D3DCommon\UploadBuffer.h" />
     <ClInclude Include="Include\DirectX12Application.h" />
     <ClInclude Include="Include\Game.h" />
-    <ClInclude Include="Include\ResourceHolder.h" />
     <ClInclude Include="Include\ResourceIdentifiers.h" />
     <ClInclude Include="Include\ResourceManager.h" />
     <ClInclude Include="Include\World.h" />
