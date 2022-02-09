@@ -1,12 +1,11 @@
 #pragma once
-
-#include "../D3DCommon/d3dApp.h"
-#include "../D3DCommon/MathHelper.h"
-#include "../D3DCommon/UploadBuffer.h"
-#include "../D3DCommon/GeometryGenerator.h"
 #include "ResourceIdentifiers.h"
+#include "SceneNode.h"
+#include <array>
 
 using Microsoft::WRL::ComPtr;
+using namespace DirectX;
+using namespace DirectX::PackedVector;
 
 class World
 {
@@ -17,10 +16,25 @@ public:
 	void Draw(const GameTimer& gt);
 
 	void BuildScene();
+	void AddTexture(Textures::ID id, std::wstring fileName);
 	void LoadTextures();
 	UINT objIndex;
-private:
 
+private:
+	enum Layer
+	{
+		Background,
+		Air,
+		LayerCount
+	};
+
+private:
+	XMFLOAT3 mWorldView;
+	SceneNode mSceneGraph;
+	std::array<SceneNode*, LayerCount>	mSceneLayers;
+	XMFLOAT4 mWorldBounds;
+	XMFLOAT3 mSpawnPosition;
+	float mScrollSpeed;
 };
 
 

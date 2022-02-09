@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() : mWorld(World())
+Game::Game() : gameWorld(World())
 {}
 
 Game::~Game()
@@ -17,7 +17,7 @@ void Game::UpdateStatistics(const GameTimer& gt)
 
 void Game::Update(const GameTimer& gt)
 {
-	mWorld.Update(gt);
+	gameWorld.Update(gt);
 	UpdateStatistics(gt);
 }
 
@@ -33,16 +33,16 @@ void Game::OnKeyboardInput(const GameTimer& gt)
 
 void Game::Initalize()
 {
-	mWorld.LoadTextures();
-	mWorld.BuildScene();
+	gameWorld.LoadTextures();
+	gameWorld.BuildScene();
 }
 
 void Game::Draw(const GameTimer& gt)
 {
-	mWorld.Draw(gt);
+	gameWorld.Draw(gt);
 }
 
 World Game::GetWorld()
 {
-	return mWorld;
+	return gameWorld;
 }

@@ -16,6 +16,13 @@ namespace Textures
 	};
 }
 
+enum class RenderLayer : int
+{
+	Opaque = 0,
+	Transparent,
+	Count
+};
+
 template <typename Resource, typename Identifier>
 class ResourceHolder;
 

@@ -625,14 +625,6 @@ void DirectX12Application::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, c
 		cmdList->IASetIndexBuffer(&ri->Geo->IndexBufferView());
 		cmdList->IASetPrimitiveTopology(ri->PrimitiveType);
 
-		// // Offset to the CBV in the descriptor heap for this object and for this frame resource.
-		// UINT cbvIndex = mCurrFrameResourceIndex*(UINT)mOpaqueRitems.size() + ri->ObjCBIndex;
-		// auto cbvHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(mCbvHeap->GetGPUDescriptorHandleForHeapStart());
-		// cbvHandle.Offset(cbvIndex, mCbvSrvUavDescriptorSize);
-		//
-		// cmdList->SetGraphicsRootDescriptorTable(0, cbvHandle);
-		//
-		// cmdList->DrawIndexedInstanced(ri->IndexCount, 1, ri->StartIndexLocation, ri->BaseVertexLocation, 0);
 		CD3DX12_GPU_DESCRIPTOR_HANDLE tex(mSrvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
 		tex.Offset(ri->Mat->DiffuseSrvHeapIndex, mCbvSrvDescriptorSize);
 

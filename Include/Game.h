@@ -10,7 +10,7 @@ class Game
 {
 public:
 
-	World mWorld;
+	World gameWorld;
 	static const float playerSpeed;
 	static const float timePerFrame;
 
@@ -23,7 +23,7 @@ public:
 	void Update(const GameTimer& gt);
 	void OnKeyboardInput(const GameTimer& gt);
 	void Draw(const GameTimer& gt);
-	Texture tex;
+	//Texture tex;
 
 	World GetWorld();
 private:
