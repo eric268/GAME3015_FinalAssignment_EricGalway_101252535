@@ -1,5 +1,5 @@
 #include "RenderItem.h"
-#include "DirectX12Application.h"
+#include "Game.h"
 #include "ResourceManager.h"
 
 RenderItem::RenderItem()
@@ -8,10 +8,10 @@ RenderItem::RenderItem()
 
 RenderItem::RenderItem(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, Textures::ID matID)
 {
-	auto tempG = static_cast<DirectX12Application*>(D3DApp::GetApp())->mGeometries["shapeGeo"].get();
+	auto tempG = static_cast<Game*>(D3DApp::GetApp())->mGeometries["shapeGeo"].get();
 	XMStoreFloat4x4(&World, XMMatrixScaling(scale.x, scale.y, scale.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(rotation.x),
 	XMConvertToRadians(rotation.y), XMConvertToRadians(rotation.z)) * XMMatrixTranslation(position.x, position.y + (0.5 * scale.y), position.z));
-	ObjCBIndex = DirectX12Application::objCBIndex++;
+	ObjCBIndex = Game::objCBIndex++;
 	Geo = tempG;
 
 	auto searchedMat = ResourceManager::GetInstance()->GetMaterials().find(matID);
@@ -24,7 +24,7 @@ RenderItem::RenderItem(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, Tex
 
 void RenderItem::Draw(RenderItem* renderItem)
 {
-	static_cast<DirectX12Application*>(D3DApp::GetApp())->AddRenderItem(this);
+	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(this);
 }
 
 void RenderItem::UpdateTransform(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)

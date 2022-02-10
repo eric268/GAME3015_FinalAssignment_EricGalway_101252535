@@ -2,7 +2,7 @@
 #include "../D3DCommon/MathHelper.h"
 #include "../D3DCommon/UploadBuffer.h"
 #include "../D3DCommon/GeometryGenerator.h"
-#include "DirectX12Application.h"
+#include "Game.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 	PSTR cmdLine, int showCmd)
@@ -14,7 +14,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 
 	try
 	{
-		DirectX12Application dirX12(hInstance);
+		Game dirX12(hInstance);
 		if (!dirX12.Initialize())
 			return 0;
 

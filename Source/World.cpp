@@ -1,7 +1,6 @@
 #include "World.h"
 #include <string.h>
 #include "ResourceManager.h"
-#include "DirectX12Application.h"
 #include "SpriteNode.h"
 
 World::World() : 
@@ -57,9 +56,10 @@ void World::BuildScene()
 		mSceneGraph.AttachChild(std::move(layer));
 	}
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode());
-	backgroundSprite->SetScale(XMFLOAT3(1.0f, 2.0f, 1.0f));
+	backgroundSprite->SetScale(XMFLOAT3(10.0f, 1.0f, 200.0f));
 	backgroundSprite->SetPosition(0, -100, 0);
 	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
+	//XMFLOAT4X4 temp = backgroundSprite->renderItem->TexTransform;
 
 
 	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::Eagle));

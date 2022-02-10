@@ -1,5 +1,5 @@
 #include "Aircraft.h"
-#include "DirectX12Application.h"
+#include "Game.h"
 
 Aircraft::Aircraft(Type type)
 {
@@ -8,7 +8,7 @@ Aircraft::Aircraft(Type type)
 	nodeScale = XMFLOAT3(1.0f, 1.0f, 1.0f);
 	mVelocity = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, ConvertTypeToTexture(type));
-	static_cast<DirectX12Application*>(D3DApp::GetApp())->AddRenderItem(renderItem);
+	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
 }
 
 Aircraft::Aircraft(RenderItem* renderItem)
@@ -18,7 +18,7 @@ Aircraft::Aircraft(RenderItem* renderItem)
 	nodeScale = XMFLOAT3(1, 1, 1);
 	mVelocity = XMFLOAT3(20.0f, 0.0f, 0.0f);
 	this->renderItem = renderItem;
-	static_cast<DirectX12Application*>(D3DApp::GetApp())->AddRenderItem(renderItem);
+	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
 }
 
 Aircraft::Aircraft(XMFLOAT3 pos, XMFLOAT3 rot, XMFLOAT3 scale, Type type)
@@ -27,7 +27,7 @@ Aircraft::Aircraft(XMFLOAT3 pos, XMFLOAT3 rot, XMFLOAT3 scale, Type type)
 	nodeRotation = rot;
 	nodeScale = scale;
 	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, ConvertTypeToTexture(type));
-	static_cast<DirectX12Application*>(D3DApp::GetApp())->AddRenderItem(renderItem);
+	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
 }
 
 Textures::ID Aircraft::ConvertTypeToTexture(Aircraft::Type type)
