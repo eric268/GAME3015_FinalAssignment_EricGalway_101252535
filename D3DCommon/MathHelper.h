@@ -157,10 +157,7 @@ public:
 		float a43 = v41 * q13 + v42 * q23 + v43 * q33 + v44 * q43;
 		float a44 = v41 * q14 + v42 * q24 + v43 * q34 + v44 * q44;
 
-		static DirectX::XMFLOAT4X4 ans(a11, a12, a13, a14, a21, a22, a23, a24, a31, a32, a33, a34, a41, a42, a43, a44);
-
-		return ans;
+		return DirectX::XMFLOAT4X4(a11, a12, a13, a14, a21, a22, a23, a24, a31, a32, a33, a34, a41, a42, a43, a44);
 	}
-
 };
 

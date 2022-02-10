@@ -23,8 +23,8 @@ void Entity::UpdateCurrent(const GameTimer& gt)
 void Entity::Move(const GameTimer& gt)
 {
 	//auto var = mParent;
-	nodePosition.x = mParent->GetPosition().x + mVelocity.x * gt.DeltaTime();
-	nodePosition.y = mParent->GetPosition().x + mVelocity.y * gt.DeltaTime();
-	nodePosition.z = mParent->GetPosition().x + mVelocity.y * gt.DeltaTime();
+	nodePosition.x +=  mVelocity.x * gt.DeltaTime();
+	nodePosition.y +=  mVelocity.y * gt.DeltaTime();
+	nodePosition.z +=  mVelocity.y * gt.DeltaTime();
 	SetPosition(nodePosition);
 }

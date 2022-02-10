@@ -38,22 +38,23 @@ void World::BuildScene()
 	}
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode());
 	backgroundSprite->SetScale(XMFLOAT3(1.0f, 2.0f, 1.0f));
-	backgroundSprite->SetPosition(0, -30, 0);
+	backgroundSprite->SetPosition(0, -100, 0);
 	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
 
 
 	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::Eagle));
 	mPlayerAircraft = leader.get();
-	mPlayerAircraft->SetPosition(mSpawnPosition);
-	mPlayerAircraft->SetVelocity(XMFLOAT3(1.0f,0.f,0.f));
+	mPlayerAircraft->SetPosition(0,-20,0);
+	mPlayerAircraft->SetScale(0.1f, 0.1f, 0.1f);
+	mPlayerAircraft->SetVelocity(XMFLOAT3(1.0f,1.f,0.f));
 	mSceneLayers[Air]->AttachChild(std::move(leader));
 
 	std::unique_ptr<Aircraft> leftEscort(new Aircraft(Aircraft::Raptor));
-	leftEscort->SetPosition(-20.f, -20.f, 0);
+	leftEscort->SetPosition(-25.f, 0.f, -10);
 	mPlayerAircraft->AttachChild(std::move(leftEscort));
 
 	std::unique_ptr<Aircraft> rightEscort(new Aircraft( Aircraft::Raptor));
-	rightEscort->SetPosition(20.f, -20.f, 0);
+	rightEscort->SetPosition(25.f, 0.f, -10);
 	mPlayerAircraft->AttachChild(std::move(rightEscort));
 
 }

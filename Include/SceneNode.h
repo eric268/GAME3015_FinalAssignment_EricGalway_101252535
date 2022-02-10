@@ -25,7 +25,7 @@ public:
 
 	DirectX::XMFLOAT3 GetWorldPosition();
 	DirectX::XMFLOAT4X4 GetWorldTransform();
-	virtual void Draw(const GameTimer& gt) const;
+	virtual void Draw(const GameTimer& gt);
 
 
 	void SetPosition(XMFLOAT3 position);
@@ -45,6 +45,11 @@ public:
 	XMFLOAT3 nodeRotation;
 	XMFLOAT3 nodeScale;
 	SceneNode* mParent;
+
+	void SetTransform(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);
+	XMFLOAT4X4 GetTransform();
+	XMFLOAT4X4 transform;
+
 
 private:
 	virtual void UpdateCurrent(const GameTimer& gt);

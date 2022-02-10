@@ -1,12 +1,14 @@
 #include "SceneNode.h"
 
-SceneNode::SceneNode() : 
+SceneNode::SceneNode() :
 	mChildren(),
-	mParent(nullptr), 
-	nodePosition(XMFLOAT3(0,0,0)),
-	nodeRotation(XMFLOAT3(0,0,0)),
-	nodeScale(XMFLOAT3(1,1,1))
+	mParent(nullptr),
+	nodePosition(XMFLOAT3(0, 0, 0)),
+	nodeRotation(XMFLOAT3(0, 0, 0)),
+	nodeScale(XMFLOAT3(1, 1, 1))
 {
+	renderItem = new RenderItem();
+	SetTransform(nodePosition,nodeRotation,nodeScale);
 }
 
 void SceneNode::AttachChild(Ptr child)
@@ -41,14 +43,23 @@ DirectX::XMFLOAT3 SceneNode::GetWorldPosition()
 
 DirectX::XMFLOAT4X4 SceneNode::GetWorldTransform()
 {
-	XMFLOAT4X4 transform = MathHelper::Identity4x4();
 	XMFLOAT4X4 t = MathHelper::Identity4x4();
 
 	for (const SceneNode* node = this; node != nullptr; node = node->mParent)
 	{
-		XMStoreFloat4x4(&transform, XMMatrixScaling(nodeScale.x, nodeScale.y, nodeScale.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(nodeRotation.x),
-			XMConvertToRadians(nodeRotation.y), XMConvertToRadians(nodeRotation.z)) * XMMatrixTranslation(nodePosition.x, nodePosition.y, nodePosition.z));
+		t = MathHelper::MultiplyXMFLOAT4x4(t,node->transform);
 	}
+	return t;
+}
+
+void SceneNode::SetTransform(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)
+{
+	XMStoreFloat4x4(&transform, XMMatrixScaling(scale.x, scale.y, scale.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(rotation.x),
+		XMConvertToRadians(rotation.y), XMConvertToRadians(rotation.z)) * XMMatrixTranslation(position.x, position.y, position.z));
+}
+
+XMFLOAT4X4 SceneNode::GetTransform()
+{
 	return transform;
 }
 
@@ -64,8 +75,13 @@ void SceneNode::UpdateChildren(const GameTimer& gt)
 	}
 }
 
-void SceneNode::Draw(const GameTimer& gt) const
+void SceneNode::Draw(const GameTimer& gt)
 {
+	auto var = renderItem->material;
+	if (mParent != nullptr && renderItem != nullptr)
+	{
+		renderItem->World = MathHelper::MultiplyXMFLOAT4x4(mParent->renderItem->World, renderItem->World);
+	}
 	DrawCurrent(gt);
 	DrawChildren(gt);
 }
@@ -74,18 +90,21 @@ void SceneNode::SetPosition(XMFLOAT3 position)
 {
 	nodePosition = position;
 	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+	//SetTransform(nodePosition, nodeRotation, nodeScale);
 }
 
 void SceneNode::SetRotation(XMFLOAT3 rotation)
 {
 	nodeRotation = rotation;
-	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+	//renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+	SetTransform(nodePosition, nodeRotation, nodeScale);
 }
 
 void SceneNode::SetScale(XMFLOAT3 scale)
 {
 	nodeScale = scale;
-	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+	//renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+	SetTransform(nodePosition, nodeRotation, nodeScale);
 }
 
 void SceneNode::SetPosition(float x, float y, float z)
@@ -93,6 +112,7 @@ void SceneNode::SetPosition(float x, float y, float z)
 	XMFLOAT3 pos = XMFLOAT3(x, y, z);
 	nodePosition = pos;
 	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+	//SetTransform(nodePosition, nodeRotation, nodeScale);
 }
 
 void SceneNode::SetRotation(float x, float y, float z)
@@ -100,6 +120,7 @@ void SceneNode::SetRotation(float x, float y, float z)
 	XMFLOAT3 rot = XMFLOAT3(x, y, z);
 	nodeRotation = rot;
 	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+	//SetTransform(nodePosition, nodeRotation, nodeScale);
 }
 
 void SceneNode::SetScale(float x, float y, float z)
@@ -107,6 +128,7 @@ void SceneNode::SetScale(float x, float y, float z)
 	XMFLOAT3 scale = XMFLOAT3(x, y, z);
 	nodeScale = scale;
 	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+	//SetTransform(nodePosition, nodeRotation, nodeScale);
 }
 
 XMFLOAT3 SceneNode::GetPosition()
