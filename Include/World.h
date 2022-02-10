@@ -13,7 +13,8 @@ class World
 {
 public:
 	World();
-	World(XMFLOAT4X4 mWorldView);
+	World(float width, float height);
+	//World(XMFLOAT4X4& mWorldView);
 
 	void Update(const GameTimer& gt);
 	void Draw(const GameTimer& gt);
@@ -22,7 +23,7 @@ public:
 	void AddTexture(Textures::ID id, std::wstring fileName);
 	void LoadTextures();
 	UINT objIndex;
-
+	XMFLOAT4X4 mWorldView;
 private:
 	enum Layer
 	{
@@ -38,9 +39,12 @@ private:
 	XMFLOAT3 mSpawnPosition;
 	float mScrollSpeed;
 	Aircraft* mPlayerAircraft;
-	XMFLOAT4X4 mWorldView;
 	XMFLOAT3 worldViewPosition;
-	void UpdateCameraViewPosition(const GameTimer& gt);
+
+	void ManagePlayerPosition();
+
+	float screenWidth;
+	float screenHeight;
 };
 
 

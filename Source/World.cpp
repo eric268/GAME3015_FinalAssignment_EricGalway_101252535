@@ -12,19 +12,30 @@ World::World() :
 	LoadTextures();
 }
 
-World::World(XMFLOAT4X4 mWorldView) : 
-	mWorldView(mWorldView),
-	mSpawnPosition(XMFLOAT3(30,20,20)),
+World::World(float width, float height) :
+	screenWidth(width),
+	screenHeight(height),
+	mSpawnPosition(XMFLOAT3(0, -20, -20)),
 	mScrollSpeed(2.0f),
+	mWorldView(XMFLOAT4X4()),
 	worldViewPosition()
 {
-	LoadTextures();
+		LoadTextures();
 }
+
+//World::World(XMFLOAT4X4& mWorldView) : 
+//	mWorldView(mWorldView),
+//	mSpawnPosition(XMFLOAT3(30,20,20)),
+//	mScrollSpeed(2.0f),
+//	worldViewPosition()
+//{
+//	LoadTextures();
+//}
 
 void World::Update(const GameTimer& gt)
 {
 	mSceneGraph.Update(gt);
-	UpdateCameraViewPosition(gt);
+	ManagePlayerPosition();
 }
 
 void World::Draw(const GameTimer& gt)
@@ -39,12 +50,17 @@ void World::LoadTextures()
 	AddTexture(Textures::ID::Raptor, L"Media/Raptor.dds");
 }
 
-void World::UpdateCameraViewPosition(const GameTimer& gt)
+void World::ManagePlayerPosition()
 {
-	//worldViewPosition.y += mScrollSpeed * gt.DeltaTime();
-	//mWorldView._42 -= worldViewPosition.y;
-}
+	XMFLOAT3 position = mPlayerAircraft->GetPosition();
+	XMFLOAT3 velocity = mPlayerAircraft->GetVelocity();
 
+	if (position.x * 10.0f <= -screenWidth/2.0f + 150|| position.x*10.0f >=  screenWidth/2.0f - 150.f)
+	{
+		velocity.x = -velocity.x;
+		mPlayerAircraft->SetVelocity(velocity);
+	}
+}
 
 void World::BuildScene()
 {
@@ -66,7 +82,7 @@ void World::BuildScene()
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->SetPosition(mSpawnPosition);
 	mPlayerAircraft->SetScale(0.1f, 0.1f, 0.1f);
-	mPlayerAircraft->SetVelocity(XMFLOAT3(1.0f, 0, mScrollSpeed));
+	mPlayerAircraft->SetVelocity(XMFLOAT3(3.0f, 0, mScrollSpeed));
 	mSceneLayers[Air]->AttachChild(std::move(leader));
 
 	std::unique_ptr<Aircraft> leftEscort(new Aircraft(Aircraft::Raptor));

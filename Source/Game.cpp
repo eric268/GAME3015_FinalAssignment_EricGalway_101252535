@@ -11,7 +11,7 @@ const int gNumFrameResources = 3;
 UINT Game::objCBIndex = 0;
 Game::Game(HINSTANCE hInstance)
     : D3DApp(hInstance),
-	gameWorld(World())
+	gameWorld(World(D3DApp::mClientWidth, D3DApp::mClientHeight))
 {
 	mTheta = 1.5f * XM_PI;
 	mPhi = 0.01f * XM_PI;
