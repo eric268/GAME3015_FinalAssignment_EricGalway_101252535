@@ -69,6 +69,12 @@
     <ClCompile Include="Source\SpriteNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Aircraft.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D3DCommon\Camera.h">
@@ -123,6 +129,12 @@
       <Filter>D3DCommon</Filter>
     </ClInclude>
     <ClInclude Include="Include\SpriteNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Aircraft.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

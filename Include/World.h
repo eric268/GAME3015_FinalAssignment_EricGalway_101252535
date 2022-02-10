@@ -1,7 +1,9 @@
 #pragma once
 #include "ResourceIdentifiers.h"
 #include "SceneNode.h"
+//#include "Aircraft.h"
 #include <array>
+
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;

@@ -1,5 +1,6 @@
-#include "SpriteNode.h"
 #include "DirectX12Application.h"
+#include "SpriteNode.h"
+
 
 SpriteNode::SpriteNode()
 {
@@ -24,5 +25,5 @@ SpriteNode::SpriteNode(XMFLOAT3 pos, XMFLOAT3 rot, XMFLOAT3 scale, Textures::ID 
 
 void SpriteNode::DrawCurrent(const GameTimer& gt) const
 {
-	//renderItem->Draw(renderItem);
+	renderItem->Draw(renderItem);
 }

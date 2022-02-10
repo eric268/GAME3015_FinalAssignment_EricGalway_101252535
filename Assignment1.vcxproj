@@ -150,7 +150,9 @@
     <ClCompile Include="D3DCommon\MathHelper.cpp" />
     <ClCompile Include="D3DCommon\RenderItem.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Source\Aircraft.cpp" />
     <ClCompile Include="Source\DirectX12Application.cpp" />
+    <ClCompile Include="Source\Entity.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\ResourceManager.cpp" />
     <ClCompile Include="Source\SceneNode.cpp" />
@@ -169,7 +171,9 @@
     <ClInclude Include="D3DCommon\MathHelper.h" />
     <ClInclude Include="D3DCommon\RenderItem.h" />
     <ClInclude Include="D3DCommon\UploadBuffer.h" />
+    <ClInclude Include="Include\Aircraft.h" />
     <ClInclude Include="Include\DirectX12Application.h" />
+    <ClInclude Include="Include\Entity.h" />
     <ClInclude Include="Include\Game.h" />
     <ClInclude Include="Include\ResourceIdentifiers.h" />
     <ClInclude Include="Include\ResourceManager.h" />

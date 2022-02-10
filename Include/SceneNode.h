@@ -5,6 +5,7 @@
 #include "../D3DCommon/MathHelper.h"
 #include "../D3DCommon/UploadBuffer.h"
 #include "../D3DCommon/GeometryGenerator.h"
+
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
 using namespace DirectX::PackedVector;
@@ -34,5 +35,6 @@ private:
 
 	std::vector<Ptr> mChildren;
 	SceneNode* mParent;
+
 };
 
