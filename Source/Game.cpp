@@ -161,29 +161,29 @@ void Game::Draw(const GameTimer& gt)
 
 void Game::OnMouseDown(WPARAM btnState, int x, int y)
 {
-	SetCapture(mhMainWnd);
+	//Add some type of key for mouse input
 }
 
 void Game::OnMouseUp(WPARAM btnState, int x, int y)
 {
-	ReleaseCapture();
+	//Add some type of key for mouse input
 }
 
 void Game::OnMouseMove(WPARAM btnState, int x, int y)
 {
+	//Add some type of key for mouse input
 }
 
 void Game::OnKeyboardInput(const GameTimer& gt)
 {
 	if (GetAsyncKeyState('1') & 0x8000)
 	{
-
+		//Add some type of key for keyboard input
 	}
 	else
 	{
 
 	}
-
 }
 
 void Game::UpdateCamera(const GameTimer& gt)

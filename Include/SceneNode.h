@@ -46,11 +46,6 @@ public:
 	XMFLOAT3 nodeScale;
 	SceneNode* mParent;
 
-	void SetTransform(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);
-	XMFLOAT4X4 GetTransform();
-	XMFLOAT4X4 transform;
-
-
 private:
 	virtual void UpdateCurrent(const GameTimer& gt);
 	void UpdateChildren(const GameTimer& gt);

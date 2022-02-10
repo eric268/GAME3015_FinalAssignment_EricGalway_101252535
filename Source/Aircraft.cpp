@@ -7,7 +7,7 @@ Aircraft::Aircraft(Type type)
 	nodeRotation = XMFLOAT3(0, 0, 0);
 	nodeScale = XMFLOAT3(1.0f, 1.0f, 1.0f);
 	mVelocity = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, ConvertTypeToTexture(type));
+	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, ConvertTypeToTexture(type),1,1);
 	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
 }
 
@@ -26,7 +26,7 @@ Aircraft::Aircraft(XMFLOAT3 pos, XMFLOAT3 rot, XMFLOAT3 scale, Type type)
 	nodePosition = pos;
 	nodeRotation = rot;
 	nodeScale = scale;
-	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, ConvertTypeToTexture(type));
+	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, ConvertTypeToTexture(type),1,1);
 	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
 }
 

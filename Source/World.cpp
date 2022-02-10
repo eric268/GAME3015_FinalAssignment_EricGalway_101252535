@@ -55,6 +55,8 @@ void World::ManagePlayerPosition()
 	XMFLOAT3 position = mPlayerAircraft->GetPosition();
 	XMFLOAT3 velocity = mPlayerAircraft->GetVelocity();
 
+
+
 	if (position.x * 10.0f <= -screenWidth/2.0f + 150|| position.x*10.0f >=  screenWidth/2.0f - 150.f)
 	{
 		velocity.x = -velocity.x;
@@ -72,7 +74,7 @@ void World::BuildScene()
 		mSceneGraph.AttachChild(std::move(layer));
 	}
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode());
-	backgroundSprite->SetScale(XMFLOAT3(10.0f, 1.0f, 200.0f));
+	backgroundSprite->SetScale(XMFLOAT3(10.0f, 1.0f, 400.0f));
 	backgroundSprite->SetPosition(0, -100, 0);
 	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
 	//XMFLOAT4X4 temp = backgroundSprite->renderItem->TexTransform;
@@ -92,7 +94,6 @@ void World::BuildScene()
 	std::unique_ptr<Aircraft> rightEscort(new Aircraft( Aircraft::Raptor));
 	rightEscort->SetPosition(25.f, 0.f, -10);
 	mPlayerAircraft->AttachChild(std::move(rightEscort));
-
 }
 
 void World::AddTexture(Textures::ID id, std::wstring fileName)

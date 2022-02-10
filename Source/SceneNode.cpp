@@ -8,7 +8,6 @@ SceneNode::SceneNode() :
 	nodeScale(XMFLOAT3(1, 1, 1))
 {
 	renderItem = new RenderItem();
-	SetTransform(nodePosition,nodeRotation,nodeScale);
 }
 
 void SceneNode::AttachChild(Ptr child)
@@ -52,17 +51,6 @@ DirectX::XMFLOAT4X4 SceneNode::GetWorldTransform()
 	return t;
 }
 
-void SceneNode::SetTransform(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)
-{
-	XMStoreFloat4x4(&transform, XMMatrixScaling(scale.x, scale.y, scale.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(rotation.x),
-		XMConvertToRadians(rotation.y), XMConvertToRadians(rotation.z)) * XMMatrixTranslation(position.x, position.y, position.z));
-}
-
-XMFLOAT4X4 SceneNode::GetTransform()
-{
-	return transform;
-}
-
 void SceneNode::UpdateCurrent(const GameTimer& gt)
 {
 }
@@ -89,21 +77,18 @@ void SceneNode::SetPosition(XMFLOAT3 position)
 {
 	nodePosition = position;
 	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
-	//SetTransform(nodePosition, nodeRotation, nodeScale);
 }
 
 void SceneNode::SetRotation(XMFLOAT3 rotation)
 {
 	nodeRotation = rotation;
-	//renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
-	SetTransform(nodePosition, nodeRotation, nodeScale);
+	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
 }
 
 void SceneNode::SetScale(XMFLOAT3 scale)
 {
 	nodeScale = scale;
-	//renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
-	SetTransform(nodePosition, nodeRotation, nodeScale);
+	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
 }
 
 void SceneNode::SetPosition(float x, float y, float z)
@@ -111,7 +96,6 @@ void SceneNode::SetPosition(float x, float y, float z)
 	XMFLOAT3 pos = XMFLOAT3(x, y, z);
 	nodePosition = pos;
 	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
-	//SetTransform(nodePosition, nodeRotation, nodeScale);
 }
 
 void SceneNode::SetRotation(float x, float y, float z)
@@ -119,7 +103,6 @@ void SceneNode::SetRotation(float x, float y, float z)
 	XMFLOAT3 rot = XMFLOAT3(x, y, z);
 	nodeRotation = rot;
 	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
-	//SetTransform(nodePosition, nodeRotation, nodeScale);
 }
 
 void SceneNode::SetScale(float x, float y, float z)
@@ -127,7 +110,6 @@ void SceneNode::SetScale(float x, float y, float z)
 	XMFLOAT3 scale = XMFLOAT3(x, y, z);
 	nodeScale = scale;
 	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
-	//SetTransform(nodePosition, nodeRotation, nodeScale);
 }
 
 XMFLOAT3 SceneNode::GetPosition()
