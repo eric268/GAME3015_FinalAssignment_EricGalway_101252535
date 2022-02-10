@@ -45,6 +45,7 @@ bool DirectX12Application::Initialize()
 	BuildRenderItems();
 	BuildFrameResources();
 	BuildPSOs();
+	InitalizeCamera();
 
 
 	// Execute the initialization commands.
@@ -176,34 +177,6 @@ void DirectX12Application::OnMouseUp(WPARAM btnState, int x, int y)
 
 void DirectX12Application::OnMouseMove(WPARAM btnState, int x, int y)
 {
-	if ((btnState & MK_LBUTTON) != 0)
-	{
-		// Make each pixel correspond to a quarter of a degree.
-		float dx = XMConvertToRadians(0.25f * static_cast<float>(x - mLastMousePos.x));
-		float dy = XMConvertToRadians(0.25f * static_cast<float>(y - mLastMousePos.y));
-
-		// Update angles based on input to orbit camera around box.
-		mTheta += dx;
-		mPhi += dy;
-
-		// Restrict the angle mPhi.
-		//mPhi = MathHelper::Clamp(mPhi, 0.1f, MathHelper::Pi - 0.1f);
-	}
-	else if ((btnState & MK_RBUTTON) != 0)
-	{
-		// Make each pixel correspond to 0.2 unit in the scene.
-		float dx = 0.05f * static_cast<float>(x - mLastMousePos.x);
-		float dy = 0.05f * static_cast<float>(y - mLastMousePos.y);
-
-		// Update the camera radius based on input.
-		mRadius += dx - dy;
-
-		// Restrict the radius.
-		//mRadius = MathHelper::Clamp(mRadius, 5.0f, 150.0f);
-	}
-
-	mLastMousePos.x = x;
-	mLastMousePos.y = y;
 }
 
 void DirectX12Application::OnKeyboardInput(const GameTimer& gt)
@@ -216,21 +189,17 @@ void DirectX12Application::OnKeyboardInput(const GameTimer& gt)
 
 void DirectX12Application::UpdateCamera(const GameTimer& gt)
 {
-	XMVECTOR right = XMVectorSet(0.01f, 0.0f, 0.0f, 1.0f);
-	XMVECTOR upward = XMVectorSet(0.00f, 0.01f, 0.0f, 1.0f);
+	//XMVECTOR right = XMVectorSet(0.01f, 0.0f, 0.0f, 1.0f);
+	//XMVECTOR upward = XMVectorSet(0.00f, 0.01f, 0.0f, 1.0f);
+
 	// Convert Spherical to Cartesian coordinates.
-	mEyePos.x = mRadius * sinf(mPhi) * cosf(mTheta);
-	mEyePos.z = mRadius * sinf(mPhi) * sinf(mTheta);
-	mEyePos.y = mRadius * cosf(mPhi);
 
-	// Build the view matrix.
-	XMVECTOR pos = XMVectorSet(mEyePos.x, mEyePos.y, mEyePos.z, 1.0f);
-	XMVECTOR up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
-	XMMATRIX view = XMMatrixLookAtLH(pos, target, up);
 	//Move Right and Left
-
+	
 	XMStoreFloat4x4(&mView, view);
+	testYCameraValue += 2.0f * gt.DeltaTime();
+	mView._42 -= testYCameraValue;
 }
 
 void DirectX12Application::AnimateMaterials(const GameTimer& gt)
@@ -656,6 +625,14 @@ void DirectX12Application::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, c
 
 		cmdList->DrawIndexedInstanced(ri->IndexCount, 1, ri->StartIndexLocation, ri->BaseVertexLocation, 0);
 	}
+}
+
+void DirectX12Application::InitalizeCamera()
+{
+	mEyePos.x = mRadius * sinf(mPhi) * cosf(mTheta);
+	mEyePos.z = mRadius * sinf(mPhi) * sinf(mTheta);
+	mEyePos.y = mRadius * cosf(mPhi);
+	view = XMMatrixLookAtLH(XMVectorSet(mEyePos.x, mEyePos.y, mEyePos.z, 1.0f), target, XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f));
 }
 
 

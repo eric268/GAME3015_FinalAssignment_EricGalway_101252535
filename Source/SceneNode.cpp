@@ -47,7 +47,7 @@ DirectX::XMFLOAT4X4 SceneNode::GetWorldTransform()
 
 	for (const SceneNode* node = this; node != nullptr; node = node->mParent)
 	{
-		t = MathHelper::MultiplyXMFLOAT4x4(t,node->transform);
+		t = MathHelper::MultiplyXMFLOAT4x4(node->renderItem->World, t);
 	}
 	return t;
 }
@@ -77,7 +77,6 @@ void SceneNode::UpdateChildren(const GameTimer& gt)
 
 void SceneNode::Draw(const GameTimer& gt)
 {
-	auto var = renderItem->material;
 	if (mParent != nullptr && renderItem != nullptr)
 	{
 		renderItem->World = MathHelper::MultiplyXMFLOAT4x4(mParent->renderItem->World, renderItem->World);

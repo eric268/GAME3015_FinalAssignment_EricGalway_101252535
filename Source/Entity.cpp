@@ -25,6 +25,6 @@ void Entity::Move(const GameTimer& gt)
 	//auto var = mParent;
 	nodePosition.x +=  mVelocity.x * gt.DeltaTime();
 	nodePosition.y +=  mVelocity.y * gt.DeltaTime();
-	nodePosition.z +=  mVelocity.y * gt.DeltaTime();
+	nodePosition.z +=  mVelocity.z * gt.DeltaTime();
 	SetPosition(nodePosition);
 }

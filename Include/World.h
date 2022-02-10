@@ -13,6 +13,7 @@ class World
 {
 public:
 	World();
+	World(XMFLOAT4X4 mWorldView);
 
 	void Update(const GameTimer& gt);
 	void Draw(const GameTimer& gt);
@@ -31,13 +32,15 @@ private:
 	};
 
 private:
-	XMFLOAT3 mWorldView;
 	SceneNode mSceneGraph;
 	std::array<SceneNode*, LayerCount>	mSceneLayers;
 	XMFLOAT4 mWorldBounds;
 	XMFLOAT3 mSpawnPosition;
 	float mScrollSpeed;
 	Aircraft* mPlayerAircraft;
+	XMFLOAT4X4 mWorldView;
+	XMFLOAT3 worldViewPosition;
+	void UpdateCameraViewPosition(const GameTimer& gt);
 };
 
 

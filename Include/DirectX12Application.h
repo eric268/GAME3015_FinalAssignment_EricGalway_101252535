@@ -6,6 +6,7 @@
 #include "../D3DCommon/GeometryGenerator.h"
 #include "../D3DCommon/FrameResource.h"
 #include "../D3DCommon/RenderItem.h"
+
 #include "Game.h"
 
 
@@ -32,6 +33,7 @@ public:
 	static UINT objCBIndex;
 
 	std::unordered_map<std::string, std::unique_ptr<MeshGeometry>> mGeometries;
+	XMMATRIX view;
 private:
 	virtual void OnResize()override;
 	virtual void Update(const GameTimer& gt)override;
@@ -47,7 +49,7 @@ private:
 	void UpdateObjectCBs(const GameTimer& gt);
 	void UpdateMaterialCBs(const GameTimer& gt);
 	void UpdateMainPassCB(const GameTimer& gt);
-
+	
 	void LoadTextures();
 	void BuildRootSignature();
 	void BuildDescriptorHeaps();
@@ -57,6 +59,9 @@ private:
 	void BuildPSOs();
 	void BuildFrameResources();
 	void BuildMaterials();
+	void InitalizeCamera();
+
+
 
 	void DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems);
 
@@ -102,8 +107,9 @@ private:
 	XMFLOAT4X4 mProj = MathHelper::Identity4x4();
 
 	float mTheta = 1.5f * XM_PI;
-	float mPhi = 0.2f * XM_PI;
-	float mRadius = 15.0f;
+	float mPhi = 0.01f * XM_PI;
+	float mRadius = 100.0f;
 	XMVECTOR target = XMVectorZero();
 	POINT mLastMousePos;
+	float testYCameraValue = 0;
 };

@@ -4,7 +4,20 @@
 #include "DirectX12Application.h"
 #include "SpriteNode.h"
 
-World::World() : mSpawnPosition(XMFLOAT3(0,-20,20))
+World::World() : 
+	mSpawnPosition(XMFLOAT3(0,-20,-20)),
+	mScrollSpeed(2.0f),
+	mWorldView(XMFLOAT4X4()),
+	worldViewPosition()
+{
+	LoadTextures();
+}
+
+World::World(XMFLOAT4X4 mWorldView) : 
+	mWorldView(mWorldView),
+	mSpawnPosition(XMFLOAT3(30,20,20)),
+	mScrollSpeed(2.0f),
+	worldViewPosition()
 {
 	LoadTextures();
 }
@@ -12,6 +25,7 @@ World::World() : mSpawnPosition(XMFLOAT3(0,-20,20))
 void World::Update(const GameTimer& gt)
 {
 	mSceneGraph.Update(gt);
+	UpdateCameraViewPosition(gt);
 }
 
 void World::Draw(const GameTimer& gt)
@@ -22,8 +36,14 @@ void World::Draw(const GameTimer& gt)
 void World::LoadTextures()
 {
 	AddTexture(Textures::ID::Desert, L"Media/Desert.dds");
-	AddTexture(Textures::ID::Eagle, L"Media/Eagle.dds");
+	AddTexture(Textures::ID::Eagle, L"Media/Eagle3.dds");
 	AddTexture(Textures::ID::Raptor, L"Media/Raptor.dds");
+}
+
+void World::UpdateCameraViewPosition(const GameTimer& gt)
+{
+	//worldViewPosition.y += mScrollSpeed * gt.DeltaTime();
+	//mWorldView._42 -= worldViewPosition.y;
 }
 
 
@@ -44,9 +64,9 @@ void World::BuildScene()
 
 	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::Eagle));
 	mPlayerAircraft = leader.get();
-	mPlayerAircraft->SetPosition(0,-20,0);
+	mPlayerAircraft->SetPosition(mSpawnPosition);
 	mPlayerAircraft->SetScale(0.1f, 0.1f, 0.1f);
-	mPlayerAircraft->SetVelocity(XMFLOAT3(1.0f,1.f,0.f));
+	mPlayerAircraft->SetVelocity(XMFLOAT3(1.0f, 0, mScrollSpeed));
 	mSceneLayers[Air]->AttachChild(std::move(leader));
 
 	std::unique_ptr<Aircraft> leftEscort(new Aircraft(Aircraft::Raptor));
