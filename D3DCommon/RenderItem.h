@@ -11,14 +11,14 @@ class RenderItem
 {
 public:
 	RenderItem();
-	RenderItem(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 Scale, Textures::ID matID, UINT objIndex);
+	RenderItem(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 Scale, Textures::ID matID);
 	void Draw(RenderItem* renderItem);
 
+	UINT ObjCBIndex = -1;
 	// Primitive topology.
 	D3D12_PRIMITIVE_TOPOLOGY PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 	// DrawIndexedInstanced parameters.
-	UINT IndexCount = 0;
 	UINT StartIndexLocation = 0;
 	int BaseVertexLocation = 0;
 
@@ -36,8 +36,7 @@ public:
 	int NumFramesDirty = gNumFrameResources;
 
 	// Index into GPU constant buffer corresponding to the ObjectCB for this render item.
-	UINT ObjCBIndex = -1;
-
+	UINT IndexCount = 0;
 	Material* material;
 	MeshGeometry* Geo;
 };

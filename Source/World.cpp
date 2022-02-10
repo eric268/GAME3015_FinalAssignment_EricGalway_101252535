@@ -37,6 +37,11 @@ void World::BuildScene()
 	}
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode());
 	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
+
+	std::unique_ptr<SpriteNode> testSprite(new SpriteNode(XMFLOAT3(3.0f,3.0f,3.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f), Textures::ID::Raptor));
+	mSceneLayers[Background]->AttachChild(std::move(testSprite));
+
+
 }
 
 void World::AddTexture(Textures::ID id, std::wstring fileName)

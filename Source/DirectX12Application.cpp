@@ -598,15 +598,17 @@ void DirectX12Application::CreateShapeInWorld(UINT objIndex, XMFLOAT3 scaling, X
 
 void DirectX12Application::BuildRenderItem()
 {
-	CreateShapeInWorld(1, XMFLOAT3(5.0f, 5.0f, 5.0f), XMFLOAT3(0.0, -15.0, -20.0), XMFLOAT3(), "grid", Textures::ID::Eagle);
+	//CreateShapeInWorld(1, XMFLOAT3(5.0f, 5.0f, 5.0f), XMFLOAT3(0.0, -15.0, -20.0), XMFLOAT3(), "grid", Textures::ID::Eagle);
 
-	for (auto& e : mAllRitems)
-		mOpaqueRitems.push_back(e.get());
+	//for (auto& e : mAllRitems)
+	//	mOpaqueRitems.push_back(e.get());
 }
 
 void DirectX12Application::BuildRenderItem(RenderItem* renderItems)
 {
 	mAllRitems.push_back(std::make_unique<RenderItem>(*renderItems));
+	mOpaqueRitems.push_back(renderItems);
+
 }
 
 
