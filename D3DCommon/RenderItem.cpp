@@ -33,3 +33,9 @@ void RenderItem::Draw(RenderItem* renderItem)
 {
 	static_cast<DirectX12Application*>(D3DApp::GetApp())->AddRenderItem(this);
 }
+
+void RenderItem::UpdateTransform(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)
+{
+	XMStoreFloat4x4(&World, XMMatrixScaling(scale.x, scale.y, scale.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(rotation.x),
+		XMConvertToRadians(rotation.y), XMConvertToRadians(rotation.z)) * XMMatrixTranslation(position.x, position.y, position.z));
+}

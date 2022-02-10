@@ -26,9 +26,25 @@ public:
 	DirectX::XMFLOAT3 GetWorldPosition()const;
 	DirectX::XMFLOAT4X4 GetWorldTransform() const;
 	virtual void Draw(const GameTimer& gt) const;
+
+
+	void SetPosition(XMFLOAT3 position);
+	void SetRotation(XMFLOAT3 rotation);
+	void SetScale(XMFLOAT3 scale);
+
+	void SetPosition(float x, float y, float z);
+	void SetRotation(float x, float y, float z);
+	void SetScale(float x, float y, float z);
+
+	XMFLOAT3 GetPosition();
+	XMFLOAT3 GetRotation();
+	XMFLOAT3 GetScale();
+
 	RenderItem* renderItem;
 	XMFLOAT3 nodePosition;
-	void TranslateWorldPos(XMFLOAT3 position, XMFLOAT3 scale, XMFLOAT3 rotation);
+	XMFLOAT3 nodeRotation;
+	XMFLOAT3 nodeScale;
+
 private:
 	virtual void UpdateCurrent(const GameTimer& gt);
 	void UpdateChildren(const GameTimer& gt);
@@ -36,10 +52,7 @@ private:
 	virtual void DrawCurrent(const GameTimer& gt) const;
 	void DrawChildren(const GameTimer& gt) const;
 
-
-
 	std::vector<Ptr> mChildren;
 	SceneNode* mParent;
-
 };
 

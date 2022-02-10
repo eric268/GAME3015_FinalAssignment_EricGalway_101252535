@@ -25,17 +25,11 @@ public:
 	UINT StartIndexLocation = 0;
 	int BaseVertexLocation = 0;
 
-
-
 	XMFLOAT4X4 World = MathHelper::Identity4x4();
-	XMFLOAT3 Position = XMFLOAT3(World._41, World._42, World._43);
-	XMFLOAT3 Rotation = XMFLOAT3(World._14, World._24, World._34);
-	XMFLOAT3 Scale = XMFLOAT3(World._31, World._32, World._33);
-
-
-
 
 	XMFLOAT4X4 TexTransform = MathHelper::Identity4x4();
+
+	void UpdateTransform(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);
 
 	// Dirty flag indicating the object data has changed and we need to update the constant buffer.
 	// Because we have an object cbuffer for each FrameResource, we have to apply the

@@ -1,6 +1,11 @@
 #include "SceneNode.h"
 
-SceneNode::SceneNode() : mChildren(), mParent(nullptr), nodePosition()
+SceneNode::SceneNode() : 
+	mChildren(),
+	mParent(nullptr), 
+	nodePosition(XMFLOAT3(0,0,0)),
+	nodeRotation(XMFLOAT3(0,0,0)),
+	nodeScale(XMFLOAT3(1,1,1))
 {
 }
 
@@ -55,6 +60,60 @@ void SceneNode::Draw(const GameTimer& gt) const
 	DrawChildren(gt);
 }
 
+void SceneNode::SetPosition(XMFLOAT3 position)
+{
+	nodePosition = position;
+	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+}
+
+void SceneNode::SetRotation(XMFLOAT3 rotation)
+{
+	nodeRotation = rotation;
+	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+}
+
+void SceneNode::SetScale(XMFLOAT3 scale)
+{
+	nodeScale = scale;
+	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+}
+
+void SceneNode::SetPosition(float x, float y, float z)
+{
+	XMFLOAT3 pos = XMFLOAT3(x, y, z);
+	nodePosition = pos;
+	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+}
+
+void SceneNode::SetRotation(float x, float y, float z)
+{
+	XMFLOAT3 rot = XMFLOAT3(x, y, z);
+	nodeRotation = rot;
+	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+}
+
+void SceneNode::SetScale(float x, float y, float z)
+{
+	XMFLOAT3 scale = XMFLOAT3(x, y, z);
+	nodeScale = scale;
+	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
+}
+
+XMFLOAT3 SceneNode::GetPosition()
+{
+	return nodePosition;
+}
+
+XMFLOAT3 SceneNode::GetRotation()
+{
+	return nodeRotation;
+}
+
+XMFLOAT3 SceneNode::GetScale()
+{
+	return nodeScale;
+}
+
 void SceneNode::DrawCurrent(const GameTimer& gt) const
 {
 }
@@ -65,12 +124,4 @@ void SceneNode::DrawChildren(const GameTimer& gt) const
 	{
 		child->Draw(gt);
 	}
-}
-
-void SceneNode::TranslateWorldPos(XMFLOAT3 position, XMFLOAT3 scale, XMFLOAT3 rotation)
-{
-
-		XMStoreFloat4x4(&renderItem->World, XMMatrixScaling(scale.x, scale.y, scale.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(rotation.x),
-			XMConvertToRadians(rotation.y), XMConvertToRadians(rotation.z)) * XMMatrixTranslation(position.x, position.y + (0.5 * scale.y), position.z));
-	
 }

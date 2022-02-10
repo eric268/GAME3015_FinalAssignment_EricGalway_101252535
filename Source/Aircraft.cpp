@@ -4,17 +4,18 @@
 Aircraft::Aircraft(Type type)
 {
 	nodePosition = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	XMFLOAT3 pos = XMFLOAT3(0, 0, 0);
-	XMFLOAT3 rot = XMFLOAT3(0, 0, 0);
-	XMFLOAT3 scale = XMFLOAT3(1, 1, 1);
-	mVelocity = XMFLOAT3(2.0f, 0.0f, 0.0f);
-	renderItem = new RenderItem(pos, rot, scale, Textures::ID::Eagle);
+	nodeRotation = XMFLOAT3(0, 0, 0);
+	nodeScale = XMFLOAT3(1, 1, 1);
+	mVelocity = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, ConvertTypeToTexture(type));
 	static_cast<DirectX12Application*>(D3DApp::GetApp())->AddRenderItem(renderItem);
 }
 
 Aircraft::Aircraft(RenderItem* renderItem)
 {
 	nodePosition = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	nodeRotation = XMFLOAT3(0, 0, 0);
+	nodeScale = XMFLOAT3(1, 1, 1);
 	mVelocity = XMFLOAT3(20.0f, 0.0f, 0.0f);
 	this->renderItem = renderItem;
 	static_cast<DirectX12Application*>(D3DApp::GetApp())->AddRenderItem(renderItem);
@@ -22,9 +23,10 @@ Aircraft::Aircraft(RenderItem* renderItem)
 
 Aircraft::Aircraft(XMFLOAT3 pos, XMFLOAT3 rot, XMFLOAT3 scale, Type type)
 {
-	nodePosition = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	mVelocity = XMFLOAT3(20.0f, 0.0f, 0.0f);
-	renderItem = new RenderItem(pos, rot, scale, ConvertTypeToTexture(type));
+	nodePosition = pos;
+	nodeRotation = rot;
+	nodeScale = scale;
+	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, ConvertTypeToTexture(type));
 	static_cast<DirectX12Application*>(D3DApp::GetApp())->AddRenderItem(renderItem);
 }
 
