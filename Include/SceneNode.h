@@ -23,8 +23,8 @@ public:
 
 	void Update(const GameTimer& gt);
 
-	DirectX::XMFLOAT3 GetWorldPosition()const;
-	DirectX::XMFLOAT4X4 GetWorldTransform() const;
+	DirectX::XMFLOAT3 GetWorldPosition();
+	DirectX::XMFLOAT4X4 GetWorldTransform();
 	virtual void Draw(const GameTimer& gt) const;
 
 
@@ -44,6 +44,7 @@ public:
 	XMFLOAT3 nodePosition;
 	XMFLOAT3 nodeRotation;
 	XMFLOAT3 nodeScale;
+	SceneNode* mParent;
 
 private:
 	virtual void UpdateCurrent(const GameTimer& gt);
@@ -53,6 +54,6 @@ private:
 	void DrawChildren(const GameTimer& gt) const;
 
 	std::vector<Ptr> mChildren;
-	SceneNode* mParent;
+
 };
 

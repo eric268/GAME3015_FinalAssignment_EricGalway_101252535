@@ -230,8 +230,6 @@ void DirectX12Application::UpdateCamera(const GameTimer& gt)
 	XMMATRIX view = XMMatrixLookAtLH(pos, target, up);
 	//Move Right and Left
 
-	
-
 	XMStoreFloat4x4(&mView, view);
 }
 

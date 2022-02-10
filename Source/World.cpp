@@ -4,7 +4,7 @@
 #include "DirectX12Application.h"
 #include "SpriteNode.h"
 
-World::World()
+World::World() : mSpawnPosition(XMFLOAT3(0,-20,20))
 {
 	LoadTextures();
 }
@@ -37,17 +37,24 @@ void World::BuildScene()
 		mSceneGraph.AttachChild(std::move(layer));
 	}
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode());
-	backgroundSprite->SetScale(XMFLOAT3(10.0f, 2000.0f, 1.0f));
-	backgroundSprite->SetPosition(0, -50, 0);
+	backgroundSprite->SetScale(XMFLOAT3(1.0f, 2.0f, 1.0f));
+	backgroundSprite->SetPosition(0, -30, 0);
 	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
 
 
-	std::unique_ptr<Aircraft> leader(new Aircraft(XMFLOAT3(0.0f,-20.0f,0), XMFLOAT3(), XMFLOAT3(0.05f,0.05f,0.05),Aircraft::Eagle));
+	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::Eagle));
 	mPlayerAircraft = leader.get();
-	//mPlayerAircraft->SetPosition(mSpawnPosition);
+	mPlayerAircraft->SetPosition(mSpawnPosition);
 	mPlayerAircraft->SetVelocity(XMFLOAT3(1.0f,0.f,0.f));
 	mSceneLayers[Air]->AttachChild(std::move(leader));
 
+	std::unique_ptr<Aircraft> leftEscort(new Aircraft(Aircraft::Raptor));
+	leftEscort->SetPosition(-20.f, -20.f, 0);
+	mPlayerAircraft->AttachChild(std::move(leftEscort));
+
+	std::unique_ptr<Aircraft> rightEscort(new Aircraft( Aircraft::Raptor));
+	rightEscort->SetPosition(20.f, -20.f, 0);
+	mPlayerAircraft->AttachChild(std::move(rightEscort));
 
 }
 

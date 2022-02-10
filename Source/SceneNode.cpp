@@ -32,14 +32,24 @@ void SceneNode::Update(const GameTimer& gt)
 	UpdateChildren(gt);
 }
 
-DirectX::XMFLOAT3 SceneNode::GetWorldPosition() const
+DirectX::XMFLOAT3 SceneNode::GetWorldPosition()
 {
-	return DirectX::XMFLOAT3();
+	XMFLOAT4X4 transform = GetWorldTransform();
+	XMFLOAT3 position = XMFLOAT3(transform._41, transform._42, transform._43);
+	return position;
 }
 
-DirectX::XMFLOAT4X4 SceneNode::GetWorldTransform()const
+DirectX::XMFLOAT4X4 SceneNode::GetWorldTransform()
 {
-	return DirectX::XMFLOAT4X4();
+	XMFLOAT4X4 transform = MathHelper::Identity4x4();
+	XMFLOAT4X4 t = MathHelper::Identity4x4();
+
+	for (const SceneNode* node = this; node != nullptr; node = node->mParent)
+	{
+		XMStoreFloat4x4(&transform, XMMatrixScaling(nodeScale.x, nodeScale.y, nodeScale.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(nodeRotation.x),
+			XMConvertToRadians(nodeRotation.y), XMConvertToRadians(nodeRotation.z)) * XMMatrixTranslation(nodePosition.x, nodePosition.y, nodePosition.z));
+	}
+	return transform;
 }
 
 void SceneNode::UpdateCurrent(const GameTimer& gt)

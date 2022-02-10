@@ -5,7 +5,7 @@ Aircraft::Aircraft(Type type)
 {
 	nodePosition = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	nodeRotation = XMFLOAT3(0, 0, 0);
-	nodeScale = XMFLOAT3(1, 1, 1);
+	nodeScale = XMFLOAT3(0.1, 0.1, 0.1);
 	mVelocity = XMFLOAT3(0.0f, 0.0f, 0.0f);
 	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, ConvertTypeToTexture(type));
 	static_cast<DirectX12Application*>(D3DApp::GetApp())->AddRenderItem(renderItem);
