@@ -27,12 +27,16 @@ public:
 	DirectX::XMFLOAT4X4 GetWorldTransform() const;
 	virtual void Draw(const GameTimer& gt) const;
 	RenderItem* renderItem;
+	XMFLOAT3 nodePosition;
+	void TranslateWorldPos(XMFLOAT3 position, XMFLOAT3 scale, XMFLOAT3 rotation);
 private:
 	virtual void UpdateCurrent(const GameTimer& gt);
 	void UpdateChildren(const GameTimer& gt);
 
 	virtual void DrawCurrent(const GameTimer& gt) const;
 	void DrawChildren(const GameTimer& gt) const;
+
+
 
 	std::vector<Ptr> mChildren;
 	SceneNode* mParent;

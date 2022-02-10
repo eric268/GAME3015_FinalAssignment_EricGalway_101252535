@@ -1,6 +1,6 @@
 #include "SceneNode.h"
 
-SceneNode::SceneNode() : mChildren(), mParent(nullptr)
+SceneNode::SceneNode() : mChildren(), mParent(nullptr), nodePosition()
 {
 }
 
@@ -43,6 +43,10 @@ void SceneNode::UpdateCurrent(const GameTimer& gt)
 
 void SceneNode::UpdateChildren(const GameTimer& gt)
 {
+	for (Ptr& child : mChildren)
+	{
+		child->Update(gt);
+	}
 }
 
 void SceneNode::Draw(const GameTimer& gt) const
@@ -61,4 +65,12 @@ void SceneNode::DrawChildren(const GameTimer& gt) const
 	{
 		child->Draw(gt);
 	}
+}
+
+void SceneNode::TranslateWorldPos(XMFLOAT3 position, XMFLOAT3 scale, XMFLOAT3 rotation)
+{
+
+		XMStoreFloat4x4(&renderItem->World, XMMatrixScaling(scale.x, scale.y, scale.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(rotation.x),
+			XMConvertToRadians(rotation.y), XMConvertToRadians(rotation.z)) * XMMatrixTranslation(position.x, position.y + (0.5 * scale.y), position.z));
+	
 }

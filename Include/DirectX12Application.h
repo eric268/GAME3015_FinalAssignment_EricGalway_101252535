@@ -26,9 +26,9 @@ public:
 	std::unordered_map<std::string, std::unique_ptr<Material>> mMaterials;
 	virtual bool Initialize()override;
 	void CreateShapeInWorld(UINT objIndex, XMFLOAT3 scaling, XMFLOAT3 translation, XMFLOAT3 angle, std::string shapeName, Textures::ID materialID);
-	void DrawRenderItem(RenderItem* ritems);
-	void BuildRenderItem();
-	void BuildRenderItem(RenderItem* renderItems);
+
+	void BuildRenderItems();
+	void AddRenderItem(RenderItem* renderItems);
 	static UINT objCBIndex;
 
 	std::unordered_map<std::string, std::unique_ptr<MeshGeometry>> mGeometries;

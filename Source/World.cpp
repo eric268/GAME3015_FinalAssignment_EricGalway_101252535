@@ -11,6 +11,7 @@ World::World()
 
 void World::Update(const GameTimer& gt)
 {
+	mSceneGraph.Update(gt);
 }
 
 void World::Draw(const GameTimer& gt)
@@ -35,13 +36,15 @@ void World::BuildScene()
 		mSceneLayers[i] = layer.get();
 		mSceneGraph.AttachChild(std::move(layer));
 	}
-	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode());
-	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
+	//std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode());
+	//mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
 
-	std::unique_ptr<SpriteNode> testSprite(new SpriteNode(XMFLOAT3(3.0f,3.0f,3.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f), Textures::ID::Raptor));
-	mSceneLayers[Background]->AttachChild(std::move(testSprite));
 
-	//std::unique_ptr<Aircraft>
+	std::unique_ptr<Aircraft> leader(new Aircraft(XMFLOAT3(0.0f,-20.0f,0), XMFLOAT3(), XMFLOAT3(0.3f,0.3f,0.3),Aircraft::Eagle));
+	mPlayerAircraft = leader.get();
+	//mPlayerAircraft->SetPosition(mSpawnPosition);
+	mPlayerAircraft->SetVelocity(XMFLOAT3(20.0f,0.f,0.f));
+	mSceneLayers[Air]->AttachChild(std::move(leader));
 
 
 }

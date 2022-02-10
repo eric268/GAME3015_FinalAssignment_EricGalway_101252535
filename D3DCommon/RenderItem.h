@@ -25,10 +25,15 @@ public:
 	UINT StartIndexLocation = 0;
 	int BaseVertexLocation = 0;
 
+
+
 	XMFLOAT4X4 World = MathHelper::Identity4x4();
-	XMFLOAT3 Position = XMFLOAT3(World._11, World._12, World._13);
-	XMFLOAT3 Rotation = XMFLOAT3(World._21, World._22, World._23);
+	XMFLOAT3 Position = XMFLOAT3(World._41, World._42, World._43);
+	XMFLOAT3 Rotation = XMFLOAT3(World._14, World._24, World._34);
 	XMFLOAT3 Scale = XMFLOAT3(World._31, World._32, World._33);
+
+
+
 
 	XMFLOAT4X4 TexTransform = MathHelper::Identity4x4();
 

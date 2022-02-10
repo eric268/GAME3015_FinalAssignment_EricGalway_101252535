@@ -31,5 +31,5 @@ RenderItem::RenderItem(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, Tex
 
 void RenderItem::Draw(RenderItem* renderItem)
 {
-	static_cast<DirectX12Application*>(D3DApp::GetApp())->DrawRenderItem(this);
+	static_cast<DirectX12Application*>(D3DApp::GetApp())->AddRenderItem(this);
 }

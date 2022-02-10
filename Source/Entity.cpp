@@ -22,6 +22,13 @@ void Entity::UpdateCurrent(const GameTimer& gt)
 
 void Entity::Move(const GameTimer& gt)
 {
-	renderItem->Position.x += mVelocity.x * gt.DeltaTime();
-	renderItem->Position.y += mVelocity.y * gt.DeltaTime();
+	nodePosition.x += mVelocity.x * gt.DeltaTime();
+	nodePosition.y += mVelocity.y * gt.DeltaTime();
+
+	//renderItem->TranslateWorldPos(nodePosition);
+	TranslateWorldPos(XMFLOAT3(nodePosition.x, nodePosition.y, 0), XMFLOAT3(0.005, 0.005, 0.005), XMFLOAT3(1, 0, 0));
+	
+
+
+	//IDirect3DDevice9::SetTransform()
 }

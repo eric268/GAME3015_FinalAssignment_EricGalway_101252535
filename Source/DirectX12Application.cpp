@@ -36,18 +36,14 @@ bool DirectX12Application::Initialize()
 
 	mCbvSrvDescriptorSize = md3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
-
 	LoadTextures();
 	BuildRootSignature();
 	BuildDescriptorHeaps();
 	BuildShadersAndInputLayout();
 	BuildShapeGeometry();
 	BuildMaterials();
-	
-	game.GetWorld().BuildScene();
-	BuildRenderItem();
+	BuildRenderItems();
 	BuildFrameResources();
-	//BuildConstantBufferViews();
 	BuildPSOs();
 
 
@@ -137,7 +133,7 @@ void DirectX12Application::Draw(const GameTimer& gt)
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
 	game.Draw(gt);
-	//DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
+	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
 	// Indicate a state transition on the resource usage.
 	mCommandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
@@ -232,6 +228,7 @@ void DirectX12Application::UpdateCamera(const GameTimer& gt)
 	XMMATRIX view = XMMatrixLookAtLH(pos, target, up);
 	//Move Right and Left
 
+	
 
 	XMStoreFloat4x4(&mView, view);
 }
@@ -307,6 +304,8 @@ void DirectX12Application::UpdateMaterialCBs(const GameTimer& gt)
 			// Next FrameResource need to be updated too.
 			mat->NumFramesDirty--;
 		}
+		//D3DMATRIX matTranslate;
+
 	}
 }
 
@@ -596,21 +595,18 @@ void DirectX12Application::CreateShapeInWorld(UINT objIndex, XMFLOAT3 scaling, X
 	mAllRitems.push_back(std::move(temp));
 }
 
-void DirectX12Application::BuildRenderItem()
+void DirectX12Application::AddRenderItem(RenderItem* renderItems)
+{
+	mAllRitems.push_back(std::make_unique<RenderItem>(std::move(*renderItems)));
+}
+
+void DirectX12Application::BuildRenderItems()
 {
 	//CreateShapeInWorld(1, XMFLOAT3(5.0f, 5.0f, 5.0f), XMFLOAT3(0.0, -15.0, -20.0), XMFLOAT3(), "grid", Textures::ID::Eagle);
-
-	//for (auto& e : mAllRitems)
-	//	mOpaqueRitems.push_back(e.get());
+	game.GetWorld().BuildScene();
+	for (auto& e : mAllRitems)
+		mOpaqueRitems.push_back(e.get());
 }
-
-void DirectX12Application::BuildRenderItem(RenderItem* renderItems)
-{
-	mAllRitems.push_back(std::make_unique<RenderItem>(*renderItems));
-	mOpaqueRitems.push_back(renderItems);
-
-}
-
 
 //The DrawRenderItems method is invoked in the main Draw call:
 void DirectX12Application::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems)
@@ -642,31 +638,6 @@ void DirectX12Application::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, c
 
 		cmdList->DrawIndexedInstanced(ri->IndexCount, 1, ri->StartIndexLocation, ri->BaseVertexLocation, 0);
 	}
-}
-
-void DirectX12Application::DrawRenderItem(RenderItem* ritems)
-{
-	UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
-	UINT matCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(MaterialConstants));
-
-	auto objectCB = mCurrFrameResource->ObjectCB->Resource();
-	auto matCB = mCurrFrameResource->MaterialCB->Resource();
-
-	mCommandList->IASetVertexBuffers(0, 1, &ritems->Geo->VertexBufferView());
-	mCommandList->IASetIndexBuffer(&ritems->Geo->IndexBufferView());
-	mCommandList->IASetPrimitiveTopology(ritems->PrimitiveType);
-
-	CD3DX12_GPU_DESCRIPTOR_HANDLE tex(mSrvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
-	tex.Offset(ritems->material->DiffuseSrvHeapIndex, mCbvSrvDescriptorSize);
-
-	D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = objectCB->GetGPUVirtualAddress() + ritems->ObjCBIndex * objCBByteSize;
-	D3D12_GPU_VIRTUAL_ADDRESS matCBAddress = matCB->GetGPUVirtualAddress() + ritems->material->MatCBIndex * matCBByteSize;
-
-	mCommandList->SetGraphicsRootDescriptorTable(0, tex);
-	mCommandList->SetGraphicsRootConstantBufferView(1, objCBAddress);
-	mCommandList->SetGraphicsRootConstantBufferView(3, matCBAddress);
-
-	mCommandList->DrawIndexedInstanced(ritems->IndexCount, 1, ritems->StartIndexLocation, ritems->BaseVertexLocation, 0);
 }
 
 
