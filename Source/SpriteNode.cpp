@@ -1,5 +1,6 @@
-#include "DirectX12Application.h"
+
 #include "SpriteNode.h"
+#include "DirectX12Application.h"
 
 
 SpriteNode::SpriteNode()

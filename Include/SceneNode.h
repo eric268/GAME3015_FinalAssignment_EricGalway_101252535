@@ -5,6 +5,7 @@
 #include "../D3DCommon/MathHelper.h"
 #include "../D3DCommon/UploadBuffer.h"
 #include "../D3DCommon/GeometryGenerator.h"
+#include "../D3DCommon/RenderItem.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -25,7 +26,7 @@ public:
 	DirectX::XMFLOAT3 GetWorldPosition()const;
 	DirectX::XMFLOAT4X4 GetWorldTransform() const;
 	virtual void Draw(const GameTimer& gt) const;
-
+	RenderItem* renderItem;
 private:
 	virtual void UpdateCurrent(const GameTimer& gt);
 	void UpdateChildren(const GameTimer& gt);

@@ -1,7 +1,10 @@
 #pragma once
-//#include "DirectX12Application.h"
-#include "Game.h"
 
+#include "../D3DCommon/d3dApp.h"
+#include "../D3DCommon/MathHelper.h"
+#include "../D3DCommon/UploadBuffer.h"
+#include "../D3DCommon/GeometryGenerator.h"
+#include "ResourceIdentifiers.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;

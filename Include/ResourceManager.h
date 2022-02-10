@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "ResourceHolder.h"
+#include <map>
 #include "ResourceIdentifiers.h"
 #include "../D3DCommon/d3dApp.h"
 

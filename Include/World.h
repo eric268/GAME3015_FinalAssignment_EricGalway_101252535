@@ -1,7 +1,7 @@
 #pragma once
 #include "ResourceIdentifiers.h"
 #include "SceneNode.h"
-//#include "Aircraft.h"
+#include "Aircraft.h"
 #include <array>
 
 
@@ -37,6 +37,7 @@ private:
 	XMFLOAT4 mWorldBounds;
 	XMFLOAT3 mSpawnPosition;
 	float mScrollSpeed;
+	Aircraft* mPlayerAircraft;
 };
 
 
