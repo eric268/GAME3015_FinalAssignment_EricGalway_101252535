@@ -13,8 +13,7 @@ class World
 {
 public:
 	World();
-	World(float width, float height);
-	//World(XMFLOAT4X4& mWorldView);
+	World( float width, float height);
 
 	void Update(const GameTimer& gt);
 	void Draw(const GameTimer& gt);
@@ -24,6 +23,8 @@ public:
 	void LoadTextures();
 	UINT objIndex;
 	XMFLOAT4X4 mWorldView;
+
+	void SetWorldView(XMFLOAT4X4& view);
 private:
 	enum Layer
 	{
@@ -42,9 +43,12 @@ private:
 	XMFLOAT3 worldViewPosition;
 
 	void ManagePlayerPosition();
-
+	void UpdateCamera(const GameTimer& gt);
 	float screenWidth;
 	float screenHeight;
+	float screenWidthBuffer;
+	float screenToWorldRatio;
+	XMFLOAT3 cameraPosition;
 };
 
 

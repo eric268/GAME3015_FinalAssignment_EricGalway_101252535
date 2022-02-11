@@ -121,11 +121,6 @@ void Game::Draw(const GameTimer& gt)
 
 	mCommandList->SetGraphicsRootSignature(mRootSignature.Get());
 
-	// int passCbvIndex = mPassCbvOffset + mCurrFrameResourceIndex;
-	// auto passCbvHandle = CD3DX12_GPU_DESCRIPTOR_HANDLE(mCbvHeap->GetGPUDescriptorHandleForHeapStart());
-	// passCbvHandle.Offset(passCbvIndex, mCbvSrvUavDescriptorSize);
-	// mCommandList->SetGraphicsRootDescriptorTable(1, passCbvHandle);
-
 	auto passCB = mCurrFrameResource->PassCB->Resource();
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
@@ -186,13 +181,6 @@ void Game::OnKeyboardInput(const GameTimer& gt)
 	}
 }
 
-void Game::UpdateCamera(const GameTimer& gt)
-{
-	XMStoreFloat4x4(&mView, view);
-	testYCameraValue += 2.0f * gt.DeltaTime();
-	mView._42 -= testYCameraValue;
-}
-
 void Game::UpdateObjectCBs(const GameTimer& gt)
 {
 	auto currObjectCB = mCurrFrameResource->ObjectCB.get();
@@ -247,7 +235,7 @@ void Game::UpdateMaterialCBs(const GameTimer& gt)
 
 void Game::UpdateMainPassCB(const GameTimer& gt)
 {
-	XMMATRIX view = XMLoadFloat4x4(&mView);
+	XMMATRIX view = XMLoadFloat4x4(&gameWorld.mWorldView);
 	XMMATRIX proj = XMLoadFloat4x4(&mProj);
 
 	XMMATRIX viewProj = XMMatrixMultiply(view, proj);
@@ -569,6 +557,8 @@ void Game::InitalizeCamera()
 	mEyePos.z = mRadius * sinf(mPhi) * sinf(mTheta);
 	mEyePos.y = mRadius * cosf(mPhi);
 	view = XMMatrixLookAtLH(XMVectorSet(mEyePos.x, mEyePos.y, mEyePos.z, 1.0f), target, XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f));
+	XMStoreFloat4x4(&mView, view);
+	gameWorld.SetWorldView(mView);
 }
 
 std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()

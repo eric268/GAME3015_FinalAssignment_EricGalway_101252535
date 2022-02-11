@@ -4,7 +4,7 @@
 #include "SpriteNode.h"
 
 World::World() : 
-	mSpawnPosition(XMFLOAT3(0,-20,-20)),
+	mSpawnPosition(XMFLOAT3(0,-20,-25)),
 	mScrollSpeed(2.0f),
 	mWorldView(XMFLOAT4X4()),
 	worldViewPosition()
@@ -12,29 +12,24 @@ World::World() :
 	LoadTextures();
 }
 
-World::World(float width, float height) :
+World::World( float width, float height) :
+	//mWorldView(mWorldView),
 	screenWidth(width),
 	screenHeight(height),
-	mSpawnPosition(XMFLOAT3(0, -20, -20)),
+	screenWidthBuffer(175.0f),
+	mSpawnPosition(XMFLOAT3(0, -20, -25)),
 	mScrollSpeed(2.0f),
-	mWorldView(XMFLOAT4X4()),
-	worldViewPosition()
+	worldViewPosition(),
+	screenToWorldRatio(10),
+	cameraPosition(XMFLOAT3())
 {
 		LoadTextures();
 }
 
-//World::World(XMFLOAT4X4& mWorldView) : 
-//	mWorldView(mWorldView),
-//	mSpawnPosition(XMFLOAT3(30,20,20)),
-//	mScrollSpeed(2.0f),
-//	worldViewPosition()
-//{
-//	LoadTextures();
-//}
-
 void World::Update(const GameTimer& gt)
 {
 	mSceneGraph.Update(gt);
+	UpdateCamera(gt);
 	ManagePlayerPosition();
 }
 
@@ -50,18 +45,28 @@ void World::LoadTextures()
 	AddTexture(Textures::ID::Raptor, L"Media/Raptor.dds");
 }
 
+void World::SetWorldView(XMFLOAT4X4& view)
+{
+	mWorldView = view;
+	cameraPosition = MathHelper::GetPosition(mWorldView);
+}
+
 void World::ManagePlayerPosition()
 {
 	XMFLOAT3 position = mPlayerAircraft->GetPosition();
 	XMFLOAT3 velocity = mPlayerAircraft->GetVelocity();
 
-
-
-	if (position.x * 10.0f <= -screenWidth/2.0f + 150|| position.x*10.0f >=  screenWidth/2.0f - 150.f)
+	if (position.x * screenToWorldRatio <= -screenWidth/2.0f + screenWidthBuffer|| position.x * screenToWorldRatio >=  screenWidth/2.0f - screenWidthBuffer)
 	{
 		velocity.x = -velocity.x;
 		mPlayerAircraft->SetVelocity(velocity);
 	}
+}
+
+void World::UpdateCamera(const GameTimer& gt)
+{
+	cameraPosition.y -= mScrollSpeed * gt.DeltaTime();
+	MathHelper::UpdatePosition(mWorldView, cameraPosition);
 }
 
 void World::BuildScene()
@@ -77,22 +82,20 @@ void World::BuildScene()
 	backgroundSprite->SetScale(XMFLOAT3(10.0f, 1.0f, 400.0f));
 	backgroundSprite->SetPosition(0, -100, 0);
 	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
-	//XMFLOAT4X4 temp = backgroundSprite->renderItem->TexTransform;
-
 
 	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::Eagle));
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->SetPosition(mSpawnPosition);
-	mPlayerAircraft->SetScale(0.1f, 0.1f, 0.1f);
-	mPlayerAircraft->SetVelocity(XMFLOAT3(3.0f, 0, mScrollSpeed));
+	mPlayerAircraft->SetScale(0.05f, 0.05f, 0.05f);
+	mPlayerAircraft->SetVelocity(XMFLOAT3(5.0f, 0, mScrollSpeed));
 	mSceneLayers[Air]->AttachChild(std::move(leader));
 
 	std::unique_ptr<Aircraft> leftEscort(new Aircraft(Aircraft::Raptor));
-	leftEscort->SetPosition(-25.f, 0.f, -10);
+	leftEscort->SetPosition(-15.f, 0.f, -10);
 	mPlayerAircraft->AttachChild(std::move(leftEscort));
 
 	std::unique_ptr<Aircraft> rightEscort(new Aircraft( Aircraft::Raptor));
-	rightEscort->SetPosition(25.f, 0.f, -10);
+	rightEscort->SetPosition(15.f, 0.f, -10);
 	mPlayerAircraft->AttachChild(std::move(rightEscort));
 }
 

@@ -149,10 +149,10 @@
     <ClCompile Include="D3DCommon\GeometryGenerator.cpp" />
     <ClCompile Include="D3DCommon\MathHelper.cpp" />
     <ClCompile Include="D3DCommon\RenderItem.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Source\Aircraft.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\Entity.cpp" />
+    <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\ResourceManager.cpp" />
     <ClCompile Include="Source\SceneNode.cpp" />
     <ClCompile Include="Source\SpriteNode.cpp" />

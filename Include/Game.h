@@ -17,7 +17,6 @@ using namespace DirectX::PackedVector;
 class Game : public D3DApp
 {
 public:
-
 	Game(HINSTANCE hInstance);
 	Game(const Game& rhs) = delete;
 	Game& operator=(const Game& rhs) = delete;

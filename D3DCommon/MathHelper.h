@@ -95,6 +95,18 @@ public:
 	static const float Infinity;
 	static const float Pi;
 
+	static DirectX::XMFLOAT3 GetPosition(const DirectX::XMFLOAT4X4 transform)
+	{
+		return DirectX::XMFLOAT3(transform._41, transform._42, transform._43);
+	}
+
+	static void UpdatePosition(DirectX::XMFLOAT4X4& transform, const DirectX::XMFLOAT3 pos)
+	{
+		transform._41 = pos.x;
+		transform._42 = pos.y;
+		transform._43 = pos.z;
+	}
+
 	static DirectX::XMFLOAT4X4 MultiplyXMFLOAT4x4(DirectX::XMFLOAT4X4 m1, DirectX::XMFLOAT4X4 m2)
 	{
 		float v11 = m1._11;
