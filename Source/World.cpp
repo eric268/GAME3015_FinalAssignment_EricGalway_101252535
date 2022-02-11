@@ -4,10 +4,16 @@
 #include "SpriteNode.h"
 
 World::World() : 
-	mSpawnPosition(XMFLOAT3(0,-20,-25)),
-	mScrollSpeed(2.0f),
+	screenWidth(0),
+	screenHeight(0),
+	screenWidthBuffer(0.0f),
+	mSpawnPosition(XMFLOAT3(0,0,0)),
+	mScrollSpeed(0.0f),
 	mWorldView(XMFLOAT4X4()),
-	worldViewPosition()
+	worldViewPosition(),
+	screenToWorldRatio(0),
+	cameraPosition(XMFLOAT3()),
+	changeInPlayerRotation(0.0f)
 {
 	LoadTextures();
 }
@@ -46,6 +52,11 @@ void World::LoadTextures()
 	AddTexture(Textures::ID::Raptor, L"Media/Raptor.dds");
 }
 
+XMFLOAT4X4 World::GetWorldView()
+{
+	return mWorldView;
+}
+
 void World::SetWorldView(XMFLOAT4X4& view)
 {
 	mWorldView = view;
@@ -57,13 +68,18 @@ void World::ManagePlayerPosition()
 	XMFLOAT3 position = mPlayerAircraft->GetPosition();
 	XMFLOAT3 velocity = mPlayerAircraft->GetVelocity();
 
-	if (position.x * screenToWorldRatio <= -screenWidth/2.0f + screenWidthBuffer|| position.x * screenToWorldRatio >=  screenWidth/2.0f - screenWidthBuffer)
+	if (position.x * screenToWorldRatio <= -screenWidth/2.0f + screenWidthBuffer || position.x * screenToWorldRatio >=  screenWidth/2.0f - screenWidthBuffer)
 	{
 		changeInPlayerRotation *= -1;
 		velocity.x = -velocity.x;
 		mPlayerAircraft->SetVelocity(velocity);
 		mPlayerAircraft->SetRotation(0, 0, changeInPlayerRotation);
 
+		//Calculates how far outside of the bounds the aircraft is and updates its position appropriately 
+		int sign = (velocity.x < 0) ? -1 : 1;
+		float offset = abs(position.x * screenToWorldRatio - (-screenWidth / 2.0f + screenWidthBuffer) * sign);
+		float positionOffset = offset * sign;
+		mPlayerAircraft->SetPosition(position.x + positionOffset, position.y, position.z);
 	}
 }
 
@@ -91,14 +107,14 @@ void World::BuildScene()
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->SetPosition(mSpawnPosition);
 	mPlayerAircraft->SetScale(0.1f, 0.1f, 0.1f);
-	mPlayerAircraft->SetVelocity(XMFLOAT3(10.0f, 0, mScrollSpeed));
+	mPlayerAircraft->SetVelocity(XMFLOAT3(15.0f, 0, mScrollSpeed));
 	mSceneLayers[Air]->AttachChild(std::move(leader));
 
 	std::unique_ptr<Aircraft> leftEscort(new Aircraft(Aircraft::Raptor));
 	leftEscort->SetPosition(-25.f, 0.0f, -10);
 	mPlayerAircraft->AttachChild(std::move(leftEscort));
 
-	std::unique_ptr<Aircraft> rightEscort(new Aircraft( Aircraft::Raptor));
+	std::unique_ptr<Aircraft> rightEscort(new Aircraft(Aircraft::Raptor));
 	rightEscort->SetPosition(25.f, 0.0f, -10);
 	mPlayerAircraft->AttachChild(std::move(rightEscort));
 }

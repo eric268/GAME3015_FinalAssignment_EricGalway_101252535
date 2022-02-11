@@ -5,38 +5,38 @@
 
 SpriteNode::SpriteNode()
 {
-	nodePosition = XMFLOAT3(0, 0, 0);
-	nodeRotation = XMFLOAT3(0, 0, 0);
-	nodeScale = XMFLOAT3(1, 1, 1);
-	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale,Textures::ID::Desert,5,2000);
-	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
+	SetPosition(0, 0, 0);
+	SetRotation(XMFLOAT3(0, 0, 0));
+	SetScale(XMFLOAT3(1, 1, 1));
+	SetRenderItem(new RenderItem(GetPosition(), GetRotation(), GetScale(), Textures::ID::Desert, 1, 1));
+	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(GetRenderItem());
 }
 
 SpriteNode::SpriteNode(float uScaling, float vScaling, Textures::ID id)
 {
-	nodePosition = XMFLOAT3(0, 0, 0);
-	nodeRotation = XMFLOAT3(0, 0, 0);
-	nodeScale = XMFLOAT3(1, 1, 1);
-	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, id, uScaling, vScaling);
-	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
+	SetPosition(XMFLOAT3(0, 0, 0));
+	SetRotation(XMFLOAT3(0, 0, 0));
+	SetScale(XMFLOAT3(1, 1, 1));
+	SetRenderItem( new RenderItem(GetPosition(), GetRotation(), GetScale(), id, uScaling, vScaling));
+	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(GetRenderItem());
 }
 
 SpriteNode::SpriteNode(RenderItem* renderItem)
 {
-	this->renderItem = renderItem;
+	SetRenderItem(renderItem);
 	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
 }
 
 SpriteNode::SpriteNode(XMFLOAT3 pos, XMFLOAT3 rot, XMFLOAT3 scale, Textures::ID id)
 {
-	nodePosition = pos;
-	nodeRotation = rot;
-	nodeScale = scale;
-	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, id,1,1);
-	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
+	SetPosition(pos);
+	SetRotation(rot);
+	SetScale(scale);
+	SetRenderItem(new RenderItem(GetPosition(), GetRotation(), GetScale(), id,1,1));
+	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(GetRenderItem());
 }
 
 void SpriteNode::DrawCurrent(const GameTimer& gt) const
 {
-	renderItem->Draw(renderItem);
+	GetRenderItem()->Draw(GetRenderItem());
 }

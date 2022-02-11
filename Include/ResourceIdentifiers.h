@@ -1,5 +1,8 @@
 #pragma once
 
+/// Namespace encapsulating Texture class
+/// 
+/// This is used to reference the appropriate Texture ID
 namespace resourceIdentifier
 {
 	class Texture;
@@ -7,6 +10,7 @@ namespace resourceIdentifier
 
 namespace Textures
 {
+	/// Enumeration for identifying textures
 	enum ID
 	{
 		Eagle,
@@ -16,14 +20,12 @@ namespace Textures
 	};
 }
 
+/// Enumeration for categorizing rendering type of objects
+/// 
+/// Important for letting the PSO know which container to categorize objects to be drawn
 enum class RenderLayer : int
 {
 	Opaque = 0,
 	Transparent,
 	Count
 };
-
-template <typename Resource, typename Identifier>
-class ResourceHolder;
-
-typedef ResourceHolder<resourceIdentifier::Texture, Textures::ID> TextureHolder;

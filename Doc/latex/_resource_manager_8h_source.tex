@@ -1,0 +1,29 @@
+\hypertarget{_resource_manager_8h_source}{}\doxysection{Resource\+Manager.\+h}
+\label{_resource_manager_8h_source}\index{Include/ResourceManager.h@{Include/ResourceManager.h}}
+\mbox{\hyperlink{_resource_manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_resource_identifiers_8h}{ResourceIdentifiers.h}}"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}../D3DCommon/d3dApp.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{11 \textcolor{keyword}{class }\mbox{\hyperlink{class_resource_manager}{ResourceManager}}}
+\DoxyCodeLine{12 \{}
+\DoxyCodeLine{13 \textcolor{keyword}{public}:}
+\DoxyCodeLine{15     \mbox{\hyperlink{class_resource_manager_a3b32babd2e81909bbd90d7f2d566fadb}{ResourceManager}}();}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{21     \textcolor{keyword}{static} \mbox{\hyperlink{class_resource_manager}{ResourceManager}}* \mbox{\hyperlink{class_resource_manager_ab15d2c21ddb0c41dd45201dacacc628d}{GetInstance}}();}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{27     std::map<Textures::ID, std::wstring>\& \mbox{\hyperlink{class_resource_manager_a4058717349e66749137e07a2cfe3bec8}{GetTextureHolder}}();}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{33     std::unordered\_map<Textures::ID, std::unique\_ptr<Material>>\& \mbox{\hyperlink{class_resource_manager_a0eb2b96f4f306587b3b82cf1393d7557}{GetMaterials}}();}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{keyword}{private}:}
+\DoxyCodeLine{36     \textcolor{keyword}{static} \mbox{\hyperlink{class_resource_manager}{ResourceManager}}* mInstance;}
+\DoxyCodeLine{37     std::map<Textures::ID,std::wstring> mTextureHolder;}
+\DoxyCodeLine{38     std::unordered\_map<Textures::ID, std::unique\_ptr<Material>> mMaterials;}
+\DoxyCodeLine{39 \};}
+\DoxyCodeLine{40 }
+
+\end{DoxyCode}

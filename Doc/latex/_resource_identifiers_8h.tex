@@ -1,0 +1,50 @@
+\hypertarget{_resource_identifiers_8h}{}\doxysection{Include/\+Resource\+Identifiers.h File Reference}
+\label{_resource_identifiers_8h}\index{Include/ResourceIdentifiers.h@{Include/ResourceIdentifiers.h}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceresource_identifier}{resource\+Identifier}}
+\begin{DoxyCompactList}\small\item\em Namespace encapsulating \mbox{\hyperlink{struct_texture}{Texture}} class. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespace_textures}{Textures}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespace_textures_a2cfe2099537d4e80b08437b4978301a5}{Textures\+::\+ID}} \{ \mbox{\hyperlink{namespace_textures_a2cfe2099537d4e80b08437b4978301a5ad1a0e749b8999f54809596206b3a2348}{Textures\+::\+Eagle}}
+, \mbox{\hyperlink{namespace_textures_a2cfe2099537d4e80b08437b4978301a5a4c97457c9c6cbb65901f311d0afa82fa}{Textures\+::\+Raptor}}
+, \mbox{\hyperlink{namespace_textures_a2cfe2099537d4e80b08437b4978301a5a6c78cd7357ece5bc1164456f4d63d167}{Textures\+::\+Desert}}
+, \mbox{\hyperlink{namespace_textures_a2cfe2099537d4e80b08437b4978301a5ad6bf97b41e18c15d87e7f158c854ea1c}{Textures\+::\+NUM\+\_\+\+TEXTURE\+\_\+\+IDS}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration for identifying textures. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159}{Render\+Layer}} \+: int \{ \mbox{\hyperlink{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159afaa90538de35640e4b1e31ccf35b6eb5}{Opaque}} = 0
+, \mbox{\hyperlink{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159a3d971943089a3388c01fb297a32d9ba7}{Transparent}}
+, \mbox{\hyperlink{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159ae93f994f01c537c4e2f7d8528c3eb5e9}{Count}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration for categorizing rendering type of objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159}\label{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159}} 
+\index{ResourceIdentifiers.h@{ResourceIdentifiers.h}!RenderLayer@{RenderLayer}}
+\index{RenderLayer@{RenderLayer}!ResourceIdentifiers.h@{ResourceIdentifiers.h}}
+\doxysubsubsection{\texorpdfstring{RenderLayer}{RenderLayer}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159}{Render\+Layer}} \+: int\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Enumeration for categorizing rendering type of objects. 
+
+Important for letting the PSO know which container to categorize objects to be drawn \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Opaque@{Opaque}!ResourceIdentifiers.h@{ResourceIdentifiers.h}}\index{ResourceIdentifiers.h@{ResourceIdentifiers.h}!Opaque@{Opaque}}}\mbox{\Hypertarget{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159afaa90538de35640e4b1e31ccf35b6eb5}\label{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159afaa90538de35640e4b1e31ccf35b6eb5}} 
+Opaque&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Transparent@{Transparent}!ResourceIdentifiers.h@{ResourceIdentifiers.h}}\index{ResourceIdentifiers.h@{ResourceIdentifiers.h}!Transparent@{Transparent}}}\mbox{\Hypertarget{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159a3d971943089a3388c01fb297a32d9ba7}\label{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159a3d971943089a3388c01fb297a32d9ba7}} 
+Transparent&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Count@{Count}!ResourceIdentifiers.h@{ResourceIdentifiers.h}}\index{ResourceIdentifiers.h@{ResourceIdentifiers.h}!Count@{Count}}}\mbox{\Hypertarget{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159ae93f994f01c537c4e2f7d8528c3eb5e9}\label{_resource_identifiers_8h_aa63ede3e7371d4bc358f651428d23159ae93f994f01c537c4e2f7d8528c3eb5e9}} 
+Count&\\
+\hline
+
+\end{DoxyEnumFields}

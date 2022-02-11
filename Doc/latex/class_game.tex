@@ -1,0 +1,125 @@
+\hypertarget{class_game}{}\doxysection{Game Class Reference}
+\label{class_game}\index{Game@{Game}}
+
+
+\mbox{\hyperlink{class_game}{Game}} class that acts as application framework.  
+
+
+
+
+{\ttfamily \#include $<$Game.\+h$>$}
+
+Inheritance diagram for Game\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_a3f68a62a1fe1ca8dcd1deb054b384cef}{Game}} (HINSTANCE h\+Instance)
+\item 
+\mbox{\hyperlink{class_game_a293c79673d4c15f55f1ab7f3d1809ddb}{Game}} (const \mbox{\hyperlink{class_game}{Game}} \&rhs)=delete
+\item 
+\mbox{\hyperlink{class_game}{Game}} \& \mbox{\hyperlink{class_game_a9bda5763ea460634fef947be2530c8f5}{operator=}} (const \mbox{\hyperlink{class_game}{Game}} \&rhs)=delete
+\item 
+\mbox{\hyperlink{class_game_ae3d112ca6e0e55150d2fdbc704474530}{$\sim$\+Game}} ()
+\item 
+virtual bool \mbox{\hyperlink{class_game_a16354d232327f6c21319713bf6983674}{Initialize}} () override
+\item 
+void \mbox{\hyperlink{class_game_abf31d9be82e627510c9c2d6e0e012cc8}{Build\+Render\+Items}} ()
+\item 
+void \mbox{\hyperlink{class_game_af3e142b25e56a236aab23206d8aae2d9}{Add\+Render\+Item}} (\mbox{\hyperlink{class_render_item}{Render\+Item}} $\ast$render\+Items)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_material}{Material}} $>$ $>$ \mbox{\hyperlink{class_game_a871400f233e46cc637f383106e89dd71}{m\+Materials}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_mesh_geometry}{Mesh\+Geometry}} $>$ $>$ \mbox{\hyperlink{class_game_a0e53612a0a54bdd46ea1d8b071260b77}{m\+Geometries}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static UINT \mbox{\hyperlink{class_game_a055965e53216b6ca6f37261eaf81fa3c}{obj\+CBIndex}} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_game}{Game}} class that acts as application framework. 
+
+This class is responsible for creating the game world, handling user input and iterating through main game loop Only one instance of this class is able to be created at a time 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_game_a3f68a62a1fe1ca8dcd1deb054b384cef}\label{class_game_a3f68a62a1fe1ca8dcd1deb054b384cef}} 
+\index{Game@{Game}!Game@{Game}}
+\index{Game@{Game}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{Game()}{Game()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Game\+::\+Game (\begin{DoxyParamCaption}\item[{HINSTANCE}]{h\+Instance }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_game_a293c79673d4c15f55f1ab7f3d1809ddb}\label{class_game_a293c79673d4c15f55f1ab7f3d1809ddb}} 
+\index{Game@{Game}!Game@{Game}}
+\index{Game@{Game}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{Game()}{Game()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Game\+::\+Game (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game}{Game}} \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_game_ae3d112ca6e0e55150d2fdbc704474530}\label{class_game_ae3d112ca6e0e55150d2fdbc704474530}} 
+\index{Game@{Game}!````~Game@{$\sim$Game}}
+\index{````~Game@{$\sim$Game}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{$\sim$Game()}{~Game()}}
+{\footnotesize\ttfamily Game\+::$\sim$\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_af3e142b25e56a236aab23206d8aae2d9}\label{class_game_af3e142b25e56a236aab23206d8aae2d9}} 
+\index{Game@{Game}!AddRenderItem@{AddRenderItem}}
+\index{AddRenderItem@{AddRenderItem}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{AddRenderItem()}{AddRenderItem()}}
+{\footnotesize\ttfamily void Game\+::\+Add\+Render\+Item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_render_item}{Render\+Item}} $\ast$}]{render\+Items }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_game_abf31d9be82e627510c9c2d6e0e012cc8}\label{class_game_abf31d9be82e627510c9c2d6e0e012cc8}} 
+\index{Game@{Game}!BuildRenderItems@{BuildRenderItems}}
+\index{BuildRenderItems@{BuildRenderItems}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{BuildRenderItems()}{BuildRenderItems()}}
+{\footnotesize\ttfamily void Game\+::\+Build\+Render\+Items (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_game_a16354d232327f6c21319713bf6983674}\label{class_game_a16354d232327f6c21319713bf6983674}} 
+\index{Game@{Game}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily bool Game\+::\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_d3_d_app_a961fa79170dcbde858923a5250c322be}{D3\+DApp}}.
+
+\mbox{\Hypertarget{class_game_a9bda5763ea460634fef947be2530c8f5}\label{class_game_a9bda5763ea460634fef947be2530c8f5}} 
+\index{Game@{Game}!operator=@{operator=}}
+\index{operator=@{operator=}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_game}{Game}} \& Game\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game}{Game}} \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_game_a0e53612a0a54bdd46ea1d8b071260b77}\label{class_game_a0e53612a0a54bdd46ea1d8b071260b77}} 
+\index{Game@{Game}!mGeometries@{mGeometries}}
+\index{mGeometries@{mGeometries}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{mGeometries}{mGeometries}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{struct_mesh_geometry}{Mesh\+Geometry}}$>$ $>$ Game\+::m\+Geometries}
+
+\mbox{\Hypertarget{class_game_a871400f233e46cc637f383106e89dd71}\label{class_game_a871400f233e46cc637f383106e89dd71}} 
+\index{Game@{Game}!mMaterials@{mMaterials}}
+\index{mMaterials@{mMaterials}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{mMaterials}{mMaterials}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{struct_material}{Material}}$>$ $>$ Game\+::m\+Materials}
+
+\mbox{\Hypertarget{class_game_a055965e53216b6ca6f37261eaf81fa3c}\label{class_game_a055965e53216b6ca6f37261eaf81fa3c}} 
+\index{Game@{Game}!objCBIndex@{objCBIndex}}
+\index{objCBIndex@{objCBIndex}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{objCBIndex}{objCBIndex}}
+{\footnotesize\ttfamily UINT Game\+::obj\+CBIndex = 0\hspace{0.3cm}{\ttfamily [static]}}
+

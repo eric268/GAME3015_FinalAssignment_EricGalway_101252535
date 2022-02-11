@@ -15,7 +15,6 @@ RenderItem::RenderItem(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, Tex
 	XMConvertToRadians(rotation.y), XMConvertToRadians(rotation.z)) * XMMatrixTranslation(position.x, position.y + (0.5 * scale.y), position.z));
 	ObjCBIndex = Game::objCBIndex++;
 	Geo = tempG;
-
 	auto searchedMat = ResourceManager::GetInstance()->GetMaterials().find(matID);
 	material = searchedMat->second.get();
 	PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;

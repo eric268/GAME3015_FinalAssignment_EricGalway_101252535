@@ -18,7 +18,7 @@ public:
 	void Draw(RenderItem* renderItem);
 	void UpdateTransform(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);
 
-	UINT ObjCBIndex = -1;
+	UINT ObjCBIndex;
 	// Primitive topology.
 	D3D12_PRIMITIVE_TOPOLOGY PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 	// DrawIndexedInstanced parameters.

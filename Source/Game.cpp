@@ -11,11 +11,18 @@ const int gNumFrameResources = 3;
 UINT Game::objCBIndex = 0;
 Game::Game(HINSTANCE hInstance)
     : D3DApp(hInstance),
-	gameWorld(World(D3DApp::mClientWidth, D3DApp::mClientHeight))
+	gameWorld(World(D3DApp::mClientWidth, D3DApp::mClientHeight)),
+	mTheta(1.5f * XM_PI),
+	mPhi(0.01f * XM_PI),
+	mRadius(150.0f),
+	mView(MathHelper::Identity4x4()),
+	mProj(MathHelper::Identity4x4()),
+	target(XMVectorZero()),
+	mPassCbvOffset(0),
+	mCurrFrameResource(nullptr),
+	mRootSignature(nullptr),
+	mSrvDescriptorHeap(nullptr)
 {
-	mTheta = 1.5f * XM_PI;
-	mPhi = 0.01f * XM_PI;
-	mRadius = 150.0f;
 }
 
 Game::~Game()
@@ -234,7 +241,7 @@ void Game::UpdateMaterialCBs(const GameTimer& gt)
 
 void Game::UpdateMainPassCB(const GameTimer& gt)
 {
-	XMMATRIX view = XMLoadFloat4x4(&gameWorld.mWorldView);
+	XMMATRIX view = XMLoadFloat4x4(&gameWorld.GetWorldView());
 	XMMATRIX proj = XMLoadFloat4x4(&mProj);
 
 	XMMATRIX viewProj = XMMatrixMultiply(view, proj);

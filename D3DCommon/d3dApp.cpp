@@ -610,7 +610,7 @@ void D3DApp::CalculateFrameStats()
 
         wstring windowText = mMainWndCaption +
             L"    fps: " + fpsStr +
-            L"   mspf: " + mspfStr;
+            L"   ms: " + mspfStr;
 
         SetWindowText(mhMainWnd, windowText.c_str());
 		

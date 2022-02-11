@@ -127,8 +127,24 @@ XMFLOAT3 SceneNode::GetScale()
 	return nodeScale;
 }
 
+RenderItem* SceneNode::GetRenderItem() const
+{
+	return renderItem;
+}
+
+void SceneNode::SetRenderItem(RenderItem* renderItem)
+{
+	this->renderItem = renderItem;
+}
+
+SceneNode* SceneNode::GetParent() const
+{
+	return mParent;
+}
+
 void SceneNode::DrawCurrent(const GameTimer& gt) const
 {
+	//Does nothing as of right now
 }
 
 void SceneNode::DrawChildren(const GameTimer& gt) const

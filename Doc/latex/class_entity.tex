@@ -1,0 +1,126 @@
+\hypertarget{class_entity}{}\doxysection{Entity Class Reference}
+\label{class_entity}\index{Entity@{Entity}}
+
+
+Parent class for all game objects with velocity.  
+
+
+
+
+{\ttfamily \#include $<$Entity.\+h$>$}
+
+Inheritance diagram for Entity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_entity}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_entity_a4777915ddad3cc2f046bb41803c861f1}{Set\+Velocity}} (XMFLOAT3 vel)
+\begin{DoxyCompactList}\small\item\em Sets the velocity to a XMFLOAT3 value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_entity_a5e9f11e5ee17afe623eb32ad350f74a5}{Set\+Velocity}} (float x, float y, float z)
+\begin{DoxyCompactList}\small\item\em Sets the velocity to three float values. \end{DoxyCompactList}\item 
+XMFLOAT3 \mbox{\hyperlink{class_entity_ae5d97f80366fed4ce0a6855d14a41a93}{Get\+Velocity}} () const
+\begin{DoxyCompactList}\small\item\em Gets the velocity of the \mbox{\hyperlink{class_entity}{Entity}}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_entity_aa967b1dcdb929d54d36f402530d96881}{Update\+Current}} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)
+\begin{DoxyCompactList}\small\item\em Updates the \mbox{\hyperlink{class_entity}{Entity}} \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_entity_a5fda2a75b632ab9ded4532633882af31}{Move}} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)
+\begin{DoxyCompactList}\small\item\em Function responsible for moving Entities \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Parent class for all game objects with velocity. 
+
+This is the parent class that all objects with movement components will inherit from. It inherits from the \mbox{\hyperlink{class_scene_node}{Scene\+Node}} base class 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_entity_ae5d97f80366fed4ce0a6855d14a41a93}\label{class_entity_ae5d97f80366fed4ce0a6855d14a41a93}} 
+\index{Entity@{Entity}!GetVelocity@{GetVelocity}}
+\index{GetVelocity@{GetVelocity}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{GetVelocity()}{GetVelocity()}}
+{\footnotesize\ttfamily XMFLOAT3 Entity\+::\+Get\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the velocity of the \mbox{\hyperlink{class_entity}{Entity}}. 
+
+\begin{DoxyReturn}{Returns}
+XMFLOAT3 value representing velocity
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_entity_a5fda2a75b632ab9ded4532633882af31}\label{class_entity_a5fda2a75b632ab9ded4532633882af31}} 
+\index{Entity@{Entity}!Move@{Move}}
+\index{Move@{Move}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily void Entity\+::\+Move (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&}]{gt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Function responsible for moving Entities 
+
+This function updates the \mbox{\hyperlink{class_entity}{Entity}} position based on Velocity and Delta Time
+
+
+\begin{DoxyParams}{Parameters}
+{\em gt} & Delta Time\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_entity_a5e9f11e5ee17afe623eb32ad350f74a5}\label{class_entity_a5e9f11e5ee17afe623eb32ad350f74a5}} 
+\index{Entity@{Entity}!SetVelocity@{SetVelocity}}
+\index{SetVelocity@{SetVelocity}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{SetVelocity()}{SetVelocity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Entity\+::\+Set\+Velocity (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{z }\end{DoxyParamCaption})}
+
+
+
+Sets the velocity to three float values. 
+
+Acts as an additional helper function so that users do not have to use XMFLOAT3
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Velocity x value\\
+\hline
+{\em y} & Velocity y value\\
+\hline
+{\em z} & Velocity z value\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_entity_a4777915ddad3cc2f046bb41803c861f1}\label{class_entity_a4777915ddad3cc2f046bb41803c861f1}} 
+\index{Entity@{Entity}!SetVelocity@{SetVelocity}}
+\index{SetVelocity@{SetVelocity}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{SetVelocity()}{SetVelocity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Entity\+::\+Set\+Velocity (\begin{DoxyParamCaption}\item[{XMFLOAT3}]{vel }\end{DoxyParamCaption})}
+
+
+
+Sets the velocity to a XMFLOAT3 value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vel} & Value that velocity is to be set to\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_entity_aa967b1dcdb929d54d36f402530d96881}\label{class_entity_aa967b1dcdb929d54d36f402530d96881}} 
+\index{Entity@{Entity}!UpdateCurrent@{UpdateCurrent}}
+\index{UpdateCurrent@{UpdateCurrent}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{UpdateCurrent()}{UpdateCurrent()}}
+{\footnotesize\ttfamily void Entity\+::\+Update\+Current (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&}]{gt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Updates the \mbox{\hyperlink{class_entity}{Entity}} 
+
+Overrides the scene node function and updates the \mbox{\hyperlink{class_entity}{Entity}} based on Delta Time
+
+
+\begin{DoxyParams}{Parameters}
+{\em gt} & Delta time\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_scene_node}{Scene\+Node}}.
+

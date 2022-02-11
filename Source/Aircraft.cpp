@@ -3,31 +3,31 @@
 
 Aircraft::Aircraft(Type type)
 {
-	nodePosition = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	nodeRotation = XMFLOAT3(0, 0, 0);
-	nodeScale = XMFLOAT3(1.0f, 1.0f, 1.0f);
-	mVelocity = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, ConvertTypeToTexture(type),1,1);
-	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
+	SetPosition(XMFLOAT3(0.0f, 0.0f, 0.0f));
+	SetRotation(XMFLOAT3(0, 0, 0));
+	SetScale(XMFLOAT3(1.0f, 1.0f, 1.0f));
+	SetVelocity(XMFLOAT3(0.0f, 0.0f, 0.0f));
+	SetRenderItem(new RenderItem(GetPosition(), GetRotation(), GetScale(), ConvertTypeToTexture(type), 1, 1));
+	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(GetRenderItem());
 }
 
 Aircraft::Aircraft(RenderItem* renderItem)
 {
-	nodePosition = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	nodeRotation = XMFLOAT3(0, 0, 0);
-	nodeScale = XMFLOAT3(1, 1, 1);
-	mVelocity = XMFLOAT3(20.0f, 0.0f, 0.0f);
-	this->renderItem = renderItem;
+	SetPosition(XMFLOAT3(0.0f, 0.0f, 0.0f));
+	SetRotation(XMFLOAT3(0, 0, 0));
+	SetScale(XMFLOAT3(1, 1, 1));
+	SetVelocity(XMFLOAT3(0.0f, 0.0f, 0.0f));
+	SetRenderItem(renderItem);
 	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
 }
 
 Aircraft::Aircraft(XMFLOAT3 pos, XMFLOAT3 rot, XMFLOAT3 scale, Type type)
 {
-	nodePosition = pos;
-	nodeRotation = rot;
-	nodeScale = scale;
-	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, ConvertTypeToTexture(type),1,1);
-	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
+	SetPosition(pos);
+	SetRotation(rot);
+	SetScale(scale);
+	SetRenderItem(new RenderItem(GetPosition(), GetRotation(), GetScale(), ConvertTypeToTexture(type), 1, 1));
+	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(GetRenderItem());
 }
 
 Textures::ID Aircraft::ConvertTypeToTexture(Aircraft::Type type)
@@ -45,5 +45,5 @@ Textures::ID Aircraft::ConvertTypeToTexture(Aircraft::Type type)
 
 void Aircraft::DrawCurrent(const GameTimer& gt) const
 {
-	renderItem->Draw(renderItem);
+	GetRenderItem()->Draw(GetRenderItem());
 }

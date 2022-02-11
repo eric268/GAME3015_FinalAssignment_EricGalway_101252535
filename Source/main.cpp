@@ -4,6 +4,9 @@
 #include "../D3DCommon/GeometryGenerator.h"
 #include "Game.h"
 
+/// <summary>Main game loop
+/// 
+/// </summary>
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 	PSTR cmdLine, int showCmd)
 {

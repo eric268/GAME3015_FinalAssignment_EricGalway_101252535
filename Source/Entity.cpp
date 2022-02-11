@@ -22,9 +22,10 @@ void Entity::UpdateCurrent(const GameTimer& gt)
 
 void Entity::Move(const GameTimer& gt)
 {
-	//auto var = mParent;
-	nodePosition.x +=  mVelocity.x * gt.DeltaTime();
-	nodePosition.y +=  mVelocity.y * gt.DeltaTime();
-	nodePosition.z +=  mVelocity.z * gt.DeltaTime();
-	SetPosition(nodePosition);
+	//Adds the velocity to the Entities current position and updates the position
+	float x = GetPosition().x + mVelocity.x * gt.DeltaTime();
+	float y = GetPosition().y + mVelocity.y * gt.DeltaTime();
+	float z = GetPosition().z + mVelocity.z * gt.DeltaTime();
+
+	SceneNode::SetPosition(x,y,z);
 }
