@@ -15,7 +15,7 @@ Game::Game(HINSTANCE hInstance)
 {
 	mTheta = 1.5f * XM_PI;
 	mPhi = 0.01f * XM_PI;
-	mRadius = 100.0f;
+	mRadius = 150.0f;
 }
 
 Game::~Game()
@@ -68,7 +68,6 @@ void Game::Update(const GameTimer& gt)
 {
 	gameWorld.Update(gt);
 	OnKeyboardInput(gt);
-	UpdateCamera(gt);
 
 	// Cycle through the circular frame resource array.
 	mCurrFrameResourceIndex = (mCurrFrameResourceIndex + 1) % gNumFrameResources;

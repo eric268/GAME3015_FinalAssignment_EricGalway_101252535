@@ -8,7 +8,16 @@ SpriteNode::SpriteNode()
 	nodePosition = XMFLOAT3(0, 0, 0);
 	nodeRotation = XMFLOAT3(0, 0, 0);
 	nodeScale = XMFLOAT3(1, 1, 1);
-	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale,Textures::ID::Desert,5,400);
+	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale,Textures::ID::Desert,5,2000);
+	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
+}
+
+SpriteNode::SpriteNode(float uScaling, float vScaling, Textures::ID id)
+{
+	nodePosition = XMFLOAT3(0, 0, 0);
+	nodeRotation = XMFLOAT3(0, 0, 0);
+	nodeScale = XMFLOAT3(1, 1, 1);
+	renderItem = new RenderItem(nodePosition, nodeRotation, nodeScale, id, uScaling, vScaling);
 	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
 }
 

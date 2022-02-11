@@ -10,7 +10,6 @@ public:
 	virtual void UpdateCurrent(const GameTimer& gt) override;
 	virtual void Move(const GameTimer& gt);
 	XMFLOAT3 mVelocity;
-
 private:
 
 

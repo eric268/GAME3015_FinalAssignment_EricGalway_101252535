@@ -49,6 +49,7 @@ private:
 	float screenWidthBuffer;
 	float screenToWorldRatio;
 	XMFLOAT3 cameraPosition;
+	float changeInPlayerRotation;
 };
 
 

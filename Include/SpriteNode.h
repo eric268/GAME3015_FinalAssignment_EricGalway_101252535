@@ -5,6 +5,7 @@ class SpriteNode : public SceneNode
 {
 public:
 	SpriteNode();
+	SpriteNode(float uScaling, float vScaling, Textures::ID id);
 	SpriteNode(RenderItem* renderItem);
 	SpriteNode(XMFLOAT3 pos, XMFLOAT3 rot, XMFLOAT3 scale, Textures::ID id);
 
