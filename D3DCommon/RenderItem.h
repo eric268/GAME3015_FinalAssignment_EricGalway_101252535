@@ -25,7 +25,7 @@ public:
 	UINT StartIndexLocation = 0;
 	int BaseVertexLocation = 0;
 	XMFLOAT4X4 World = MathHelper::Identity4x4();
-	XMFLOAT4X4 TexTransform;
+	XMFLOAT4X4 TexTransform = MathHelper::Identity4x4();
 	int NumFramesDirty = gNumFrameResources;
 	// Index into GPU constant buffer corresponding to the ObjectCB for this render item.
 	UINT IndexCount = 0;

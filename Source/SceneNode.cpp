@@ -24,6 +24,7 @@ SceneNode::Ptr SceneNode::detachChild(const SceneNode& node)
 	Ptr result = std::move(*found);
 	result->mParent = nullptr;
 	mChildren.erase(found);
+
 	return result;
 }
 

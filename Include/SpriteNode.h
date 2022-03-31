@@ -18,21 +18,6 @@ public:
 	/// <param name="id">Texture ID value</param>
 	SpriteNode(float uScaling, float vScaling, Textures::ID id);
 
-	/// <summary>Overloaded Scene Node constructor 
-	/// 
-	/// Used for when a render item has already been created</summary>
-	/// <param name="renderItem">Render Item pointer</param>
-	SpriteNode(RenderItem* renderItem);
-
-	/// <summary>Overloaded Scene Node Constructor
-	/// 
-	/// Useful for when transform data is to be manipulated and UV scaling are 1,1</summary>
-	/// <param name="pos">Position</param>
-	/// <param name="rot">Rotation</param>
-	/// <param name="scale">Scale</param>
-	/// <param name="id">Texture ID</param>
-	SpriteNode(XMFLOAT3 pos, XMFLOAT3 rot, XMFLOAT3 scale, Textures::ID id);
-
 private:
 	/// <summary>Function that overrides scene node draw current function
 	/// 

@@ -1,5 +1,6 @@
 #include "Aircraft.h"
 #include "Game.h"
+#include "ResourceManager.h"
 
 Aircraft::Aircraft(Type type)
 {
@@ -7,26 +8,24 @@ Aircraft::Aircraft(Type type)
 	SetRotation(XMFLOAT3(0, 0, 0));
 	SetScale(XMFLOAT3(1.0f, 1.0f, 1.0f));
 	SetVelocity(XMFLOAT3(0.0f, 0.0f, 0.0f));
-	SetRenderItem(new RenderItem(GetPosition(), GetRotation(), GetScale(), ConvertTypeToTexture(type), 1, 1));
-	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(GetRenderItem());
-}
 
-Aircraft::Aircraft(RenderItem* renderItem)
-{
-	SetPosition(XMFLOAT3(0.0f, 0.0f, 0.0f));
-	SetRotation(XMFLOAT3(0, 0, 0));
-	SetScale(XMFLOAT3(1, 1, 1));
-	SetVelocity(XMFLOAT3(0.0f, 0.0f, 0.0f));
-	SetRenderItem(renderItem);
-	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(renderItem);
-}
+	RenderItem* aircraftRenderItem = new RenderItem();
 
-Aircraft::Aircraft(XMFLOAT3 pos, XMFLOAT3 rot, XMFLOAT3 scale, Type type)
-{
-	SetPosition(pos);
-	SetRotation(rot);
-	SetScale(scale);
-	SetRenderItem(new RenderItem(GetPosition(), GetRotation(), GetScale(), ConvertTypeToTexture(type), 1, 1));
+	XMStoreFloat4x4(&aircraftRenderItem->TexTransform, XMMatrixScaling(1, 1, 1));
+	auto tempG = static_cast<Game*>(D3DApp::GetApp())->mGeometries["shapeGeo"].get();
+	XMStoreFloat4x4(&aircraftRenderItem->World, XMMatrixScaling(GetScale().x, GetScale().y, GetScale().z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(GetRotation().x),
+		XMConvertToRadians(GetRotation().y), XMConvertToRadians(GetRotation().z)) * XMMatrixTranslation(GetPosition().x, GetPosition().y + (0.5 * GetScale().y), GetPosition().z));
+	aircraftRenderItem->ObjCBIndex = Game::objCBIndex++;
+	aircraftRenderItem->Geo = tempG;
+	auto searchedMat = ResourceManager::GetInstance()->GetMaterials().find(ConvertTypeToTexture(type));
+	aircraftRenderItem->material = searchedMat->second.get();
+	aircraftRenderItem->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+	aircraftRenderItem->IndexCount = aircraftRenderItem->Geo->DrawArgs["grid"].IndexCount;
+	aircraftRenderItem->StartIndexLocation = aircraftRenderItem->Geo->DrawArgs["grid"].StartIndexLocation;
+	aircraftRenderItem->BaseVertexLocation = aircraftRenderItem->Geo->DrawArgs["grid"].BaseVertexLocation;
+
+
+	SetRenderItem(aircraftRenderItem);
 	static_cast<Game*>(D3DApp::GetApp())->AddRenderItem(GetRenderItem());
 }
 

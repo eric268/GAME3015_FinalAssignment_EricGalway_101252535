@@ -162,16 +162,27 @@ void Game::Draw(const GameTimer& gt)
 
 void Game::OnMouseDown(WPARAM btnState, int x, int y)
 {
+	if (btnState == 1)
+		OutputDebugString(L"Left Mouse Pressed\n");
+	if (btnState == 2)
+		OutputDebugString(L"Right Mouse Pressed\n");
+	if (btnState == 16)
+		OutputDebugString(L"Middle Mouse Pressed\n");
 	//Add some type of key for mouse input
 }
 
 void Game::OnMouseUp(WPARAM btnState, int x, int y)
 {
+	
 	//Add some type of key for mouse input
 }
 
 void Game::OnMouseMove(WPARAM btnState, int x, int y)
 {
+	//Pressed and held
+	std::wstring text = L"Left Mouse Pressed X: " + std::to_wstring(x) + L" Y: " + std::to_wstring(y) + L"\n";
+	if (btnState == 1)
+		OutputDebugString(text.c_str());
 	//Add some type of key for mouse input
 }
 
@@ -179,11 +190,27 @@ void Game::OnKeyboardInput(const GameTimer& gt)
 {
 	if (GetAsyncKeyState('1') & 0x8000)
 	{
-		//Add some type of key for keyboard input
+		OutputDebugString(L"1 KeyPressed\n");
 	}
-	else
+	else if (GetAsyncKeyState('2') & 0x8000)
 	{
-
+		OutputDebugString(L"2 KeyPressed\n");
+	}
+	else if (GetAsyncKeyState(VK_UP) & 0x8000 || GetAsyncKeyState('W') & 0x8000)
+	{
+		OutputDebugString(L"Up Pressed\n");
+	}
+	else if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	{
+		OutputDebugString(L"Down Pressed\n");
+	}
+	else if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	{
+		OutputDebugString(L"Left Pressed\n");
+	}
+	else if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+	{
+		OutputDebugString(L"Right Pressed\n");
 	}
 }
 

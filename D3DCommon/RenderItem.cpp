@@ -8,7 +8,6 @@ RenderItem::RenderItem()
 
 RenderItem::RenderItem(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale, Textures::ID matID, float uScaling, float vScaling)
 {
-	TexTransform = MathHelper::Identity4x4();
 	XMStoreFloat4x4(&TexTransform, XMMatrixScaling(uScaling, vScaling, 1));
 	auto tempG = static_cast<Game*>(D3DApp::GetApp())->mGeometries["shapeGeo"].get();
 	XMStoreFloat4x4(&World, XMMatrixScaling(scale.x, scale.y, scale.z) * XMMatrixRotationRollPitchYaw(XMConvertToRadians(rotation.x),
