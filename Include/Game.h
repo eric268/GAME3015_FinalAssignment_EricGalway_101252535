@@ -6,7 +6,6 @@
 #include "../D3DCommon/GeometryGenerator.h"
 #include "../D3DCommon/FrameResource.h"
 #include "../D3DCommon/RenderItem.h"
-
 #include "World.h"
 
 
@@ -44,6 +43,7 @@ private:
 	virtual void OnMouseDown(WPARAM btnState, int x, int y)override;
 	virtual void OnMouseUp(WPARAM btnState, int x, int y)override;
 	virtual void OnMouseMove(WPARAM btnState, int x, int y)override;
+	virtual void OnKeyboardInput(WPARAM key) override;
 
 	void OnKeyboardInput(const GameTimer& gt);
 	void UpdateObjectCBs(const GameTimer& gt);
@@ -74,7 +74,7 @@ private:
 
 private:
 	World gameWorld;
-
+	//Player player;
 	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
 	FrameResource* mCurrFrameResource;
 	int mCurrFrameResourceIndex = 0;

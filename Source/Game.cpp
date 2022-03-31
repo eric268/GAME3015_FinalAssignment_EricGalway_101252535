@@ -5,7 +5,7 @@
 
 #include "Game.h"
 #include "ResourceManager.h"
-
+#include "Player.h"
 
 const int gNumFrameResources = 3;
 UINT Game::objCBIndex = 0;
@@ -186,8 +186,20 @@ void Game::OnMouseMove(WPARAM btnState, int x, int y)
 	//Add some type of key for mouse input
 }
 
+void Game::OnKeyboardInput(WPARAM key)
+{
+	CommandQueue& commands = gameWorld.getCommandQueue();
+	Player mPlayer;
+	mPlayer.handleEvent(key, commands);
+	mPlayer.handleRealtimeInput(commands);
+
+	//OutputDebugString(L"Keyboard Pressed\n");
+}
+
 void Game::OnKeyboardInput(const GameTimer& gt)
 {
+	CommandQueue& commands = gameWorld.getCommandQueue();
+
 	if (GetAsyncKeyState('1') & 0x8000)
 	{
 		OutputDebugString(L"1 KeyPressed\n");

@@ -91,9 +91,9 @@ void Player::initalizeActions()
 {
 	const float playerSpeed = 200.0f;
 	mActionBinding[MoveLeft].action = derivedAction<Aircraft>(AircraftMover(-playerSpeed, 0.0f));
-	mActionBinding[MoveRight].action = derivedAction<Aircraft>(AircraftMover(+playerSpeed, 0.0f));
-	mActionBinding[MoveUp].action = derivedAction<Aircraft>(AircraftMover(0.0f, -playerSpeed));
-	mActionBinding[MoveLeft].action = derivedAction<Aircraft>(AircraftMover(0.0f, +playerSpeed));
+	mActionBinding[MoveRight].action = derivedAction<Aircraft>(AircraftMover(playerSpeed, 0.0f));
+	mActionBinding[MoveUp].action = derivedAction<Aircraft>(AircraftMover(0.0f, playerSpeed));
+	mActionBinding[MoveDown].action = derivedAction<Aircraft>(AircraftMover(0.0f, -playerSpeed));
 
 	mActionBinding[GetPosition].action = [](SceneNode& s, GameTimer) {
 		std::wstring pos = std::to_wstring(s.GetPosition().x) + L"," + std::to_wstring(s.GetPosition().y) + L"\n";

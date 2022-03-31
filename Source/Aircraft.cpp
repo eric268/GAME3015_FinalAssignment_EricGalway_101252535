@@ -42,6 +42,16 @@ Textures::ID Aircraft::ConvertTypeToTexture(Aircraft::Type type)
 	return Textures::Eagle;
 }
 
+unsigned int Aircraft::getCategory() const 
+{
+	switch (mType)
+	{
+	case Eagle:
+		return Category::PlayerAircraft;
+	default: return Category::EnemyAircraft;
+	}
+}
+
 void Aircraft::DrawCurrent(const GameTimer& gt) const
 {
 	GetRenderItem()->Draw(GetRenderItem());

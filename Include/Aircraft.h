@@ -25,6 +25,8 @@ public:
 	/// position, scale, render item all to default values
 	/// <param name="type"> Type of aircraft to create</param>
 	Aircraft(Type type);
+
+	virtual unsigned int getCategory() const;
 	
 	/// Converts the aircraft type enumeration to the appropriate texture enumeration
 	/// 

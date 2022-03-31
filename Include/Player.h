@@ -5,6 +5,7 @@
 #include "Game.h"
 
 class CommandQueue;
+
 class Player
 {
 public:

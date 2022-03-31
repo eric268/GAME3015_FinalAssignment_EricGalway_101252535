@@ -3,6 +3,8 @@
 //#include "SceneNode.h"
 #include "Aircraft.h"
 #include <array>
+#include "CommandQueue.h"
+#include "Command.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -39,6 +41,8 @@ public:
 	/// <param name="gt">delta time</param>
 	void Draw(const GameTimer& gt);
 
+	CommandQueue& getCommandQueue();
+
 	/// <summary>Creates all scene nodes
 	/// 
 	/// Initializes their respective values</summary>
@@ -67,6 +71,9 @@ public:
 	/// </summary>
 	/// <param name="view">Transform to set camera transform too</param>
 	void SetWorldView(XMFLOAT4X4& view);
+
+	void adaptPlayerPosition();
+	void adaptPlayerVelocity();
 private:
 	/// <summary>
 	/// Enumeration for identifying node layers
@@ -90,6 +97,8 @@ private:
 	void UpdateCamera(const GameTimer& gt);
 
 private:
+	CommandQueue mCommandQueue;
+
 	SceneNode mSceneGraph;
 	std::array<SceneNode*, LayerCount>	mSceneLayers;
 	Aircraft* mPlayerAircraft;
@@ -105,6 +114,7 @@ private:
 	float screenWidth;
 	float screenHeight;
 	float screenWidthBuffer;
+	float screenHeightBuffer;
 	float screenToWorldRatio;
 	float changeInPlayerRotation;
 };

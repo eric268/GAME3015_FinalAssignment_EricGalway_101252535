@@ -1,4 +1,7 @@
 #include "SceneNode.h"
+#include "Command.h"
+#include <algorithm>
+#include <cassert>
 
 SceneNode::SceneNode() :
 	mChildren(),
@@ -72,6 +75,20 @@ void SceneNode::Draw(const GameTimer& gt)
 	}
 	DrawCurrent(gt);
 	DrawChildren(gt);
+}
+
+void SceneNode::onCommand(const Command& command, GameTimer dt)
+{
+	if (command.category & getCategory())
+		command.action(*this, dt);
+
+	for (Ptr& child : mChildren)
+		child->onCommand(command, dt);
+}
+
+unsigned int SceneNode::getCategory() const
+{
+	return Category::Scene;
 }
 
 void SceneNode::SetPosition(XMFLOAT3 position)

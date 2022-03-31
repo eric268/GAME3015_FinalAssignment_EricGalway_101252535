@@ -7,6 +7,7 @@ World::World() :
 	screenWidth(0),
 	screenHeight(0),
 	screenWidthBuffer(0.0f),
+	screenHeightBuffer(0.0f),
 	mSpawnPosition(XMFLOAT3(0,0,0)),
 	mScrollSpeed(0.0f),
 	mWorldView(XMFLOAT4X4()),
@@ -23,6 +24,7 @@ World::World( float width, float height) :
 	screenWidth(width),
 	screenHeight(height),
 	screenWidthBuffer(25.0f),
+	screenHeightBuffer(25.0f),
 	mSpawnPosition(XMFLOAT3(0, -20, -25)),
 	mScrollSpeed(5.0f),
 	worldViewPosition(),
@@ -35,9 +37,17 @@ World::World( float width, float height) :
 
 void World::Update(const GameTimer& gt)
 {
+
+	//UpdateCamera(gt);
+	mPlayerAircraft->SetVelocity(0.0f, 0.0f, 0.0f);
+	
+	while (!mCommandQueue.isEmpty())
+		mSceneGraph.onCommand(mCommandQueue.pop(), gt);
+	
+	//ManagePlayerPosition();
+	//adaptPlayerVelocity();
 	mSceneGraph.Update(gt);
-	UpdateCamera(gt);
-	ManagePlayerPosition();
+	//adaptPlayerPosition();
 }
 
 void World::Draw(const GameTimer& gt)
@@ -61,6 +71,29 @@ void World::SetWorldView(XMFLOAT4X4& view)
 {
 	mWorldView = view;
 	cameraPosition = MathHelper::GetPosition(mWorldView);
+}
+
+void World::adaptPlayerPosition()
+{
+	XMFLOAT3 position = mPlayerAircraft->GetPosition();
+	//position.x = max(position.x * screenToWorldRatio, screenWidth/2.0f - screenWidthBuffer);
+	//position.x = min(position.x * screenToWorldRatio, -screenWidth/2.0f + screenWidthBuffer);
+	position.y = min(position.y * screenToWorldRatio, screenHeight/2.0f - screenHeightBuffer);
+	position.y = max(position.y * screenToWorldRatio, -screenHeight/2.0f  + screenHeightBuffer);
+
+	mPlayerAircraft->SetPosition(position);
+}
+
+void World::adaptPlayerVelocity()
+{
+	XMFLOAT3 velocity = mPlayerAircraft->GetVelocity();
+	
+	if (velocity.x != 0.0f && velocity.y != 0.0f)
+	{
+		mPlayerAircraft->SetVelocity(velocity.x / std::sqrt(2.0f), velocity.y / std::sqrt(2.0f), 0.0f);
+	}
+
+	mPlayerAircraft->accelerate(0.0f, mScrollSpeed);
 }
 
 void World::ManagePlayerPosition()
@@ -122,6 +155,11 @@ void World::BuildScene()
 void World::AddTexture(Textures::ID id, std::wstring fileName)
 {
 	ResourceManager::GetInstance()->GetTextureHolder().insert(std::pair<Textures::ID, std::wstring>(id, fileName));
+}
+
+CommandQueue& World::getCommandQueue()
+{
+	return mCommandQueue;
 }
 
 

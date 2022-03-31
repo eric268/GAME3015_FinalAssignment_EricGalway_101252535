@@ -6,6 +6,8 @@
 #include "../D3DCommon/UploadBuffer.h"
 #include "../D3DCommon/GeometryGenerator.h"
 #include "../D3DCommon/RenderItem.h"
+#include "Category.h"
+struct Command;
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -47,7 +49,8 @@ public:
 	/// <param name="gt">Delta Time</param>
 	virtual void Draw(const GameTimer& gt);
 
-
+	void onCommand(const Command& command, GameTimer dt);
+	virtual unsigned int getCategory() const;
 	//Getters
 
 
