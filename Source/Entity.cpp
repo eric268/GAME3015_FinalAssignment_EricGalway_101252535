@@ -29,3 +29,15 @@ void Entity::Move(const GameTimer& gt)
 
 	SceneNode::SetPosition(x,y,z);
 }
+
+void Entity::accelerate(XMFLOAT2 velocity)
+{
+	mVelocity.x += velocity.x;
+	mVelocity.y += velocity.y;
+}
+
+void Entity::accelerate(float vx, float vy)
+{
+	mVelocity.x += vx;
+	mVelocity.y += vy;
+}

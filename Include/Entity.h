@@ -37,6 +37,9 @@ public:
 	/// <param name="gt">Delta Time</param>
 	virtual void Move(const GameTimer& gt);
 
+	void				accelerate(XMFLOAT2 velocity);
+	void				accelerate(float vx, float vy);
+
 private:
 	XMFLOAT3 mVelocity;
 };

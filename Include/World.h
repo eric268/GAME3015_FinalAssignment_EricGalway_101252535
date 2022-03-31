@@ -1,6 +1,6 @@
 #pragma once
-#include "ResourceIdentifiers.h"
-#include "SceneNode.h"
+//#include "ResourceIdentifiers.h"
+//#include "SceneNode.h"
 #include "Aircraft.h"
 #include <array>
 
