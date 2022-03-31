@@ -196,22 +196,6 @@ void Game::OnKeyboardInput(const GameTimer& gt)
 	{
 		OutputDebugString(L"2 KeyPressed\n");
 	}
-	else if (GetAsyncKeyState(VK_UP) & 0x8000 || GetAsyncKeyState('W') & 0x8000)
-	{
-		OutputDebugString(L"Up Pressed\n");
-	}
-	else if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-	{
-		OutputDebugString(L"Down Pressed\n");
-	}
-	else if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-	{
-		OutputDebugString(L"Left Pressed\n");
-	}
-	else if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-	{
-		OutputDebugString(L"Right Pressed\n");
-	}
 }
 
 void Game::UpdateObjectCBs(const GameTimer& gt)

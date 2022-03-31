@@ -6,6 +6,9 @@
 #include <algorithm>
 #include <iostream>
 
+//using Microsoft::WRL::ComPtr;
+//using namespace DirectX;
+//using namespace DirectX::PackedVector;
 struct AircraftMover
 {
 	AircraftMover(float vx, float vy)
@@ -20,3 +23,95 @@ struct AircraftMover
 	}
 	XMFLOAT2 velocity;
 };
+
+Player::Player()
+{
+	mKeyBinding[VK_LEFT] = MoveLeft;
+	mKeyBinding[VK_RIGHT] = MoveRight;
+	mKeyBinding[VK_UP] = MoveUp;
+	mKeyBinding[VK_DOWN] = MoveDown;
+
+	mKeyBinding['P'] = GetPosition;
+	mKeyBinding['W'] = MoveUp;
+	mKeyBinding['A'] = MoveLeft;
+	mKeyBinding['S'] = MoveDown;
+	mKeyBinding['D'] = MoveRight;
+
+	initalizeActions();
+
+	for (auto& pair : mActionBinding)
+	{
+		pair.second.category = Category::PlayerAircraft;
+	}
+}
+
+void Player::handleEvent(UINT event, CommandQueue& commands)
+{
+	auto found = mKeyBinding.find(event);
+	if (found != mKeyBinding.end() && !isRealtimeAction(found->second))
+	{
+		commands.push(mActionBinding[found->second]);
+	}
+}
+
+void Player::handleRealtimeInput(CommandQueue& commands)
+{
+	for (auto pair : mKeyBinding)
+	{
+		if (GetAsyncKeyState(pair.first) && isRealtimeAction(pair.second))
+			commands.push(mActionBinding[pair.second]);
+	}
+}
+
+void Player::assignKey(Action action, int key)
+{
+	for (auto itr = mKeyBinding.begin(); itr != mKeyBinding.end();)
+	{
+		if (itr->second == action)
+			mKeyBinding.erase(itr++);
+		else
+			++itr;
+	}
+	mKeyBinding[key] = action;
+}
+
+int Player::getAssignedKey(Action action) const
+{
+	for (auto pair : mKeyBinding)
+	{
+		if (pair.second == action)
+		{
+			return pair.first;
+		}
+	}
+	return -1;
+}
+
+void Player::initalizeActions()
+{
+	const float playerSpeed = 200.0f;
+	mActionBinding[MoveLeft].action = derivedAction<Aircraft>(AircraftMover(-playerSpeed, 0.0f));
+	mActionBinding[MoveRight].action = derivedAction<Aircraft>(AircraftMover(+playerSpeed, 0.0f));
+	mActionBinding[MoveUp].action = derivedAction<Aircraft>(AircraftMover(0.0f, -playerSpeed));
+	mActionBinding[MoveLeft].action = derivedAction<Aircraft>(AircraftMover(0.0f, +playerSpeed));
+
+	mActionBinding[GetPosition].action = [](SceneNode& s, GameTimer) {
+		std::wstring pos = std::to_wstring(s.GetPosition().x) + L"," + std::to_wstring(s.GetPosition().y) + L"\n";
+		OutputDebugString(pos.c_str());
+	};
+}
+
+bool Player::isRealtimeAction(Action action)
+{
+	switch (action)
+	{
+	case MoveLeft:
+	case MoveRight:
+	case MoveDown:
+	case MoveUp:
+		return true;
+
+	default:
+		return false;
+	}
+}
