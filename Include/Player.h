@@ -1,8 +1,7 @@
 #pragma once
 #include "Command.h"
 #include <map>
-
-#include "Game.h"
+#include "../D3DCommon/d3dApp.h"
 
 class CommandQueue;
 

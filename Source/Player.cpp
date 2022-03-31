@@ -6,9 +6,6 @@
 #include <algorithm>
 #include <iostream>
 
-//using Microsoft::WRL::ComPtr;
-//using namespace DirectX;
-//using namespace DirectX::PackedVector;
 struct AircraftMover
 {
 	AircraftMover(float vx, float vy)
@@ -19,6 +16,7 @@ struct AircraftMover
 
 	void operator() (Aircraft& aircraft, GameTimer) const
 	{
+		OutputDebugString(L"Accelerating\n");
 		aircraft.accelerate(velocity);
 	}
 	XMFLOAT2 velocity;
@@ -96,7 +94,7 @@ void Player::initalizeActions()
 	mActionBinding[MoveDown].action = derivedAction<Aircraft>(AircraftMover(0.0f, -playerSpeed));
 
 	mActionBinding[GetPosition].action = [](SceneNode& s, GameTimer) {
-		std::wstring pos = std::to_wstring(s.GetPosition().x) + L"," + std::to_wstring(s.GetPosition().y) + L"\n";
+		std::wstring pos = std::to_wstring(s.GetPosition().x) + L"," + std::to_wstring(s.GetPosition().z) + L"\n";
 		OutputDebugString(pos.c_str());
 	};
 }

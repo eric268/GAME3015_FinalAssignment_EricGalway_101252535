@@ -38,14 +38,14 @@ World::World( float width, float height) :
 void World::Update(const GameTimer& gt)
 {
 
-	//UpdateCamera(gt);
+	UpdateCamera(gt);
 	mPlayerAircraft->SetVelocity(0.0f, 0.0f, 0.0f);
 	
 	while (!mCommandQueue.isEmpty())
 		mSceneGraph.onCommand(mCommandQueue.pop(), gt);
 	
 	//ManagePlayerPosition();
-	//adaptPlayerVelocity();
+	adaptPlayerVelocity();
 	mSceneGraph.Update(gt);
 	//adaptPlayerPosition();
 }

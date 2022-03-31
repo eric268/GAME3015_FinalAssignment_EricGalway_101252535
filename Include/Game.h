@@ -7,11 +7,12 @@
 #include "../D3DCommon/FrameResource.h"
 #include "../D3DCommon/RenderItem.h"
 #include "World.h"
-
+#include "Player.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
 using namespace DirectX::PackedVector;
+
 
 /// Game class that acts as application framework 
 /// 
@@ -74,7 +75,7 @@ private:
 
 private:
 	World gameWorld;
-	//Player player;
+	Player mPlayer;
 	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
 	FrameResource* mCurrFrameResource;
 	int mCurrFrameResourceIndex = 0;

@@ -8,6 +8,7 @@ Aircraft::Aircraft(Type type)
 	SetRotation(XMFLOAT3(0, 0, 0));
 	SetScale(XMFLOAT3(1.0f, 1.0f, 1.0f));
 	SetVelocity(XMFLOAT3(0.0f, 0.0f, 0.0f));
+	mType = type;
 
 	RenderItem* aircraftRenderItem = new RenderItem();
 
@@ -48,7 +49,8 @@ unsigned int Aircraft::getCategory() const
 	{
 	case Eagle:
 		return Category::PlayerAircraft;
-	default: return Category::EnemyAircraft;
+	default: 
+		return Category::EnemyAircraft;
 	}
 }
 

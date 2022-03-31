@@ -3,7 +3,6 @@
 #include "../D3DCommon/UploadBuffer.h"
 #include "../D3DCommon/GeometryGenerator.h"
 #include "Game.h"
-
 /// <summary>Main game loop
 /// 
 /// </summary>

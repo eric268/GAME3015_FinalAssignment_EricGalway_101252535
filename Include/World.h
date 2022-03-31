@@ -10,7 +10,6 @@ using Microsoft::WRL::ComPtr;
 using namespace DirectX;
 using namespace DirectX::PackedVector;
 
-class Game;
 /// <summary> Class that creates game world
 /// 
 /// Responsible for all objects that will be created, drawn and updated in the game</summary>
@@ -102,7 +101,6 @@ private:
 	SceneNode mSceneGraph;
 	std::array<SceneNode*, LayerCount>	mSceneLayers;
 	Aircraft* mPlayerAircraft;
-	Game* mGame;
 	XMFLOAT4 mWorldBounds;
 	XMFLOAT4X4 mWorldView;
 
