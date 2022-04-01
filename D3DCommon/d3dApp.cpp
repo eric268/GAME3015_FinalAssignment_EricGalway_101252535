@@ -358,7 +358,7 @@ LRESULT D3DApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 		return 0;
 	case WM_KEYDOWN:
-		OnKeyboardInput(wParam);
+		OnKeyPressed(wParam);
 		return 0;
     case WM_KEYUP:
         if(wParam == VK_ESCAPE)

@@ -1,5 +1,9 @@
 #pragma once
 
+/// <summary>
+/// A namespace encapsulating an enum used for differentiating between different types of 
+/// of Scene Nodes
+/// </summary>
 namespace Category
 {
 	enum Type

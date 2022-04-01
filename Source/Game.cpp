@@ -176,32 +176,16 @@ void Game::OnMouseMove(WPARAM btnState, int x, int y)
 	//Add some type of key for mouse input
 }
 
-void Game::OnKeyboardInput(WPARAM key)
+void Game::OnKeyPressed(WPARAM key)
 {
-	//CommandQueue& commands = gameWorld.getCommandQueue();
-	//mPlayer.handleEvent(key, commands);
-	//mPlayer.handleRealtimeInput(commands);
+	CommandQueue& commands = gameWorld.getCommandQueue();
+	mPlayer.handleEvent(key, commands);
 }
 
 void Game::OnKeyboardInput(const GameTimer& gt)
 {
 	CommandQueue& commands = gameWorld.getCommandQueue();
-
-	//while (!keysPressed.empty())
-	//{
-	//	WPARAM param = keysPressed.front();
-	//	keysPressed.pop();
-	//	mPlayer.handleEvent(param, commands);
-	//	mPlayer.handleRealtimeInput(commands);
-	//}
-	for (int i = 0; i < 256; i++)
-	{
-		if (GetAsyncKeyState(i) & 0x8000)
-		{
-			mPlayer.handleEvent(i, commands);
-			mPlayer.handleRealtimeInput(commands);
-		}
-	}
+	mPlayer.handleRealtimeInput(commands);
 }
 
 void Game::UpdateObjectCBs(const GameTimer& gt)

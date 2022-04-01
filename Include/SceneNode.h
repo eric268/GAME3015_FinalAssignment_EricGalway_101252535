@@ -50,10 +50,17 @@ public:
 	/// <param name="gt">Delta Time</param>
 	virtual void Draw(const GameTimer& gt);
 
-	
-	//*****************
-	
+	/// <summary>
+	/// Performs action if command correctly matches the category
+	/// </summary>
+	/// <param name="command">Command to check if category matches and if true performs respective action</param>
+	/// <param name="dt">Delta time</param>
 	void onCommand(const Command& command, GameTimer dt);
+
+	/// <summary>
+	/// Returns the current category
+	/// </summary>
+	/// <returns>A Type from the Category namespace</returns>
 	virtual unsigned int getCategory() const;
 	
 	

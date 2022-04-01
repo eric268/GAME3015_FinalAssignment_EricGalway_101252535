@@ -50,7 +50,7 @@ protected:
 	virtual void OnMouseDown(WPARAM btnState, int x, int y){ }
 	virtual void OnMouseUp(WPARAM btnState, int x, int y)  { }
 	virtual void OnMouseMove(WPARAM btnState, int x, int y){ }
-    virtual void OnKeyboardInput(WPARAM key) {};
+    virtual void OnKeyPressed(WPARAM key) {};
 
 protected:
 
@@ -123,6 +123,5 @@ protected:
     DXGI_FORMAT mDepthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 	int mClientWidth = 800;
 	int mClientHeight = 600;
-    std::queue<WPARAM> keysPressed;
 };
 

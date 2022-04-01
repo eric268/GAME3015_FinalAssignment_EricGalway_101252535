@@ -26,7 +26,7 @@ World::World( float width, float height) :
 	screenWidth(width),
 	screenHeight(height),
 	screenWidthBuffer(-10.0f),
-	screenHeightBuffer(-20.0f),
+	screenHeightBuffer(-75.0f),
 	mSpawnPosition(XMFLOAT3(0, -20, -25)),
 	mScrollSpeed(5.0f),
 	worldViewPosition(),
@@ -42,13 +42,12 @@ World::World( float width, float height) :
 void World::Update(const GameTimer& gt)
 {
 	UpdateCamera(gt);
+
 	mPlayerAircraft->SetVelocity(0.0f, 0.0f, 0.0f);
 
 	while (!mCommandQueue.isEmpty())
 		mSceneGraph.onCommand(mCommandQueue.pop(), gt);
-
 	adaptPlayerVelocity();
-
 	mSceneGraph.Update(gt);
 	adaptPlayerPosition();
 }
@@ -78,12 +77,12 @@ void World::SetWorldView(XMFLOAT4X4& view)
 
 void World::adaptPlayerPosition()
 {
-	float offset = (mWorldView._42 - mWorldView._43);
 	XMFLOAT3 position = mPlayerAircraft->GetPosition();
+	
 	position.x = min(position.x,  screenWidth  / (2.0f * screenToWorldRatio) - screenWidthBuffer);
 	position.x = max(position.x, -screenWidth  / (2.0f * screenToWorldRatio) + screenWidthBuffer);
-	position.z = max(position.z, offset - screenHeight / (2.0f * screenToWorldRatio));
-	position.z = min(position.z, -offset + screenHeight / (2.0f * screenToWorldRatio) - screenHeightBuffer);
+	position.z = max(position.z, (-cameraPosition.y *1.4f)  - screenHeight / (2.f * screenToWorldRatio));
+	position.z = min(position.z, -(cameraPosition.y * 1.4f) + screenHeight / (2.f * screenToWorldRatio) - screenHeightBuffer);
 
 	mPlayerAircraft->SetPosition(position);
 }
@@ -91,7 +90,7 @@ void World::adaptPlayerPosition()
 void World::adaptPlayerVelocity()
 {
 	XMFLOAT3 velocity = mPlayerAircraft->GetVelocity();
-	
+
 	//Clamping max speed
 	velocity.x = min(max(velocity.x, -maxSpeed), maxSpeed);
 	velocity.z = min(max(velocity.z, -maxSpeed), maxSpeed);
@@ -103,6 +102,7 @@ void World::adaptPlayerVelocity()
 	}
 
 	mPlayerAircraft->accelerate(0.0f, mScrollSpeed);
+	mPlayerAircraft->SetRotation(mPlayerAircraft->GetVelocity().z / 2.0f, 0, -mPlayerAircraft->GetVelocity().x / 2.0f);
 }
 
 void World::UpdateCamera(const GameTimer& gt)
@@ -121,7 +121,7 @@ void World::BuildScene()
 		mSceneLayers[i] = layer.get();
 		mSceneGraph.AttachChild(std::move(layer));
 	}
-	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(5,1500, Textures::ID::Desert));
+	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(3,1500, Textures::ID::Desert));
 	backgroundSprite->SetScale(XMFLOAT3(10.0f, 1.0f, 2000.0f));
 	backgroundSprite->SetPosition(0, -100, 0);
 	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));

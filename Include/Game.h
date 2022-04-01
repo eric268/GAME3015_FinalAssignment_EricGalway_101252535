@@ -44,7 +44,7 @@ private:
 	virtual void OnMouseDown(WPARAM btnState, int x, int y)override;
 	virtual void OnMouseUp(WPARAM btnState, int x, int y)override;
 	virtual void OnMouseMove(WPARAM btnState, int x, int y)override;
-	virtual void OnKeyboardInput(WPARAM key) override;
+	virtual void OnKeyPressed(WPARAM key) override;
 
 	void OnKeyboardInput(const GameTimer& gt);
 	void UpdateObjectCBs(const GameTimer& gt);
@@ -101,4 +101,6 @@ private:
 	float mRadius;
 	XMVECTOR target;
 	XMMATRIX view;
+
+	std::queue<WPARAM> keysPressed;
 };

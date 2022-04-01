@@ -56,7 +56,7 @@ void Player::handleRealtimeInput(CommandQueue& commands)
 	}
 }
 
-void Player::assignKey(Action action, int key)
+void Player::assignKey(Action action, WPARAM key)
 {
 	for (auto itr = mKeyBinding.begin(); itr != mKeyBinding.end();)
 	{
