@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['resourceidentifier_0',['resourceIdentifier',['../namespaceresource_identifier.html',1,'']]]
+  ['directx_0',['DirectX',['../namespace_direct_x.html',1,'']]]
 ];

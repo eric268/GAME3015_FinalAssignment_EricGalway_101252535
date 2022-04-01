@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A1_Eric_Galway: Include/Game.h Source File</title>
+<title>Game3015_A2_Eric_Galway_101252535_W2022: Include/Game.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A1_Eric_Galway<span id="projectnumber">&#160;A1</span>
+   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
    </div>
-   <div id="projectbrief">Game engine framework with DirectX12</div>
+   <div id="projectbrief">Showcasing input handeling in Directx12</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -103,13 +103,13 @@ $(document).ready(function(){initNavTree('_game_8h_source.html',''); initResizab
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;../D3DCommon/GeometryGenerator.h&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;../D3DCommon/FrameResource.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;../D3DCommon/RenderItem.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="_world_8h.html">World.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="_world_8h.html">World.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="_player_8h.html">Player.h</a>&quot;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">using</span> Microsoft::WRL::ComPtr;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_direct_x.html">DirectX</a>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">using namespace </span>DirectX::PackedVector;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">using</span> Microsoft::WRL::ComPtr;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespace_direct_x.html">DirectX</a>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">using namespace </span>DirectX::PackedVector;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="class_game.html">   21</a></span><span class="keyword">class </span><a class="code hl_class" href="class_game.html">Game</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_d3_d_app.html">D3DApp</a></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>{</div>
@@ -137,80 +137,85 @@ $(document).ready(function(){initNavTree('_game_8h_source.html',''); initResizab
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnMouseDown(WPARAM btnState, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y)<span class="keyword">override</span>;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnMouseUp(WPARAM btnState, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y)<span class="keyword">override</span>;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnMouseMove(WPARAM btnState, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y)<span class="keyword">override</span>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> OnKeyboardInput(<span class="keyword">const</span> <a class="code hl_class" href="class_game_timer.html">GameTimer</a>&amp; gt);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> UpdateObjectCBs(<span class="keyword">const</span> <a class="code hl_class" href="class_game_timer.html">GameTimer</a>&amp; gt);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> UpdateMaterialCBs(<span class="keyword">const</span> <a class="code hl_class" href="class_game_timer.html">GameTimer</a>&amp; gt);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">void</span> UpdateMainPassCB(<span class="keyword">const</span> <a class="code hl_class" href="class_game_timer.html">GameTimer</a>&amp; gt);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> LoadTextures();</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">void</span> BuildRootSignature();</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">void</span> BuildDescriptorHeaps();</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> BuildShadersAndInputLayout();</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">void</span> BuildShapeGeometry();</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">void</span> BuildPSOs();</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">void</span> BuildFrameResources();</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span> BuildMaterials();</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">void</span> InitalizeCamera();</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">void</span> DrawRenderItems(ID3D12GraphicsCommandList* cmdList, <span class="keyword">const</span> std::vector&lt;RenderItem*&gt;&amp; ritems);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    std::array&lt;const CD3DX12_STATIC_SAMPLER_DESC, 6&gt; GetStaticSamplers();</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="comment">// List of all the render items.</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    std::vector&lt;std::unique_ptr&lt;RenderItem&gt;&gt; mAllRitems;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="comment">// Render items divided by PSO.</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    std::vector&lt;RenderItem*&gt; mRitemLayer[(int)<a class="code hl_enumvalue" href="_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159ae93f994f01c537c4e2f7d8528c3eb5e9">RenderLayer::Count</a>];</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    std::vector&lt;RenderItem*&gt; mOpaqueRitems;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_class" href="class_world.html">World</a> gameWorld;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    std::vector&lt;std::unique_ptr&lt;FrameResource&gt;&gt; mFrameResources;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_struct" href="struct_frame_resource.html">FrameResource</a>* mCurrFrameResource;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">int</span> mCurrFrameResourceIndex = 0;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    UINT mCbvSrvDescriptorSize = 0;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    ComPtr&lt;ID3D12RootSignature&gt; mRootSignature;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    ComPtr&lt;ID3D12DescriptorHeap&gt; mSrvDescriptorHeap;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    std::unordered_map&lt;std::string, std::unique_ptr&lt;Texture&gt;&gt; mTextures;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::unordered_map&lt;std::string, ComPtr&lt;ID3DBlob&gt;&gt; mShaders;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    std::unordered_map&lt;std::string, ComPtr&lt;ID3D12PipelineState&gt;&gt; mPSOs;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    std::vector&lt;D3D12_INPUT_ELEMENT_DESC&gt; mInputLayout;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_struct" href="struct_pass_constants.html">PassConstants</a> mMainPassCB;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    UINT mPassCbvOffset;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="comment">//Camera Variables</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    XMFLOAT3  mEyePos;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    XMFLOAT4X4 mView;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    XMFLOAT4X4 mProj;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordtype">float</span> mTheta;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordtype">float</span> mPhi;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">float</span> mRadius;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    XMVECTOR target;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    XMMATRIX view;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> OnKeyPressed(WPARAM key) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> OnKeyboardInput(<span class="keyword">const</span> <a class="code hl_class" href="class_game_timer.html">GameTimer</a>&amp; gt);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> UpdateObjectCBs(<span class="keyword">const</span> <a class="code hl_class" href="class_game_timer.html">GameTimer</a>&amp; gt);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">void</span> UpdateMaterialCBs(<span class="keyword">const</span> <a class="code hl_class" href="class_game_timer.html">GameTimer</a>&amp; gt);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">void</span> UpdateMainPassCB(<span class="keyword">const</span> <a class="code hl_class" href="class_game_timer.html">GameTimer</a>&amp; gt);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">void</span> LoadTextures();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">void</span> BuildRootSignature();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> BuildDescriptorHeaps();</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">void</span> BuildShadersAndInputLayout();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">void</span> BuildShapeGeometry();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">void</span> BuildPSOs();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span> BuildFrameResources();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">void</span> BuildMaterials();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">void</span> InitalizeCamera();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">void</span> DrawRenderItems(ID3D12GraphicsCommandList* cmdList, <span class="keyword">const</span> std::vector&lt;RenderItem*&gt;&amp; ritems);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    std::array&lt;const CD3DX12_STATIC_SAMPLER_DESC, 6&gt; GetStaticSamplers();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="comment">// List of all the render items.</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    std::vector&lt;std::unique_ptr&lt;RenderItem&gt;&gt; mAllRitems;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="comment">// Render items divided by PSO.</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    std::vector&lt;RenderItem*&gt; mRitemLayer[(int)<a class="code hl_enumvalue" href="_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159ae93f994f01c537c4e2f7d8528c3eb5e9">RenderLayer::Count</a>];</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    std::vector&lt;RenderItem*&gt; mOpaqueRitems;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <a class="code hl_class" href="class_world.html">World</a> gameWorld;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_class" href="class_player.html">Player</a> mPlayer;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    std::vector&lt;std::unique_ptr&lt;FrameResource&gt;&gt; mFrameResources;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_struct" href="struct_frame_resource.html">FrameResource</a>* mCurrFrameResource;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">int</span> mCurrFrameResourceIndex = 0;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    UINT mCbvSrvDescriptorSize = 0;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    ComPtr&lt;ID3D12RootSignature&gt; mRootSignature;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    ComPtr&lt;ID3D12DescriptorHeap&gt; mSrvDescriptorHeap;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::unordered_map&lt;std::string, std::unique_ptr&lt;Texture&gt;&gt; mTextures;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    std::unordered_map&lt;std::string, ComPtr&lt;ID3DBlob&gt;&gt; mShaders;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    std::unordered_map&lt;std::string, ComPtr&lt;ID3D12PipelineState&gt;&gt; mPSOs;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    std::vector&lt;D3D12_INPUT_ELEMENT_DESC&gt; mInputLayout;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <a class="code hl_struct" href="struct_pass_constants.html">PassConstants</a> mMainPassCB;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    UINT mPassCbvOffset;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="comment">//Camera Variables</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    XMFLOAT3  mEyePos;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    XMFLOAT4X4 mView;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    XMFLOAT4X4 mProj;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordtype">float</span> mTheta;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">float</span> mPhi;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordtype">float</span> mRadius;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    XMVECTOR target;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    XMMATRIX view;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    std::queue&lt;WPARAM&gt; keysPressed;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>};</div>
+<div class="ttc" id="a_player_8h_html"><div class="ttname"><a href="_player_8h.html">Player.h</a></div></div>
 <div class="ttc" id="a_resource_identifiers_8h_html_aa63ede3e7371d4bc358f651428d23159ae93f994f01c537c4e2f7d8528c3eb5e9"><div class="ttname"><a href="_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159ae93f994f01c537c4e2f7d8528c3eb5e9">RenderLayer::Count</a></div><div class="ttdeci">@ Count</div></div>
 <div class="ttc" id="a_world_8h_html"><div class="ttname"><a href="_world_8h.html">World.h</a></div></div>
 <div class="ttc" id="aclass_d3_d_app_html"><div class="ttname"><a href="class_d3_d_app.html">D3DApp</a></div><div class="ttdef"><b>Definition:</b> d3dApp.h:19</div></div>
 <div class="ttc" id="aclass_game_html"><div class="ttname"><a href="class_game.html">Game</a></div><div class="ttdoc">Game class that acts as application framework.</div><div class="ttdef"><b>Definition:</b> Game.h:22</div></div>
 <div class="ttc" id="aclass_game_html_a055965e53216b6ca6f37261eaf81fa3c"><div class="ttname"><a href="class_game.html#a055965e53216b6ca6f37261eaf81fa3c">Game::objCBIndex</a></div><div class="ttdeci">static UINT objCBIndex</div><div class="ttdef"><b>Definition:</b> Game.h:35</div></div>
 <div class="ttc" id="aclass_game_html_a0e53612a0a54bdd46ea1d8b071260b77"><div class="ttname"><a href="class_game.html#a0e53612a0a54bdd46ea1d8b071260b77">Game::mGeometries</a></div><div class="ttdeci">std::unordered_map&lt; std::string, std::unique_ptr&lt; MeshGeometry &gt; &gt; mGeometries</div><div class="ttdef"><b>Definition:</b> Game.h:37</div></div>
-<div class="ttc" id="aclass_game_html_a16354d232327f6c21319713bf6983674"><div class="ttname"><a href="class_game.html#a16354d232327f6c21319713bf6983674">Game::Initialize</a></div><div class="ttdeci">virtual bool Initialize() override</div><div class="ttdef"><b>Definition:</b> Game.cpp:34</div></div>
+<div class="ttc" id="aclass_game_html_a16354d232327f6c21319713bf6983674"><div class="ttname"><a href="class_game.html#a16354d232327f6c21319713bf6983674">Game::Initialize</a></div><div class="ttdeci">virtual bool Initialize() override</div><div class="ttdef"><b>Definition:</b> Game.cpp:35</div></div>
 <div class="ttc" id="aclass_game_html_a293c79673d4c15f55f1ab7f3d1809ddb"><div class="ttname"><a href="class_game.html#a293c79673d4c15f55f1ab7f3d1809ddb">Game::Game</a></div><div class="ttdeci">Game(const Game &amp;rhs)=delete</div></div>
 <div class="ttc" id="aclass_game_html_a3f68a62a1fe1ca8dcd1deb054b384cef"><div class="ttname"><a href="class_game.html#a3f68a62a1fe1ca8dcd1deb054b384cef">Game::Game</a></div><div class="ttdeci">Game(HINSTANCE hInstance)</div><div class="ttdef"><b>Definition:</b> Game.cpp:12</div></div>
 <div class="ttc" id="aclass_game_html_a871400f233e46cc637f383106e89dd71"><div class="ttname"><a href="class_game.html#a871400f233e46cc637f383106e89dd71">Game::mMaterials</a></div><div class="ttdeci">std::unordered_map&lt; std::string, std::unique_ptr&lt; Material &gt; &gt; mMaterials</div><div class="ttdef"><b>Definition:</b> Game.h:36</div></div>
 <div class="ttc" id="aclass_game_html_a9bda5763ea460634fef947be2530c8f5"><div class="ttname"><a href="class_game.html#a9bda5763ea460634fef947be2530c8f5">Game::operator=</a></div><div class="ttdeci">Game &amp; operator=(const Game &amp;rhs)=delete</div></div>
-<div class="ttc" id="aclass_game_html_abf31d9be82e627510c9c2d6e0e012cc8"><div class="ttname"><a href="class_game.html#abf31d9be82e627510c9c2d6e0e012cc8">Game::BuildRenderItems</a></div><div class="ttdeci">void BuildRenderItems()</div><div class="ttdef"><b>Definition:</b> Game.cpp:521</div></div>
-<div class="ttc" id="aclass_game_html_ae3d112ca6e0e55150d2fdbc704474530"><div class="ttname"><a href="class_game.html#ae3d112ca6e0e55150d2fdbc704474530">Game::~Game</a></div><div class="ttdeci">~Game()</div><div class="ttdef"><b>Definition:</b> Game.cpp:28</div></div>
-<div class="ttc" id="aclass_game_html_af3e142b25e56a236aab23206d8aae2d9"><div class="ttname"><a href="class_game.html#af3e142b25e56a236aab23206d8aae2d9">Game::AddRenderItem</a></div><div class="ttdeci">void AddRenderItem(RenderItem *renderItems)</div><div class="ttdef"><b>Definition:</b> Game.cpp:516</div></div>
+<div class="ttc" id="aclass_game_html_abf31d9be82e627510c9c2d6e0e012cc8"><div class="ttname"><a href="class_game.html#abf31d9be82e627510c9c2d6e0e012cc8">Game::BuildRenderItems</a></div><div class="ttdeci">void BuildRenderItems()</div><div class="ttdef"><b>Definition:</b> Game.cpp:522</div></div>
+<div class="ttc" id="aclass_game_html_ae3d112ca6e0e55150d2fdbc704474530"><div class="ttname"><a href="class_game.html#ae3d112ca6e0e55150d2fdbc704474530">Game::~Game</a></div><div class="ttdeci">~Game()</div><div class="ttdef"><b>Definition:</b> Game.cpp:29</div></div>
+<div class="ttc" id="aclass_game_html_af3e142b25e56a236aab23206d8aae2d9"><div class="ttname"><a href="class_game.html#af3e142b25e56a236aab23206d8aae2d9">Game::AddRenderItem</a></div><div class="ttdeci">void AddRenderItem(RenderItem *renderItems)</div><div class="ttdef"><b>Definition:</b> Game.cpp:517</div></div>
 <div class="ttc" id="aclass_game_timer_html"><div class="ttname"><a href="class_game_timer.html">GameTimer</a></div><div class="ttdef"><b>Definition:</b> GameTimer.h:9</div></div>
+<div class="ttc" id="aclass_player_html"><div class="ttname"><a href="class_player.html">Player</a></div><div class="ttdoc">Class used for handling player inputs and their corresponding actions/events</div><div class="ttdef"><b>Definition:</b> Player.h:12</div></div>
 <div class="ttc" id="aclass_render_item_html"><div class="ttname"><a href="class_render_item.html">RenderItem</a></div><div class="ttdef"><b>Definition:</b> RenderItem.h:14</div></div>
-<div class="ttc" id="aclass_world_html"><div class="ttname"><a href="class_world.html">World</a></div><div class="ttdoc">Class that creates game world</div><div class="ttdef"><b>Definition:</b> World.h:15</div></div>
+<div class="ttc" id="aclass_world_html"><div class="ttname"><a href="class_world.html">World</a></div><div class="ttdoc">Class that creates game world</div><div class="ttdef"><b>Definition:</b> World.h:17</div></div>
 <div class="ttc" id="anamespace_direct_x_html"><div class="ttname"><a href="namespace_direct_x.html">DirectX</a></div><div class="ttdef"><b>Definition:</b> DDSTextureLoader.h:48</div></div>
 <div class="ttc" id="astruct_frame_resource_html"><div class="ttname"><a href="struct_frame_resource.html">FrameResource</a></div><div class="ttdef"><b>Definition:</b> FrameResource.h:49</div></div>
 <div class="ttc" id="astruct_pass_constants_html"><div class="ttname"><a href="struct_pass_constants.html">PassConstants</a></div><div class="ttdef"><b>Definition:</b> FrameResource.h:14</div></div>

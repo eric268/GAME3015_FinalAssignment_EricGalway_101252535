@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['raptor_0',['Raptor',['../class_aircraft.html#a7dae28542933e088032b753600046acdaf080b57c0c515dea65f056395cc6d59b',1,'Aircraft::Raptor()'],['../namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a4c97457c9c6cbb65901f311d0afa82fa',1,'Textures::Raptor()']]]
+  ['movedown_0',['MoveDown',['../class_player.html#a2da5df212d083bbb1460237f34ab0d88a685fada3f0a5111b3b8e56f5357a05b0',1,'Player']]],
+  ['moveleft_1',['MoveLeft',['../class_player.html#a2da5df212d083bbb1460237f34ab0d88a0166b28e57a9a8553a603a4c0fbe5807',1,'Player']]],
+  ['moveright_2',['MoveRight',['../class_player.html#a2da5df212d083bbb1460237f34ab0d88aa89dbd9060b77566a66b115531df631b',1,'Player']]],
+  ['moveup_3',['MoveUp',['../class_player.html#a2da5df212d083bbb1460237f34ab0d88a6c74df21e9d4e850dd175a23b78c6540',1,'Player']]]
 ];

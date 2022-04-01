@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A1_Eric_Galway: D3DCommon/RenderItem.h Source File</title>
+<title>Game3015_A2_Eric_Galway_101252535_W2022: D3DCommon/RenderItem.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A1_Eric_Galway<span id="projectnumber">&#160;A1</span>
+   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
    </div>
-   <div id="projectbrief">Game engine framework with DirectX12</div>
+   <div id="projectbrief">Showcasing input handeling in Directx12</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('_render_item_8h_source.html',''); init
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="class_render_item.html#a979179c6dd354cd329563e3599245463">   25</a></span>    UINT <a class="code hl_variable" href="class_render_item.html#a979179c6dd354cd329563e3599245463">StartIndexLocation</a> = 0;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="class_render_item.html#a3750ef7b2791ea922df46e222649f3dc">   26</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_render_item.html#a3750ef7b2791ea922df46e222649f3dc">BaseVertexLocation</a> = 0;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_render_item.html#a2e0a651d0ad4ba7975455e22fbde1a28">   27</a></span>    XMFLOAT4X4 <a class="code hl_class" href="class_world.html">World</a> = <a class="code hl_function" href="class_math_helper.html#a68b4e9af95b1a36aad30ea80839f6b19">MathHelper::Identity4x4</a>();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="class_render_item.html#ac6799548474209d172cbb3d337f56074">   28</a></span>    XMFLOAT4X4 <a class="code hl_variable" href="class_render_item.html#ac6799548474209d172cbb3d337f56074">TexTransform</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="class_render_item.html#ac6799548474209d172cbb3d337f56074">   28</a></span>    XMFLOAT4X4 <a class="code hl_variable" href="class_render_item.html#ac6799548474209d172cbb3d337f56074">TexTransform</a> = <a class="code hl_function" href="class_math_helper.html#a68b4e9af95b1a36aad30ea80839f6b19">MathHelper::Identity4x4</a>();</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_render_item.html#aca6ae2de91638af530fd5ce91fea3306">   29</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_render_item.html#aca6ae2de91638af530fd5ce91fea3306">NumFramesDirty</a> = <a class="code hl_variable" href="d3d_util_8h.html#a7c82b7821d2662eb6e0cfdc08a6c4bd4">gNumFrameResources</a>;</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="comment">// Index into GPU constant buffer corresponding to the ObjectCB for this render item.</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="class_render_item.html#ad95fafa012c0d99c216b998f11207e38">   31</a></span>    UINT <a class="code hl_variable" href="class_render_item.html#ad95fafa012c0d99c216b998f11207e38">IndexCount</a> = 0;</div>
@@ -136,16 +136,16 @@ $(document).ready(function(){initNavTree('_render_item_8h_source.html',''); init
 <div class="ttc" id="aclass_render_item_html_a055ad735f3cfbefd4b2215242831c3d3"><div class="ttname"><a href="class_render_item.html#a055ad735f3cfbefd4b2215242831c3d3">RenderItem::RenderItem</a></div><div class="ttdeci">RenderItem()</div><div class="ttdef"><b>Definition:</b> RenderItem.cpp:5</div></div>
 <div class="ttc" id="aclass_render_item_html_a3750ef7b2791ea922df46e222649f3dc"><div class="ttname"><a href="class_render_item.html#a3750ef7b2791ea922df46e222649f3dc">RenderItem::BaseVertexLocation</a></div><div class="ttdeci">int BaseVertexLocation</div><div class="ttdef"><b>Definition:</b> RenderItem.h:26</div></div>
 <div class="ttc" id="aclass_render_item_html_a4a4015284acd79469b70c358b6c1c2a1"><div class="ttname"><a href="class_render_item.html#a4a4015284acd79469b70c358b6c1c2a1">RenderItem::ObjCBIndex</a></div><div class="ttdeci">UINT ObjCBIndex</div><div class="ttdef"><b>Definition:</b> RenderItem.h:21</div></div>
-<div class="ttc" id="aclass_render_item_html_a4fd195c473ef0bb6cb14ba62edebfe7a"><div class="ttname"><a href="class_render_item.html#a4fd195c473ef0bb6cb14ba62edebfe7a">RenderItem::UpdateTransform</a></div><div class="ttdeci">void UpdateTransform(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)</div><div class="ttdef"><b>Definition:</b> RenderItem.cpp:31</div></div>
+<div class="ttc" id="aclass_render_item_html_a4fd195c473ef0bb6cb14ba62edebfe7a"><div class="ttname"><a href="class_render_item.html#a4fd195c473ef0bb6cb14ba62edebfe7a">RenderItem::UpdateTransform</a></div><div class="ttdeci">void UpdateTransform(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)</div><div class="ttdef"><b>Definition:</b> RenderItem.cpp:30</div></div>
 <div class="ttc" id="aclass_render_item_html_a7e4ddbefdc41b7efcad3c3a4b0ceccd9"><div class="ttname"><a href="class_render_item.html#a7e4ddbefdc41b7efcad3c3a4b0ceccd9">RenderItem::Geo</a></div><div class="ttdeci">MeshGeometry * Geo</div><div class="ttdef"><b>Definition:</b> RenderItem.h:33</div></div>
 <div class="ttc" id="aclass_render_item_html_a979179c6dd354cd329563e3599245463"><div class="ttname"><a href="class_render_item.html#a979179c6dd354cd329563e3599245463">RenderItem::StartIndexLocation</a></div><div class="ttdeci">UINT StartIndexLocation</div><div class="ttdef"><b>Definition:</b> RenderItem.h:25</div></div>
-<div class="ttc" id="aclass_render_item_html_a9ce59736c0ef340b00a614ac039669df"><div class="ttname"><a href="class_render_item.html#a9ce59736c0ef340b00a614ac039669df">RenderItem::Draw</a></div><div class="ttdeci">void Draw(RenderItem *renderItem)</div><div class="ttdef"><b>Definition:</b> RenderItem.cpp:26</div></div>
+<div class="ttc" id="aclass_render_item_html_a9ce59736c0ef340b00a614ac039669df"><div class="ttname"><a href="class_render_item.html#a9ce59736c0ef340b00a614ac039669df">RenderItem::Draw</a></div><div class="ttdeci">void Draw(RenderItem *renderItem)</div><div class="ttdef"><b>Definition:</b> RenderItem.cpp:25</div></div>
 <div class="ttc" id="aclass_render_item_html_aade7ce124e3be6cb423d04f115748ca0"><div class="ttname"><a href="class_render_item.html#aade7ce124e3be6cb423d04f115748ca0">RenderItem::material</a></div><div class="ttdeci">Material * material</div><div class="ttdef"><b>Definition:</b> RenderItem.h:32</div></div>
 <div class="ttc" id="aclass_render_item_html_ab3aad9050526250c4877956789e50b3a"><div class="ttname"><a href="class_render_item.html#ab3aad9050526250c4877956789e50b3a">RenderItem::PrimitiveType</a></div><div class="ttdeci">D3D12_PRIMITIVE_TOPOLOGY PrimitiveType</div><div class="ttdef"><b>Definition:</b> RenderItem.h:23</div></div>
 <div class="ttc" id="aclass_render_item_html_ac6799548474209d172cbb3d337f56074"><div class="ttname"><a href="class_render_item.html#ac6799548474209d172cbb3d337f56074">RenderItem::TexTransform</a></div><div class="ttdeci">XMFLOAT4X4 TexTransform</div><div class="ttdef"><b>Definition:</b> RenderItem.h:28</div></div>
 <div class="ttc" id="aclass_render_item_html_aca6ae2de91638af530fd5ce91fea3306"><div class="ttname"><a href="class_render_item.html#aca6ae2de91638af530fd5ce91fea3306">RenderItem::NumFramesDirty</a></div><div class="ttdeci">int NumFramesDirty</div><div class="ttdef"><b>Definition:</b> RenderItem.h:29</div></div>
 <div class="ttc" id="aclass_render_item_html_ad95fafa012c0d99c216b998f11207e38"><div class="ttname"><a href="class_render_item.html#ad95fafa012c0d99c216b998f11207e38">RenderItem::IndexCount</a></div><div class="ttdeci">UINT IndexCount</div><div class="ttdef"><b>Definition:</b> RenderItem.h:31</div></div>
-<div class="ttc" id="aclass_world_html"><div class="ttname"><a href="class_world.html">World</a></div><div class="ttdoc">Class that creates game world</div><div class="ttdef"><b>Definition:</b> World.h:15</div></div>
+<div class="ttc" id="aclass_world_html"><div class="ttname"><a href="class_world.html">World</a></div><div class="ttdoc">Class that creates game world</div><div class="ttdef"><b>Definition:</b> World.h:17</div></div>
 <div class="ttc" id="ad3d_util_8h_html_a7c82b7821d2662eb6e0cfdc08a6c4bd4"><div class="ttname"><a href="d3d_util_8h.html#a7c82b7821d2662eb6e0cfdc08a6c4bd4">gNumFrameResources</a></div><div class="ttdeci">const int gNumFrameResources</div><div class="ttdef"><b>Definition:</b> Game.cpp:10</div></div>
 <div class="ttc" id="anamespace_direct_x_html"><div class="ttname"><a href="namespace_direct_x.html">DirectX</a></div><div class="ttdef"><b>Definition:</b> DDSTextureLoader.h:48</div></div>
 <div class="ttc" id="anamespace_textures_html_a2cfe2099537d4e80b08437b4978301a5"><div class="ttname"><a href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5">Textures::ID</a></div><div class="ttdeci">ID</div><div class="ttdoc">Enumeration for identifying textures.</div><div class="ttdef"><b>Definition:</b> ResourceIdentifiers.h:15</div></div>

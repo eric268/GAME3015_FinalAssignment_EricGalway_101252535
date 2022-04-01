@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A1_Eric_Galway: Include/Entity.h Source File</title>
+<title>Game3015_A2_Eric_Galway_101252535_W2022: Include/Entity.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A1_Eric_Galway<span id="projectnumber">&#160;A1</span>
+   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
    </div>
-   <div id="projectbrief">Game engine framework with DirectX12</div>
+   <div id="projectbrief">Showcasing input handeling in Directx12</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -110,18 +110,23 @@ $(document).ready(function(){initNavTree('_entity_8h_source.html',''); initResiz
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_entity.html#a5fda2a75b632ab9ded4532633882af31">Move</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_game_timer.html">GameTimer</a>&amp; gt);</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    XMFLOAT3 mVelocity;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>};</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_entity.html#a29cd4a06215880f5442ad3b8ffad63ff">accelerate</a>(XMFLOAT2 velocity);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_entity.html#a29cd4a06215880f5442ad3b8ffad63ff">accelerate</a>(<span class="keywordtype">float</span> vx, <span class="keywordtype">float</span> vy);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    XMFLOAT3 mVelocity;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>};</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
 <div class="ttc" id="a_scene_node_8h_html"><div class="ttname"><a href="_scene_node_8h.html">SceneNode.h</a></div></div>
 <div class="ttc" id="aclass_entity_html"><div class="ttname"><a href="class_entity.html">Entity</a></div><div class="ttdoc">Parent class for all game objects with velocity.</div><div class="ttdef"><b>Definition:</b> Entity.h:9</div></div>
+<div class="ttc" id="aclass_entity_html_a29cd4a06215880f5442ad3b8ffad63ff"><div class="ttname"><a href="class_entity.html#a29cd4a06215880f5442ad3b8ffad63ff">Entity::accelerate</a></div><div class="ttdeci">void accelerate(XMFLOAT2 velocity)</div><div class="ttdoc">Function that increases the velocity of entities</div><div class="ttdef"><b>Definition:</b> Entity.cpp:33</div></div>
 <div class="ttc" id="aclass_entity_html_a4777915ddad3cc2f046bb41803c861f1"><div class="ttname"><a href="class_entity.html#a4777915ddad3cc2f046bb41803c861f1">Entity::SetVelocity</a></div><div class="ttdeci">void SetVelocity(XMFLOAT3 vel)</div><div class="ttdoc">Sets the velocity to a XMFLOAT3 value.</div><div class="ttdef"><b>Definition:</b> Entity.cpp:3</div></div>
 <div class="ttc" id="aclass_entity_html_a5fda2a75b632ab9ded4532633882af31"><div class="ttname"><a href="class_entity.html#a5fda2a75b632ab9ded4532633882af31">Entity::Move</a></div><div class="ttdeci">virtual void Move(const GameTimer &amp;gt)</div><div class="ttdoc">Function responsible for moving Entities</div><div class="ttdef"><b>Definition:</b> Entity.cpp:23</div></div>
 <div class="ttc" id="aclass_entity_html_aa967b1dcdb929d54d36f402530d96881"><div class="ttname"><a href="class_entity.html#aa967b1dcdb929d54d36f402530d96881">Entity::UpdateCurrent</a></div><div class="ttdeci">virtual void UpdateCurrent(const GameTimer &amp;gt)</div><div class="ttdoc">Updates the Entity</div><div class="ttdef"><b>Definition:</b> Entity.cpp:18</div></div>
 <div class="ttc" id="aclass_entity_html_ae5d97f80366fed4ce0a6855d14a41a93"><div class="ttname"><a href="class_entity.html#ae5d97f80366fed4ce0a6855d14a41a93">Entity::GetVelocity</a></div><div class="ttdeci">XMFLOAT3 GetVelocity() const</div><div class="ttdoc">Gets the velocity of the Entity.</div><div class="ttdef"><b>Definition:</b> Entity.cpp:13</div></div>
 <div class="ttc" id="aclass_game_timer_html"><div class="ttname"><a href="class_game_timer.html">GameTimer</a></div><div class="ttdef"><b>Definition:</b> GameTimer.h:9</div></div>
-<div class="ttc" id="aclass_scene_node_html"><div class="ttname"><a href="class_scene_node.html">SceneNode</a></div><div class="ttdoc">Class which all scene objects will inherit from.</div><div class="ttdef"><b>Definition:</b> SceneNode.h:20</div></div>
+<div class="ttc" id="aclass_scene_node_html"><div class="ttname"><a href="class_scene_node.html">SceneNode</a></div><div class="ttdoc">Class which all scene objects will inherit from.</div><div class="ttdef"><b>Definition:</b> SceneNode.h:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

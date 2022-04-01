@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['opaque_0',['Opaque',['../_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159afaa90538de35640e4b1e31ccf35b6eb5',1,'ResourceIdentifiers.h']]]
+  ['getposition_0',['GetPosition',['../class_player.html#a2da5df212d083bbb1460237f34ab0d88a5ab2bb88cbfe4421381afd6bf330cc09',1,'Player']]]
 ];

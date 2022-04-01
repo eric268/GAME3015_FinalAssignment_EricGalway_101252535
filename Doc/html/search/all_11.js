@@ -10,5 +10,5 @@ var searchData=
   ['tostring_7',['ToString',['../classd3d_util.html#ae0b7d841076df11833db2564c86faefe',1,'d3dUtil::ToString()'],['../class_dx_exception.html#a031a5ff549f043decbe96093e73dac27',1,'DxException::ToString()']]],
   ['totaltime_8',['TotalTime',['../struct_pass_constants.html#a8b7dc8578d216518bff83264bc85d34c',1,'PassConstants::TotalTime()'],['../class_game_timer.html#a4d51c259eeb170d1841f84f41779592d',1,'GameTimer::TotalTime()']]],
   ['transparent_9',['Transparent',['../_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159a3d971943089a3388c01fb297a32d9ba7',1,'ResourceIdentifiers.h']]],
-  ['type_10',['Type',['../class_aircraft.html#a7dae28542933e088032b753600046acd',1,'Aircraft']]]
+  ['type_10',['Type',['../class_aircraft.html#a7dae28542933e088032b753600046acd',1,'Aircraft::Type()'],['../namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0',1,'Category::Type()']]]
 ];

@@ -24,9 +24,9 @@
 */
 var NAVTREE =
 [
-  [ "Game3015_A1_Eric_Galway", "index.html", [
+  [ "Game3015_A2_Eric_Galway_101252535_W2022", "index.html", [
     [ "Main Page", "index.html", [
-      [ "DirectX12 Engine Framework GAME3015 A1 W2022", "index.html#DirectX12", null ]
+      [ "DirectX12 Engine Framework GAME3015 A2 W2022", "index.html#DirectX12", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -43,7 +43,7 @@ var NAVTREE =
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", null ],
+        [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
         [ "Typedefs", "functions_type.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
@@ -67,8 +67,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_aircraft_8cpp.html",
-"class_geometry_generator.html#aa43c875ea24dfa8958087c6198323f86",
-"struct_mesh_geometry.html#a9cfdc0d2b907a9059b32fccae59d9813"
+"class_game.html#a871400f233e46cc637f383106e89dd71",
+"struct_d_d_s___h_e_a_d_e_r___d_x_t10.html#a7208befc03e44222386ee54ee4fa9ec6"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

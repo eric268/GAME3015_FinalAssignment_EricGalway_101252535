@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A1_Eric_Galway: SceneNode Class Reference</title>
+<title>Game3015_A2_Eric_Galway_101252535_W2022: SceneNode Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A1_Eric_Galway<span id="projectnumber">&#160;A1</span>
+   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
    </div>
-   <div id="projectbrief">Game engine framework with DirectX12</div>
+   <div id="projectbrief">Showcasing input handeling in Directx12</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -138,6 +138,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a79328f7ae1942b33831f3810a9c9eec6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#a79328f7ae1942b33831f3810a9c9eec6">Draw</a> (const <a class="el" href="class_game_timer.html">GameTimer</a> &amp;gt)</td></tr>
 <tr class="memdesc:a79328f7ae1942b33831f3810a9c9eec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that will add the node to the <a class="el" href="_game_8cpp.html">game.cpp</a> container which draws all render items  <a href="class_scene_node.html#a79328f7ae1942b33831f3810a9c9eec6">More...</a><br /></td></tr>
 <tr class="separator:a79328f7ae1942b33831f3810a9c9eec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae360bd0e77746e5ff492cb398b5f6139"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#ae360bd0e77746e5ff492cb398b5f6139">onCommand</a> (const <a class="el" href="struct_command.html">Command</a> &amp;command, <a class="el" href="class_game_timer.html">GameTimer</a> dt)</td></tr>
+<tr class="memdesc:ae360bd0e77746e5ff492cb398b5f6139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs action if command correctly matches the category  <a href="class_scene_node.html#ae360bd0e77746e5ff492cb398b5f6139">More...</a><br /></td></tr>
+<tr class="separator:ae360bd0e77746e5ff492cb398b5f6139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af713a8c58831a27bc791a2efdfb7c495"><td class="memItemLeft" align="right" valign="top">virtual unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#af713a8c58831a27bc791a2efdfb7c495">getCategory</a> () const</td></tr>
+<tr class="memdesc:af713a8c58831a27bc791a2efdfb7c495"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current category  <a href="class_scene_node.html#af713a8c58831a27bc791a2efdfb7c495">More...</a><br /></td></tr>
+<tr class="separator:af713a8c58831a27bc791a2efdfb7c495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04faa4a9dc47d3db6c8027c7b79c47a2"><td class="memItemLeft" align="right" valign="top">DirectX::XMFLOAT3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#a04faa4a9dc47d3db6c8027c7b79c47a2">GetWorldPosition</a> ()</td></tr>
 <tr class="memdesc:a04faa4a9dc47d3db6c8027c7b79c47a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="class_world.html" title="Class that creates game world">World</a> Position of the node </p><dl class="section return"><dt>Returns</dt><dd>XMFLOAT3 representing world position</dd></dl>
  <a href="class_scene_node.html#a04faa4a9dc47d3db6c8027c7b79c47a2">More...</a><br /></td></tr>
@@ -314,6 +320,36 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="af713a8c58831a27bc791a2efdfb7c495" name="af713a8c58831a27bc791a2efdfb7c495"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af713a8c58831a27bc791a2efdfb7c495">&#9670;&nbsp;</a></span>getCategory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int SceneNode::getCategory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the current category </p>
+<dl class="section return"><dt>Returns</dt><dd>A Type from the <a class="el" href="namespace_category.html" title="A namespace encapsulating an enum used for differentiating between different types of of Scene Nodes">Category</a> namespace</dd></dl>
+
+<p>Reimplemented in <a class="el" href="class_aircraft.html#a01f9042934c08ef18b62351e6bca320d">Aircraft</a>.</p>
+
+</div>
+</div>
 <a id="a9e6d2358774c83744027a161cf31c6e0" name="a9e6d2358774c83744027a161cf31c6e0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9e6d2358774c83744027a161cf31c6e0">&#9670;&nbsp;</a></span>GetParent()</h2>
 
@@ -451,6 +487,43 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the transform of the Scene Node </p><dl class="section return"><dt>Returns</dt><dd>XMFLOAT4X4 Representing the transform of the scene node</dd></dl>
 </p>
+
+</div>
+</div>
+<a id="ae360bd0e77746e5ff492cb398b5f6139" name="ae360bd0e77746e5ff492cb398b5f6139"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae360bd0e77746e5ff492cb398b5f6139">&#9670;&nbsp;</a></span>onCommand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SceneNode::onCommand </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_command.html">Command</a> &amp;&#160;</td>
+          <td class="paramname"><em>command</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_game_timer.html">GameTimer</a>&#160;</td>
+          <td class="paramname"><em>dt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Performs action if command correctly matches the category </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td><a class="el" href="struct_command.html" title="Structure used for executing input commands">Command</a> to check if category matches and if true performs respective action</td></tr>
+    <tr><td class="paramname">dt</td><td>Delta time</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

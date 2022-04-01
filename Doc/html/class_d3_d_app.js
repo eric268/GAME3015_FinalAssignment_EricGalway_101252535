@@ -23,6 +23,7 @@ var class_d3_d_app =
     [ "LogOutputDisplayModes", "class_d3_d_app.html#a96563a403e9119629fff43b86d9807ea", null ],
     [ "MainWnd", "class_d3_d_app.html#ae70e0422d916077999b25cc1b984027d", null ],
     [ "MsgProc", "class_d3_d_app.html#a50a6ba535971837f61c79d7f9390dc30", null ],
+    [ "OnKeyPressed", "class_d3_d_app.html#ae4c2c0fd683903f62315fb4ba4418cb5", null ],
     [ "OnMouseDown", "class_d3_d_app.html#afa0d546d52408a9b55866e6ba065ddae", null ],
     [ "OnMouseMove", "class_d3_d_app.html#aa5270048920cd8a62dc07c7ed5e97622", null ],
     [ "OnMouseUp", "class_d3_d_app.html#a98be07429ac3ffb5f76cbe831f9d94de", null ],

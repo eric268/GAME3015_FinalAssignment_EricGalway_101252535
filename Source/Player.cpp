@@ -6,6 +6,9 @@
 #include <algorithm>
 #include <iostream>
 
+/// <summary>
+/// Struct used for changing the velocity of Aircraft
+/// </summary>
 struct AircraftMover
 {
 	AircraftMover(float vx, float vy)

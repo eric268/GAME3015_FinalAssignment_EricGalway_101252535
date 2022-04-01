@@ -1,7 +1,10 @@
 var annotated_dup =
 [
     [ "Aircraft", "class_aircraft.html", "class_aircraft" ],
+    [ "AircraftMover", "struct_aircraft_mover.html", "struct_aircraft_mover" ],
     [ "Camera", "class_camera.html", "class_camera" ],
+    [ "Command", "struct_command.html", "struct_command" ],
+    [ "CommandQueue", "class_command_queue.html", "class_command_queue" ],
     [ "D3DApp", "class_d3_d_app.html", "class_d3_d_app" ],
     [ "d3dUtil", "classd3d_util.html", null ],
     [ "DDS_HEADER", "struct_d_d_s___h_e_a_d_e_r.html", "struct_d_d_s___h_e_a_d_e_r" ],
@@ -20,6 +23,7 @@ var annotated_dup =
     [ "MeshGeometry", "struct_mesh_geometry.html", "struct_mesh_geometry" ],
     [ "ObjectConstants", "struct_object_constants.html", "struct_object_constants" ],
     [ "PassConstants", "struct_pass_constants.html", "struct_pass_constants" ],
+    [ "Player", "class_player.html", "class_player" ],
     [ "RenderItem", "class_render_item.html", "class_render_item" ],
     [ "ResourceManager", "class_resource_manager.html", "class_resource_manager" ],
     [ "SceneNode", "class_scene_node.html", "class_scene_node" ],

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A1_Eric_Galway: World Class Reference</title>
+<title>Game3015_A2_Eric_Galway_101252535_W2022: World Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A1_Eric_Galway<span id="projectnumber">&#160;A1</span>
+   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
    </div>
-   <div id="projectbrief">Game engine framework with DirectX12</div>
+   <div id="projectbrief">Showcasing input handeling in Directx12</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -118,6 +118,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae4006ec9b23a9b8c68c1c213f070c7ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_world.html#ae4006ec9b23a9b8c68c1c213f070c7ab">Draw</a> (const <a class="el" href="class_game_timer.html">GameTimer</a> &amp;gt)</td></tr>
 <tr class="memdesc:ae4006ec9b23a9b8c68c1c213f070c7ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the draw function of the scene graph.  <a href="class_world.html#ae4006ec9b23a9b8c68c1c213f070c7ab">More...</a><br /></td></tr>
 <tr class="separator:ae4006ec9b23a9b8c68c1c213f070c7ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af224b413f30c86ec99d042d0f4df56ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_command_queue.html">CommandQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_world.html#af224b413f30c86ec99d042d0f4df56ee">getCommandQueue</a> ()</td></tr>
+<tr class="memdesc:af224b413f30c86ec99d042d0f4df56ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a reference to the command queue  <a href="class_world.html#af224b413f30c86ec99d042d0f4df56ee">More...</a><br /></td></tr>
+<tr class="separator:af224b413f30c86ec99d042d0f4df56ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81432025b35688ecd581dcbbdd389f65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_world.html#a81432025b35688ecd581dcbbdd389f65">BuildScene</a> ()</td></tr>
 <tr class="memdesc:a81432025b35688ecd581dcbbdd389f65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates all scene nodes  <a href="class_world.html#a81432025b35688ecd581dcbbdd389f65">More...</a><br /></td></tr>
 <tr class="separator:a81432025b35688ecd581dcbbdd389f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,6 +136,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae061efdab88ee4361951583e1a2a053a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_world.html#ae061efdab88ee4361951583e1a2a053a">SetWorldView</a> (XMFLOAT4X4 &amp;view)</td></tr>
 <tr class="memdesc:ae061efdab88ee4361951583e1a2a053a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the main camera transform  <a href="class_world.html#ae061efdab88ee4361951583e1a2a053a">More...</a><br /></td></tr>
 <tr class="separator:ae061efdab88ee4361951583e1a2a053a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0200a52c67934169111b2ea563883bf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_world.html#a0200a52c67934169111b2ea563883bf3">adaptPlayerPosition</a> ()</td></tr>
+<tr class="memdesc:a0200a52c67934169111b2ea563883bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensures the main aircraft and children stay within screen bounds  <a href="class_world.html#a0200a52c67934169111b2ea563883bf3">More...</a><br /></td></tr>
+<tr class="separator:a0200a52c67934169111b2ea563883bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5d9b6b0e18307c0e50d60f1426a147f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_world.html#ac5d9b6b0e18307c0e50d60f1426a147f">adaptPlayerVelocity</a> ()</td></tr>
+<tr class="memdesc:ac5d9b6b0e18307c0e50d60f1426a147f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensures the magnitude of aircraft velocity always stays at max speed  <a href="class_world.html#ac5d9b6b0e18307c0e50d60f1426a147f">More...</a><br /></td></tr>
+<tr class="separator:ac5d9b6b0e18307c0e50d60f1426a147f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Class that creates game world </p>
@@ -196,6 +205,44 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0200a52c67934169111b2ea563883bf3" name="a0200a52c67934169111b2ea563883bf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0200a52c67934169111b2ea563883bf3">&#9670;&nbsp;</a></span>adaptPlayerPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void World::adaptPlayerPosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ensures the main aircraft and children stay within screen bounds </p>
+
+</div>
+</div>
+<a id="ac5d9b6b0e18307c0e50d60f1426a147f" name="ac5d9b6b0e18307c0e50d60f1426a147f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5d9b6b0e18307c0e50d60f1426a147f">&#9670;&nbsp;</a></span>adaptPlayerVelocity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void World::adaptPlayerVelocity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ensures the magnitude of aircraft velocity always stays at max speed </p>
+
+</div>
+</div>
 <a id="a2257a3f16d06cbede0383c8babefbc75" name="a2257a3f16d06cbede0383c8babefbc75"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2257a3f16d06cbede0383c8babefbc75">&#9670;&nbsp;</a></span>AddTexture()</h2>
 
@@ -277,6 +324,26 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="af224b413f30c86ec99d042d0f4df56ee" name="af224b413f30c86ec99d042d0f4df56ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af224b413f30c86ec99d042d0f4df56ee">&#9670;&nbsp;</a></span>getCommandQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_command_queue.html">CommandQueue</a> &amp; World::getCommandQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a reference to the command queue </p>
+<dl class="section return"><dt>Returns</dt><dd>A command queue reference named mCommandQueue</dd></dl>
 
 </div>
 </div>

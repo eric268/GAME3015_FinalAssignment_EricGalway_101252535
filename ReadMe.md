@@ -7,7 +7,13 @@
    The world scene updates and draws the scene graph. All game objects that need to be drawn and updated correctly must be attached as a child of the scene node or have a parent that is a child of the scene node.\n
    A player class has been added to allow for the handeling of player inputs. Currently some keyboard inputs have been implemented to allow for control of a plane. More inputs can be added in the Player.cpp file.\n 
    
-  @attention The controls are as follows: \nLeft Arrow : Move Left \nRight Arrow: Move Right \nUp Arrow: Move Up \n Down Arrow: Move Down \n P: Print aircraft position to output window
+  @note 
+The controls are as follows:\n @note **Left Arrow:** Move Left\n 
+	**Right Arrow:** Move Right\n 
+	**Up Arrow:** Move Up\n 
+	**Down Arrow:** Move Down\n
+	**P:** Print aircraft position to output window\n
+
   @warning Not correctly attaching game objects to the scene node will result in them not being correctly drawn and updated.
     
 

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A1_Eric_Galway: D3DCommon/d3dx12.h Source File</title>
+<title>Game3015_A2_Eric_Galway_101252535_W2022: D3DCommon/d3dx12.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A1_Eric_Galway<span id="projectnumber">&#160;A1</span>
+   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
    </div>
-   <div id="projectbrief">Game engine framework with DirectX12</div>
+   <div id="projectbrief">Showcasing input handeling in Directx12</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -371,7 +371,7 @@ $(document).ready(function(){initNavTree('d3dx12_8h_source.html',''); initResiza
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        UINT creationNodeMask = 1, </div>
 <div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        UINT nodeMask = 1 )</div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    {</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        Type = D3D12_HEAP_TYPE_CUSTOM;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <a class="code hl_enumeration" href="namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0">Type</a> = D3D12_HEAP_TYPE_CUSTOM;</div>
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        CPUPageProperty = cpuPageProperty;</div>
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        MemoryPoolPreference = memoryPoolPreference;</div>
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        CreationNodeMask = creationNodeMask;</div>
@@ -382,7 +382,7 @@ $(document).ready(function(){initNavTree('d3dx12_8h_source.html',''); initResiza
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        UINT creationNodeMask = 1, </div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        UINT nodeMask = 1 )</div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    {</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        Type = type;</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <a class="code hl_enumeration" href="namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0">Type</a> = type;</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_UNKNOWN;</div>
 <div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        MemoryPoolPreference = D3D12_MEMORY_POOL_UNKNOWN;</div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        CreationNodeMask = creationNodeMask;</div>
@@ -391,7 +391,7 @@ $(document).ready(function(){initNavTree('d3dx12_8h_source.html',''); initResiza
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    <span class="keyword">operator</span> <span class="keyword">const</span> D3D12_HEAP_PROPERTIES&amp;() <span class="keyword">const</span> { <span class="keywordflow">return</span> *<span class="keyword">this</span>; }</div>
 <div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keywordtype">bool</span> IsCPUAccessible()<span class="keyword"> const</span></div>
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        <span class="keywordflow">return</span> Type == D3D12_HEAP_TYPE_UPLOAD || Type == D3D12_HEAP_TYPE_READBACK || (Type == D3D12_HEAP_TYPE_CUSTOM &amp;&amp;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        <span class="keywordflow">return</span> <a class="code hl_enumeration" href="namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0">Type</a> == D3D12_HEAP_TYPE_UPLOAD || <a class="code hl_enumeration" href="namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0">Type</a> == D3D12_HEAP_TYPE_READBACK || (<a class="code hl_enumeration" href="namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0">Type</a> == D3D12_HEAP_TYPE_CUSTOM &amp;&amp;</div>
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>            (CPUPageProperty == D3D12_CPU_PAGE_PROPERTY_WRITE_COMBINE || CPUPageProperty == D3D12_CPU_PAGE_PROPERTY_WRITE_BACK));</div>
 <div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    }</div>
 <div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>};</div>
@@ -745,13 +745,13 @@ $(document).ready(function(){initNavTree('d3dx12_8h_source.html',''); initResiza
 <div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>    CD3DX12_TEXTURE_COPY_LOCATION(ID3D12Resource* pRes, D3D12_PLACED_SUBRESOURCE_FOOTPRINT <span class="keyword">const</span>&amp; Footprint)</div>
 <div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>    {</div>
 <div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>        pResource = pRes;</div>
-<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>        Type = D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT;</div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>        <a class="code hl_enumeration" href="namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0">Type</a> = D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT;</div>
 <div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>        PlacedFootprint = Footprint;</div>
 <div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>    }</div>
 <div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>    CD3DX12_TEXTURE_COPY_LOCATION(ID3D12Resource* pRes, UINT Sub)</div>
 <div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>    {</div>
 <div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>        pResource = pRes;</div>
-<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>        Type = D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;</div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>        <a class="code hl_enumeration" href="namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0">Type</a> = D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX;</div>
 <div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>        SubresourceIndex = Sub;</div>
 <div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>    }</div>
 <div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>}; </div>
@@ -1602,6 +1602,7 @@ $(document).ready(function(){initNavTree('d3dx12_8h_source.html',''); initResiza
 <div class="line"><a id="l01506" name="l01506"></a><span class="lineno"> 1506</span> </div>
 <div class="line"><a id="l01507" name="l01507"></a><span class="lineno"> 1507</span> </div>
 <div class="line"><a id="l01508" name="l01508"></a><span class="lineno"> 1508</span> </div>
+<div class="ttc" id="anamespace_category_html_a2ff936dbd42aeae91fdfb6f8456a8ab0"><div class="ttname"><a href="namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0">Category::Type</a></div><div class="ttdeci">Type</div><div class="ttdef"><b>Definition:</b> Category.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

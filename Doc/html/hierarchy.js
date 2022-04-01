@@ -1,6 +1,9 @@
 var hierarchy =
 [
+    [ "AircraftMover", "struct_aircraft_mover.html", null ],
     [ "Camera", "class_camera.html", null ],
+    [ "Command", "struct_command.html", null ],
+    [ "CommandQueue", "class_command_queue.html", null ],
     [ "D3DApp", "class_d3_d_app.html", [
       [ "Game", "class_game.html", null ]
     ] ],
@@ -20,6 +23,7 @@ var hierarchy =
     [ "MeshGeometry", "struct_mesh_geometry.html", null ],
     [ "ObjectConstants", "struct_object_constants.html", null ],
     [ "PassConstants", "struct_pass_constants.html", null ],
+    [ "Player", "class_player.html", null ],
     [ "RenderItem", "class_render_item.html", null ],
     [ "ResourceManager", "class_resource_manager.html", null ],
     [ "SceneNode", "class_scene_node.html", [
