@@ -40,6 +40,10 @@ public:
 	/// <param name="gt">delta time</param>
 	void Draw(const GameTimer& gt);
 
+	/// <summary>
+	/// Get a reference to the command queue
+	/// </summary>
+	/// <returns>A command queue reference named mCommandQueue</returns>
 	CommandQueue& getCommandQueue();
 
 	/// <summary>Creates all scene nodes
@@ -71,7 +75,14 @@ public:
 	/// <param name="view">Transform to set camera transform too</param>
 	void SetWorldView(XMFLOAT4X4& view);
 
+	/// <summary>
+	/// Ensures the main aircraft and children stay within screen bounds
+	/// </summary>
 	void adaptPlayerPosition();
+
+	/// <summary>
+	/// Ensures the magnitude of aircraft velocity always stays at max speed
+	/// </summary>
 	void adaptPlayerVelocity();
 private:
 	/// <summary>
@@ -83,11 +94,6 @@ private:
 		Air,
 		LayerCount
 	};
-
-	/// <summary>
-	/// Ensures the main aircraft and children stay within screen bounds
-	/// </summary>
-	void ManagePlayerPosition();
 
 	/// <summary>
 	/// Moves the main camera with scroll speed
@@ -115,6 +121,8 @@ private:
 	float screenHeightBuffer;
 	float screenToWorldRatio;
 	float changeInPlayerRotation;
+	float maxSpeed;
+	float mPhi;
 };
 
 

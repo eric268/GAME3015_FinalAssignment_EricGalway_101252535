@@ -13,7 +13,7 @@ Game::Game(HINSTANCE hInstance)
     : D3DApp(hInstance),
 	gameWorld(World(D3DApp::mClientWidth, D3DApp::mClientHeight)),
 	mTheta(1.5f * XM_PI),
-	mPhi(0.01f * XM_PI),
+	mPhi(0.25f * XM_PI),
 	mRadius(150.0f),
 	mView(MathHelper::Identity4x4()),
 	mProj(MathHelper::Identity4x4()),
@@ -22,6 +22,7 @@ Game::Game(HINSTANCE hInstance)
 	mCurrFrameResource(nullptr),
 	mRootSignature(nullptr),
 	mSrvDescriptorHeap(nullptr)
+
 {
 }
 
@@ -162,48 +163,44 @@ void Game::Draw(const GameTimer& gt)
 
 void Game::OnMouseDown(WPARAM btnState, int x, int y)
 {
-	if (btnState == 1)
-		OutputDebugString(L"Left Mouse Pressed\n");
-	if (btnState == 2)
-		OutputDebugString(L"Right Mouse Pressed\n");
-	if (btnState == 16)
-		OutputDebugString(L"Middle Mouse Pressed\n");
 	//Add some type of key for mouse input
 }
 
 void Game::OnMouseUp(WPARAM btnState, int x, int y)
 {
-	
 	//Add some type of key for mouse input
 }
 
 void Game::OnMouseMove(WPARAM btnState, int x, int y)
 {
-	//Pressed and held
-	std::wstring text = L"Left Mouse Pressed X: " + std::to_wstring(x) + L" Y: " + std::to_wstring(y) + L"\n";
-	if (btnState == 1)
-		OutputDebugString(text.c_str());
 	//Add some type of key for mouse input
 }
 
 void Game::OnKeyboardInput(WPARAM key)
 {
-	CommandQueue& commands = gameWorld.getCommandQueue();
-	mPlayer.handleEvent(key, commands);
-	mPlayer.handleRealtimeInput(commands);
+	//CommandQueue& commands = gameWorld.getCommandQueue();
+	//mPlayer.handleEvent(key, commands);
+	//mPlayer.handleRealtimeInput(commands);
 }
 
 void Game::OnKeyboardInput(const GameTimer& gt)
 {
 	CommandQueue& commands = gameWorld.getCommandQueue();
 
-	if (GetAsyncKeyState('1') & 0x8000)
+	//while (!keysPressed.empty())
+	//{
+	//	WPARAM param = keysPressed.front();
+	//	keysPressed.pop();
+	//	mPlayer.handleEvent(param, commands);
+	//	mPlayer.handleRealtimeInput(commands);
+	//}
+	for (int i = 0; i < 256; i++)
 	{
-		OutputDebugString(L"1 KeyPressed\n");
-	}
-	else if (GetAsyncKeyState('2') & 0x8000)
-	{
-		OutputDebugString(L"2 KeyPressed\n");
+		if (GetAsyncKeyState(i) & 0x8000)
+		{
+			mPlayer.handleEvent(i, commands);
+			mPlayer.handleRealtimeInput(commands);
+		}
 	}
 }
 

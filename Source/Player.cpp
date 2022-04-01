@@ -16,7 +16,6 @@ struct AircraftMover
 
 	void operator() (Aircraft& aircraft, GameTimer) const
 	{
-		OutputDebugString(L"Accelerating\n");
 		aircraft.accelerate(velocity);
 	}
 	XMFLOAT2 velocity;
@@ -30,10 +29,6 @@ Player::Player()
 	mKeyBinding[VK_DOWN] = MoveDown;
 
 	mKeyBinding['P'] = GetPosition;
-	mKeyBinding['W'] = MoveUp;
-	mKeyBinding['A'] = MoveLeft;
-	mKeyBinding['S'] = MoveDown;
-	mKeyBinding['D'] = MoveRight;
 
 	initalizeActions();
 
@@ -43,7 +38,7 @@ Player::Player()
 	}
 }
 
-void Player::handleEvent(UINT event, CommandQueue& commands)
+void Player::handleEvent(WPARAM event, CommandQueue& commands)
 {
 	auto found = mKeyBinding.find(event);
 	if (found != mKeyBinding.end() && !isRealtimeAction(found->second))
@@ -73,7 +68,7 @@ void Player::assignKey(Action action, int key)
 	mKeyBinding[key] = action;
 }
 
-int Player::getAssignedKey(Action action) const
+WPARAM Player::getAssignedKey(Action action) const
 {
 	for (auto pair : mKeyBinding)
 	{
@@ -87,7 +82,7 @@ int Player::getAssignedKey(Action action) const
 
 void Player::initalizeActions()
 {
-	const float playerSpeed = 200.0f;
+	const float playerSpeed = 50.0f;
 	mActionBinding[MoveLeft].action = derivedAction<Aircraft>(AircraftMover(-playerSpeed, 0.0f));
 	mActionBinding[MoveRight].action = derivedAction<Aircraft>(AircraftMover(playerSpeed, 0.0f));
 	mActionBinding[MoveUp].action = derivedAction<Aircraft>(AircraftMover(0.0f, playerSpeed));

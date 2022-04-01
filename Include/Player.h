@@ -11,7 +11,7 @@ public:
 	//typedef int Key;
 
 	Player();
-	void handleEvent(UINT event, CommandQueue& commands);
+	void handleEvent(WPARAM event, CommandQueue& commands);
 	void handleRealtimeInput(CommandQueue& commands);
 
 	enum Action
@@ -25,7 +25,7 @@ public:
 	};
 
 	void assignKey(Action action, int key);
-	int getAssignedKey(Action action) const;
+	WPARAM getAssignedKey(Action action) const;
 
 private:
 	void initalizeActions();

@@ -359,6 +359,7 @@ LRESULT D3DApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return 0;
 	case WM_KEYDOWN:
 		OnKeyboardInput(wParam);
+		return 0;
     case WM_KEYUP:
         if(wParam == VK_ESCAPE)
         {
@@ -600,6 +601,8 @@ void D3DApp::CalculateFrameStats()
 	static float timeElapsed = 0.0f;
 
 	frameCnt++;
+
+
 
 	// Compute averages over one second period.
 	if( (mTimer.TotalTime() - timeElapsed) >= 1.0f )

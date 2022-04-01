@@ -14,7 +14,9 @@ World::World() :
 	worldViewPosition(),
 	screenToWorldRatio(0),
 	cameraPosition(XMFLOAT3()),
-	changeInPlayerRotation(0.0f)
+	changeInPlayerRotation(0.0f),
+	maxSpeed(0.0f),
+	mPhi(0.0f)
 {
 	LoadTextures();
 }
@@ -23,31 +25,32 @@ World::World( float width, float height) :
 	//mWorldView(mWorldView),
 	screenWidth(width),
 	screenHeight(height),
-	screenWidthBuffer(25.0f),
-	screenHeightBuffer(25.0f),
+	screenWidthBuffer(-10.0f),
+	screenHeightBuffer(-20.0f),
 	mSpawnPosition(XMFLOAT3(0, -20, -25)),
 	mScrollSpeed(5.0f),
 	worldViewPosition(),
 	screenToWorldRatio(10),
 	cameraPosition(XMFLOAT3()),
-	changeInPlayerRotation(-30.0f)
+	changeInPlayerRotation(-30.0f),
+	maxSpeed(50.0f),
+	mPhi(0.25f * XM_PI)
 {
 		LoadTextures();
 }
 
 void World::Update(const GameTimer& gt)
 {
-
 	UpdateCamera(gt);
 	mPlayerAircraft->SetVelocity(0.0f, 0.0f, 0.0f);
-	
+
 	while (!mCommandQueue.isEmpty())
 		mSceneGraph.onCommand(mCommandQueue.pop(), gt);
-	
-	//ManagePlayerPosition();
+
 	adaptPlayerVelocity();
+
 	mSceneGraph.Update(gt);
-	//adaptPlayerPosition();
+	adaptPlayerPosition();
 }
 
 void World::Draw(const GameTimer& gt)
@@ -75,11 +78,12 @@ void World::SetWorldView(XMFLOAT4X4& view)
 
 void World::adaptPlayerPosition()
 {
+	float offset = (mWorldView._42 - mWorldView._43);
 	XMFLOAT3 position = mPlayerAircraft->GetPosition();
-	//position.x = max(position.x * screenToWorldRatio, screenWidth/2.0f - screenWidthBuffer);
-	//position.x = min(position.x * screenToWorldRatio, -screenWidth/2.0f + screenWidthBuffer);
-	position.y = min(position.y * screenToWorldRatio, screenHeight/2.0f - screenHeightBuffer);
-	position.y = max(position.y * screenToWorldRatio, -screenHeight/2.0f  + screenHeightBuffer);
+	position.x = min(position.x,  screenWidth  / (2.0f * screenToWorldRatio) - screenWidthBuffer);
+	position.x = max(position.x, -screenWidth  / (2.0f * screenToWorldRatio) + screenWidthBuffer);
+	position.z = max(position.z, offset - screenHeight / (2.0f * screenToWorldRatio));
+	position.z = min(position.z, -offset + screenHeight / (2.0f * screenToWorldRatio) - screenHeightBuffer);
 
 	mPlayerAircraft->SetPosition(position);
 }
@@ -88,37 +92,23 @@ void World::adaptPlayerVelocity()
 {
 	XMFLOAT3 velocity = mPlayerAircraft->GetVelocity();
 	
-	if (velocity.x != 0.0f && velocity.y != 0.0f)
+	//Clamping max speed
+	velocity.x = min(max(velocity.x, -maxSpeed), maxSpeed);
+	velocity.z = min(max(velocity.z, -maxSpeed), maxSpeed);
+	
+	if (velocity.x != 0.0f && velocity.z != 0.0f)
 	{
-		mPlayerAircraft->SetVelocity(velocity.x / std::sqrt(2.0f), velocity.y / std::sqrt(2.0f), 0.0f);
+		mPlayerAircraft->SetVelocity(velocity.x / std::sqrt(2.0f), 0.0f, velocity.z / std::sqrt(2.0f));
+		velocity = mPlayerAircraft->GetVelocity();
 	}
 
 	mPlayerAircraft->accelerate(0.0f, mScrollSpeed);
 }
 
-void World::ManagePlayerPosition()
-{
-	XMFLOAT3 position = mPlayerAircraft->GetPosition();
-	XMFLOAT3 velocity = mPlayerAircraft->GetVelocity();
-
-	if (position.x * screenToWorldRatio <= -screenWidth/2.0f + screenWidthBuffer || position.x * screenToWorldRatio >=  screenWidth/2.0f - screenWidthBuffer)
-	{
-		changeInPlayerRotation *= -1;
-		velocity.x = -velocity.x;
-		mPlayerAircraft->SetVelocity(velocity);
-		mPlayerAircraft->SetRotation(0, 0, changeInPlayerRotation);
-
-		//Calculates how far outside of the bounds the aircraft is and updates its position appropriately 
-		int sign = (velocity.x < 0) ? -1 : 1;
-		float offset = abs(position.x * screenToWorldRatio - (-screenWidth / 2.0f + screenWidthBuffer) * sign);
-		float positionOffset = offset * sign;
-		mPlayerAircraft->SetPosition(position.x + positionOffset, position.y, position.z);
-	}
-}
-
 void World::UpdateCamera(const GameTimer& gt)
 {
-	cameraPosition.y -= mScrollSpeed * gt.DeltaTime();
+	cameraPosition.y -= mScrollSpeed * sin(mPhi) *gt.DeltaTime();
+	cameraPosition.z -= mScrollSpeed * sin(mPhi) * gt.DeltaTime();
 	MathHelper::UpdatePosition(mWorldView, cameraPosition);
 }
 

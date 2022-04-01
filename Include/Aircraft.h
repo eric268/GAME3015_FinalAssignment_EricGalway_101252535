@@ -26,6 +26,10 @@ public:
 	/// <param name="type"> Type of aircraft to create</param>
 	Aircraft(Type type);
 
+	/// <summary>
+	/// A virtual function that returns the category of the aircraft
+	/// </summary>
+	/// <returns>An unsigned int representing the aircraft category</returns>
 	virtual unsigned int getCategory() const;
 	
 	/// Converts the aircraft type enumeration to the appropriate texture enumeration
