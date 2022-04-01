@@ -11,7 +11,7 @@ const int gNumFrameResources = 3;
 UINT Game::objCBIndex = 0;
 Game::Game(HINSTANCE hInstance)
     : D3DApp(hInstance),
-	gameWorld(World(D3DApp::mClientWidth, D3DApp::mClientHeight)),
+	gameWorld(World(this,D3DApp::mClientWidth, D3DApp::mClientHeight)),
 	mTheta(1.5f * XM_PI),
 	mPhi(0.25f * XM_PI),
 	mRadius(150.0f),
@@ -178,14 +178,14 @@ void Game::OnMouseMove(WPARAM btnState, int x, int y)
 
 void Game::OnKeyPressed(WPARAM key)
 {
-	CommandQueue& commands = gameWorld.getCommandQueue();
-	mPlayer.handleEvent(key, commands);
+	//CommandQueue& commands = gameWorld.getCommandQueue();
+	//mPlayer.handleEvent(key, commands);
 }
 
 void Game::OnKeyboardInput(const GameTimer& gt)
 {
-	CommandQueue& commands = gameWorld.getCommandQueue();
-	mPlayer.handleRealtimeInput(commands);
+	//CommandQueue& commands = gameWorld.getCommandQueue();
+	//mPlayer.handleRealtimeInput(commands);
 }
 
 void Game::UpdateObjectCBs(const GameTimer& gt)
@@ -517,6 +517,16 @@ void Game::BuildMaterials()
 void Game::AddRenderItem(RenderItem* renderItems)
 {
 	mAllRitems.push_back(std::make_unique<RenderItem>(std::move(*renderItems)));
+}
+
+bool Game::GetKeyIsPressed()
+{
+	return keyIsPressed;
+}
+
+WPARAM Game::GetKeyPressed()
+{
+	return keyPressed;
 }
 
 void Game::BuildRenderItems()

@@ -4,18 +4,17 @@
 #include "../D3DCommon/d3dApp.h"
 
 class CommandQueue;
-
+class World;
 /// <summary>
 /// Class used for handling player inputs and their corresponding actions/events
 /// </summary>
 class Player
 {
 public:
-
-	/// <summary>
+	Player() {}
 	/// Default Player Constructor. Populates key binding map with event keys
 	/// </summary>
-	Player();
+	Player(World* mWorld);
 	/// <summary>
 	/// Check if pressed key appears in key binding, trigger command if so if this has
 	/// not occurred during real time
@@ -57,6 +56,12 @@ public:
 	/// <returns></returns>
 	WPARAM getAssignedKey(Action action) const;
 
+	/// <summary>
+	/// Handles all player events
+	/// </summary>
+	/// <param name="commands">Takes a reference to the commandQueue </param>
+	void processEvents(CommandQueue& commands);
+
 private:
 	/// <summary>
 	/// Binds all action bindings to their respective derived actions
@@ -68,9 +73,11 @@ private:
 	/// </summary>
 	/// <param name="action">Action to check if bound</param>
 	/// <returns>Returns true if action is bound and false if not</returns>
-	static bool isRealtimeAction(Action action);
+	bool isRealtimeAction(Action action);
 
 private:
 	std::map<int, Action> mKeyBinding;
+	std::map<Action, bool> mKeyIsPressed;
 	std::map<Action, Command> mActionBinding;
+	World* mWorld;
 };

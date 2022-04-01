@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "CommandQueue.h"
 #include "Aircraft.h"
+#include "World.h"
+#include "Game.h"
 #include <map>
 #include <string>
 #include <algorithm>
@@ -24,14 +26,20 @@ struct AircraftMover
 	XMFLOAT2 velocity;
 };
 
-Player::Player()
+Player::Player(World* world)
+	: mWorld(world)
 {
 	mKeyBinding[VK_LEFT] = MoveLeft;
 	mKeyBinding[VK_RIGHT] = MoveRight;
 	mKeyBinding[VK_UP] = MoveUp;
 	mKeyBinding[VK_DOWN] = MoveDown;
-
 	mKeyBinding['P'] = GetPosition;
+
+	mKeyIsPressed[MoveLeft] = false;
+	mKeyIsPressed[MoveRight] = false;
+	mKeyIsPressed[MoveUp] = false;
+	mKeyIsPressed[MoveDown] = false;
+	mKeyIsPressed[GetPosition] = false;
 
 	initalizeActions();
 
@@ -46,6 +54,7 @@ void Player::handleEvent(WPARAM event, CommandQueue& commands)
 	auto found = mKeyBinding.find(event);
 	if (found != mKeyBinding.end() && !isRealtimeAction(found->second))
 	{
+		mKeyIsPressed[found->second] = true;
 		commands.push(mActionBinding[found->second]);
 	}
 }
@@ -54,8 +63,17 @@ void Player::handleRealtimeInput(CommandQueue& commands)
 {
 	for (auto pair : mKeyBinding)
 	{
-		if (GetAsyncKeyState(pair.first) && isRealtimeAction(pair.second))
-			commands.push(mActionBinding[pair.second]);
+		if (GetAsyncKeyState(pair.first))
+		{
+			if (isRealtimeAction(pair.second))
+			{
+				commands.push(mActionBinding[pair.second]);
+			}
+		}
+		else
+		{
+			mKeyIsPressed[pair.second] = false;
+		}
 	}
 }
 
@@ -83,6 +101,15 @@ WPARAM Player::getAssignedKey(Action action) const
 	return -1;
 }
 
+void Player::processEvents(CommandQueue& commands)
+{
+	if (mWorld->GetGame()->GetKeyIsPressed())
+	{
+		handleEvent(mWorld->GetGame()->GetKeyPressed(), commands);
+		handleRealtimeInput(commands);
+	}
+}
+
 void Player::initalizeActions()
 {
 	const float playerSpeed = 50.0f;
@@ -102,11 +129,15 @@ bool Player::isRealtimeAction(Action action)
 	switch (action)
 	{
 	case MoveLeft:
+		return mKeyIsPressed[MoveLeft];
 	case MoveRight:
+		return mKeyIsPressed[MoveRight];
 	case MoveDown:
+		return mKeyIsPressed[MoveDown];
 	case MoveUp:
-		return true;
-
+		return mKeyIsPressed[MoveUp];
+	case GetPosition:
+		return mKeyIsPressed[GetPosition];
 	default:
 		return false;
 	}

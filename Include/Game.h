@@ -7,7 +7,6 @@
 #include "../D3DCommon/FrameResource.h"
 #include "../D3DCommon/RenderItem.h"
 #include "World.h"
-#include "Player.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -30,6 +29,9 @@ public:
 
 	void BuildRenderItems();
 	void AddRenderItem(RenderItem* renderItems);
+
+	virtual bool GetKeyIsPressed() override;
+	virtual WPARAM GetKeyPressed() override;
 
 public:
 	static UINT objCBIndex;
@@ -75,7 +77,7 @@ private:
 
 private:
 	World gameWorld;
-	Player mPlayer;
+	//Player mPlayer;
 	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
 	FrameResource* mCurrFrameResource;
 	int mCurrFrameResourceIndex = 0;
@@ -102,5 +104,4 @@ private:
 	XMVECTOR target;
 	XMMATRIX view;
 
-	std::queue<WPARAM> keysPressed;
 };

@@ -9,7 +9,6 @@
 
 #include "d3dUtil.h"
 #include "GameTimer.h"
-#include <queue>
 // Link necessary d3d12 libraries.
 #pragma comment(lib,"d3dcompiler.lib")
 #pragma comment(lib, "D3D12.lib")
@@ -25,9 +24,8 @@ protected:
     virtual ~D3DApp();
 
 public:
-
     static D3DApp* GetApp();
-    
+
 	HINSTANCE AppInst()const;
 	HWND      MainWnd()const;
 	float     AspectRatio()const;
@@ -39,6 +37,9 @@ public:
  
     virtual bool Initialize();
     virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+    virtual bool GetKeyIsPressed();
+    virtual WPARAM GetKeyPressed();
 
 protected:
     virtual void CreateRtvAndDsvDescriptorHeaps();
@@ -123,5 +124,7 @@ protected:
     DXGI_FORMAT mDepthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 	int mClientWidth = 800;
 	int mClientHeight = 600;
+    bool keyIsPressed = false;
+    WPARAM keyPressed;
 };
 

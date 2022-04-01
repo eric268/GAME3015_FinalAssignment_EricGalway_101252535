@@ -2,6 +2,7 @@
 #include <string.h>
 #include "ResourceManager.h"
 #include "SpriteNode.h"
+#include "Game.h"
 
 World::World() : 
 	screenWidth(0),
@@ -21,8 +22,9 @@ World::World() :
 	LoadTextures();
 }
 
-World::World( float width, float height) :
-	//mWorldView(mWorldView),
+World::World(Game* gameWorld, float width, float height) :
+	mGame(gameWorld),
+	player(Player(this)),
 	screenWidth(width),
 	screenHeight(height),
 	screenWidthBuffer(-10.0f),
@@ -42,11 +44,12 @@ World::World( float width, float height) :
 void World::Update(const GameTimer& gt)
 {
 	UpdateCamera(gt);
-
 	mPlayerAircraft->SetVelocity(0.0f, 0.0f, 0.0f);
+	player.processEvents(mCommandQueue);
 
 	while (!mCommandQueue.isEmpty())
 		mSceneGraph.onCommand(mCommandQueue.pop(), gt);
+	
 	adaptPlayerVelocity();
 	mSceneGraph.Update(gt);
 	adaptPlayerPosition();
@@ -91,10 +94,6 @@ void World::adaptPlayerVelocity()
 {
 	XMFLOAT3 velocity = mPlayerAircraft->GetVelocity();
 
-	//Clamping max speed
-	velocity.x = min(max(velocity.x, -maxSpeed), maxSpeed);
-	velocity.z = min(max(velocity.z, -maxSpeed), maxSpeed);
-	
 	if (velocity.x != 0.0f && velocity.z != 0.0f)
 	{
 		mPlayerAircraft->SetVelocity(velocity.x / std::sqrt(2.0f), 0.0f, velocity.z / std::sqrt(2.0f));
@@ -103,6 +102,11 @@ void World::adaptPlayerVelocity()
 
 	mPlayerAircraft->accelerate(0.0f, mScrollSpeed);
 	mPlayerAircraft->SetRotation(mPlayerAircraft->GetVelocity().z / 2.0f, 0, -mPlayerAircraft->GetVelocity().x / 2.0f);
+}
+
+Game* World::GetGame()
+{
+	return mGame;
 }
 
 void World::UpdateCamera(const GameTimer& gt)

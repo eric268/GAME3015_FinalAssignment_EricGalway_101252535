@@ -5,10 +5,13 @@
 #include <array>
 #include "CommandQueue.h"
 #include "Command.h"
+#include "Player.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
 using namespace DirectX::PackedVector;
+
+class Game;
 
 /// <summary> Class that creates game world
 /// 
@@ -21,12 +24,14 @@ public:
 	/// </summary>
 	World();
 
+	Game* mGame;
+
 	/// <summary> Overloaded Constructor
 	/// 
 	/// Contains the width and height of the window</summary>
 	/// <param name="width">Window width</param>
 	/// <param name="height">Window height</param>
-	World( float width, float height);
+	World(Game* mGame, float width, float height);
 
 	/// <summary>Function that updates main game objects
 	/// 
@@ -84,6 +89,12 @@ public:
 	/// Ensures the magnitude of aircraft velocity always stays at max speed
 	/// </summary>
 	void adaptPlayerVelocity();
+
+	/// <summary>
+	/// Returns a reference to the game world
+	/// </summary>
+	/// <returns>Returns refernece of type Game</returns>
+	Game* GetGame();
 private:
 	/// <summary>
 	/// Enumeration for identifying node layers
@@ -101,9 +112,10 @@ private:
 	/// <param name="gt">Delta time</param>
 	void UpdateCamera(const GameTimer& gt);
 
+
 private:
 	CommandQueue mCommandQueue;
-
+	Player player;
 	SceneNode mSceneGraph;
 	std::array<SceneNode*, LayerCount>	mSceneLayers;
 	Aircraft* mPlayerAircraft;
