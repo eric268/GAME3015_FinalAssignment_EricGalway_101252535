@@ -20,6 +20,11 @@ std::map<Textures::ID, std::wstring>& ResourceManager::GetTextureHolder()
 	return mTextureHolder;
 }
 
+std::map<Fonts::ID, std::wstring>& ResourceManager::GetFontHolder()
+{
+	return mFontHolder;
+}
+
 std::unordered_map<Textures::ID, std::unique_ptr<Material>>& ResourceManager::GetMaterials()
 {
 	return mMaterials;

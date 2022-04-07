@@ -26,6 +26,13 @@ public:
 	typedef std::shared_ptr<SceneNode> Ptr;
 	Game* mGame;
 
+	enum Layer
+	{
+		Background,
+		Air,
+		LayerCount
+	};
+
 	SceneNode();
 	/// <summary>Default constructor for Scene Node
 	SceneNode(Game* game);

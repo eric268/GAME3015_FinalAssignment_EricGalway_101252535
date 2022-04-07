@@ -160,6 +160,10 @@
     <ClCompile Include="Source\ResourceManager.cpp" />
     <ClCompile Include="Source\SceneNode.cpp" />
     <ClCompile Include="Source\SpriteNode.cpp" />
+    <ClCompile Include="Source\State.cpp" />
+    <ClCompile Include="Source\StateStack.cpp" />
+    <ClCompile Include="Source\TitleState.cpp" />
+    <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +189,11 @@
     <ClInclude Include="Include\ResourceManager.h" />
     <ClInclude Include="Include\SceneNode.h" />
     <ClInclude Include="Include\SpriteNode.h" />
+    <ClInclude Include="Include\State.h" />
+    <ClInclude Include="Include\StateIdentifiers.h" />
+    <ClInclude Include="Include\StateStack.h" />
+    <ClInclude Include="Include\TitleState.h" />
+    <ClInclude Include="Include\Utility.h" />
     <ClInclude Include="Include\World.h" />
   </ItemGroup>
   <ItemGroup>

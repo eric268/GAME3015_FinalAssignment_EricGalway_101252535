@@ -63,9 +63,10 @@ void World::Draw(const GameTimer& gt)
 
 void World::LoadTextures()
 {
-	AddTexture(Textures::ID::Desert, L"Media/Desert.dds");
-	AddTexture(Textures::ID::Eagle, L"Media/Eagle3.dds");
-	AddTexture(Textures::ID::Raptor, L"Media/Raptor.dds");
+	//AddTexture(Textures::ID::Desert, L"Media/Desert.dds");
+	//AddTexture(Textures::ID::Eagle, L"Media/Eagle3.dds");
+	//AddTexture(Textures::ID::Raptor, L"Media/Raptor.dds");
+	//AddTexture(Textures::ID::TitleScreen, L"Media/TitleScreen.dds");
 }
 
 XMFLOAT4X4 World::GetWorldView()
@@ -82,9 +83,9 @@ void World::SetWorldView(XMFLOAT4X4& view)
 void World::adaptPlayerPosition()
 {
 	XMFLOAT3 position = mPlayerAircraft->GetPosition();
-	
-	position.x = min(position.x,  screenWidth  / (2.0f * screenToWorldRatio) - screenWidthBuffer);
-	position.x = max(position.x, -screenWidth  / (2.0f * screenToWorldRatio) + screenWidthBuffer);
+
+	position.x = min(position.x, mGame->GetClientWidth() / (2.0f * screenToWorldRatio) - screenWidthBuffer);
+	position.x = max(position.x, -mGame->GetClientWidth() / (2.0f * screenToWorldRatio) + screenWidthBuffer);
 	position.z = max(position.z, (-cameraPosition.y *1.4f)  - screenHeight / (2.f * screenToWorldRatio));
 	position.z = min(position.z, -(cameraPosition.y * 1.4f) + screenHeight / (2.f * screenToWorldRatio) - screenHeightBuffer);
 
@@ -120,7 +121,7 @@ void World::UpdateCamera(const GameTimer& gt)
 void World::BuildScene()
 {
 	// Initialize the different layers
-	for (std::size_t i = 0; i < LayerCount; ++i)
+	for (std::size_t i = 0; i < SceneNode::LayerCount; ++i)
 	{
 		SceneNode::Ptr layer(new SceneNode());
 		mSceneLayers[i] = layer.get();
@@ -129,14 +130,14 @@ void World::BuildScene()
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, 3, 1500, Textures::ID::Desert));
 	backgroundSprite->SetScale(XMFLOAT3(10.0f, 1.0f, 2000.0f));
 	backgroundSprite->SetPosition(0, -100, 0);
-	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
+	mSceneLayers[SceneNode::Background]->AttachChild(std::move(backgroundSprite));
 
 	std::unique_ptr<Aircraft> leader(new Aircraft(mGame, Aircraft::Eagle));
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->SetPosition(0,0,0);
 	mPlayerAircraft->SetScale(0.1f, 0.1f, 0.1f);
 	mPlayerAircraft->SetVelocity(XMFLOAT3(0.0f, 0, mScrollSpeed));
-	mSceneLayers[Air]->AttachChild(std::move(leader));
+	mSceneLayers[SceneNode::Air]->AttachChild(std::move(leader));
 
 	std::unique_ptr<Aircraft> leftEscort(new Aircraft(mGame, Aircraft::Raptor));
 	leftEscort->SetPosition(-25.f, 0.0f, -25);

@@ -99,12 +99,7 @@ private:
 	/// <summary>
 	/// Enumeration for identifying node layers
 	/// </summary>
-	enum Layer
-	{
-		Background,
-		Air,
-		LayerCount
-	};
+
 
 	/// <summary>
 	/// Moves the main camera with scroll speed
@@ -117,7 +112,7 @@ private:
 	CommandQueue mCommandQueue;
 	Player player;
 	SceneNode mSceneGraph;
-	std::array<SceneNode*, LayerCount>	mSceneLayers;
+	std::array<SceneNode*,SceneNode::LayerCount>	mSceneLayers;
 	Aircraft* mPlayerAircraft;
 	XMFLOAT4 mWorldBounds;
 	XMFLOAT4X4 mWorldView;

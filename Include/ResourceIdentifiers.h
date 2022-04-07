@@ -1,11 +1,13 @@
 #pragma once
-
+#include <map>
+#include <string>
 /// Namespace encapsulating Texture class
 /// 
 /// This is used to reference the appropriate Texture ID
 namespace resourceIdentifier
 {
 	class Texture;
+	class Font;
 }
 
 namespace Textures
@@ -16,7 +18,16 @@ namespace Textures
 		Eagle,
 		Raptor,
 		Desert,
+		TitleScreen,
 		NUM_TEXTURE_IDS
+	};
+}
+
+namespace Fonts
+{
+	enum ID
+	{
+		Main,
 	};
 }
 
@@ -29,3 +40,7 @@ enum class RenderLayer : int
 	Transparent,
 	Count
 };
+
+class ResourceManager;
+typedef std::map<Textures::ID, std::wstring> TextureHolder;
+typedef std::map<Fonts::ID, std::wstring> FontHolder;

@@ -37,6 +37,12 @@ public:
 
 	std::vector<std::unique_ptr<RenderItem>>& GetRenderItems();
 
+	float GetClientWidth();
+	float GetClientHeight();
+
+	void AddTexture(Textures::ID id, std::wstring fileName);
+	void LoadTexture();
+
 public:
 	static UINT objCBIndex;
 	std::unordered_map<std::string, std::unique_ptr<Material>> mMaterials;

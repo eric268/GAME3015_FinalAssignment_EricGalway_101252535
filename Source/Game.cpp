@@ -36,11 +36,11 @@ bool Game::Initialize()
 {
 	if (!D3DApp::Initialize())
 		return false;
-
 	// Reset the command list to prep for initialization commands.
 	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), nullptr));
 
 	mCbvSrvDescriptorSize = md3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	
 
 	LoadTextures();
 	BuildRootSignature();
@@ -74,8 +74,8 @@ void Game::OnResize()
 
 void Game::Update(const GameTimer& gt)
 {
-
-
+	//std::wstring word = std::to_wstring(GetClientWidth());
+	//OutputDebugString(word.c_str());
 
 	//std::vector<std::unique_ptr<RenderItem>> t2 = mAllRitems;
 	OnKeyboardInput(gt);
@@ -275,6 +275,11 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 
 void Game::LoadTextures()
 {
+	AddTexture(Textures::ID::Desert, L"Media/Desert.dds");
+	AddTexture(Textures::ID::Eagle, L"Media/Eagle3.dds");
+	AddTexture(Textures::ID::Raptor, L"Media/Raptor.dds");
+	AddTexture(Textures::ID::TitleScreen, L"Media/TitleScreen.dds");
+
 	for (int i = 0; i < Textures::NUM_TEXTURE_IDS; i++)
 	{
 		auto temp = std::make_unique<Texture>();
@@ -535,6 +540,25 @@ Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Game::GetCMDList()
 std::vector<std::unique_ptr<RenderItem>>& Game::GetRenderItems()
 {
 	return mAllRitems;
+}
+
+float Game::GetClientWidth()
+{
+	return mClientWidth;
+}
+
+float Game::GetClientHeight()
+{
+	return mClientHeight;
+}
+
+void Game::AddTexture(Textures::ID id, std::wstring fileName)
+{
+	ResourceManager::GetInstance()->GetTextureHolder().insert(std::pair<Textures::ID, std::wstring>(id, fileName));
+}
+
+void Game::LoadTexture()
+{
 }
 
 void Game::BuildRenderItems()
