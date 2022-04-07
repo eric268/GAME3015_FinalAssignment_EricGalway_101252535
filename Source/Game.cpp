@@ -74,7 +74,10 @@ void Game::OnResize()
 
 void Game::Update(const GameTimer& gt)
 {
-	gameWorld.Update(gt);
+
+
+
+	//std::vector<std::unique_ptr<RenderItem>> t2 = mAllRitems;
 	OnKeyboardInput(gt);
 
 	// Cycle through the circular frame resource array.
@@ -92,6 +95,7 @@ void Game::Update(const GameTimer& gt)
 	}
 
 	UpdateObjectCBs(gt);
+	gameWorld.Update(gt);
 	UpdateMaterialCBs(gt);
 	UpdateMainPassCB(gt);
 }

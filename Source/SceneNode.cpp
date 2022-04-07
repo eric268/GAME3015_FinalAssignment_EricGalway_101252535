@@ -86,9 +86,7 @@ void SceneNode::Draw(const GameTimer& gt)
 	{
 		renderItem->World = MathHelper::MultiplyXMFLOAT4x4(mParent->renderItem->World, renderItem->World);
 	}
-	renderItem->NumFramesDirty++;
 	
-
 	DrawCurrent(gt);
 	DrawChildren(gt);
 }

@@ -53,6 +53,5 @@ public:
 
 private:
 	XMFLOAT3 mVelocity;
-	int counter = 0;
 };
 

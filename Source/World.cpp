@@ -30,7 +30,7 @@ World::World(Game* gameWorld, float width, float height) :
 	screenWidthBuffer(-10.0f),
 	screenHeightBuffer(-75.0f),
 	mSpawnPosition(XMFLOAT3(0, -20, -25)),
-	mScrollSpeed(15.0f),
+	mScrollSpeed(5.0f),
 	worldViewPosition(),
 	screenToWorldRatio(10),
 	cameraPosition(XMFLOAT3()),
@@ -140,10 +140,12 @@ void World::BuildScene()
 
 	std::unique_ptr<Aircraft> leftEscort(new Aircraft(mGame, Aircraft::Raptor));
 	leftEscort->SetPosition(-25.f, 0.0f, -25);
+	leftEscort->SetScale(1, 1, 1);
 	mPlayerAircraft->AttachChild(std::move(leftEscort));
 
 	std::unique_ptr<Aircraft> rightEscort(new Aircraft(mGame, Aircraft::Raptor));
 	rightEscort->SetPosition(25.f, 0.0f, -25);
+	rightEscort->SetScale(1, 1, 1);
 	mPlayerAircraft->AttachChild(std::move(rightEscort));
 }
 

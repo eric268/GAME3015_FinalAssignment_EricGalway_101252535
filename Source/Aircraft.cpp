@@ -69,6 +69,8 @@ void Aircraft::DrawCurrent(const GameTimer& gt) const
 	// For each render item...
 	if (mAircraftRenderItem)
 	{
+		mAircraftRenderItem->NumFramesDirty++;
+
 		mGame->GetCMDList()->SetPipelineState(mGame->mPSOs["transparent"].Get());
 
 		mGame->GetCMDList()->IASetVertexBuffers(0, 1, &mAircraftRenderItem->Geo->VertexBufferView());
@@ -86,5 +88,9 @@ void Aircraft::DrawCurrent(const GameTimer& gt) const
 		mGame->GetCMDList()->SetGraphicsRootConstantBufferView(3, matCBAddress);
 
 		mGame->GetCMDList()->DrawIndexedInstanced(mAircraftRenderItem->IndexCount, 1, mAircraftRenderItem->StartIndexLocation, mAircraftRenderItem->BaseVertexLocation, 0);
+
+		std::vector<std::unique_ptr<RenderItem>>& test = mGame->GetRenderItems();
+
+		OutputDebugString(L"Test");
 	}
 }
