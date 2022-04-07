@@ -24,7 +24,7 @@ public:
 	/// This constructor initializes and aircraft based on type required. Acts almost like a default constructor initializing 
 	/// position, scale, render item all to default values
 	/// <param name="type"> Type of aircraft to create</param>
-	Aircraft(Type type);
+	Aircraft(Game* game, Type type);
 
 	/// <summary>
 	/// A virtual function that returns the category of the aircraft
@@ -47,5 +47,6 @@ public:
 
 private:
 	Type mType;
+	RenderItem* mAircraftRenderItem;
 };
 

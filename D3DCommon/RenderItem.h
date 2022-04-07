@@ -18,6 +18,10 @@ public:
 	void Draw(RenderItem* renderItem);
 	void UpdateTransform(XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale);
 
+	void UpdatePosition(XMFLOAT3 pos);
+	void UpdateRotation(XMFLOAT3 pos);
+	void UpdateScale(XMFLOAT3 pos);
+
 	UINT ObjCBIndex;
 	// Primitive topology.
 	D3D12_PRIMITIVE_TOPOLOGY PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;

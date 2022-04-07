@@ -33,10 +33,18 @@ public:
 	virtual bool GetKeyIsPressed() override;
 	virtual WPARAM GetKeyPressed() override;
 
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetCMDList();
+
+	std::vector<std::unique_ptr<RenderItem>>& GetRenderItems();
+
 public:
 	static UINT objCBIndex;
 	std::unordered_map<std::string, std::unique_ptr<Material>> mMaterials;
 	std::unordered_map<std::string, std::unique_ptr<MeshGeometry>> mGeometries;
+	FrameResource* mCurrFrameResource;
+	UINT mCbvSrvDescriptorSize = 0;
+	ComPtr<ID3D12DescriptorHeap> mSrvDescriptorHeap;
+	std::unordered_map<std::string, ComPtr<ID3D12PipelineState>> mPSOs;
 
 private:
 	virtual void OnResize()override;
@@ -50,6 +58,7 @@ private:
 
 	void OnKeyboardInput(const GameTimer& gt);
 	void UpdateObjectCBs(const GameTimer& gt);
+	void UpdateObjectVBs(const GameTimer& gt);
 	void UpdateMaterialCBs(const GameTimer& gt);
 	void UpdateMainPassCB(const GameTimer& gt);
 	
@@ -79,15 +88,14 @@ private:
 	World gameWorld;
 	//Player mPlayer;
 	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
-	FrameResource* mCurrFrameResource;
+
 	int mCurrFrameResourceIndex = 0;
-	UINT mCbvSrvDescriptorSize = 0;
+
 	ComPtr<ID3D12RootSignature> mRootSignature;
 
-	ComPtr<ID3D12DescriptorHeap> mSrvDescriptorHeap;
 	std::unordered_map<std::string, std::unique_ptr<Texture>> mTextures;
 	std::unordered_map<std::string, ComPtr<ID3DBlob>> mShaders;
-	std::unordered_map<std::string, ComPtr<ID3D12PipelineState>> mPSOs;
+
 	std::vector<D3D12_INPUT_ELEMENT_DESC> mInputLayout;
 
 	PassConstants mMainPassCB;

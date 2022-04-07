@@ -1,6 +1,8 @@
 #pragma once
 #include "SceneNode.h"	
 
+class Game;
+
 /// <summary>Class that creates sprite nodes
 /// 
 /// This class is designed to create static nodes in the scene</summary>
@@ -8,7 +10,7 @@ class SpriteNode : public SceneNode
 {
 public:
 	/// <summary>Default constructor for Sprite Node
-	SpriteNode();
+	SpriteNode(Game* game);
 
 	/// <summary> Overloaded constructor for Scene Node
 	/// 
@@ -16,7 +18,7 @@ public:
 	/// <param name="uScaling">Texture U scaling value</param>
 	/// <param name="vScaling">Texture V scaling value</param>
 	/// <param name="id">Texture ID value</param>
-	SpriteNode(float uScaling, float vScaling, Textures::ID id);
+	SpriteNode(Game* game, float uScaling, float vScaling, Textures::ID id);
 
 private:
 	/// <summary>Function that overrides scene node draw current function
@@ -24,5 +26,7 @@ private:
 	/// This adds the current sprite node to the container which draws nodes in the game.cpp</summary>
 	/// <param name="gt"></param>
 	virtual void DrawCurrent(const GameTimer& gt) const;
+	Game* mGame;
+	RenderItem* mSpriteNodeRenderItem;
 };
 

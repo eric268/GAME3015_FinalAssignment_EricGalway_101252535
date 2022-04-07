@@ -9,6 +9,7 @@
 #include "Category.h"
 
 struct Command;
+class Game;
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -23,9 +24,11 @@ class SceneNode
 {
 public:
 	typedef std::shared_ptr<SceneNode> Ptr;
+	Game* mGame;
 
-	/// <summary>Default constructor for Scene Node
 	SceneNode();
+	/// <summary>Default constructor for Scene Node
+	SceneNode(Game* game);
 
 	/// <summary>Attaches scene nodes as children
 	/// 
@@ -173,9 +176,12 @@ private:
 	/// <param name="gt">Delta time</param>
 	void DrawChildren(const GameTimer& gt) const;
 
+public:
+		RenderItem* renderItem;
+
 private:
 	std::vector<Ptr> mChildren;
-	RenderItem* renderItem;
+
 	SceneNode* mParent;
 
 	XMFLOAT3 nodePosition;

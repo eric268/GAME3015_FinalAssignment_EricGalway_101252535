@@ -135,6 +135,8 @@ private:
 	float changeInPlayerRotation;
 	float maxSpeed;
 	float mPhi;
+
+	int counter = 0;
 };
 
 

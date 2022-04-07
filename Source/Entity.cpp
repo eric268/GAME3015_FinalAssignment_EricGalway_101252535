@@ -1,5 +1,9 @@
 #include "Entity.h"
 
+Entity::Entity(Game* game) : SceneNode(game)
+{
+}
+
 void Entity::SetVelocity(XMFLOAT3 vel)
 {
 	mVelocity = vel;

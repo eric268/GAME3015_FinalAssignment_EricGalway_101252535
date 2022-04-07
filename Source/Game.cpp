@@ -131,11 +131,9 @@ void Game::Draw(const GameTimer& gt)
 	auto passCB = mCurrFrameResource->PassCB->Resource();
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
-	//Where game world is drawn
 	gameWorld.Draw(gt);
 
-	mCommandList->SetPipelineState(mPSOs["transparent"].Get());
-	DrawRenderItems(mCommandList.Get(), mRitemLayer[(int)RenderLayer::Transparent]);
+	//DrawRenderItems(mCommandList.Get(), mRitemLayer[(int)RenderLayer::Transparent]);
 
 	// Indicate a state transition on the resource usage.
 	mCommandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
@@ -211,6 +209,7 @@ void Game::UpdateObjectCBs(const GameTimer& gt)
 		}
 	}
 }
+
 
 void Game::UpdateMaterialCBs(const GameTimer& gt)
 {
@@ -514,11 +513,6 @@ void Game::BuildMaterials()
 	}
 }
 
-void Game::AddRenderItem(RenderItem* renderItems)
-{
-	mAllRitems.push_back(std::make_unique<RenderItem>(std::move(*renderItems)));
-}
-
 bool Game::GetKeyIsPressed()
 {
 	return keyIsPressed;
@@ -529,43 +523,27 @@ WPARAM Game::GetKeyPressed()
 	return keyPressed;
 }
 
+Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> Game::GetCMDList()
+{
+	return mCommandList;
+}
+
+std::vector<std::unique_ptr<RenderItem>>& Game::GetRenderItems()
+{
+	return mAllRitems;
+}
+
 void Game::BuildRenderItems()
 {
 	gameWorld.BuildScene();
+
 	for (auto& e : mAllRitems)
-		mRitemLayer[(int)RenderLayer::Transparent].push_back(e.get());
+		mOpaqueRitems.push_back(e.get());
 }
 
-//The DrawRenderItems method is invoked in the main Draw call:
-void Game::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems)
+void Game::AddRenderItem(RenderItem* renderItems)
 {
-	UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
-	UINT matCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(MaterialConstants));
-
-	auto objectCB = mCurrFrameResource->ObjectCB->Resource();
-	auto matCB = mCurrFrameResource->MaterialCB->Resource();
-
-	// For each render item...
-	for (size_t i = 0; i < ritems.size(); ++i)
-	{
-		auto ri = ritems[i];
-
-		cmdList->IASetVertexBuffers(0, 1, &ri->Geo->VertexBufferView());
-		cmdList->IASetIndexBuffer(&ri->Geo->IndexBufferView());
-		cmdList->IASetPrimitiveTopology(ri->PrimitiveType);
-
-		CD3DX12_GPU_DESCRIPTOR_HANDLE tex(mSrvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
-		tex.Offset(ri->material->DiffuseSrvHeapIndex, mCbvSrvDescriptorSize);
-
-		D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = objectCB->GetGPUVirtualAddress() + ri->ObjCBIndex * objCBByteSize;
-		D3D12_GPU_VIRTUAL_ADDRESS matCBAddress = matCB->GetGPUVirtualAddress() + ri->material->MatCBIndex * matCBByteSize;
-
-		cmdList->SetGraphicsRootDescriptorTable(0, tex);
-		cmdList->SetGraphicsRootConstantBufferView(1, objCBAddress);
-		cmdList->SetGraphicsRootConstantBufferView(3, matCBAddress);
-
-		cmdList->DrawIndexedInstanced(ri->IndexCount, 1, ri->StartIndexLocation, ri->BaseVertexLocation, 0);
-	}
+	mAllRitems.push_back(std::make_unique<RenderItem>(std::move(*renderItems)));
 }
 
 void Game::InitalizeCamera()

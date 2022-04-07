@@ -4,6 +4,18 @@
 #include <cassert>
 
 SceneNode::SceneNode() :
+	mGame(nullptr),
+	mChildren(),
+	mParent(nullptr),
+	nodePosition(XMFLOAT3(0, 0, 0)),
+	nodeRotation(XMFLOAT3(0, 0, 0)),
+	nodeScale(XMFLOAT3(1, 1, 1))
+{
+	renderItem = new RenderItem();
+}
+
+SceneNode::SceneNode(Game* game) :
+	mGame(game),
 	mChildren(),
 	mParent(nullptr),
 	nodePosition(XMFLOAT3(0, 0, 0)),
@@ -57,6 +69,7 @@ DirectX::XMFLOAT4X4 SceneNode::GetWorldTransform()
 
 void SceneNode::UpdateCurrent(const GameTimer& gt)
 {
+
 }
 
 void SceneNode::UpdateChildren(const GameTimer& gt)
@@ -73,6 +86,9 @@ void SceneNode::Draw(const GameTimer& gt)
 	{
 		renderItem->World = MathHelper::MultiplyXMFLOAT4x4(mParent->renderItem->World, renderItem->World);
 	}
+	renderItem->NumFramesDirty++;
+	
+
 	DrawCurrent(gt);
 	DrawChildren(gt);
 }
@@ -111,6 +127,7 @@ void SceneNode::SetScale(XMFLOAT3 scale)
 
 void SceneNode::SetPosition(float x, float y, float z)
 {
+
 	XMFLOAT3 pos = XMFLOAT3(x, y, z);
 	nodePosition = pos;
 	renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);

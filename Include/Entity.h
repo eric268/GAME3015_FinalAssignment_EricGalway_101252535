@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneNode.h"
 
+
 /// Parent class for all game objects with velocity
 /// 
 /// This is the parent class that all objects with movement components will inherit from.
@@ -8,6 +9,7 @@
 class Entity : public SceneNode
 {
 public:
+	Entity(Game* game);
 	/// Sets the velocity to a XMFLOAT3 value
 	/// 
 	/// <param name="vel">Value that velocity is to be set to</param>
@@ -51,5 +53,6 @@ public:
 
 private:
 	XMFLOAT3 mVelocity;
+	int counter = 0;
 };
 
