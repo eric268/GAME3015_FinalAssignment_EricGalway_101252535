@@ -360,6 +360,7 @@ LRESULT D3DApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_KEYDOWN:
 		keyIsPressed = true;
 		keyPressed = wParam;
+		OnKeyPressed(wParam);
 		return 0;
 	case WM_KEYUP:
 		keyIsPressed = false;

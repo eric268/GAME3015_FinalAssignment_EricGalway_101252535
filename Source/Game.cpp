@@ -5,13 +5,13 @@
 
 #include "Game.h"
 #include "ResourceManager.h"
-
+#include "TitleState.h"
 
 const int gNumFrameResources = 3;
 UINT Game::objCBIndex = 0;
 Game::Game(HINSTANCE hInstance)
     : D3DApp(hInstance),
-	gameWorld(World(this,D3DApp::mClientWidth, D3DApp::mClientHeight)),
+	//gameWorld(World(this,D3DApp::mClientWidth, D3DApp::mClientHeight)),
 	mTheta(1.5f * XM_PI),
 	mPhi(0.25f * XM_PI),
 	mRadius(150.0f),
@@ -21,9 +21,14 @@ Game::Game(HINSTANCE hInstance)
 	mPassCbvOffset(0),
 	mCurrFrameResource(nullptr),
 	mRootSignature(nullptr),
-	mSrvDescriptorHeap(nullptr)
-
+	mSrvDescriptorHeap(nullptr),
+	mPlayer(Player()),
+	mStateStack(this, State::Context(ResourceManager::GetInstance()->GetTextureHolder(), mPlayer))
 {
+	RegisterStates();
+	mStateStack.pushState(States::Title);
+	mStateStack.applyPendingChanges();
+	
 }
 
 Game::~Game()
@@ -74,10 +79,7 @@ void Game::OnResize()
 
 void Game::Update(const GameTimer& gt)
 {
-	//std::wstring word = std::to_wstring(GetClientWidth());
-	//OutputDebugString(word.c_str());
 
-	//std::vector<std::unique_ptr<RenderItem>> t2 = mAllRitems;
 	OnKeyboardInput(gt);
 
 	// Cycle through the circular frame resource array.
@@ -93,9 +95,8 @@ void Game::Update(const GameTimer& gt)
 		WaitForSingleObject(eventHandle, INFINITE);
 		CloseHandle(eventHandle);
 	}
-
 	UpdateObjectCBs(gt);
-	gameWorld.Update(gt);
+	mStateStack.update(gt);
 	UpdateMaterialCBs(gt);
 	UpdateMainPassCB(gt);
 }
@@ -135,9 +136,8 @@ void Game::Draw(const GameTimer& gt)
 	auto passCB = mCurrFrameResource->PassCB->Resource();
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
-	gameWorld.Draw(gt);
-
-	//DrawRenderItems(mCommandList.Get(), mRitemLayer[(int)RenderLayer::Transparent]);
+	mStateStack.draw(gt);
+	//gameWorld.Draw(gt);
 
 	// Indicate a state transition on the resource usage.
 	mCommandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
@@ -186,8 +186,10 @@ void Game::OnKeyPressed(WPARAM key)
 
 void Game::OnKeyboardInput(const GameTimer& gt)
 {
+	mStateStack.handleEvent('1');
 	//CommandQueue& commands = gameWorld.getCommandQueue();
 	//mPlayer.handleRealtimeInput(commands);
+
 }
 
 void Game::UpdateObjectCBs(const GameTimer& gt)
@@ -245,7 +247,7 @@ void Game::UpdateMaterialCBs(const GameTimer& gt)
 
 void Game::UpdateMainPassCB(const GameTimer& gt)
 {
-	XMMATRIX view = XMLoadFloat4x4(&gameWorld.GetWorldView());
+	XMMATRIX view = XMLoadFloat4x4(&mView);
 	XMMATRIX proj = XMLoadFloat4x4(&mProj);
 
 	XMMATRIX viewProj = XMMatrixMultiply(view, proj);
@@ -563,7 +565,7 @@ void Game::LoadTexture()
 
 void Game::BuildRenderItems()
 {
-	gameWorld.BuildScene();
+	mStateStack.BuildScene();
 
 	for (auto& e : mAllRitems)
 		mOpaqueRitems.push_back(e.get());
@@ -581,7 +583,12 @@ void Game::InitalizeCamera()
 	mEyePos.y = mRadius * cosf(mPhi);
 	view = XMMatrixLookAtLH(XMVectorSet(mEyePos.x, mEyePos.y, mEyePos.z, 1.0f), target, XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f));
 	XMStoreFloat4x4(&mView, view);
-	gameWorld.SetWorldView(mView);
+	//gameWorld.SetWorldView(mView);
+}
+
+void Game::RegisterStates()
+{
+	mStateStack.registerState<TitleState>(States::Title);
 }
 
 std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()

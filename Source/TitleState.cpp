@@ -5,41 +5,20 @@
 #include "ResourceHolder.h"
 #include "SceneNode.h"
 
-//#include <SFML/Graphics/RenderWindow.hpp>
-
-
 TitleState::TitleState(Game* game, StateStack& stack, Context context)
 	: mGame(game),
-	State(stack, context)
-	//, mText()
-	, mShowText(true)
-	, mTextEffectTime(0.0f)
+	  State(game, stack, context),
+	 mBackgroundSprite(nullptr),
+	 mSceneGraph(new SceneNode(game)),
+	 mShowText(true),
+	 mTextEffectTime(0.0f)
 {
-
-	//// Initialize the different layers
-	//for (std::size_t i = 0; i < SceneNode::LayerCount; ++i)
-	//{
-	//	SceneNode::Ptr layer(new SceneNode());
-	//	mSceneLayers[i] = layer.get();
-	//	mSceneGraph.AttachChild(std::move(layer));
-	//}
-
-	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, 3, 1500, Textures::ID::TitleScreen));
-	backgroundSprite->SetScale(XMFLOAT3(10.0f, 1.0f, 2000.0f));
-	backgroundSprite->SetPosition(0, -100, 0);
-	mSceneGraph.AttachChild(std::move(backgroundSprite));
-
-
-
-	//mText.setFont(context.fonts->get(Fonts::Main));
-	//mText.setString("Press any key to start");
-	//centerOrigin(mText);
-	//mText.setPosition(context.window->getView().getSize() / 2.f);
+	//BuildScene();
 }
 
 void TitleState::draw(GameTimer gt)
 {
-	mSceneGraph.Draw(gt);
+	mSceneGraph->Draw(gt);
 }
 
 bool TitleState::update(GameTimer dt)
@@ -65,5 +44,17 @@ bool TitleState::handleEvent(const WPARAM event)
 	}
 
 	return true;
+}
+void TitleState::BuildScene()
+{
+	mGame->GetRenderItems().clear();
+	mGame->mOpaqueRitems.clear();
+	mGame->mFrameResources.clear();
+
+	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, 1, 1, Textures::ID::TitleScreen));
+	mBackgroundSprite = backgroundSprite.get();
+	mBackgroundSprite->SetScale(XMFLOAT3(5.0f, 1.0f, 5));
+	mBackgroundSprite->SetPosition(0, -100, 0);
+	mSceneGraph->AttachChild(std::move(backgroundSprite));
 }
 #pragma endregion

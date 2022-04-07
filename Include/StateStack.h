@@ -9,11 +9,7 @@
 #include <functional>
 #include <map>
 
-namespace sf
-{/*
-	class Event;
-	class RenderWindow;*/
-}
+class Game;
 
 class StateStack
 {
@@ -26,7 +22,7 @@ public:
 	};
 
 public:
-	explicit StateStack(State::Context context);
+	explicit StateStack(Game* game, State::Context context);
 
 	template<typename T>
 	void registerState(States::ID stateID);
@@ -39,10 +35,11 @@ public:
 	void				clearStates();
 
 	bool				isEmpty() const;
-
+	virtual void        BuildScene();
+	void				applyPendingChanges();
 private:
 	State::Ptr			createState(States::ID stateID);
-	void				applyPendingChanges();
+
 
 
 private:
@@ -57,7 +54,7 @@ private:
 private:
 	std::vector<State::Ptr>								mStack;
 	std::vector<PendingChange>							mPendingList;
-
+	Game* mGame;
 	State::Context										mContext;
 	std::map<States::ID, std::function<State::Ptr()>>	mFactories;
 };
@@ -67,6 +64,6 @@ void StateStack::registerState(States::ID stateID)
 {
 	mFactories[stateID] = [this]()
 	{
-		return State::Ptr(new T(*this, mContext));
+		return State::Ptr(new T(mGame, *this, mContext));
 	};
 }

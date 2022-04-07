@@ -26,8 +26,7 @@ struct AircraftMover
 	XMFLOAT2 velocity;
 };
 
-Player::Player(World* world)
-	: mWorld(world)
+Player::Player()
 {
 	mKeyBinding[VK_LEFT] = MoveLeft;
 	mKeyBinding[VK_RIGHT] = MoveRight;
@@ -63,18 +62,23 @@ void Player::handleRealtimeInput(CommandQueue& commands)
 {
 	for (auto pair : mKeyBinding)
 	{
-		if (GetAsyncKeyState(pair.first))
-		{
-			if (isRealtimeAction(pair.second))
-			{
-				commands.push(mActionBinding[pair.second]);
-			}
-		}
-		else
-		{
-			mKeyIsPressed[pair.second] = false;
-		}
+		if (GetAsyncKeyState(pair.first) && isRealtimeAction(pair.second))
+			commands.push(mActionBinding[pair.second]);
 	}
+	//for (auto pair : mKeyBinding)
+	//{
+	//	if (GetAsyncKeyState(pair.first))
+	//	{
+	//		if (isRealtimeAction(pair.second))
+	//		{
+	//			commands.push(mActionBinding[pair.second]);
+	//		}
+	//	}
+	//	else
+	//	{
+	//		mKeyIsPressed[pair.second] = false;
+	//	}
+	//}
 }
 
 void Player::assignKey(Action action, WPARAM key)
@@ -103,11 +107,11 @@ WPARAM Player::getAssignedKey(Action action) const
 
 void Player::processEvents(CommandQueue& commands)
 {
-	if (mWorld->GetGame()->GetKeyIsPressed())
-	{
-		handleEvent(mWorld->GetGame()->GetKeyPressed(), commands);
-		handleRealtimeInput(commands);
-	}
+	//if (mWorld->GetGame()->GetKeyIsPressed())
+	//{
+	//	handleEvent(mWorld->GetGame()->GetKeyPressed(), commands);
+	//	handleRealtimeInput(commands);
+	//}
 }
 
 void Player::initalizeActions()
@@ -129,15 +133,16 @@ bool Player::isRealtimeAction(Action action)
 	switch (action)
 	{
 	case MoveLeft:
-		return mKeyIsPressed[MoveLeft];
+		//return mKeyIsPressed[MoveLeft];
 	case MoveRight:
-		return mKeyIsPressed[MoveRight];
+		//return mKeyIsPressed[MoveRight];
 	case MoveDown:
-		return mKeyIsPressed[MoveDown];
+		//return mKeyIsPressed[MoveDown];
 	case MoveUp:
-		return mKeyIsPressed[MoveUp];
+		//return mKeyIsPressed[MoveUp];
 	case GetPosition:
-		return mKeyIsPressed[GetPosition];
+		//return mKeyIsPressed[GetPosition];
+		return true;
 	default:
 		return false;
 	}

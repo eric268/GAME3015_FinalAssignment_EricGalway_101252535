@@ -1,10 +1,11 @@
 #include "StateStack.h"
-
+#include "Game.h"
 #include <cassert>
 
 
-StateStack::StateStack(State::Context context)
-	: mStack()
+StateStack::StateStack(Game* game, State::Context context)
+	: mGame(game),
+	  mStack()
 	, mPendingList()
 	, mContext(context)
 	, mFactories()
@@ -60,6 +61,15 @@ void StateStack::clearStates()
 bool StateStack::isEmpty() const
 {
 	return mStack.empty();
+}
+
+void StateStack::BuildScene()
+{
+		// Iterate from top to bottom, stop as soon as update() returns false
+	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
+	{
+		(*itr)->BuildScene();
+	}
 }
 
 State::Ptr StateStack::createState(States::ID stateID)

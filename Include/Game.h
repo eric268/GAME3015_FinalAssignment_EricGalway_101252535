@@ -7,6 +7,8 @@
 #include "../D3DCommon/FrameResource.h"
 #include "../D3DCommon/RenderItem.h"
 #include "World.h"
+#include "StateStack.h"
+#include "Player.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -42,6 +44,10 @@ public:
 
 	void AddTexture(Textures::ID id, std::wstring fileName);
 	void LoadTexture();
+
+
+	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
+	std::vector<RenderItem*> mOpaqueRitems;
 
 public:
 	static UINT objCBIndex;
@@ -79,7 +85,7 @@ private:
 	void BuildMaterials();
 	void InitalizeCamera();
 
-	void DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems);
+	void RegisterStates();
 
 	std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> GetStaticSamplers();
 
@@ -88,12 +94,12 @@ private:
 
 	// Render items divided by PSO.
 	std::vector<RenderItem*> mRitemLayer[(int)RenderLayer::Count];
-	std::vector<RenderItem*> mOpaqueRitems;
+
 
 private:
-	World gameWorld;
-	//Player mPlayer;
-	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
+	//World gameWorld;
+	Player mPlayer;
+	StateStack mStateStack;
 
 	int mCurrFrameResourceIndex = 0;
 

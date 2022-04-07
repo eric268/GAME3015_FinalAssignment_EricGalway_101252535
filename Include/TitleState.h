@@ -1,10 +1,11 @@
 #pragma once
 #include "State.h"
 #include "SpriteNode.h"
+#include "Aircraft.h"
 
 class Game;
 class SceneNode;
-class TitleState : State
+class TitleState : public State
 {
 public:
 	TitleState(Game* game, StateStack& stack, Context context);
@@ -16,12 +17,12 @@ public:
 
 private:
 	SpriteNode*			mBackgroundSprite;
-
-	//Need to add this later
-	//sf::Text			mText; 
-
+	std::array<SceneNode*, SceneNode::LayerCount>	mSceneLayers;
 	bool				mShowText;
 	float			mTextEffectTime;
 	Game* mGame;
-	SceneNode mSceneGraph;
+	SceneNode* mSceneGraph;
+	Aircraft* mPlayerAircraft;
+	void BuildScene();
+	
 };

@@ -4,17 +4,15 @@
 #include "../D3DCommon/d3dApp.h"
 
 class CommandQueue;
-class World;
 /// <summary>
 /// Class used for handling player inputs and their corresponding actions/events
 /// </summary>
 class Player
 {
 public:
-	Player() {}
 	/// Default Player Constructor. Populates key binding map with event keys
 	/// </summary>
-	Player(World* mWorld);
+	Player();
 	/// <summary>
 	/// Check if pressed key appears in key binding, trigger command if so if this has
 	/// not occurred during real time
@@ -79,5 +77,4 @@ private:
 	std::map<int, Action> mKeyBinding;
 	std::map<Action, bool> mKeyIsPressed;
 	std::map<Action, Command> mActionBinding;
-	World* mWorld;
 };

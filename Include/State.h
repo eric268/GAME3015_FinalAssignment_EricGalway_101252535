@@ -6,13 +6,10 @@
 
 #include <memory>
 
-namespace sf
-{
-	class RenderWindow;
-}
 
 class StateStack;
 class Player;
+class Game;
 
 class State
 {
@@ -21,30 +18,30 @@ public:
 
 	struct Context
 	{
-		Context(/*sf::RenderWindow& window,*/ TextureHolder& textures, FontHolder& fonts, Player& player);
-		//sf::RenderWindow* window;
+		Context( TextureHolder& textures, Player& player);
 		TextureHolder* textures;
-		FontHolder* fonts;
 		Player* player;
 	};
 
 public:
-	State(StateStack& stack, Context context);
+	State(Game* game, StateStack& stack, Context context);
 	virtual ~State();
 
 	virtual void draw(GameTimer gt) = 0;
 	virtual bool update(GameTimer gt) = 0;
 	virtual bool handleEvent(WPARAM event) = 0;
+	virtual void BuildScene() = 0;
 
 
-protected:
+
 	void requestStackPush(States::ID stateID);
 	void requestStackPop();
 	void requestStateClear();
 
 	Context getContext() const;
-private:
+
 	StateStack* mStack;
 	Context mContext;
+	Game* mGame;
 
 };

@@ -24,7 +24,6 @@ World::World() :
 
 World::World(Game* gameWorld, float width, float height) :
 	mGame(gameWorld),
-	player(Player(this)),
 	screenWidth(width),
 	screenHeight(height),
 	screenWidthBuffer(-10.0f),
@@ -45,12 +44,12 @@ void World::Update(const GameTimer& gt)
 {
 	UpdateCamera(gt);
 	mPlayerAircraft->SetVelocity(0.0f, 0.0f, 0.0f);
-	player.processEvents(mCommandQueue);
 
 	while (!mCommandQueue.isEmpty())
 	{
 		mSceneGraph.onCommand(mCommandQueue.pop(), gt);
 	}
+
 	adaptPlayerVelocity();
 	mSceneGraph.Update(gt);
 	adaptPlayerPosition();

@@ -1,16 +1,17 @@
 #include "State.h"
 #include "StateStack.h"
+#include  "Game.h"
 
-State::Context::Context(/*sf::RenderWindow& window,*/ TextureHolder& textures, FontHolder& fonts, Player& player)
+State::Context::Context(TextureHolder& textures, Player& player)
 	: textures(&textures)
-	, fonts(&fonts)
 	, player(&player)
 {
 }
 
-State::State(StateStack& stack, Context context)
-	: mStack(&stack)
-	, mContext(context)
+State::State(Game* game, StateStack& stack, Context context)
+	: mGame(game),
+	  mStack(&stack),
+	  mContext(context)
 {
 }
 
