@@ -51,6 +51,11 @@ public:
 	void LoadTextures();
 	void LoadText();
 
+	void BuildRootSignature();
+	void BuildDescriptorHeaps();
+	void BuildShadersAndInputLayout();
+	void BuildShapeGeometry();
+
 	bool doOnce = false;
 
 
@@ -82,14 +87,6 @@ private:
 	void UpdateObjectCBs(const GameTimer& gt);
 	void UpdateMaterialCBs(const GameTimer& gt);
 	void UpdateMainPassCB(const GameTimer& gt);
-	
-
-	void BuildRootSignature();
-	void BuildDescriptorHeaps();
-	void BuildShadersAndInputLayout();
-
-	void BuildShapeGeometry();
-
 
 	void RegisterStates();
 

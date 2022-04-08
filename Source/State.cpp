@@ -2,9 +2,8 @@
 #include "StateStack.h"
 #include  "Game.h"
 
-State::Context::Context(TextureHolder& textures, Player& player)
-	: textures(&textures)
-	, player(&player)
+State::Context::Context(Player& player)
+	: player(&player)
 {
 }
 

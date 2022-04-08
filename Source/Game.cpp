@@ -8,6 +8,7 @@
 #include "TitleState.h"
 #include "MenuState.h"
 #include "GameState.h"
+#include "PauseState.h"
 
 const int gNumFrameResources = 3;
 UINT Game::objCBIndex = 0;
@@ -24,10 +25,11 @@ Game::Game(HINSTANCE hInstance)
 	mRootSignature(nullptr),
 	mSrvDescriptorHeap(nullptr),
 	mPlayer(Player()),
-	mStateStack(this, State::Context(ResourceManager::GetInstance()->GetTextureHolder(), mPlayer))
+	mStateStack(this, State::Context(mPlayer))
 {
 	RegisterStates();
 	mStateStack.pushState(States::Title);
+	//mStateStack.applyPendingChanges();
 }
 
 Game::~Game()
@@ -45,8 +47,13 @@ bool Game::Initialize()
 	mCbvSrvDescriptorSize = md3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
 	LoadTextures();
+	BuildRootSignature();
 	BuildDescriptorHeaps();
+	BuildShadersAndInputLayout();
 	BuildShapeGeometry();
+	BuildMaterials();
+	mStateStack.applyPendingChanges();
+	//BuildPSOs();
 
 	// Execute the initialization commands.
 	ThrowIfFailed(mCommandList->Close());
@@ -54,9 +61,11 @@ bool Game::Initialize()
 	mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
 	FlushCommandQueue();
 
-	BuildRootSignature();
-	BuildShadersAndInputLayout();
-	BuildPSOs();
+
+
+
+
+
 
 	return true;
 }
@@ -175,13 +184,15 @@ void Game::OnMouseMove(WPARAM btnState, int x, int y)
 
 void Game::OnKeyPressed(WPARAM key)
 {
+	mStateStack.handleEvent(key);
+
 	//CommandQueue& commands = gameWorld.getCommandQueue();
 	//mPlayer.handleEvent(key, commands);
 }
 
 void Game::OnKeyboardInput(const GameTimer& gt)
 {
-	mStateStack.handleEvent('1');
+	//mStateStack.handleEvent('A');
 	//CommandQueue& commands = gameWorld.getCommandQueue();
 	//mPlayer.handleRealtimeInput(commands);
 
@@ -215,7 +226,7 @@ void Game::UpdateObjectCBs(const GameTimer& gt)
 void Game::UpdateMaterialCBs(const GameTimer& gt)
 {
 	auto currMaterialCB = mCurrFrameResource->MaterialCB.get();
-	for (auto& e : ResourceManager::GetInstance()->GetMaterials())
+	for (auto& e : mMaterials /*ResourceManager::GetInstance()->GetMaterials()*/)
 	{
 		// Only update the cbuffer data if the constants have changed.  If the cbuffer
 		// data changes, it needs to be updated for each FrameResource.
@@ -274,26 +285,59 @@ void Game::LoadTextures()
 {
 	mTextures.clear();
 
-	AddTexture(Textures::ID::Desert, L"Media/Desert.dds");
-	AddTexture(Textures::ID::Eagle, L"Media/Eagle3.dds");
-	AddTexture(Textures::ID::Raptor, L"Media/Raptor.dds");
-	AddTexture(Textures::ID::TitleScreen, L"Media/TitleScreen.dds");
+	//AddTexture(Textures::ID::Desert, L"Media/Desert.dds");
+	//AddTexture(Textures::ID::Eagle, L"Media/Eagle3.dds");
+	//AddTexture(Textures::ID::Raptor, L"Media/Raptor.dds");
+	//AddTexture(Textures::ID::TitleScreen, L"Media/TitleScreen.dds");
 	//AddTexture(Textures::ID::TitleScreen2, L"Media/Background.dds");
 
-	for (int i = 0; i < Textures::NUM_TEXTURE_IDS; i++)
-	{
-		auto temp = std::make_unique<Texture>();
-		temp->Name = std::to_string(i);
+	auto desetText = std::make_unique<Texture>();
+	desetText->Name = std::to_string(Textures::ID::Desert);
+	desetText->Filename = L"Media/Desert.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), desetText->Filename.c_str(),
+		desetText->Resource, desetText->UploadHeap));
 
-		auto t = ResourceManager::GetInstance()->GetTextureHolder().find(Textures::ID(i));
+	auto eagleText = std::make_unique<Texture>();
+	eagleText->Name = std::to_string(Textures::ID::Eagle);
+	eagleText->Filename = L"Media/Eagle3.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), eagleText->Filename.c_str(),
+		eagleText->Resource, eagleText->UploadHeap));
 
-		temp->Filename = t->second;
-		ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-			mCommandList.Get(), temp->Filename.c_str(),
-			temp->Resource, temp->UploadHeap));
+	auto raptorText = std::make_unique<Texture>();
+	raptorText->Name = std::to_string(Textures::ID::Raptor);
+	raptorText->Filename = L"Media/Raptor.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), raptorText->Filename.c_str(),
+		raptorText->Resource, raptorText->UploadHeap));
 
-		mTextures[temp->Name] = std::move(temp);
-	}
+	auto titleText = std::make_unique<Texture>();
+	titleText->Name = std::to_string(Textures::ID::TitleScreen);
+	titleText->Filename = L"Media/TitleScreen.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), titleText->Filename.c_str(),
+		titleText->Resource, titleText->UploadHeap));
+
+	mTextures[desetText->Name] = std::move(desetText);
+	mTextures[eagleText->Name] = std::move(eagleText);
+	mTextures[raptorText->Name] = std::move(raptorText);
+	mTextures[titleText->Name] = std::move(titleText);
+
+	//for (int i = 0; i < Textures::NUM_TEXTURE_IDS; i++)
+	//{
+	//	auto temp = std::make_unique<Texture>();
+	//	temp->Name = std::to_string(i);
+
+	//	auto t = mMaterials.find(std::to_string('0' + Textures::ID(i)));
+
+	//	temp->Filename = t->second;
+	//	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+	//		mCommandList.Get(), temp->Filename.c_str(),
+	//		temp->Resource, temp->UploadHeap));
+
+	//	mTextures[temp->Name] = std::move(temp);
+	//}
 }
 void Game::LoadText()
 {
@@ -519,27 +563,64 @@ void Game::BuildFrameResources()
 	for (int i = 0; i < gNumFrameResources; ++i)
 	{
 		mFrameResources.push_back(std::make_unique<FrameResource>(md3dDevice.Get(),
-			1, (UINT)mAllRitems.size(), (UINT)ResourceManager::GetInstance()->GetMaterials().size()));
+			1, (UINT)mAllRitems.size(), (UINT)mMaterials.size()/*ResourceManager::GetInstance()->GetMaterials().size()*/));
 	}
 }
 
 void Game::BuildMaterials()
 {
-	ResourceManager::GetInstance()->GetMaterials().clear();
+	//ResourceManager::GetInstance()->GetMaterials().clear();
 
-	for (int i = 0; i < Textures::NUM_TEXTURE_IDS; i++)
-	{
-		auto mat = std::make_unique<Material>();
-		mat->Name = std::to_string(i);
-		mat->MatCBIndex = i;
-		mat->DiffuseSrvHeapIndex = i;
-		mat->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-		mat->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-		mat->Roughness = 1.0f;
-		//mMaterials[std::to_string(i)] = std::move(mat);
-		ResourceManager::GetInstance()->GetMaterials()[static_cast<Textures::ID>(i)] = std::move(mat);
+	auto mat0 = std::make_unique<Material>();
+	mat0->Name = std::to_string('0');
+	mat0->MatCBIndex = 0;
+	mat0->DiffuseSrvHeapIndex = 0;
+	mat0->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	mat0->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
+	mat0->Roughness = 1.0f;
+	mMaterials[std::to_string('0')] = std::move(mat0);
 
-	}
+	auto mat1 = std::make_unique<Material>();
+	mat1->Name = std::to_string('1');
+	mat1->MatCBIndex = 1;
+	mat1->DiffuseSrvHeapIndex = 1;
+	mat1->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	mat1->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
+	mat1->Roughness = 1.0f;
+	mMaterials[std::to_string('1')] = std::move(mat1);
+
+	auto mat2 = std::make_unique<Material>();
+	mat2->Name = std::to_string('2');
+	mat2->MatCBIndex = 2;
+	mat2->DiffuseSrvHeapIndex = 2;
+	mat2->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	mat2->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
+	mat2->Roughness = 1.0f;
+	mMaterials[std::to_string('2')] = std::move(mat2);
+
+	auto mat3 = std::make_unique<Material>();
+	mat3->Name = std::to_string('3');
+	mat3->MatCBIndex = 3;
+	mat3->DiffuseSrvHeapIndex = 3;
+	mat3->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	mat3->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
+	mat3->Roughness = 1.0f;
+	mMaterials[std::to_string('3')] = std::move(mat3);
+	//ResourceManager::GetInstance()->GetMaterials()[static_cast<Textures::ID>(0)] = std::move(mat);
+
+	//for (int i = 0; i < Textures::NUM_TEXTURE_IDS; i++)
+	//{
+	//	auto mat = std::make_unique<Material>();
+	//	mat->Name = std::to_string(i);
+	//	mat->MatCBIndex = i;
+	//	mat->DiffuseSrvHeapIndex = i;
+	//	mat->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	//	mat->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
+	//	mat->Roughness = 1.0f;
+	//	//mMaterials[std::to_string(i)] = std::move(mat);
+	//	ResourceManager::GetInstance()->GetMaterials()[static_cast<Textures::ID>(i)] = std::move(mat);
+
+	//}
 }
 
 bool Game::GetKeyIsPressed()
@@ -572,10 +653,10 @@ float Game::GetClientHeight()
 	return mClientHeight;
 }
 
-void Game::AddTexture(Textures::ID id, std::wstring fileName)
-{
-	ResourceManager::GetInstance()->GetTextureHolder().insert(std::pair<Textures::ID, std::wstring>(id, fileName));
-}
+//void Game::AddTexture(Textures::ID id, std::wstring fileName)
+//{
+//	//ResourceManager::GetInstance()->GetTextureHolder().insert(std::pair<Textures::ID, std::wstring>(id, fileName));
+//}
 
 void Game::BuildRenderItems()
 {
@@ -606,6 +687,7 @@ void Game::RegisterStates()
 	mStateStack.registerState<TitleState>(States::Title);
 	mStateStack.registerState<MenuState>(States::Menu);
 	mStateStack.registerState<GameState>(States::Game);
+	mStateStack.registerState<PauseState>(States::Pause);
 }
 
 std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()

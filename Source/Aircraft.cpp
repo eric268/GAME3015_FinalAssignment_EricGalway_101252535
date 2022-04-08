@@ -21,7 +21,7 @@ Aircraft::Aircraft(Game* game, Type type) : Entity(game)
 	
 	renderItem->ObjCBIndex = Game::objCBIndex++;
 	renderItem->Geo = game->mGeometries["shapeGeo"].get();
-	auto searchedMat = ResourceManager::GetInstance()->GetMaterials().find(ConvertTypeToTexture(type));
+	auto searchedMat = mGame->mMaterials.find(std::to_string('0' + ConvertTypeToTexture(type)));//ResourceManager::GetInstance()->GetMaterials().find(ConvertTypeToTexture(type));
 	renderItem->material = searchedMat->second.get();
 
 

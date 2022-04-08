@@ -18,8 +18,7 @@ public:
 
 	struct Context
 	{
-		Context( TextureHolder& textures, Player& player);
-		TextureHolder* textures;
+		Context(Player& player);
 		Player* player;
 	};
 

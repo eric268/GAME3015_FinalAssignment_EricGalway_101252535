@@ -114,7 +114,7 @@ void World::UpdateCamera(const GameTimer& gt)
 {
 	cameraPosition.y -= mScrollSpeed * sin(mPhi) *gt.DeltaTime();
 	cameraPosition.z -= mScrollSpeed * sin(mPhi) * gt.DeltaTime();
-	MathHelper::UpdatePosition(mWorldView, cameraPosition);
+	MathHelper::UpdatePosition(/*mGame->mView*/ mWorldView, cameraPosition);
 }
 
 void World::BuildScene()
@@ -153,7 +153,7 @@ void World::BuildScene()
 
 void World::AddTexture(Textures::ID id, std::wstring fileName)
 {
-	ResourceManager::GetInstance()->GetTextureHolder().insert(std::pair<Textures::ID, std::wstring>(id, fileName));
+	//ResourceManager::GetInstance()->GetTextureHolder().insert(std::pair<Textures::ID, std::wstring>(id, fileName));
 }
 
 CommandQueue& World::getCommandQueue()

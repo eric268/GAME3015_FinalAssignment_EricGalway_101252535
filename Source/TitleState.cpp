@@ -36,6 +36,7 @@ bool TitleState::update(GameTimer dt)
 bool TitleState::handleEvent(const WPARAM event)
 {
 	// If any key is pressed, trigger the next screen
+
 	if (GetAsyncKeyState('1')/*mGame->GetKeyIsPressed()*/)
 	{
 		requestStackPop();
@@ -46,7 +47,6 @@ bool TitleState::handleEvent(const WPARAM event)
 }
 void TitleState::BuildScene()
 {	
-	mGame->LoadText();
 	mGame->GetRenderItems().clear();
 	mGame->mOpaqueRitems.clear();
 	mGame->mFrameResources.clear();
@@ -67,7 +67,6 @@ void TitleState::BuildScene()
 
 	mGame->BuildRenderItems();
 	mGame->BuildFrameResources();
+	mGame->BuildPSOs();
 	mGame->InitalizeCamera(100.0f, 1.5f * XM_PI, 0.1f);
-
-
 }
