@@ -44,8 +44,7 @@ bool MenuState::handleEvent(const WPARAM event)
 
 void MenuState::BuildScene()
 {
-	mGame->InitalizeState();
-
+	mGame->LoadText();
 	mGame->GetRenderItems().clear();
 	mGame->mOpaqueRitems.clear();
 	mGame->mFrameResources.clear();
@@ -59,14 +58,14 @@ void MenuState::BuildScene()
 
 	std::unique_ptr<SpriteNode> option1Sprite(new SpriteNode(mGame, 1, 1, Textures::ID::Raptor));
 	mOption1Sprite = option1Sprite.get();
-	mOption1Sprite->SetScale(XMFLOAT3(0.75f, 0.5f, 0.55f));
-	mOption1Sprite->SetPosition(0, 0, 0);
-	mOption1Sprite->AttachChild(std::move(option1Sprite));
+	mOption1Sprite->SetScale(XMFLOAT3(0.15f, 0.5f, 0.15f));
+	mOption1Sprite->SetPosition(25, 0.15f, 0);
+	mSceneGraph->AttachChild(std::move(option1Sprite));
 
 	std::unique_ptr<SpriteNode> option2Sprite(new SpriteNode(mGame, 1, 1, Textures::ID::Eagle));
 	mOption2Sprite = option2Sprite.get();
-	mOption2Sprite->SetScale(XMFLOAT3(0.75f, 0.5f, 0.55f));
-	mOption2Sprite->SetPosition(0, 0, 0);
+	mOption2Sprite->SetScale(XMFLOAT3(0.15f, 0.5f, 0.15f));
+	mOption2Sprite->SetPosition(25, 0.1f, -20);
 	mSceneGraph->AttachChild(std::move(option2Sprite));
 
 	mGame->BuildRenderItems();

@@ -40,6 +40,19 @@ bool Game::Initialize()
 	if (!D3DApp::Initialize())
 		return false;
 
+	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), nullptr));
+	mCbvSrvDescriptorSize = md3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+	LoadTextures();
+	BuildDescriptorHeaps();
+	BuildShapeGeometry();
+
+	// Execute the initialization commands.
+	ThrowIfFailed(mCommandList->Close());
+	ID3D12CommandList* cmdsLists[] = { mCommandList.Get() };
+	mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
+	FlushCommandQueue();
+
 	BuildRootSignature();
 	BuildShadersAndInputLayout();
 	BuildPSOs();
@@ -281,6 +294,20 @@ void Game::LoadTextures()
 		mTextures[temp->Name] = std::move(temp);
 	}
 }
+void Game::LoadText()
+{
+	// Reset the command list to prep for initialization commands.
+	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), nullptr));
+	mCbvSrvDescriptorSize = md3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	
+	BuildMaterials();
+
+	// Execute the initialization commands.
+	ThrowIfFailed(mCommandList->Close());
+	ID3D12CommandList* cmdsLists[] = { mCommandList.Get() };
+	mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
+	FlushCommandQueue();
+}
 //If we have 3 frame resources and n render items, then we have three 3n object constant
 //buffers and 3 pass constant buffers.Hence we need 3(n + 1) constant buffer views(CBVs).
 //Thus we will need to modify our CBV heap to include the additional descriptors :
@@ -508,8 +535,9 @@ void Game::BuildMaterials()
 		mat->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 		mat->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
 		mat->Roughness = 1.0f;
-
+		//mMaterials[std::to_string(i)] = std::move(mat);
 		ResourceManager::GetInstance()->GetMaterials()[static_cast<Textures::ID>(i)] = std::move(mat);
+
 	}
 }
 
@@ -570,27 +598,6 @@ void Game::InitalizeCamera()
 
 void Game::InitalizeState()
 {
-	// Reset the command list to prep for initialization commands.
-	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), nullptr));
-	mCbvSrvDescriptorSize = md3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-
-	LoadTextures();
-	BuildMaterials();
-	BuildShapeGeometry();
-
-	// Execute the initialization commands.
-	ThrowIfFailed(mCommandList->Close());
-	ID3D12CommandList* cmdsLists[] = { mCommandList.Get() };
-	mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
-	FlushCommandQueue();
-
-
-
-	BuildDescriptorHeaps();
-
-	//**
-
-	//
 }
 
 void Game::RegisterStates()

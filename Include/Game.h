@@ -49,6 +49,9 @@ public:
 	void InitalizeCamera();
 	void InitalizeState();
 	void LoadTextures();
+	void LoadText();
+
+	bool doOnce = false;
 
 
 public:
@@ -61,7 +64,7 @@ public:
 	std::unordered_map<std::string, ComPtr<ID3D12PipelineState>> mPSOs;
 	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
 	std::vector<RenderItem*> mOpaqueRitems;
-
+	int mCurrFrameResourceIndex = 0;
 private:
 	virtual void OnResize()override;
 	virtual void Update(const GameTimer& gt)override;
@@ -101,7 +104,7 @@ private:
 	Player mPlayer;
 	StateStack mStateStack;
 
-	int mCurrFrameResourceIndex = 0;
+
 
 	ComPtr<ID3D12RootSignature> mRootSignature;
 

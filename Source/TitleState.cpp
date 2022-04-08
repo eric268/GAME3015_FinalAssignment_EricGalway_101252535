@@ -46,12 +46,12 @@ bool TitleState::handleEvent(const WPARAM event)
 }
 void TitleState::BuildScene()
 {	
-	mGame->InitalizeState();
-
+	mGame->LoadText();
 	mGame->GetRenderItems().clear();
 	mGame->mOpaqueRitems.clear();
 	mGame->mFrameResources.clear();
 	Game::objCBIndex = 0;
+
 
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, 1, 1, Textures::ID::TitleScreen));
 	mBackgroundSprite = backgroundSprite.get();
