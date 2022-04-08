@@ -62,5 +62,6 @@ void SpriteNode::DrawCurrent(const GameTimer& gt) const
 		mGame->GetCMDList()->SetGraphicsRootConstantBufferView(3, matCBAddress);
 
 		mGame->GetCMDList()->DrawIndexedInstanced(mSpriteNodeRenderItem->IndexCount, 1, mSpriteNodeRenderItem->StartIndexLocation, mSpriteNodeRenderItem->BaseVertexLocation, 0);
+		GetRenderItem()->NumFramesDirty++;
 	}
 }

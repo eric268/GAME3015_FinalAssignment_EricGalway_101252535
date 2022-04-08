@@ -43,11 +43,13 @@ public:
 	float GetClientHeight();
 
 	void AddTexture(Textures::ID id, std::wstring fileName);
-	void LoadTexture();
+	void BuildFrameResources();
+	void BuildMaterials();
+	void BuildPSOs();
+	void InitalizeCamera();
+	void InitalizeState();
+	void LoadTextures();
 
-
-	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
-	std::vector<RenderItem*> mOpaqueRitems;
 
 public:
 	static UINT objCBIndex;
@@ -57,6 +59,8 @@ public:
 	UINT mCbvSrvDescriptorSize = 0;
 	ComPtr<ID3D12DescriptorHeap> mSrvDescriptorHeap;
 	std::unordered_map<std::string, ComPtr<ID3D12PipelineState>> mPSOs;
+	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
+	std::vector<RenderItem*> mOpaqueRitems;
 
 private:
 	virtual void OnResize()override;
@@ -70,20 +74,16 @@ private:
 
 	void OnKeyboardInput(const GameTimer& gt);
 	void UpdateObjectCBs(const GameTimer& gt);
-	void UpdateObjectVBs(const GameTimer& gt);
 	void UpdateMaterialCBs(const GameTimer& gt);
 	void UpdateMainPassCB(const GameTimer& gt);
 	
-	void LoadTextures();
+
 	void BuildRootSignature();
 	void BuildDescriptorHeaps();
 	void BuildShadersAndInputLayout();
 
 	void BuildShapeGeometry();
-	void BuildPSOs();
-	void BuildFrameResources();
-	void BuildMaterials();
-	void InitalizeCamera();
+
 
 	void RegisterStates();
 

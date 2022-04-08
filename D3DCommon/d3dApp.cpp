@@ -583,6 +583,11 @@ void D3DApp::FlushCommandQueue()
 	}
 }
 
+void D3DApp::SetCurrentFence(UINT64 val)
+{
+	mCurrentFence = val;
+}
+
 
 
 ID3D12Resource* D3DApp::CurrentBackBuffer()const

@@ -1,7 +1,6 @@
 #pragma once
 #include "State.h"
 #include "SpriteNode.h"
-#include "Aircraft.h"
 
 class Game;
 class SceneNode;
@@ -17,12 +16,11 @@ public:
 
 private:
 	SpriteNode*			mBackgroundSprite;
-	std::array<SceneNode*, SceneNode::LayerCount>	mSceneLayers;
+	SpriteNode*			mPrompt;
 	bool				mShowText;
 	float			mTextEffectTime;
 	Game* mGame;
 	SceneNode* mSceneGraph;
-	Aircraft* mPlayerAircraft;
-	void BuildScene();
+	virtual void BuildScene() override;
 	
 };

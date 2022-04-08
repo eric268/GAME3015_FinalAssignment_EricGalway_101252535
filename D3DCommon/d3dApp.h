@@ -40,6 +40,14 @@ public:
 
     virtual bool GetKeyIsPressed();
     virtual WPARAM GetKeyPressed();
+    void FlushCommandQueue();
+    void SetCurrentFence(UINT64 val);
+
+public:
+	Microsoft::WRL::ComPtr<ID3D12CommandQueue> mCommandQueue;
+	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> mCommandList;
+    Microsoft::WRL::ComPtr<ID3D12Device> md3dDevice;
 
 protected:
     virtual void CreateRtvAndDsvDescriptorHeaps();
@@ -60,7 +68,7 @@ protected:
 	void CreateCommandObjects();
     void CreateSwapChain();
 
-	void FlushCommandQueue();
+
 
 	ID3D12Resource* CurrentBackBuffer()const;
 	D3D12_CPU_DESCRIPTOR_HANDLE CurrentBackBufferView()const;
@@ -93,14 +101,12 @@ protected:
 	
     Microsoft::WRL::ComPtr<IDXGIFactory4> mdxgiFactory;
     Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;
-    Microsoft::WRL::ComPtr<ID3D12Device> md3dDevice;
+
 
     Microsoft::WRL::ComPtr<ID3D12Fence> mFence;
     UINT64 mCurrentFence = 0;
 	
-    Microsoft::WRL::ComPtr<ID3D12CommandQueue> mCommandQueue;
-    Microsoft::WRL::ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;
-    Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> mCommandList;
+
 
 	static const int SwapChainBufferCount = 2;
 	int mCurrBackBuffer = 0;

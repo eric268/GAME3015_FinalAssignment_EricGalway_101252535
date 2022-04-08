@@ -6,19 +6,19 @@
 #include "Game.h"
 #include "ResourceManager.h"
 #include "TitleState.h"
+#include "MenuState.h"
 
 const int gNumFrameResources = 3;
 UINT Game::objCBIndex = 0;
 Game::Game(HINSTANCE hInstance)
     : D3DApp(hInstance),
-	//gameWorld(World(this,D3DApp::mClientWidth, D3DApp::mClientHeight)),
 	mTheta(1.5f * XM_PI),
-	mPhi(0.25f * XM_PI),
-	mRadius(150.0f),
+	mPhi(0.1f),
+	mRadius(100.0f),
 	mView(MathHelper::Identity4x4()),
 	mProj(MathHelper::Identity4x4()),
 	target(XMVectorZero()),
-	mPassCbvOffset(0),
+	//mPassCbvOffset(0),
 	mCurrFrameResource(nullptr),
 	mRootSignature(nullptr),
 	mSrvDescriptorHeap(nullptr),
@@ -27,8 +27,6 @@ Game::Game(HINSTANCE hInstance)
 {
 	RegisterStates();
 	mStateStack.pushState(States::Title);
-	mStateStack.applyPendingChanges();
-	
 }
 
 Game::~Game()
@@ -41,30 +39,11 @@ bool Game::Initialize()
 {
 	if (!D3DApp::Initialize())
 		return false;
-	// Reset the command list to prep for initialization commands.
-	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), nullptr));
 
-	mCbvSrvDescriptorSize = md3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	
-
-	LoadTextures();
 	BuildRootSignature();
-	BuildDescriptorHeaps();
 	BuildShadersAndInputLayout();
-	BuildShapeGeometry();
-	BuildMaterials();
-	BuildRenderItems();
-	BuildFrameResources();
 	BuildPSOs();
-	InitalizeCamera();
 
-	// Execute the initialization commands.
-	ThrowIfFailed(mCommandList->Close());
-	ID3D12CommandList* cmdsLists[] = { mCommandList.Get() };
-	mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
-
-	// Wait until initialization is complete.
-	FlushCommandQueue();
 	return true;
 }
 
@@ -79,7 +58,6 @@ void Game::OnResize()
 
 void Game::Update(const GameTimer& gt)
 {
-
 	OnKeyboardInput(gt);
 
 	// Cycle through the circular frame resource array.
@@ -99,6 +77,9 @@ void Game::Update(const GameTimer& gt)
 	mStateStack.update(gt);
 	UpdateMaterialCBs(gt);
 	UpdateMainPassCB(gt);
+
+	if (mStateStack.isEmpty())
+		exit(0);
 }
 
 void Game::Draw(const GameTimer& gt)
@@ -277,10 +258,13 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 
 void Game::LoadTextures()
 {
+	mTextures.clear();
+
 	AddTexture(Textures::ID::Desert, L"Media/Desert.dds");
 	AddTexture(Textures::ID::Eagle, L"Media/Eagle3.dds");
 	AddTexture(Textures::ID::Raptor, L"Media/Raptor.dds");
 	AddTexture(Textures::ID::TitleScreen, L"Media/TitleScreen.dds");
+	//AddTexture(Textures::ID::TitleScreen2, L"Media/Background.dds");
 
 	for (int i = 0; i < Textures::NUM_TEXTURE_IDS; i++)
 	{
@@ -384,6 +368,7 @@ void Game::BuildRootSignature()
 
 void Game::BuildShadersAndInputLayout()
 {
+	mShaders.clear();
 	mShaders["standardVS"] = d3dUtil::CompileShader(L"Shaders\\Default.hlsl", nullptr, "VS", "vs_5_1");
 	mShaders["opaquePS"] = d3dUtil::CompileShader(L"Shaders\\Default.hlsl", nullptr, "PS", "ps_5_1");
 
@@ -398,6 +383,8 @@ void Game::BuildShadersAndInputLayout()
 
 void Game::BuildShapeGeometry()
 {
+	mGeometries.clear();
+
 	GeometryGenerator geoGen;
 	GeometryGenerator::MeshData grid = geoGen.CreateGrid(160.0f, 160.0f, 50, 50);
 	UINT gridVertexOffset = 0;
@@ -510,6 +497,8 @@ void Game::BuildFrameResources()
 
 void Game::BuildMaterials()
 {
+	ResourceManager::GetInstance()->GetMaterials().clear();
+
 	for (int i = 0; i < Textures::NUM_TEXTURE_IDS; i++)
 	{
 		auto mat = std::make_unique<Material>();
@@ -559,14 +548,8 @@ void Game::AddTexture(Textures::ID id, std::wstring fileName)
 	ResourceManager::GetInstance()->GetTextureHolder().insert(std::pair<Textures::ID, std::wstring>(id, fileName));
 }
 
-void Game::LoadTexture()
-{
-}
-
 void Game::BuildRenderItems()
 {
-	mStateStack.BuildScene();
-
 	for (auto& e : mAllRitems)
 		mOpaqueRitems.push_back(e.get());
 }
@@ -583,12 +566,37 @@ void Game::InitalizeCamera()
 	mEyePos.y = mRadius * cosf(mPhi);
 	view = XMMatrixLookAtLH(XMVectorSet(mEyePos.x, mEyePos.y, mEyePos.z, 1.0f), target, XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f));
 	XMStoreFloat4x4(&mView, view);
-	//gameWorld.SetWorldView(mView);
+}
+
+void Game::InitalizeState()
+{
+	// Reset the command list to prep for initialization commands.
+	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), nullptr));
+	mCbvSrvDescriptorSize = md3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+	LoadTextures();
+	BuildMaterials();
+	BuildShapeGeometry();
+
+	// Execute the initialization commands.
+	ThrowIfFailed(mCommandList->Close());
+	ID3D12CommandList* cmdsLists[] = { mCommandList.Get() };
+	mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
+	FlushCommandQueue();
+
+
+
+	BuildDescriptorHeaps();
+
+	//**
+
+	//
 }
 
 void Game::RegisterStates()
 {
 	mStateStack.registerState<TitleState>(States::Title);
+	mStateStack.registerState<MenuState>(States::Menu);
 }
 
 std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()

@@ -1,4 +1,3 @@
-#pragma region step 11
 #include "TitleState.h"
 #include "Game.h"
 #include "Utility.h"
@@ -13,7 +12,7 @@ TitleState::TitleState(Game* game, StateStack& stack, Context context)
 	 mShowText(true),
 	 mTextEffectTime(0.0f)
 {
-	//BuildScene();
+	BuildScene();
 }
 
 void TitleState::draw(GameTimer gt)
@@ -37,24 +36,38 @@ bool TitleState::update(GameTimer dt)
 bool TitleState::handleEvent(const WPARAM event)
 {
 	// If any key is pressed, trigger the next screen
-	if (mGame->GetKeyIsPressed())
+	if (GetAsyncKeyState('1')/*mGame->GetKeyIsPressed()*/)
 	{
 		requestStackPop();
-		//requestStackPush(States::Menu);
+		requestStackPush(States::Menu);
 	}
 
 	return true;
 }
 void TitleState::BuildScene()
-{
+{	
+	mGame->InitalizeState();
+
 	mGame->GetRenderItems().clear();
 	mGame->mOpaqueRitems.clear();
 	mGame->mFrameResources.clear();
+	Game::objCBIndex = 0;
 
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, 1, 1, Textures::ID::TitleScreen));
 	mBackgroundSprite = backgroundSprite.get();
-	mBackgroundSprite->SetScale(XMFLOAT3(5.0f, 1.0f, 5));
-	mBackgroundSprite->SetPosition(0, -100, 0);
+	mBackgroundSprite->SetScale(XMFLOAT3(0.75f, 0.5f, 0.55f));
+	mBackgroundSprite->SetPosition(0, 0, 0);
 	mSceneGraph->AttachChild(std::move(backgroundSprite));
+
+	std::unique_ptr<SpriteNode> promptSprite(new SpriteNode(mGame, 1, 1, Textures::ID::TitleScreen));
+	mPrompt = promptSprite.get();
+	mPrompt->SetScale(XMFLOAT3(0.3f, 0.5f, 0.2f));
+	mPrompt->SetPosition(0, 0.1f, 0);
+	mSceneGraph->AttachChild(std::move(promptSprite));
+
+	mGame->BuildRenderItems();
+	mGame->BuildFrameResources();
+	mGame->InitalizeCamera();
+
+
 }
-#pragma endregion
