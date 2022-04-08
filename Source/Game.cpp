@@ -7,6 +7,7 @@
 #include "ResourceManager.h"
 #include "TitleState.h"
 #include "MenuState.h"
+#include "GameState.h"
 
 const int gNumFrameResources = 3;
 UINT Game::objCBIndex = 0;
@@ -587,11 +588,11 @@ void Game::AddRenderItem(RenderItem* renderItems)
 	mAllRitems.push_back(std::make_unique<RenderItem>(std::move(*renderItems)));
 }
 
-void Game::InitalizeCamera()
+void Game::InitalizeCamera(float radius, float theta, float phi)
 {
-	mEyePos.x = mRadius * sinf(mPhi) * cosf(mTheta);
-	mEyePos.z = mRadius * sinf(mPhi) * sinf(mTheta);
-	mEyePos.y = mRadius * cosf(mPhi);
+	mEyePos.x = radius * sinf(phi) * cosf(theta);
+	mEyePos.z = radius * sinf(phi) * sinf(theta);
+	mEyePos.y = radius * cosf(phi);
 	view = XMMatrixLookAtLH(XMVectorSet(mEyePos.x, mEyePos.y, mEyePos.z, 1.0f), target, XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f));
 	XMStoreFloat4x4(&mView, view);
 }
@@ -604,6 +605,7 @@ void Game::RegisterStates()
 {
 	mStateStack.registerState<TitleState>(States::Title);
 	mStateStack.registerState<MenuState>(States::Menu);
+	mStateStack.registerState<GameState>(States::Game);
 }
 
 std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()

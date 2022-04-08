@@ -46,7 +46,7 @@ public:
 	void BuildFrameResources();
 	void BuildMaterials();
 	void BuildPSOs();
-	void InitalizeCamera();
+	void InitalizeCamera(float radius, float theta, float phi);
 	void InitalizeState();
 	void LoadTextures();
 	void LoadText();
@@ -65,6 +65,9 @@ public:
 	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
 	std::vector<RenderItem*> mOpaqueRitems;
 	int mCurrFrameResourceIndex = 0;
+	XMFLOAT4X4 mView;
+
+	Player mPlayer;
 private:
 	virtual void OnResize()override;
 	virtual void Update(const GameTimer& gt)override;
@@ -101,7 +104,7 @@ private:
 
 private:
 	//World gameWorld;
-	Player mPlayer;
+
 	StateStack mStateStack;
 
 
@@ -119,7 +122,7 @@ private:
 
 	//Camera Variables
 	XMFLOAT3  mEyePos;
-	XMFLOAT4X4 mView;
+
 	XMFLOAT4X4 mProj;
 	float mTheta;
 	float mPhi;

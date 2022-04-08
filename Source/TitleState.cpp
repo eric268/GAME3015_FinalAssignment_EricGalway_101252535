@@ -67,7 +67,7 @@ void TitleState::BuildScene()
 
 	mGame->BuildRenderItems();
 	mGame->BuildFrameResources();
-	mGame->InitalizeCamera();
+	mGame->InitalizeCamera(100.0f, 1.5f * XM_PI, 0.1f);
 
 
 }

@@ -4,28 +4,26 @@
 #include "SpriteNode.h"
 #include "Game.h"
 
-World::World() : 
-	screenWidth(0),
-	screenHeight(0),
-	screenWidthBuffer(0.0f),
-	screenHeightBuffer(0.0f),
-	mSpawnPosition(XMFLOAT3(0,0,0)),
-	mScrollSpeed(0.0f),
-	mWorldView(XMFLOAT4X4()),
-	worldViewPosition(),
-	screenToWorldRatio(0),
-	cameraPosition(XMFLOAT3()),
-	changeInPlayerRotation(0.0f),
-	maxSpeed(0.0f),
-	mPhi(0.0f)
-{
-	LoadTextures();
-}
+//World::World() : 
+//	screenWidth(0),
+//	screenHeight(0),
+//	screenWidthBuffer(0.0f),
+//	screenHeightBuffer(0.0f),
+//	mSpawnPosition(XMFLOAT3(0,0,0)),
+//	mScrollSpeed(0.0f),
+//	mWorldView(XMFLOAT4X4()),
+//	worldViewPosition(),
+//	screenToWorldRatio(0),
+//	cameraPosition(XMFLOAT3()),
+//	changeInPlayerRotation(0.0f),
+//	maxSpeed(0.0f),
+//	mPhi(0.0f)
+//{
+//	BuildScene();
+//}
 
-World::World(Game* gameWorld, float width, float height) :
+World::World(Game* gameWorld) :
 	mGame(gameWorld),
-	screenWidth(width),
-	screenHeight(height),
 	screenWidthBuffer(-10.0f),
 	screenHeightBuffer(-75.0f),
 	mSpawnPosition(XMFLOAT3(0, -20, -25)),
@@ -35,9 +33,11 @@ World::World(Game* gameWorld, float width, float height) :
 	cameraPosition(XMFLOAT3()),
 	changeInPlayerRotation(-30.0f),
 	maxSpeed(50.0f),
-	mPhi(0.25f * XM_PI)
+	mPhi(0.25f * XM_PI),
+	mWorldView(mGame->mView),
+	mSceneGraph(SceneNode())
 {
-		LoadTextures();
+	BuildScene();
 }
 
 void World::Update(const GameTimer& gt)
@@ -119,24 +119,26 @@ void World::UpdateCamera(const GameTimer& gt)
 
 void World::BuildScene()
 {
-	// Initialize the different layers
-	for (std::size_t i = 0; i < SceneNode::LayerCount; ++i)
-	{
-		SceneNode::Ptr layer(new SceneNode());
-		mSceneLayers[i] = layer.get();
-		mSceneGraph.AttachChild(std::move(layer));
-	}
+	//// Initialize the different layers
+	//for (std::size_t i = 0; i < SceneNode::LayerCount; ++i)
+	//{
+	//	SceneNode::Ptr layer(new SceneNode());
+	//	mSceneLayers[i] = layer.get();
+	//	mSceneGraph.AttachChild(std::move(layer));
+	//}
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, 3, 1500, Textures::ID::Desert));
 	backgroundSprite->SetScale(XMFLOAT3(10.0f, 1.0f, 2000.0f));
 	backgroundSprite->SetPosition(0, -100, 0);
-	mSceneLayers[SceneNode::Background]->AttachChild(std::move(backgroundSprite));
+	mSceneGraph.AttachChild(std::move(backgroundSprite));
+	//mSceneLayers[SceneNode::Background]->AttachChild(std::move(backgroundSprite));
 
 	std::unique_ptr<Aircraft> leader(new Aircraft(mGame, Aircraft::Eagle));
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->SetPosition(0,0,0);
 	mPlayerAircraft->SetScale(0.1f, 0.1f, 0.1f);
 	mPlayerAircraft->SetVelocity(XMFLOAT3(0.0f, 0, mScrollSpeed));
-	mSceneLayers[SceneNode::Air]->AttachChild(std::move(leader));
+	mSceneGraph.AttachChild(std::move(leader));
+	//mSceneLayers[SceneNode::Air]->AttachChild(std::move(leader));
 
 	std::unique_ptr<Aircraft> leftEscort(new Aircraft(mGame, Aircraft::Raptor));
 	leftEscort->SetPosition(-25.f, 0.0f, -25);

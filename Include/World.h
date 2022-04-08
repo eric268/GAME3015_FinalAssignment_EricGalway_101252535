@@ -22,7 +22,7 @@ public:
 	/// <summary>Default Constructor
 	/// 
 	/// </summary>
-	World();
+	World() {};
 
 	Game* mGame;
 
@@ -31,7 +31,7 @@ public:
 	/// Contains the width and height of the window</summary>
 	/// <param name="width">Window width</param>
 	/// <param name="height">Window height</param>
-	World(Game* mGame, float width, float height);
+	World(Game* mGame);
 
 	/// <summary>Function that updates main game objects
 	/// 
