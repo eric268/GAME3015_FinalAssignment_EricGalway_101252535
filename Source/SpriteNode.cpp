@@ -25,6 +25,7 @@ SpriteNode::SpriteNode(Game* game, float uScaling, float vScaling, Textures::ID 
 	renderItem->ObjCBIndex = Game::objCBIndex++;
 	renderItem->Geo = game->mGeometries["shapeGeo"].get();;
 	auto searchedMat = mGame->mMaterials.find(std::to_string('0' + id));
+	renderItem->materialID = id;
 	renderItem->material = searchedMat->second.get();
 	
 	renderItem->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;

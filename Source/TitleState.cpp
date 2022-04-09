@@ -50,6 +50,7 @@ void TitleState::BuildScene()
 	mGame->GetRenderItems().clear();
 	mGame->mOpaqueRitems.clear();
 	mGame->mFrameResources.clear();
+	mGame->BuildMaterials();
 	Game::objCBIndex = 0;
 
 

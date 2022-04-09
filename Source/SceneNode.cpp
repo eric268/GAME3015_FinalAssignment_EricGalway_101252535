@@ -84,6 +84,7 @@ void SceneNode::Draw(const GameTimer& gt)
 {
 	if (mParent != nullptr && renderItem != nullptr)
 	{
+		renderItem->UpdateTransform(nodePosition, nodeRotation, nodeScale);
 		renderItem->World = MathHelper::MultiplyXMFLOAT4x4(mParent->renderItem->World, renderItem->World);
 	}
 	

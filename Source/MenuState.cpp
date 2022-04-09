@@ -44,10 +44,11 @@ bool MenuState::handleEvent(const WPARAM event)
 
 void MenuState::BuildScene()
 {
-	mGame->LoadText();
+
 	mGame->GetRenderItems().clear();
 	mGame->mOpaqueRitems.clear();
 	mGame->mFrameResources.clear();
+	mGame->BuildMaterials();
 	Game::objCBIndex = 0;
 
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, 1, 1, Textures::ID::TitleScreen));
@@ -70,5 +71,6 @@ void MenuState::BuildScene()
 
 	mGame->BuildRenderItems();
 	mGame->BuildFrameResources();
+	mGame->BuildPSOs();
 	mGame->InitalizeCamera(100.0f, 1.5f * XM_PI, 0.1f);
 }

@@ -19,15 +19,24 @@ void PauseState::draw(GameTimer dt)
 
 bool PauseState::update(GameTimer dt)
 {
-	//mSceneGraph->Update(dt);
-	return true;
+	return false;
 }
 
 bool PauseState::handleEvent(const WPARAM event)
 {
-	if (event == VK_ESCAPE)
+	if (event == VK_RETURN)
 	{
 		requestStackPop();
+		mGame->GetRenderItems().pop_back();
+		mGame->GetRenderItems().shrink_to_fit();
+		mGame->mOpaqueRitems.pop_back();
+		mGame->mOpaqueRitems.shrink_to_fit();
+		Game::objCBIndex--;
+
+		mGame->mFrameResources.clear();
+		mGame->BuildFrameResources();
+		mGame->BuildMaterials();
+		mGame->ReAddMaterials();
 	}
 
 	if (event == VK_BACK)
@@ -40,16 +49,19 @@ bool PauseState::handleEvent(const WPARAM event)
 
 void PauseState::BuildScene()
 {
-	mGame->mOpaqueRitems.clear();
+
 	mGame->mFrameResources.clear();
+	mGame->BuildMaterials();
 
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, 1, 1, Textures::ID::TitleScreen));
 	mBackgroundSprite = backgroundSprite.get();
 	mBackgroundSprite->SetScale(XMFLOAT3(0.25f, 0.5f, 0.25f));
-	mBackgroundSprite->SetPosition(0, 0, 0);
+	mBackgroundSprite->SetPosition(0, -0.2f, 0);
+	mBackgroundSprite->SetRotation(0, 0, 0);
 	mSceneGraph->AttachChild(std::move(backgroundSprite));
 
-	mGame->BuildRenderItems();
+	mGame->AddRenderItem(mBackgroundSprite->renderItem);
 	mGame->BuildFrameResources();
-	//mGame->BuildPSOs();
+	mGame->BuildPSOs();
+	mGame->ReAddMaterials();
 }

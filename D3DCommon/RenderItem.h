@@ -35,5 +35,6 @@ public:
 	UINT IndexCount = 0;
 	Material* material;
 	MeshGeometry* Geo;
+	int materialID;
 
 };

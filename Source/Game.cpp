@@ -61,12 +61,6 @@ bool Game::Initialize()
 	mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
 	FlushCommandQueue();
 
-
-
-
-
-
-
 	return true;
 }
 
@@ -95,11 +89,13 @@ void Game::Update(const GameTimer& gt)
 		ThrowIfFailed(mFence->SetEventOnCompletion(mCurrFrameResource->Fence, eventHandle));
 		WaitForSingleObject(eventHandle, INFINITE);
 		CloseHandle(eventHandle);
-	}
+	}	
+	
+
 	UpdateObjectCBs(gt);
-	mStateStack.update(gt);
 	UpdateMaterialCBs(gt);
 	UpdateMainPassCB(gt);
+	mStateStack.update(gt);
 
 	if (mStateStack.isEmpty())
 		exit(0);
@@ -141,7 +137,6 @@ void Game::Draw(const GameTimer& gt)
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
 	mStateStack.draw(gt);
-	//gameWorld.Draw(gt);
 
 	// Indicate a state transition on the resource usage.
 	mCommandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
@@ -339,20 +334,7 @@ void Game::LoadTextures()
 	//	mTextures[temp->Name] = std::move(temp);
 	//}
 }
-void Game::LoadText()
-{
-	// Reset the command list to prep for initialization commands.
-	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), nullptr));
-	mCbvSrvDescriptorSize = md3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	
-	BuildMaterials();
 
-	// Execute the initialization commands.
-	ThrowIfFailed(mCommandList->Close());
-	ID3D12CommandList* cmdsLists[] = { mCommandList.Get() };
-	mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
-	FlushCommandQueue();
-}
 //If we have 3 frame resources and n render items, then we have three 3n object constant
 //buffers and 3 pass constant buffers.Hence we need 3(n + 1) constant buffer views(CBVs).
 //Thus we will need to modify our CBV heap to include the additional descriptors :
@@ -511,6 +493,14 @@ void Game::BuildShapeGeometry()
 	mGeometries[geo->Name] = std::move(geo);
 }
 
+void Game::ReAddMaterials()
+{
+	for (auto& e : mAllRitems)
+	{
+		e->material = mMaterials.find(std::to_string('0' + e->materialID))->second.get();
+	}
+}
+
 void Game::BuildPSOs()
 {
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC opaquePsoDesc;
@@ -569,7 +559,7 @@ void Game::BuildFrameResources()
 
 void Game::BuildMaterials()
 {
-	//ResourceManager::GetInstance()->GetMaterials().clear();
+	//mMaterials.clear();
 
 	auto mat0 = std::make_unique<Material>();
 	mat0->Name = std::to_string('0');
@@ -666,7 +656,7 @@ void Game::BuildRenderItems()
 
 void Game::AddRenderItem(RenderItem* renderItems)
 {
-	mAllRitems.push_back(std::make_unique<RenderItem>(std::move(*renderItems)));
+	mOpaqueRitems.push_back(renderItems);
 }
 
 void Game::InitalizeCamera(float radius, float theta, float phi)

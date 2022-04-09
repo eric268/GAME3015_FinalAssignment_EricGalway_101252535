@@ -43,10 +43,11 @@ bool GameState::handleEvent(const WPARAM event)
 
 void GameState::BuildScene()
 {
-	mGame->LoadText();
+
 	mGame->GetRenderItems().clear();
 	mGame->mOpaqueRitems.clear();
 	mGame->mFrameResources.clear();
+	mGame->BuildMaterials();
 	Game::objCBIndex = 0;
 	
 	mGame->InitalizeCamera(150.0f, 1.5f * XM_PI, 0.25f * XM_PI);

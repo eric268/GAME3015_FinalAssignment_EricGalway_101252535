@@ -21,6 +21,7 @@ Aircraft::Aircraft(Game* game, Type type) : Entity(game)
 	
 	renderItem->ObjCBIndex = Game::objCBIndex++;
 	renderItem->Geo = game->mGeometries["shapeGeo"].get();
+	renderItem->materialID = ConvertTypeToTexture(type);
 	auto searchedMat = mGame->mMaterials.find(std::to_string('0' + ConvertTypeToTexture(type)));//ResourceManager::GetInstance()->GetMaterials().find(ConvertTypeToTexture(type));
 	renderItem->material = searchedMat->second.get();
 
@@ -90,7 +91,5 @@ void Aircraft::DrawCurrent(const GameTimer& gt) const
 		mGame->GetCMDList()->DrawIndexedInstanced(mAircraftRenderItem->IndexCount, 1, mAircraftRenderItem->StartIndexLocation, mAircraftRenderItem->BaseVertexLocation, 0);
 
 		std::vector<std::unique_ptr<RenderItem>>& test = mGame->GetRenderItems();
-
-		OutputDebugString(L"Test");
 	}
 }

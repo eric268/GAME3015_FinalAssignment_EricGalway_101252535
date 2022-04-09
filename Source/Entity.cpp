@@ -31,6 +31,7 @@ void Entity::Move(const GameTimer& gt)
 	float y = GetPosition().y + mVelocity.y * gt.DeltaTime();
 	float z = GetPosition().z + mVelocity.z * gt.DeltaTime();
 
+	//renderItem->UpdatePosition(XMFLOAT3(x,y,z));
 	SceneNode::SetPosition(x,y,z);
 }
 

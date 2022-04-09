@@ -56,6 +56,8 @@ public:
 	void BuildShadersAndInputLayout();
 	void BuildShapeGeometry();
 
+	void ReAddMaterials();
+
 	bool doOnce = false;
 
 
