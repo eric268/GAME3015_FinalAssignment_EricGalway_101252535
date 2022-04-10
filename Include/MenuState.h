@@ -29,6 +29,9 @@ private:
 	SpriteNode*				mBackgroundSprite;
 	SpriteNode*				mOption1Sprite;
 	SpriteNode*				mOption2Sprite;
+	SpriteNode*				mArrowSprite;
+
+	OptionNames arrowPosition;
 
 	Game* mGame;
 

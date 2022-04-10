@@ -49,15 +49,15 @@ bool PauseState::handleEvent(const WPARAM event)
 
 void PauseState::BuildScene()
 {
-
+	
 	mGame->mFrameResources.clear();
 	mGame->BuildMaterials();
 
-	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, 1, 1, Textures::ID::TitleScreen));
+	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame, 1, 1, Textures::ID::PauseText));
 	mBackgroundSprite = backgroundSprite.get();
-	mBackgroundSprite->SetScale(XMFLOAT3(0.25f, 0.5f, 0.25f));
-	mBackgroundSprite->SetPosition(0, -0.2f, 0);
-	mBackgroundSprite->SetRotation(0, 0, 0);
+	mBackgroundSprite->SetScale(XMFLOAT3(0.7f, 0.5f, 0.7f));
+	mBackgroundSprite->SetPosition(0, 10.5f, -30);
+	mBackgroundSprite->SetRotation(-45, 0, 0);
 	mSceneGraph->AttachChild(std::move(backgroundSprite));
 
 	mGame->AddRenderItem(mBackgroundSprite->renderItem);

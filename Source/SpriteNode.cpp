@@ -47,7 +47,7 @@ void SpriteNode::DrawCurrent(const GameTimer& gt) const
 
 	if (mSpriteNodeRenderItem)
 	{
-
+		mGame->GetCMDList()->SetPipelineState(mGame->mPSOs["transparent"].Get());
 		mGame->GetCMDList()->IASetVertexBuffers(0, 1, &mSpriteNodeRenderItem->Geo->VertexBufferView());
 		mGame->GetCMDList()->IASetIndexBuffer(&mSpriteNodeRenderItem->Geo->IndexBufferView());
 		mGame->GetCMDList()->IASetPrimitiveTopology(mSpriteNodeRenderItem->PrimitiveType);

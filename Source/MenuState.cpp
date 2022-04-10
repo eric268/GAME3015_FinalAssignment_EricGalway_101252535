@@ -11,7 +11,8 @@ MenuState::MenuState(Game* game, StateStack& stack, Context context)
 	mOption1Sprite(nullptr),
 	mOption2Sprite(nullptr),
 	mBackgroundSprite(nullptr),
-	mSceneGraph(new SceneNode(game))
+	mSceneGraph(new SceneNode(game)),
+	arrowPosition(Play)
 
 {
 	BuildScene();
@@ -29,15 +30,33 @@ bool MenuState::update(GameTimer dt)
 
 bool MenuState::handleEvent(const WPARAM event)
 {
-	if (GetAsyncKeyState('S'))
+	if (event == VK_UP)
 	{
-		requestStackPop();
-		requestStackPush(States::Game);
+		if (arrowPosition != Play)
+		{
+			arrowPosition = Play;
+			mArrowSprite->SetPosition(-15, 0.3f, 8);
+		}
 	}
-	else if (GetAsyncKeyState('Q'))
+	else if (event == VK_DOWN)
 	{
-		// The exit option was chosen, by removing itself, the stack will be empty, and the game will know it is time to close.
-		requestStackPop();
+		if (arrowPosition != Exit)
+		{
+			arrowPosition = Exit;
+			mArrowSprite->SetPosition(-15, 0.3f, -18);
+		}
+	}
+	else if (event == VK_RETURN)
+	{
+		if (arrowPosition == Play)
+		{
+			requestStackPop();
+			requestStackPush(States::Game);
+		}
+		else if (arrowPosition == Exit)
+		{
+			requestStackPop();
+		}
 	}
 	return true;
 }
@@ -57,17 +76,23 @@ void MenuState::BuildScene()
 	mBackgroundSprite->SetPosition(0, 0, 0);
 	mSceneGraph->AttachChild(std::move(backgroundSprite));
 
-	std::unique_ptr<SpriteNode> option1Sprite(new SpriteNode(mGame, 1, 1, Textures::ID::Raptor));
+	std::unique_ptr<SpriteNode> option1Sprite(new SpriteNode(mGame, 1, 1, Textures::ID::PlayText));
 	mOption1Sprite = option1Sprite.get();
-	mOption1Sprite->SetScale(XMFLOAT3(0.15f, 0.5f, 0.15f));
-	mOption1Sprite->SetPosition(25, 0.15f, 0);
+	mOption1Sprite->SetScale(XMFLOAT3(0.3f, 0.5f, 0.3f));
+	mOption1Sprite->SetPosition(15, 0.1f, 0);
 	mSceneGraph->AttachChild(std::move(option1Sprite));
 
-	std::unique_ptr<SpriteNode> option2Sprite(new SpriteNode(mGame, 1, 1, Textures::ID::Eagle));
+	std::unique_ptr<SpriteNode> option2Sprite(new SpriteNode(mGame, 1, 1, Textures::ID::QuitText));
 	mOption2Sprite = option2Sprite.get();
-	mOption2Sprite->SetScale(XMFLOAT3(0.15f, 0.5f, 0.15f));
-	mOption2Sprite->SetPosition(25, 0.1f, -20);
+	mOption2Sprite->SetScale(XMFLOAT3(0.3f, 0.5f, 0.3f));
+	mOption2Sprite->SetPosition(15, 0.2f, -30);
 	mSceneGraph->AttachChild(std::move(option2Sprite));
+
+	std::unique_ptr<SpriteNode> arrowSprite(new SpriteNode(mGame, 1, 1, Textures::ID::Arrow));
+	mArrowSprite = arrowSprite.get();
+	mArrowSprite->SetScale(XMFLOAT3(0.07f, 0.5f, 0.07f));
+	mArrowSprite->SetPosition(-15, 0.3f, 8);
+	mSceneGraph->AttachChild(std::move(arrowSprite));
 
 	mGame->BuildRenderItems();
 	mGame->BuildFrameResources();

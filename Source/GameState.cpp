@@ -28,7 +28,7 @@ bool GameState::handleEvent(const WPARAM event)
 	CommandQueue& commands = mWorld->getCommandQueue();
 	mPlayer.handleEvent(event, commands);
 
-	if (event == 'Z')
+	if (event == 'P')
 	{
 		requestStackPush(States::Pause);
 	}

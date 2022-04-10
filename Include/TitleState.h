@@ -16,7 +16,8 @@ public:
 
 private:
 	SpriteNode*			mBackgroundSprite;
-	SpriteNode*			mPrompt;
+	SpriteNode*			mTitleText;
+	SpriteNode*			mPressKeyText;
 	bool				mShowText;
 	float			mTextEffectTime;
 	Game* mGame;

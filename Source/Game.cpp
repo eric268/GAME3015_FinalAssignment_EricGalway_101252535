@@ -280,12 +280,6 @@ void Game::LoadTextures()
 {
 	mTextures.clear();
 
-	//AddTexture(Textures::ID::Desert, L"Media/Desert.dds");
-	//AddTexture(Textures::ID::Eagle, L"Media/Eagle3.dds");
-	//AddTexture(Textures::ID::Raptor, L"Media/Raptor.dds");
-	//AddTexture(Textures::ID::TitleScreen, L"Media/TitleScreen.dds");
-	//AddTexture(Textures::ID::TitleScreen2, L"Media/Background.dds");
-
 	auto desetText = std::make_unique<Texture>();
 	desetText->Name = std::to_string(Textures::ID::Desert);
 	desetText->Filename = L"Media/Desert.dds";
@@ -307,17 +301,69 @@ void Game::LoadTextures()
 		mCommandList.Get(), raptorText->Filename.c_str(),
 		raptorText->Resource, raptorText->UploadHeap));
 
+	auto title = std::make_unique<Texture>();
+	title->Name = std::to_string(Textures::ID::TitleScreen);
+	title->Filename = L"Media/Title.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), title->Filename.c_str(),
+		title->Resource, title->UploadHeap));
+
+	auto arrow = std::make_unique<Texture>();
+	arrow->Name = std::to_string(Textures::ID::Arrow);
+	arrow->Filename = L"Media/Arrow.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), arrow->Filename.c_str(),
+		arrow->Resource, arrow->UploadHeap));
+
+	auto pauseText = std::make_unique<Texture>();
+	pauseText->Name = std::to_string(Textures::ID::PauseText);
+	pauseText->Filename = L"Media/PauseText.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), pauseText->Filename.c_str(),
+		pauseText->Resource, pauseText->UploadHeap));
+
+	auto playText = std::make_unique<Texture>();
+	playText->Name = std::to_string(Textures::ID::PlayText);
+	playText->Filename = L"Media/PlayUC.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), playText->Filename.c_str(),
+		playText->Resource, playText->UploadHeap));
+
+	auto quitText = std::make_unique<Texture>();
+	quitText->Name = std::to_string(Textures::ID::QuitText);
+	quitText->Filename = L"Media/QuitUC.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), quitText->Filename.c_str(),
+		quitText->Resource, quitText->UploadHeap));
+
+	auto pressKeyText = std::make_unique<Texture>();
+	pressKeyText->Name = std::to_string(Textures::ID::PressKeyText);
+	pressKeyText->Filename = L"Media/PressKeyText.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), pressKeyText->Filename.c_str(),
+		pressKeyText->Resource, pressKeyText->UploadHeap));
+
 	auto titleText = std::make_unique<Texture>();
-	titleText->Name = std::to_string(Textures::ID::TitleScreen);
-	titleText->Filename = L"Media/TitleScreen.dds";
+	titleText->Name = std::to_string(Textures::ID::TitleText);
+	titleText->Filename = L"Media/TitleText.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
 		mCommandList.Get(), titleText->Filename.c_str(),
 		titleText->Resource, titleText->UploadHeap));
 
+	
+
+
 	mTextures[desetText->Name] = std::move(desetText);
 	mTextures[eagleText->Name] = std::move(eagleText);
 	mTextures[raptorText->Name] = std::move(raptorText);
+	mTextures[title->Name] = std::move(title);
+	mTextures[arrow->Name] = std::move(arrow);
+	mTextures[pauseText->Name] = std::move(pauseText);
+	mTextures[playText->Name] = std::move(playText);
+	mTextures[quitText->Name] = std::move(quitText);
+	mTextures[pressKeyText->Name] = std::move(pressKeyText);
 	mTextures[titleText->Name] = std::move(titleText);
+
 
 	//for (int i = 0; i < Textures::NUM_TEXTURE_IDS; i++)
 	//{
@@ -596,21 +642,60 @@ void Game::BuildMaterials()
 	mat3->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
 	mat3->Roughness = 1.0f;
 	mMaterials[std::to_string('3')] = std::move(mat3);
-	//ResourceManager::GetInstance()->GetMaterials()[static_cast<Textures::ID>(0)] = std::move(mat);
 
-	//for (int i = 0; i < Textures::NUM_TEXTURE_IDS; i++)
-	//{
-	//	auto mat = std::make_unique<Material>();
-	//	mat->Name = std::to_string(i);
-	//	mat->MatCBIndex = i;
-	//	mat->DiffuseSrvHeapIndex = i;
-	//	mat->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	//	mat->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
-	//	mat->Roughness = 1.0f;
-	//	//mMaterials[std::to_string(i)] = std::move(mat);
-	//	ResourceManager::GetInstance()->GetMaterials()[static_cast<Textures::ID>(i)] = std::move(mat);
+	auto mat4 = std::make_unique<Material>();
+	mat4->Name = std::to_string('4');
+	mat4->MatCBIndex = 4;
+	mat4->DiffuseSrvHeapIndex = 4;
+	mat4->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	mat4->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
+	mat4->Roughness = 1.0f;
+	mMaterials[std::to_string('4')] = std::move(mat4);
 
-	//}
+	auto mat5 = std::make_unique<Material>();
+	mat5->Name = std::to_string('5');
+	mat5->MatCBIndex = 5;
+	mat5->DiffuseSrvHeapIndex = 5;
+	mat5->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	mat5->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
+	mat5->Roughness = 1.0f;
+	mMaterials[std::to_string('5')] = std::move(mat5);
+
+	auto mat6 = std::make_unique<Material>();
+	mat6->Name = std::to_string('6');
+	mat6->MatCBIndex = 6;
+	mat6->DiffuseSrvHeapIndex = 6;
+	mat6->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	mat6->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
+	mat6->Roughness = 1.0f;
+	mMaterials[std::to_string('6')] = std::move(mat6);
+
+	auto mat7 = std::make_unique<Material>();
+	mat7->Name = std::to_string('7');
+	mat7->MatCBIndex = 7;
+	mat7->DiffuseSrvHeapIndex = 7;
+	mat7->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	mat7->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
+	mat7->Roughness = 1.0f;
+	mMaterials[std::to_string('7')] = std::move(mat7);
+
+	auto mat8 = std::make_unique<Material>();
+	mat8->Name = std::to_string('8');
+	mat8->MatCBIndex = 8;
+	mat8->DiffuseSrvHeapIndex = 8;
+	mat8->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	mat8->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
+	mat8->Roughness = 1.0f;
+	mMaterials[std::to_string('8')] = std::move(mat8);
+
+	auto mat9 = std::make_unique<Material>();
+	mat9->Name = std::to_string('9');
+	mat9->MatCBIndex = 9;
+	mat9->DiffuseSrvHeapIndex = 9;
+	mat9->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	mat9->FresnelR0 = XMFLOAT3(0.1f, 0.1f, 0.1f);
+	mat9->Roughness = 1.0f;
+	mMaterials[std::to_string('9')] = std::move(mat9);
 }
 
 bool Game::GetKeyIsPressed()

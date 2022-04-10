@@ -19,6 +19,12 @@ namespace Textures
 		Raptor,
 		Desert,
 		TitleScreen,
+		Arrow,
+		PauseText,
+		PlayText,
+		QuitText,
+		PressKeyText,
+		TitleText,
 		NUM_TEXTURE_IDS
 	};
 }
