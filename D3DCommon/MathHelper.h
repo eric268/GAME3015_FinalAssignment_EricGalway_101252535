@@ -102,9 +102,9 @@ public:
 
 	static void UpdatePosition(DirectX::XMFLOAT4X4& transform, const DirectX::XMFLOAT3 pos)
 	{
-		transform._41 = pos.x;
-		transform._42 = pos.y;
-		transform._43 = pos.z;
+		transform._41 += pos.x;
+		transform._42 += pos.y;
+		transform._43 += pos.z;
 	}
 
 	static DirectX::XMFLOAT4X4 MultiplyXMFLOAT4x4(DirectX::XMFLOAT4X4 m1, DirectX::XMFLOAT4X4 m2)
