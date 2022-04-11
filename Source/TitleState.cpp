@@ -62,15 +62,10 @@ void TitleState::BuildScene()
 
 	std::unique_ptr<SpriteNode> promptSprite(new SpriteNode(mGame, 1, 1, Textures::ID::TitleText));
 	mTitleText = promptSprite.get();
-	mTitleText->SetScale(XMFLOAT3(0.5f, 3.5f, 0.2f));
-	mTitleText->SetPosition(-10, 0.1f, 20);
+	mTitleText->SetScale(XMFLOAT3(0.08f, 0.05f, 0.05f));
+	mTitleText->SetPosition(-45, 0.1f, -35);
 	mSceneGraph->AttachChild(std::move(promptSprite));
 
-	std::unique_ptr<SpriteNode> pressKeySprite(new SpriteNode(mGame, 1, 1, Textures::ID::PressKeyText));
-	mPressKeyText = pressKeySprite.get();
-	mPressKeyText->SetScale(XMFLOAT3(0.5f, 0.2f, 0.2f));
-	mPressKeyText->SetPosition(0, 0.2f, -10);
-	mSceneGraph->AttachChild(std::move(pressKeySprite));
 
 	mGame->BuildRenderItems();
 	mGame->BuildFrameResources();

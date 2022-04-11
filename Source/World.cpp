@@ -4,24 +4,6 @@
 #include "SpriteNode.h"
 #include "Game.h"
 
-//World::World() : 
-//	screenWidth(0),
-//	screenHeight(0),
-//	screenWidthBuffer(0.0f),
-//	screenHeightBuffer(0.0f),
-//	mSpawnPosition(XMFLOAT3(0,0,0)),
-//	mScrollSpeed(0.0f),
-//	mWorldView(XMFLOAT4X4()),
-//	worldViewPosition(),
-//	screenToWorldRatio(0),
-//	cameraPosition(XMFLOAT3()),
-//	changeInPlayerRotation(0.0f),
-//	maxSpeed(0.0f),
-//	mPhi(0.0f)
-//{
-//	BuildScene();
-//}
-
 World::World(Game* game) :
 	mGame(game),
 	screenWidthBuffer(-10.0f),
@@ -58,14 +40,6 @@ void World::Update(const GameTimer& gt)
 void World::Draw(const GameTimer& gt)
 {
 	mSceneGraph.Draw(gt);
-}
-
-void World::LoadTextures()
-{
-	//AddTexture(Textures::ID::Desert, L"Media/Desert.dds");
-	//AddTexture(Textures::ID::Eagle, L"Media/Eagle3.dds");
-	//AddTexture(Textures::ID::Raptor, L"Media/Raptor.dds");
-	//AddTexture(Textures::ID::TitleScreen, L"Media/TitleScreen.dds");
 }
 
 XMFLOAT4X4 World::GetWorldView()
@@ -121,6 +95,8 @@ void World::UpdateCamera(const GameTimer& gt)
 	cameraPostion.z -= delta;
 
 	MathHelper::UpdatePosition(mGame->mView, deltaCameraPostion);
+
+	mGame->mPlayer.mCameraPosition = cameraPostion;
 }
 
 void World::BuildScene()
@@ -153,11 +129,6 @@ void World::BuildScene()
 	rightEscort->SetPosition(25.f, 0.0f, -25);
 	rightEscort->SetScale(1, 1, 1);
 	mPlayerAircraft->AttachChild(std::move(rightEscort));
-}
-
-void World::AddTexture(Textures::ID id, std::wstring fileName)
-{
-	//ResourceManager::GetInstance()->GetTextureHolder().insert(std::pair<Textures::ID, std::wstring>(id, fileName));
 }
 
 CommandQueue& World::getCommandQueue()

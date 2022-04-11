@@ -3,6 +3,9 @@
 #include <map>
 #include "../D3DCommon/d3dApp.h"
 
+using Microsoft::WRL::ComPtr;
+using namespace DirectX;
+using namespace DirectX::PackedVector;
 class CommandQueue;
 /// <summary>
 /// Class used for handling player inputs and their corresponding actions/events
@@ -59,6 +62,9 @@ public:
 	/// </summary>
 	/// <param name="commands">Takes a reference to the commandQueue </param>
 	void processEvents(CommandQueue& commands);
+
+public:
+	XMFLOAT3 mCameraPosition;
 
 private:
 	/// <summary>

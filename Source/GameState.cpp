@@ -32,18 +32,12 @@ bool GameState::handleEvent(const WPARAM event)
 	{
 		requestStackPush(States::Pause);
 	}
-
-	// Escape pressed, trigger the pause screen
-	//if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-//	requestStackPush(States::Pause);
-
-
 	return true;
 }
 
 void GameState::BuildScene()
 {
-
+	mGame->FlushCommandQueue();
 	mGame->GetRenderItems().clear();
 	mGame->mOpaqueRitems.clear();
 	mGame->mFrameResources.clear();
@@ -56,5 +50,4 @@ void GameState::BuildScene()
 
 	mGame->BuildRenderItems();
 	mGame->BuildFrameResources();
-
 }

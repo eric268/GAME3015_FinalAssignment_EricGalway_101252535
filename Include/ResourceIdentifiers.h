@@ -23,7 +23,7 @@ namespace Textures
 		PauseText,
 		PlayText,
 		QuitText,
-		PressKeyText,
+		MenuScreen,
 		TitleText,
 		NUM_TEXTURE_IDS
 	};

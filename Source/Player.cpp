@@ -26,7 +26,7 @@ struct AircraftMover
 	XMFLOAT2 velocity;
 };
 
-Player::Player()
+Player::Player() : mCameraPosition(XMFLOAT3())
 {
 	mKeyBinding[VK_LEFT] = MoveLeft;
 	mKeyBinding[VK_RIGHT] = MoveRight;

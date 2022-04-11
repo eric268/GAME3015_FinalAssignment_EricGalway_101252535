@@ -97,6 +97,8 @@ void Game::Update(const GameTimer& gt)
 	UpdateMainPassCB(gt);
 	mStateStack.update(gt);
 
+
+
 	if (mStateStack.isEmpty())
 		exit(0);
 }
@@ -187,9 +189,6 @@ void Game::OnKeyPressed(WPARAM key)
 
 void Game::OnKeyboardInput(const GameTimer& gt)
 {
-	//mStateStack.handleEvent('A');
-	//CommandQueue& commands = gameWorld.getCommandQueue();
-	//mPlayer.handleRealtimeInput(commands);
 
 }
 
@@ -303,7 +302,7 @@ void Game::LoadTextures()
 
 	auto title = std::make_unique<Texture>();
 	title->Name = std::to_string(Textures::ID::TitleScreen);
-	title->Filename = L"Media/Title.dds";
+	title->Filename = L"Media/TitleBackground.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
 		mCommandList.Get(), title->Filename.c_str(),
 		title->Resource, title->UploadHeap));
@@ -324,24 +323,24 @@ void Game::LoadTextures()
 
 	auto playText = std::make_unique<Texture>();
 	playText->Name = std::to_string(Textures::ID::PlayText);
-	playText->Filename = L"Media/PlayUC.dds";
+	playText->Filename = L"Media/PlayText.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
 		mCommandList.Get(), playText->Filename.c_str(),
 		playText->Resource, playText->UploadHeap));
 
 	auto quitText = std::make_unique<Texture>();
 	quitText->Name = std::to_string(Textures::ID::QuitText);
-	quitText->Filename = L"Media/QuitUC.dds";
+	quitText->Filename = L"Media/QuitText.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
 		mCommandList.Get(), quitText->Filename.c_str(),
 		quitText->Resource, quitText->UploadHeap));
 
-	auto pressKeyText = std::make_unique<Texture>();
-	pressKeyText->Name = std::to_string(Textures::ID::PressKeyText);
-	pressKeyText->Filename = L"Media/PressKeyText.dds";
+	auto menuScreen = std::make_unique<Texture>();
+	menuScreen->Name = std::to_string(Textures::ID::MenuScreen);
+	menuScreen->Filename = L"Media/MenuBackground2.dds";
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), pressKeyText->Filename.c_str(),
-		pressKeyText->Resource, pressKeyText->UploadHeap));
+		mCommandList.Get(), menuScreen->Filename.c_str(),
+		menuScreen->Resource, menuScreen->UploadHeap));
 
 	auto titleText = std::make_unique<Texture>();
 	titleText->Name = std::to_string(Textures::ID::TitleText);
@@ -361,24 +360,8 @@ void Game::LoadTextures()
 	mTextures[pauseText->Name] = std::move(pauseText);
 	mTextures[playText->Name] = std::move(playText);
 	mTextures[quitText->Name] = std::move(quitText);
-	mTextures[pressKeyText->Name] = std::move(pressKeyText);
+	mTextures[menuScreen->Name] = std::move(menuScreen);
 	mTextures[titleText->Name] = std::move(titleText);
-
-
-	//for (int i = 0; i < Textures::NUM_TEXTURE_IDS; i++)
-	//{
-	//	auto temp = std::make_unique<Texture>();
-	//	temp->Name = std::to_string(i);
-
-	//	auto t = mMaterials.find(std::to_string('0' + Textures::ID(i)));
-
-	//	temp->Filename = t->second;
-	//	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-	//		mCommandList.Get(), temp->Filename.c_str(),
-	//		temp->Resource, temp->UploadHeap));
-
-	//	mTextures[temp->Name] = std::move(temp);
-	//}
 }
 
 //If we have 3 frame resources and n render items, then we have three 3n object constant

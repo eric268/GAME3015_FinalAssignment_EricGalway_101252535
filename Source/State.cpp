@@ -16,7 +16,6 @@ State::State(Game* game, StateStack& stack, Context context)
 
 State::~State()
 {
-	mGame->FlushCommandQueue();
 }
 
 void State::requestStackPush(States::ID stateID)
