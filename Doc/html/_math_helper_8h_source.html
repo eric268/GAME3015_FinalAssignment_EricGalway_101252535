@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A2_Eric_Galway_101252535_W2022: D3DCommon/MathHelper.h Source File</title>
+<title>GAME3015 Final Assignment W2022 Eric Galway: D3DCommon/MathHelper.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
+   <div id="projectname">GAME3015 Final Assignment W2022 Eric Galway<span id="projectnumber">&#160;3.0</span>
    </div>
-   <div id="projectbrief">Showcasing input handeling in Directx12</div>
+   <div id="projectbrief">Game made with DirectX 12 showcasing input handeling and a state machine</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -199,9 +199,9 @@ $(document).ready(function(){initNavTree('_math_helper_8h_source.html',''); init
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="class_math_helper.html#a15ec0fd8ffcbdbf63fa9b232c03bde4e">  103</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_math_helper.html#a15ec0fd8ffcbdbf63fa9b232c03bde4e">UpdatePosition</a>(DirectX::XMFLOAT4X4&amp; transform, <span class="keyword">const</span> DirectX::XMFLOAT3 pos)</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        transform._41 = pos.x;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        transform._42 = pos.y;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        transform._43 = pos.z;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        transform._41 += pos.x;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        transform._42 += pos.y;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        transform._43 += pos.z;</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    }</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="class_math_helper.html#a26c67a7519fc5a63b1a2574880eb74f4">  110</a></span>    <span class="keyword">static</span> DirectX::XMFLOAT4X4 <a class="code hl_function" href="class_math_helper.html#a26c67a7519fc5a63b1a2574880eb74f4">MultiplyXMFLOAT4x4</a>(DirectX::XMFLOAT4X4 m1, DirectX::XMFLOAT4X4 m2)</div>

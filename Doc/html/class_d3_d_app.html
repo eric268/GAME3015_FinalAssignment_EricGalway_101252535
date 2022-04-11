@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A2_Eric_Galway_101252535_W2022: D3DApp Class Reference</title>
+<title>GAME3015 Final Assignment W2022 Eric Galway: D3DApp Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
+   <div id="projectname">GAME3015 Final Assignment W2022 Eric Galway<span id="projectnumber">&#160;3.0</span>
    </div>
-   <div id="projectbrief">Showcasing input handeling in Directx12</div>
+   <div id="projectbrief">Game made with DirectX 12 showcasing input handeling and a state machine</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -95,6 +95,7 @@ $(document).ready(function(){initNavTree('class_d3_d_app.html',''); initResizabl
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
@@ -132,11 +133,30 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a961fa79170dcbde858923a5250c322be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50a6ba535971837f61c79d7f9390dc30"><td class="memItemLeft" align="right" valign="top">virtual LRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a50a6ba535971837f61c79d7f9390dc30">MsgProc</a> (HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)</td></tr>
 <tr class="separator:a50a6ba535971837f61c79d7f9390dc30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a9a6996e2864dc2c163e433e1b99f9b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a8a9a6996e2864dc2c163e433e1b99f9b">GetKeyIsPressed</a> ()</td></tr>
+<tr class="separator:a8a9a6996e2864dc2c163e433e1b99f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a052765b8de0e26f4fece9ad14a3f3e28"><td class="memItemLeft" align="right" valign="top">virtual WPARAM&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a052765b8de0e26f4fece9ad14a3f3e28">GetKeyPressed</a> ()</td></tr>
+<tr class="separator:a052765b8de0e26f4fece9ad14a3f3e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd141907db51f0c177ab89955e9d5de9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#afd141907db51f0c177ab89955e9d5de9">FlushCommandQueue</a> ()</td></tr>
+<tr class="separator:afd141907db51f0c177ab89955e9d5de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36697750adfffa2094194496798096cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a36697750adfffa2094194496798096cf">SetCurrentFence</a> (UINT64 val)</td></tr>
+<tr class="separator:a36697750adfffa2094194496798096cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a66173f354ad8b3edc6c714883c7203df"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_d3_d_app.html">D3DApp</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a66173f354ad8b3edc6c714883c7203df">GetApp</a> ()</td></tr>
 <tr class="separator:a66173f354ad8b3edc6c714883c7203df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a96ae78a6cf93ec91272032890ef65440"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; ID3D12CommandQueue &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a96ae78a6cf93ec91272032890ef65440">mCommandQueue</a></td></tr>
+<tr class="separator:a96ae78a6cf93ec91272032890ef65440"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae00420d2e3d8305821a1a95ebc1b00bb"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; ID3D12CommandAllocator &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#ae00420d2e3d8305821a1a95ebc1b00bb">mDirectCmdListAlloc</a></td></tr>
+<tr class="separator:ae00420d2e3d8305821a1a95ebc1b00bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d515a557287c1a8f8fcc60abc839e84"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; ID3D12GraphicsCommandList &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a3d515a557287c1a8f8fcc60abc839e84">mCommandList</a></td></tr>
+<tr class="separator:a3d515a557287c1a8f8fcc60abc839e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15b84b7e76f6c705196dd6b4b5ad418d"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; ID3D12Device &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a15b84b7e76f6c705196dd6b4b5ad418d">md3dDevice</a></td></tr>
+<tr class="separator:a15b84b7e76f6c705196dd6b4b5ad418d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -172,8 +192,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a978d7c0fda3b30b09c91dc52ec99d942"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93e68c33a000808033ce442cd5568dec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a93e68c33a000808033ce442cd5568dec">CreateSwapChain</a> ()</td></tr>
 <tr class="separator:a93e68c33a000808033ce442cd5568dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd141907db51f0c177ab89955e9d5de9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#afd141907db51f0c177ab89955e9d5de9">FlushCommandQueue</a> ()</td></tr>
-<tr class="separator:afd141907db51f0c177ab89955e9d5de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a851376059fec11e3a6d7535785c5d8cd"><td class="memItemLeft" align="right" valign="top">ID3D12Resource *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a851376059fec11e3a6d7535785c5d8cd">CurrentBackBuffer</a> () const</td></tr>
 <tr class="separator:a851376059fec11e3a6d7535785c5d8cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac796a8fcd1a1af0e4665e221af6981d4"><td class="memItemLeft" align="right" valign="top">D3D12_CPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#ac796a8fcd1a1af0e4665e221af6981d4">CurrentBackBufferView</a> () const</td></tr>
@@ -215,18 +233,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a8bb5fcea3838adea2a82cd32cf641ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adac97bdf38a37003abbbd7d39c2a75fb"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; IDXGISwapChain &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#adac97bdf38a37003abbbd7d39c2a75fb">mSwapChain</a></td></tr>
 <tr class="separator:adac97bdf38a37003abbbd7d39c2a75fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15b84b7e76f6c705196dd6b4b5ad418d"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; ID3D12Device &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a15b84b7e76f6c705196dd6b4b5ad418d">md3dDevice</a></td></tr>
-<tr class="separator:a15b84b7e76f6c705196dd6b4b5ad418d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90597e8c2902073536b6609864eaf160"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; ID3D12Fence &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a90597e8c2902073536b6609864eaf160">mFence</a></td></tr>
 <tr class="separator:a90597e8c2902073536b6609864eaf160"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc7041db5dcaaa0d76ed263c55d1c6b2"><td class="memItemLeft" align="right" valign="top">UINT64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#acc7041db5dcaaa0d76ed263c55d1c6b2">mCurrentFence</a> = 0</td></tr>
 <tr class="separator:acc7041db5dcaaa0d76ed263c55d1c6b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96ae78a6cf93ec91272032890ef65440"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; ID3D12CommandQueue &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a96ae78a6cf93ec91272032890ef65440">mCommandQueue</a></td></tr>
-<tr class="separator:a96ae78a6cf93ec91272032890ef65440"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae00420d2e3d8305821a1a95ebc1b00bb"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; ID3D12CommandAllocator &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#ae00420d2e3d8305821a1a95ebc1b00bb">mDirectCmdListAlloc</a></td></tr>
-<tr class="separator:ae00420d2e3d8305821a1a95ebc1b00bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d515a557287c1a8f8fcc60abc839e84"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; ID3D12GraphicsCommandList &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a3d515a557287c1a8f8fcc60abc839e84">mCommandList</a></td></tr>
-<tr class="separator:a3d515a557287c1a8f8fcc60abc839e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0ef1ea8fcb85251dcd6d603a4090d62"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#ab0ef1ea8fcb85251dcd6d603a4090d62">mCurrBackBuffer</a> = 0</td></tr>
 <tr class="separator:ab0ef1ea8fcb85251dcd6d603a4090d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad84c0de388ee240f478cc14c1dc7ba24"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; ID3D12Resource &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#ad84c0de388ee240f478cc14c1dc7ba24">mSwapChainBuffer</a> [<a class="el" href="class_d3_d_app.html#af4cd47b4bb3b28e1013e861355baf8e8">SwapChainBufferCount</a>]</td></tr>
@@ -247,7 +257,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a61a130cb7d4045a2ab26b486cd07edb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e084fa045c8e46d65a37889ff5d307d"><td class="memItemLeft" align="right" valign="top">UINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a0e084fa045c8e46d65a37889ff5d307d">mCbvSrvUavDescriptorSize</a> = 0</td></tr>
 <tr class="separator:a0e084fa045c8e46d65a37889ff5d307d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb2eb2bca9adc01c7224200eab6b14dc"><td class="memItemLeft" align="right" valign="top">std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#afb2eb2bca9adc01c7224200eab6b14dc">mMainWndCaption</a> = L&quot;A2 <a class="el" href="class_game.html">Game</a> 3015 Eric Galway 101252535&quot;</td></tr>
+<tr class="memitem:afb2eb2bca9adc01c7224200eab6b14dc"><td class="memItemLeft" align="right" valign="top">std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#afb2eb2bca9adc01c7224200eab6b14dc">mMainWndCaption</a> = L&quot;Final Assignment <a class="el" href="class_game.html">Game</a> 3015 Eric Galway 101252535&quot;</td></tr>
 <tr class="separator:afb2eb2bca9adc01c7224200eab6b14dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a357a4053739265f5bfe5a8d209073fe0"><td class="memItemLeft" align="right" valign="top">D3D_DRIVER_TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a357a4053739265f5bfe5a8d209073fe0">md3dDriverType</a> = D3D_DRIVER_TYPE_HARDWARE</td></tr>
 <tr class="separator:a357a4053739265f5bfe5a8d209073fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -259,6 +269,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a3f9dae9800854a7aae8a9ca8677a4d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad54b6af44b0c13b645f363d849230d51"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#ad54b6af44b0c13b645f363d849230d51">mClientHeight</a> = 600</td></tr>
 <tr class="separator:ad54b6af44b0c13b645f363d849230d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc8127c6fda5ba5459fd86968b5b0ea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a6cc8127c6fda5ba5459fd86968b5b0ea">keyIsPressed</a> = false</td></tr>
+<tr class="separator:a6cc8127c6fda5ba5459fd86968b5b0ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e1b033c97c4e1b4eafbd556d614ceae"><td class="memItemLeft" align="right" valign="top">WPARAM&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_d3_d_app.html#a9e1b033c97c4e1b4eafbd556d614ceae">keyPressed</a></td></tr>
+<tr class="separator:a9e1b033c97c4e1b4eafbd556d614ceae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -586,9 +600,6 @@ Static Protected Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void D3DApp::FlushCommandQueue </td>
@@ -597,11 +608,6 @@ Static Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -645,6 +651,60 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a9a6996e2864dc2c163e433e1b99f9b" name="a8a9a6996e2864dc2c163e433e1b99f9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a9a6996e2864dc2c163e433e1b99f9b">&#9670;&nbsp;</a></span>GetKeyIsPressed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool D3DApp::GetKeyIsPressed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="class_game.html#adde1139fc92ebd4c6818c72c2b4d0de3">Game</a>.</p>
+
+</div>
+</div>
+<a id="a052765b8de0e26f4fece9ad14a3f3e28" name="a052765b8de0e26f4fece9ad14a3f3e28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a052765b8de0e26f4fece9ad14a3f3e28">&#9670;&nbsp;</a></span>GetKeyPressed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WPARAM D3DApp::GetKeyPressed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="class_game.html#a724b41ca85a944ebbacaecfbe744f413">Game</a>.</p>
 
 </div>
 </div>
@@ -1115,6 +1175,24 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a36697750adfffa2094194496798096cf" name="a36697750adfffa2094194496798096cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36697750adfffa2094194496798096cf">&#9670;&nbsp;</a></span>SetCurrentFence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void D3DApp::SetCurrentFence </td>
+          <td>(</td>
+          <td class="paramtype">UINT64&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae31029e118e14ee3ae4649f1c6f8d2dd" name="ae31029e118e14ee3ae4649f1c6f8d2dd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae31029e118e14ee3ae4649f1c6f8d2dd">&#9670;&nbsp;</a></span>Update()</h2>
 
@@ -1142,6 +1220,50 @@ Static Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a6cc8127c6fda5ba5459fd86968b5b0ea" name="a6cc8127c6fda5ba5459fd86968b5b0ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cc8127c6fda5ba5459fd86968b5b0ea">&#9670;&nbsp;</a></span>keyIsPressed</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool D3DApp::keyIsPressed = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e1b033c97c4e1b4eafbd556d614ceae" name="a9e1b033c97c4e1b4eafbd556d614ceae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e1b033c97c4e1b4eafbd556d614ceae">&#9670;&nbsp;</a></span>keyPressed</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WPARAM D3DApp::keyPressed</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afb28a606eca768c1bb6cdc2109683dc7" name="afb28a606eca768c1bb6cdc2109683dc7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afb28a606eca768c1bb6cdc2109683dc7">&#9670;&nbsp;</a></span>m4xMsaaQuality</h2>
 
@@ -1323,19 +1445,11 @@ Static Protected Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Microsoft::WRL::ComPtr&lt;ID3D12GraphicsCommandList&gt; D3DApp::mCommandList</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -1345,19 +1459,11 @@ Static Protected Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Microsoft::WRL::ComPtr&lt;ID3D12CommandQueue&gt; D3DApp::mCommandQueue</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -1411,19 +1517,11 @@ Static Protected Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Microsoft::WRL::ComPtr&lt;ID3D12Device&gt; D3DApp::md3dDevice</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -1499,19 +1597,11 @@ Static Protected Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Microsoft::WRL::ComPtr&lt;ID3D12CommandAllocator&gt; D3DApp::mDirectCmdListAlloc</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -1680,7 +1770,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::wstring D3DApp::mMainWndCaption = L&quot;A2 <a class="el" href="class_game.html">Game</a> 3015 Eric Galway 101252535&quot;</td>
+          <td class="memname">std::wstring D3DApp::mMainWndCaption = L&quot;Final Assignment <a class="el" href="class_game.html">Game</a> 3015 Eric Galway 101252535&quot;</td>
         </tr>
       </table>
   </td>

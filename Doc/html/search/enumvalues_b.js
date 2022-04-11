@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['transparent_0',['Transparent',['../_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159a3d971943089a3388c01fb297a32d9ba7',1,'ResourceIdentifiers.h']]]
+  ['quittext_0',['QuitText',['../namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a798bb85038e8221381d7602849b5621d',1,'Textures']]]
 ];

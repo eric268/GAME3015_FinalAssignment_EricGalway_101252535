@@ -1,5 +1,6 @@
 var class_entity =
 [
+    [ "Entity", "class_entity.html#a9f6b0ce5dcbdb9107ba1972da24003a6", null ],
     [ "accelerate", "class_entity.html#a2ff2403c455f15b3fe5d04e922b3943d", null ],
     [ "accelerate", "class_entity.html#a29cd4a06215880f5442ad3b8ffad63ff", null ],
     [ "GetVelocity", "class_entity.html#ae5d97f80366fed4ce0a6855d14a41a93", null ],

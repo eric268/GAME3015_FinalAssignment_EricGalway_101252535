@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A2_Eric_Galway_101252535_W2022: SceneNode Class Reference</title>
+<title>GAME3015 Final Assignment W2022 Eric Galway: SceneNode Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
+   <div id="projectname">GAME3015 Final Assignment W2022 Eric Galway<span id="projectnumber">&#160;3.0</span>
    </div>
-   <div id="projectbrief">Showcasing input handeling in Directx12</div>
+   <div id="projectbrief">Game made with DirectX 12 showcasing input handeling and a state machine</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -95,6 +95,7 @@ $(document).ready(function(){initNavTree('class_scene_node.html',''); initResiza
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="class_scene_node-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">SceneNode Class Reference</div></div>
 </div><!--header-->
@@ -118,14 +119,21 @@ Inheritance diagram for SceneNode:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
+<tr class="memitem:a1aa0d9084e4e1cab66fdc4ae9598f90a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#a1aa0d9084e4e1cab66fdc4ae9598f90a">Layer</a> { <a class="el" href="class_scene_node.html#a1aa0d9084e4e1cab66fdc4ae9598f90aa6a8bd12962bf5829d447157fc2280085">Background</a>
+, <a class="el" href="class_scene_node.html#a1aa0d9084e4e1cab66fdc4ae9598f90aa5fe47e46bcb6768820ff1f1d6032ab85">Air</a>
+, <a class="el" href="class_scene_node.html#a1aa0d9084e4e1cab66fdc4ae9598f90aa2157cb94a149aaf5928f7cc17c0fc7b4">LayerCount</a>
+ }</td></tr>
+<tr class="separator:a1aa0d9084e4e1cab66fdc4ae9598f90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17e23bcf18251560fe4721c9123dfb9d"><td class="memItemLeft" align="right" valign="top">typedef std::shared_ptr&lt; <a class="el" href="class_scene_node.html">SceneNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#a17e23bcf18251560fe4721c9123dfb9d">Ptr</a></td></tr>
 <tr class="separator:a17e23bcf18251560fe4721c9123dfb9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:acc2e7940323560ba86dad8e2d6eb6690"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#acc2e7940323560ba86dad8e2d6eb6690">SceneNode</a> ()</td></tr>
-<tr class="memdesc:acc2e7940323560ba86dad8e2d6eb6690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for Scene Node  <a href="class_scene_node.html#acc2e7940323560ba86dad8e2d6eb6690">More...</a><br /></td></tr>
 <tr class="separator:acc2e7940323560ba86dad8e2d6eb6690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1f3bf5e98c8b2c90b36057df2577d1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#af1f3bf5e98c8b2c90b36057df2577d1a">SceneNode</a> (<a class="el" href="class_game.html">Game</a> *game)</td></tr>
+<tr class="memdesc:af1f3bf5e98c8b2c90b36057df2577d1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for Scene Node  <a href="class_scene_node.html#af1f3bf5e98c8b2c90b36057df2577d1a">More...</a><br /></td></tr>
+<tr class="separator:af1f3bf5e98c8b2c90b36057df2577d1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ba065dcc419234283a0086823a09068"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#a7ba065dcc419234283a0086823a09068">AttachChild</a> (<a class="el" href="class_scene_node.html#a17e23bcf18251560fe4721c9123dfb9d">Ptr</a> child)</td></tr>
 <tr class="memdesc:a7ba065dcc419234283a0086823a09068"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attaches scene nodes as children  <a href="class_scene_node.html#a7ba065dcc419234283a0086823a09068">More...</a><br /></td></tr>
 <tr class="separator:a7ba065dcc419234283a0086823a09068"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -189,9 +197,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8b3f450fde826723e0e0c66c9fe77d68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#a8b3f450fde826723e0e0c66c9fe77d68">SetScale</a> (float x, float y, float z)</td></tr>
 <tr class="memdesc:a8b3f450fde826723e0e0c66c9fe77d68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the scale of the scene node  <a href="class_scene_node.html#a8b3f450fde826723e0e0c66c9fe77d68">More...</a><br /></td></tr>
 <tr class="separator:a8b3f450fde826723e0e0c66c9fe77d68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae58639ad1f79f51271788372428bbc4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#aae58639ad1f79f51271788372428bbc4">SetRenderItem</a> (<a class="el" href="class_render_item.html">RenderItem</a> *renderItem)</td></tr>
+<tr class="memitem:aae58639ad1f79f51271788372428bbc4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#aae58639ad1f79f51271788372428bbc4">SetRenderItem</a> (<a class="el" href="class_render_item.html">RenderItem</a> *<a class="el" href="class_scene_node.html#a45b939839c61baa3396a020fb1710afb">renderItem</a>)</td></tr>
 <tr class="memdesc:aae58639ad1f79f51271788372428bbc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the render item to the paramter  <a href="class_scene_node.html#aae58639ad1f79f51271788372428bbc4">More...</a><br /></td></tr>
 <tr class="separator:aae58639ad1f79f51271788372428bbc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a707d389d06633c9e40041209c77ff3b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_game.html">Game</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#a707d389d06633c9e40041209c77ff3b6">mGame</a></td></tr>
+<tr class="separator:a707d389d06633c9e40041209c77ff3b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45b939839c61baa3396a020fb1710afb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_render_item.html">RenderItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene_node.html#a45b939839c61baa3396a020fb1710afb">renderItem</a></td></tr>
+<tr class="separator:a45b939839c61baa3396a020fb1710afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Class which all scene objects will inherit from. </p>
@@ -211,9 +226,29 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a1aa0d9084e4e1cab66fdc4ae9598f90a" name="a1aa0d9084e4e1cab66fdc4ae9598f90a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1aa0d9084e4e1cab66fdc4ae9598f90a">&#9670;&nbsp;</a></span>Layer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_scene_node.html#a1aa0d9084e4e1cab66fdc4ae9598f90a">SceneNode::Layer</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a1aa0d9084e4e1cab66fdc4ae9598f90aa6a8bd12962bf5829d447157fc2280085" name="a1aa0d9084e4e1cab66fdc4ae9598f90aa6a8bd12962bf5829d447157fc2280085"></a>Background&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1aa0d9084e4e1cab66fdc4ae9598f90aa5fe47e46bcb6768820ff1f1d6032ab85" name="a1aa0d9084e4e1cab66fdc4ae9598f90aa5fe47e46bcb6768820ff1f1d6032ab85"></a>Air&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1aa0d9084e4e1cab66fdc4ae9598f90aa2157cb94a149aaf5928f7cc17c0fc7b4" name="a1aa0d9084e4e1cab66fdc4ae9598f90aa2157cb94a149aaf5928f7cc17c0fc7b4"></a>LayerCount&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="acc2e7940323560ba86dad8e2d6eb6690" name="acc2e7940323560ba86dad8e2d6eb6690"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc2e7940323560ba86dad8e2d6eb6690">&#9670;&nbsp;</a></span>SceneNode()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acc2e7940323560ba86dad8e2d6eb6690">&#9670;&nbsp;</a></span>SceneNode() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -222,6 +257,24 @@ Public Member Functions</h2></td></tr>
           <td class="memname">SceneNode::SceneNode </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af1f3bf5e98c8b2c90b36057df2577d1a" name="af1f3bf5e98c8b2c90b36057df2577d1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1f3bf5e98c8b2c90b36057df2577d1a">&#9670;&nbsp;</a></span>SceneNode() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SceneNode::SceneNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -792,6 +845,35 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a707d389d06633c9e40041209c77ff3b6" name="a707d389d06633c9e40041209c77ff3b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a707d389d06633c9e40041209c77ff3b6">&#9670;&nbsp;</a></span>mGame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_game.html">Game</a>* SceneNode::mGame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a45b939839c61baa3396a020fb1710afb" name="a45b939839c61baa3396a020fb1710afb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45b939839c61baa3396a020fb1710afb">&#9670;&nbsp;</a></span>renderItem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_render_item.html">RenderItem</a>* SceneNode::renderItem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

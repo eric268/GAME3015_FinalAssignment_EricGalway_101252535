@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['id_0',['ID',['../namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5',1,'Textures']]],
+  ['id_0',['ID',['../namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5',1,'Textures::ID()'],['../namespace_fonts.html#a240717ec0dc75e98501af734a02c396d',1,'Fonts::ID()'],['../namespace_states.html#a571a0dc62822f97bb9511eb013d8e1c3',1,'States::ID()']]],
   ['identity4x4_1',['Identity4x4',['../class_math_helper.html#a68b4e9af95b1a36aad30ea80839f6b19',1,'MathHelper']]],
   ['indexbufferbytesize_2',['IndexBufferByteSize',['../struct_mesh_geometry.html#ada154aecae7686cb96099c259fa49946',1,'MeshGeometry']]],
   ['indexbuffercpu_3',['IndexBufferCPU',['../struct_mesh_geometry.html#aa9a4e934b370f9c716217b01c15bad32',1,'MeshGeometry']]],
@@ -11,15 +11,17 @@ var searchData=
   ['indexformat_8',['IndexFormat',['../struct_mesh_geometry.html#a4ab6fed21b08b6008850e43f8e912506',1,'MeshGeometry']]],
   ['indices32_9',['Indices32',['../struct_geometry_generator_1_1_mesh_data.html#af32ad2f27a3c6c78700f726050e2eb73',1,'GeometryGenerator::MeshData']]],
   ['infinity_10',['Infinity',['../class_math_helper.html#a47ba7794c81623ae250d7593a0e8de6a',1,'MathHelper']]],
-  ['initdirect3d_11',['InitDirect3D',['../class_d3_d_app.html#a13ad61cbed0b9641974cc6183ba6a22b',1,'D3DApp']]],
-  ['initialize_12',['Initialize',['../class_d3_d_app.html#a961fa79170dcbde858923a5250c322be',1,'D3DApp::Initialize()'],['../class_game.html#a16354d232327f6c21319713bf6983674',1,'Game::Initialize()']]],
-  ['initmainwindow_13',['InitMainWindow',['../class_d3_d_app.html#a775e141865e0de4dc3f3a39281cbcf02',1,'D3DApp']]],
-  ['inversetranspose_14',['InverseTranspose',['../class_math_helper.html#aaad3761266ef094f5448993a8b2992a5',1,'MathHelper']]],
-  ['invproj_15',['InvProj',['../struct_pass_constants.html#a9a1ac0a0421d54bf40c9749ec1d1537c',1,'PassConstants']]],
-  ['invrendertargetsize_16',['InvRenderTargetSize',['../struct_pass_constants.html#af25015138bf3b92384560ec1eed1e6aa',1,'PassConstants']]],
-  ['invview_17',['InvView',['../struct_pass_constants.html#a4c0b015fa6bc9623ccfa4be6a16a4da9',1,'PassConstants']]],
-  ['invviewproj_18',['InvViewProj',['../struct_pass_constants.html#a54f008edf338ad532633c2bb797fca88',1,'PassConstants']]],
-  ['isbitmask_19',['ISBITMASK',['../_d_d_s_texture_loader_8cpp.html#a5f3918f64c6ea8f31c0cd931b0578017',1,'DDSTextureLoader.cpp']]],
-  ['isempty_20',['isEmpty',['../class_command_queue.html#a3a6eb6a7c83d9b20ad7a6cac63795ec1',1,'CommandQueue']]],
-  ['iskeydown_21',['IsKeyDown',['../classd3d_util.html#a2e43ccad934a5f8de92c10de835e7d14',1,'d3dUtil']]]
+  ['initalizecamera_11',['InitalizeCamera',['../class_game.html#a5fdca04c533905f8ce751fc999ea94ad',1,'Game']]],
+  ['initalizestate_12',['InitalizeState',['../class_game.html#a1a3ae4e5b96d09ad2f4f9461206dc546',1,'Game']]],
+  ['initdirect3d_13',['InitDirect3D',['../class_d3_d_app.html#a13ad61cbed0b9641974cc6183ba6a22b',1,'D3DApp']]],
+  ['initialize_14',['Initialize',['../class_d3_d_app.html#a961fa79170dcbde858923a5250c322be',1,'D3DApp::Initialize()'],['../class_game.html#a16354d232327f6c21319713bf6983674',1,'Game::Initialize()']]],
+  ['initmainwindow_15',['InitMainWindow',['../class_d3_d_app.html#a775e141865e0de4dc3f3a39281cbcf02',1,'D3DApp']]],
+  ['inversetranspose_16',['InverseTranspose',['../class_math_helper.html#aaad3761266ef094f5448993a8b2992a5',1,'MathHelper']]],
+  ['invproj_17',['InvProj',['../struct_pass_constants.html#a9a1ac0a0421d54bf40c9749ec1d1537c',1,'PassConstants']]],
+  ['invrendertargetsize_18',['InvRenderTargetSize',['../struct_pass_constants.html#af25015138bf3b92384560ec1eed1e6aa',1,'PassConstants']]],
+  ['invview_19',['InvView',['../struct_pass_constants.html#a4c0b015fa6bc9623ccfa4be6a16a4da9',1,'PassConstants']]],
+  ['invviewproj_20',['InvViewProj',['../struct_pass_constants.html#a54f008edf338ad532633c2bb797fca88',1,'PassConstants']]],
+  ['isbitmask_21',['ISBITMASK',['../_d_d_s_texture_loader_8cpp.html#a5f3918f64c6ea8f31c0cd931b0578017',1,'DDSTextureLoader.cpp']]],
+  ['isempty_22',['isEmpty',['../class_command_queue.html#a3a6eb6a7c83d9b20ad7a6cac63795ec1',1,'CommandQueue::isEmpty()'],['../class_state_stack.html#a4d9dc16e1a69640b6a85c224fe1c3f33',1,'StateStack::isEmpty()']]],
+  ['iskeydown_23',['IsKeyDown',['../classd3d_util.html#a2e43ccad934a5f8de92c10de835e7d14',1,'d3dUtil']]]
 ];

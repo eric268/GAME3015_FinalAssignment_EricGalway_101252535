@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A2_Eric_Galway_101252535_W2022: Include/ResourceManager.h Source File</title>
+<title>GAME3015 Final Assignment W2022 Eric Galway: Include/ResourceManager.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
+   <div id="projectname">GAME3015 Final Assignment W2022 Eric Galway<span id="projectnumber">&#160;3.0</span>
    </div>
-   <div id="projectbrief">Showcasing input handeling in Directx12</div>
+   <div id="projectbrief">Game made with DirectX 12 showcasing input handeling and a state machine</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -101,29 +101,42 @@ $(document).ready(function(){initNavTree('_resource_manager_8h_source.html','');
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="_resource_identifiers_8h.html">ResourceIdentifiers.h</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;../D3DCommon/d3dApp.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_resource_manager.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="class_resource_manager.html">ResourceManager</a></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_function" href="class_resource_manager.html#a3b32babd2e81909bbd90d7f2d566fadb">ResourceManager</a>();</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">static</span> <a class="code hl_class" href="class_resource_manager.html">ResourceManager</a>* <a class="code hl_function" href="class_resource_manager.html#ab15d2c21ddb0c41dd45201dacacc628d">GetInstance</a>();</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    std::map&lt;Textures::ID, std::wstring&gt;&amp; <a class="code hl_function" href="class_resource_manager.html#a4058717349e66749137e07a2cfe3bec8">GetTextureHolder</a>();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    std::unordered_map&lt;Textures::ID, std::unique_ptr&lt;Material&gt;&gt;&amp; <a class="code hl_function" href="class_resource_manager.html#a0eb2b96f4f306587b3b82cf1393d7557">GetMaterials</a>();</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">static</span> <a class="code hl_class" href="class_resource_manager.html">ResourceManager</a>* mInstance;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    std::map&lt;Textures::ID,std::wstring&gt; mTextureHolder;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    std::unordered_map&lt;Textures::ID, std::unique_ptr&lt;Material&gt;&gt; mMaterials;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>};</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//class ResourceManager</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//{</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">//public:</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">//  /// Default constructor for Resource Manager</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">//  ResourceManager();</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">//  /// Returns an instance of the Resource Manager</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">//  /// </span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//  /// If the instance is null it will initialize the Resource Manager Instance&lt;/summary&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//  /// &lt;returns&gt;Instance of Resource Manager&lt;/returns&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//  static ResourceManager* GetInstance();</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//  /// &lt;summary&gt;Returns Texture Container</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//  /// </span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//  /// Returns a reference to texture holder so that textures can be added or removed&lt;/summary&gt;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//  /// &lt;returns&gt;Map of textures ids and file loading paths&lt;/returns&gt;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//  std::map&lt;Textures::ID, std::wstring&gt;&amp; GetTextureHolder();</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">//  std::map&lt;Fonts::ID, std::wstring&gt;&amp; GetFontHolder();</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">//</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">//  /// &lt;summary&gt;Returns Material Container</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">//  /// </span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">//  /// Returns a reference to material holder so that materials can be added or removed&lt;/summary&gt;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">//  /// &lt;returns&gt;Map of texture ids and which lead to their respective materials&lt;/returns&gt;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">//  std::unordered_map&lt;Textures::ID, std::unique_ptr&lt;Material&gt;&gt;&amp; GetMaterials();</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">//</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">//</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">//</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">//private:</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//  static ResourceManager* mInstance;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">//  std::map&lt;Textures::ID,std::wstring&gt; mTextureHolder;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">//  std::map&lt;Fonts::ID, std::wstring&gt; mFontHolder;</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">//  std::unordered_map&lt;Textures::ID, std::unique_ptr&lt;Material&gt;&gt; mMaterials;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">//};</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="ttc" id="a_resource_identifiers_8h_html"><div class="ttname"><a href="_resource_identifiers_8h.html">ResourceIdentifiers.h</a></div></div>
-<div class="ttc" id="aclass_resource_manager_html"><div class="ttname"><a href="class_resource_manager.html">ResourceManager</a></div><div class="ttdoc">Singleton class for accessing resources.</div><div class="ttdef"><b>Definition:</b> ResourceManager.h:12</div></div>
-<div class="ttc" id="aclass_resource_manager_html_a0eb2b96f4f306587b3b82cf1393d7557"><div class="ttname"><a href="class_resource_manager.html#a0eb2b96f4f306587b3b82cf1393d7557">ResourceManager::GetMaterials</a></div><div class="ttdeci">std::unordered_map&lt; Textures::ID, std::unique_ptr&lt; Material &gt; &gt; &amp; GetMaterials()</div><div class="ttdoc">Returns Material Container</div><div class="ttdef"><b>Definition:</b> ResourceManager.cpp:23</div></div>
-<div class="ttc" id="aclass_resource_manager_html_a3b32babd2e81909bbd90d7f2d566fadb"><div class="ttname"><a href="class_resource_manager.html#a3b32babd2e81909bbd90d7f2d566fadb">ResourceManager::ResourceManager</a></div><div class="ttdeci">ResourceManager()</div><div class="ttdoc">Default constructor for Resource Manager.</div><div class="ttdef"><b>Definition:</b> ResourceManager.cpp:5</div></div>
-<div class="ttc" id="aclass_resource_manager_html_a4058717349e66749137e07a2cfe3bec8"><div class="ttname"><a href="class_resource_manager.html#a4058717349e66749137e07a2cfe3bec8">ResourceManager::GetTextureHolder</a></div><div class="ttdeci">std::map&lt; Textures::ID, std::wstring &gt; &amp; GetTextureHolder()</div><div class="ttdoc">Returns Texture Container</div><div class="ttdef"><b>Definition:</b> ResourceManager.cpp:18</div></div>
-<div class="ttc" id="aclass_resource_manager_html_ab15d2c21ddb0c41dd45201dacacc628d"><div class="ttname"><a href="class_resource_manager.html#ab15d2c21ddb0c41dd45201dacacc628d">ResourceManager::GetInstance</a></div><div class="ttdeci">static ResourceManager * GetInstance()</div><div class="ttdoc">Returns an instance of the Resource Manager.</div><div class="ttdef"><b>Definition:</b> ResourceManager.cpp:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -63,9 +63,6 @@ public:
 	/// <param name="commands">Takes a reference to the commandQueue </param>
 	void processEvents(CommandQueue& commands);
 
-public:
-	XMFLOAT3 mCameraPosition;
-
 private:
 	/// <summary>
 	/// Binds all action bindings to their respective derived actions

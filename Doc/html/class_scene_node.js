@@ -1,7 +1,13 @@
 var class_scene_node =
 [
     [ "Ptr", "class_scene_node.html#a17e23bcf18251560fe4721c9123dfb9d", null ],
+    [ "Layer", "class_scene_node.html#a1aa0d9084e4e1cab66fdc4ae9598f90a", [
+      [ "Background", "class_scene_node.html#a1aa0d9084e4e1cab66fdc4ae9598f90aa6a8bd12962bf5829d447157fc2280085", null ],
+      [ "Air", "class_scene_node.html#a1aa0d9084e4e1cab66fdc4ae9598f90aa5fe47e46bcb6768820ff1f1d6032ab85", null ],
+      [ "LayerCount", "class_scene_node.html#a1aa0d9084e4e1cab66fdc4ae9598f90aa2157cb94a149aaf5928f7cc17c0fc7b4", null ]
+    ] ],
     [ "SceneNode", "class_scene_node.html#acc2e7940323560ba86dad8e2d6eb6690", null ],
+    [ "SceneNode", "class_scene_node.html#af1f3bf5e98c8b2c90b36057df2577d1a", null ],
     [ "AttachChild", "class_scene_node.html#a7ba065dcc419234283a0086823a09068", null ],
     [ "detachChild", "class_scene_node.html#a3b9681eb3db7d9e575945b57e275e040", null ],
     [ "Draw", "class_scene_node.html#a79328f7ae1942b33831f3810a9c9eec6", null ],
@@ -21,5 +27,7 @@ var class_scene_node =
     [ "SetRotation", "class_scene_node.html#acbee04e2ca5d95fb217f356578012c28", null ],
     [ "SetScale", "class_scene_node.html#a8b3f450fde826723e0e0c66c9fe77d68", null ],
     [ "SetScale", "class_scene_node.html#a21b6d82fbe68b7fe62bbbb16a5dc2bad", null ],
-    [ "Update", "class_scene_node.html#a50153339c54a2666853e3991559077cf", null ]
+    [ "Update", "class_scene_node.html#a50153339c54a2666853e3991559077cf", null ],
+    [ "mGame", "class_scene_node.html#a707d389d06633c9e40041209c77ff3b6", null ],
+    [ "renderItem", "class_scene_node.html#a45b939839c61baa3396a020fb1710afb", null ]
 ];

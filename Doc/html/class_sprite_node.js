@@ -1,5 +1,5 @@
 var class_sprite_node =
 [
-    [ "SpriteNode", "class_sprite_node.html#a0f9529fa5cd03852ad18fb56c8fdcd66", null ],
-    [ "SpriteNode", "class_sprite_node.html#a36ea1cc14a57d89477005acee790b7b4", null ]
+    [ "SpriteNode", "class_sprite_node.html#af9a13269b4f3d7a194e1826c704155dc", null ],
+    [ "SpriteNode", "class_sprite_node.html#a1bb50ba48ed5b141b9a2520331c451cb", null ]
 ];

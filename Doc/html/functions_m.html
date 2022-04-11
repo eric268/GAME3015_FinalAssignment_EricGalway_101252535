@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A2_Eric_Galway_101252535_W2022: Class Members</title>
+<title>GAME3015 Final Assignment W2022 Eric Galway: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
+   <div id="projectname">GAME3015 Final Assignment W2022 Eric Galway<span id="projectnumber">&#160;3.0</span>
    </div>
-   <div id="projectbrief">Showcasing input handeling in Directx12</div>
+   <div id="projectbrief">Game made with DirectX 12 showcasing input handeling and a state machine</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -103,16 +103,21 @@ $(document).ready(function(){initNavTree('functions_m.html',''); initResizable()
 <li>MatCBIndex&#160;:&#160;<a class="el" href="struct_material.html#a7bafa2db0678ffe18c5e51f3d0e45df9">Material</a></li>
 <li>material&#160;:&#160;<a class="el" href="class_render_item.html#aade7ce124e3be6cb423d04f115748ca0">RenderItem</a></li>
 <li>MaterialCB&#160;:&#160;<a class="el" href="struct_frame_resource.html#a502a3bd044ed30d31280f4382cc07570">FrameResource</a></li>
+<li>materialID&#160;:&#160;<a class="el" href="class_render_item.html#a5406ffb1d5f412a73c814789bbbcc3c0">RenderItem</a></li>
 <li>MatTransform&#160;:&#160;<a class="el" href="struct_material.html#a3fd206fc6ecb51634475f22ff17528d0">Material</a>, <a class="el" href="struct_material_constants.html#a5d631fb90e1b2557008841d059c322c8">MaterialConstants</a></li>
 <li>Max()&#160;:&#160;<a class="el" href="class_math_helper.html#a0c33d72533f7bb85d56ab384e6867771">MathHelper</a></li>
 <li>mBackBufferFormat&#160;:&#160;<a class="el" href="class_d3_d_app.html#a025509339d4e0ec2781a8deb9d4218cc">D3DApp</a></li>
+<li>mCbvSrvDescriptorSize&#160;:&#160;<a class="el" href="class_game.html#ad7a064571877d4b8becd1f53c98cafa9">Game</a></li>
 <li>mCbvSrvUavDescriptorSize&#160;:&#160;<a class="el" href="class_d3_d_app.html#a0e084fa045c8e46d65a37889ff5d307d">D3DApp</a></li>
 <li>mClientHeight&#160;:&#160;<a class="el" href="class_d3_d_app.html#ad54b6af44b0c13b645f363d849230d51">D3DApp</a></li>
 <li>mClientWidth&#160;:&#160;<a class="el" href="class_d3_d_app.html#a3f9dae9800854a7aae8a9ca8677a4d4f">D3DApp</a></li>
 <li>mCommandList&#160;:&#160;<a class="el" href="class_d3_d_app.html#a3d515a557287c1a8f8fcc60abc839e84">D3DApp</a></li>
 <li>mCommandQueue&#160;:&#160;<a class="el" href="class_d3_d_app.html#a96ae78a6cf93ec91272032890ef65440">D3DApp</a></li>
+<li>mContext&#160;:&#160;<a class="el" href="class_state.html#a7a3d9f2d67529dd7c2eaae143447511b">State</a></li>
 <li>mCurrBackBuffer&#160;:&#160;<a class="el" href="class_d3_d_app.html#ab0ef1ea8fcb85251dcd6d603a4090d62">D3DApp</a></li>
 <li>mCurrentFence&#160;:&#160;<a class="el" href="class_d3_d_app.html#acc7041db5dcaaa0d76ed263c55d1c6b2">D3DApp</a></li>
+<li>mCurrFrameResource&#160;:&#160;<a class="el" href="class_game.html#a6119ac12b9dafae4e105ac9b4e80c1b2">Game</a></li>
+<li>mCurrFrameResourceIndex&#160;:&#160;<a class="el" href="class_game.html#a1f687875ba94b87162a7dc90b80b0092">Game</a></li>
 <li>md3dDevice&#160;:&#160;<a class="el" href="class_d3_d_app.html#a15b84b7e76f6c705196dd6b4b5ad418d">D3DApp</a></li>
 <li>md3dDriverType&#160;:&#160;<a class="el" href="class_d3_d_app.html#a357a4053739265f5bfe5a8d209073fe0">D3DApp</a></li>
 <li>mDepthStencilBuffer&#160;:&#160;<a class="el" href="class_d3_d_app.html#a5abf385ad562d607c7087a82ccf5ffef">D3DApp</a></li>
@@ -121,8 +126,11 @@ $(document).ready(function(){initNavTree('functions_m.html',''); initResizable()
 <li>mDsvDescriptorSize&#160;:&#160;<a class="el" href="class_d3_d_app.html#a61a130cb7d4045a2ab26b486cd07edb5">D3DApp</a></li>
 <li>mDsvHeap&#160;:&#160;<a class="el" href="class_d3_d_app.html#a40c212366e13b47ff5858e852ca21a1e">D3DApp</a></li>
 <li>mdxgiFactory&#160;:&#160;<a class="el" href="class_d3_d_app.html#a8bb5fcea3838adea2a82cd32cf641ea0">D3DApp</a></li>
+<li>MenuState()&#160;:&#160;<a class="el" href="class_menu_state.html#a6dad86cbbfdbe2a06c8bc122da04e311">MenuState</a></li>
 <li>mFence&#160;:&#160;<a class="el" href="class_d3_d_app.html#a90597e8c2902073536b6609864eaf160">D3DApp</a></li>
+<li>mFrameResources&#160;:&#160;<a class="el" href="class_game.html#a2a9401ba48c48468ceef6771309ddff7">Game</a></li>
 <li>mFullscreenState&#160;:&#160;<a class="el" href="class_d3_d_app.html#acf957ef460a36e91d1c9f3e23e6e4606">D3DApp</a></li>
+<li>mGame&#160;:&#160;<a class="el" href="class_scene_node.html#a707d389d06633c9e40041209c77ff3b6">SceneNode</a>, <a class="el" href="class_state.html#a0b2cc4d1f24881f8e0ac5dd5c80e4799">State</a>, <a class="el" href="class_world.html#a625a8dbdd805000904fb376215ca4c0a">World</a></li>
 <li>mGeometries&#160;:&#160;<a class="el" href="class_game.html#a0e53612a0a54bdd46ea1d8b071260b77">Game</a></li>
 <li>mhAppInst&#160;:&#160;<a class="el" href="class_d3_d_app.html#a68be4559a964d5972c3e43a20d7c00a3">D3DApp</a></li>
 <li>mhMainWnd&#160;:&#160;<a class="el" href="class_d3_d_app.html#ae68879f7a2cf2b770b1015ab9c0f14e5">D3DApp</a></li>
@@ -134,21 +142,27 @@ $(document).ready(function(){initNavTree('functions_m.html',''); initResizable()
 <li>mMaterials&#160;:&#160;<a class="el" href="class_game.html#a871400f233e46cc637f383106e89dd71">Game</a></li>
 <li>mMaximized&#160;:&#160;<a class="el" href="class_d3_d_app.html#a0a1a869eb2966b6d0e905902b05671c6">D3DApp</a></li>
 <li>mMinimized&#160;:&#160;<a class="el" href="class_d3_d_app.html#a042fc6ee35adee941a1ca38dc31bf517">D3DApp</a></li>
+<li>mOpaqueRitems&#160;:&#160;<a class="el" href="class_game.html#a626d5d97ee0e536b99703094828f5f79">Game</a></li>
 <li>Move()&#160;:&#160;<a class="el" href="class_entity.html#a5fda2a75b632ab9ded4532633882af31">Entity</a></li>
 <li>MoveDown&#160;:&#160;<a class="el" href="class_player.html#a2da5df212d083bbb1460237f34ab0d88a685fada3f0a5111b3b8e56f5357a05b0">Player</a></li>
 <li>MoveLeft&#160;:&#160;<a class="el" href="class_player.html#a2da5df212d083bbb1460237f34ab0d88a0166b28e57a9a8553a603a4c0fbe5807">Player</a></li>
 <li>MoveRight&#160;:&#160;<a class="el" href="class_player.html#a2da5df212d083bbb1460237f34ab0d88aa89dbd9060b77566a66b115531df631b">Player</a></li>
 <li>MoveUp&#160;:&#160;<a class="el" href="class_player.html#a2da5df212d083bbb1460237f34ab0d88a6c74df21e9d4e850dd175a23b78c6540">Player</a></li>
+<li>mPlayer&#160;:&#160;<a class="el" href="class_game.html#a1633a90f20203779bc1a1171c2d7ad77">Game</a></li>
+<li>mPSOs&#160;:&#160;<a class="el" href="class_game.html#a43bb2ff24bf92a5d8dfb1a8ba110d33d">Game</a></li>
 <li>mResizing&#160;:&#160;<a class="el" href="class_d3_d_app.html#abf2dd8ed33542b683ba236a82bcc6e6f">D3DApp</a></li>
 <li>mRtvDescriptorSize&#160;:&#160;<a class="el" href="class_d3_d_app.html#ae164797b666d06a8f2e609a0ab1d1f75">D3DApp</a></li>
 <li>mRtvHeap&#160;:&#160;<a class="el" href="class_d3_d_app.html#adb69a9972a7aa8884307b18070e0f455">D3DApp</a></li>
 <li>mScissorRect&#160;:&#160;<a class="el" href="class_d3_d_app.html#adbf6e2922df9e6545390049968715547">D3DApp</a></li>
 <li>mScreenViewport&#160;:&#160;<a class="el" href="class_d3_d_app.html#ab86744c66c883d3815c5d08107b16408">D3DApp</a></li>
 <li>MsgProc()&#160;:&#160;<a class="el" href="class_d3_d_app.html#a50a6ba535971837f61c79d7f9390dc30">D3DApp</a></li>
+<li>mSrvDescriptorHeap&#160;:&#160;<a class="el" href="class_game.html#a85befdbe03bbcdd30ad94cd64e0a1bd1">Game</a></li>
+<li>mStack&#160;:&#160;<a class="el" href="class_state.html#af0424dd012cc1ceb6e0f416982aa9228">State</a></li>
 <li>mSwapChain&#160;:&#160;<a class="el" href="class_d3_d_app.html#adac97bdf38a37003abbbd7d39c2a75fb">D3DApp</a></li>
 <li>mSwapChainBuffer&#160;:&#160;<a class="el" href="class_d3_d_app.html#ad84c0de388ee240f478cc14c1dc7ba24">D3DApp</a></li>
 <li>mTimer&#160;:&#160;<a class="el" href="class_d3_d_app.html#a687d7ace8230b136b6431c8697cc47fd">D3DApp</a></li>
 <li>MultiplyXMFLOAT4x4()&#160;:&#160;<a class="el" href="class_math_helper.html#a26c67a7519fc5a63b1a2574880eb74f4">MathHelper</a></li>
+<li>mView&#160;:&#160;<a class="el" href="class_game.html#abfaa440795c3610368a994a3045d04ba">Game</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

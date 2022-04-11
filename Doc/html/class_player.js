@@ -12,5 +12,6 @@ var class_player =
     [ "assignKey", "class_player.html#a15305362ead231957037ef12cbd6fdec", null ],
     [ "getAssignedKey", "class_player.html#a7c5ee0548962029315ba214600761aa1", null ],
     [ "handleEvent", "class_player.html#a968ea57e7786a97c6fb4c38419d9f7ca", null ],
-    [ "handleRealtimeInput", "class_player.html#ac520744c103fb38763c8856b4f158627", null ]
+    [ "handleRealtimeInput", "class_player.html#ac520744c103fb38763c8856b4f158627", null ],
+    [ "processEvents", "class_player.html#aa4c648ce6c840c74bab4948ae09cc57b", null ]
 ];

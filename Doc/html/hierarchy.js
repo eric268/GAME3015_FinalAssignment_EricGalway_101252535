@@ -4,6 +4,7 @@ var hierarchy =
     [ "Camera", "class_camera.html", null ],
     [ "Command", "struct_command.html", null ],
     [ "CommandQueue", "class_command_queue.html", null ],
+    [ "State::Context", "struct_state_1_1_context.html", null ],
     [ "D3DApp", "class_d3_d_app.html", [
       [ "Game", "class_game.html", null ]
     ] ],
@@ -25,13 +26,19 @@ var hierarchy =
     [ "PassConstants", "struct_pass_constants.html", null ],
     [ "Player", "class_player.html", null ],
     [ "RenderItem", "class_render_item.html", null ],
-    [ "ResourceManager", "class_resource_manager.html", null ],
     [ "SceneNode", "class_scene_node.html", [
       [ "Entity", "class_entity.html", [
         [ "Aircraft", "class_aircraft.html", null ]
       ] ],
       [ "SpriteNode", "class_sprite_node.html", null ]
     ] ],
+    [ "State", "class_state.html", [
+      [ "GameState", "class_game_state.html", null ],
+      [ "MenuState", "class_menu_state.html", null ],
+      [ "PauseState", "class_pause_state.html", null ],
+      [ "TitleState", "class_title_state.html", null ]
+    ] ],
+    [ "StateStack", "class_state_stack.html", null ],
     [ "SubmeshGeometry", "struct_submesh_geometry.html", null ],
     [ "Texture", "struct_texture.html", null ],
     [ "UploadBuffer< T >", "class_upload_buffer.html", null ],

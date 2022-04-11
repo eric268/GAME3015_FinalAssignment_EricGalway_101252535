@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A2_Eric_Galway_101252535_W2022: Player Class Reference</title>
+<title>GAME3015 Final Assignment W2022 Eric Galway: Player Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
+   <div id="projectname">GAME3015 Final Assignment W2022 Eric Galway<span id="projectnumber">&#160;3.0</span>
    </div>
-   <div id="projectbrief">Showcasing input handeling in Directx12</div>
+   <div id="projectbrief">Game made with DirectX 12 showcasing input handeling and a state machine</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -137,6 +137,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7c5ee0548962029315ba214600761aa1"><td class="memItemLeft" align="right" valign="top">WPARAM&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a7c5ee0548962029315ba214600761aa1">getAssignedKey</a> (<a class="el" href="class_player.html#a2da5df212d083bbb1460237f34ab0d88">Action</a> action) const</td></tr>
 <tr class="memdesc:a7c5ee0548962029315ba214600761aa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the key to a corresponding action  <a href="class_player.html#a7c5ee0548962029315ba214600761aa1">More...</a><br /></td></tr>
 <tr class="separator:a7c5ee0548962029315ba214600761aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4c648ce6c840c74bab4948ae09cc57b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#aa4c648ce6c840c74bab4948ae09cc57b">processEvents</a> (<a class="el" href="class_command_queue.html">CommandQueue</a> &amp;commands)</td></tr>
+<tr class="memdesc:aa4c648ce6c840c74bab4948ae09cc57b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles all player events  <a href="class_player.html#aa4c648ce6c840c74bab4948ae09cc57b">More...</a><br /></td></tr>
+<tr class="separator:aa4c648ce6c840c74bab4948ae09cc57b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Class used for handling player inputs and their corresponding actions/events </p>
@@ -309,6 +312,32 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">event</td><td>A parameter using Microsofts typedef for event int values</td></tr>
     <tr><td class="paramname">commands</td><td>Takes in a reference to a command queue instances</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa4c648ce6c840c74bab4948ae09cc57b" name="aa4c648ce6c840c74bab4948ae09cc57b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4c648ce6c840c74bab4948ae09cc57b">&#9670;&nbsp;</a></span>processEvents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Player::processEvents </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_command_queue.html">CommandQueue</a> &amp;&#160;</td>
+          <td class="paramname"><em>commands</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Handles all player events </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">commands</td><td>Takes a reference to the commandQueue </td></tr>
   </table>
   </dd>
 </dl>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['playeraircraft_0',['PlayerAircraft',['../namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0ac17fded322e70d4086e2f5dfcc706679',1,'Category']]]
+  ['none_0',['None',['../namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0af5e99963224a9d7e0d16e4a782446ebf',1,'Category::None()'],['../namespace_states.html#a571a0dc62822f97bb9511eb013d8e1c3ae18ebe696f4559ff77e50030089b4787',1,'States::None()']]],
+  ['num_5ftexture_5fids_1',['NUM_TEXTURE_IDS',['../namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5ad6bf97b41e18c15d87e7f158c854ea1c',1,'Textures']]]
 ];

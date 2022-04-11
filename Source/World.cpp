@@ -12,7 +12,7 @@ World::World(Game* game) :
 	mScrollSpeed(5.0f),
 	worldViewPosition(),
 	screenToWorldRatio(10),
-	deltaCameraPostion(XMFLOAT3()),
+	mDeltaCameraPostion(XMFLOAT3()),
 	changeInPlayerRotation(-30.0f),
 	maxSpeed(50.0f),
 	mPhi(0.25f * XM_PI),
@@ -50,7 +50,7 @@ XMFLOAT4X4 World::GetWorldView()
 void World::SetWorldView(XMFLOAT4X4& view)
 {
 	mWorldView = view;
-	deltaCameraPostion = MathHelper::GetPosition(mWorldView);
+	mDeltaCameraPostion = MathHelper::GetPosition(mWorldView);
 }
 
 void World::adaptPlayerPosition()
@@ -59,8 +59,8 @@ void World::adaptPlayerPosition()
 
 	position.x = min(position.x, mGame->GetClientWidth() / (2.0f * screenToWorldRatio) - screenWidthBuffer);
 	position.x = max(position.x, -mGame->GetClientWidth() / (2.0f * screenToWorldRatio) + screenWidthBuffer);
-	position.z = max(position.z, (-cameraPostion.y *1.4f)  - screenHeight / (2.f * screenToWorldRatio));
-	position.z = min(position.z, -(cameraPostion.y * 1.4f) + screenHeight / (2.f * screenToWorldRatio) - screenHeightBuffer);
+	position.z = max(position.z, (-mCameraPostion.y *1.4f)  - screenHeight / (2.f * screenToWorldRatio));
+	position.z = min(position.z, -(mCameraPostion.y * 1.4f) + screenHeight / (2.f * screenToWorldRatio) - screenHeightBuffer);
 
 	mPlayerAircraft->SetPosition(position);
 }
@@ -88,15 +88,13 @@ void World::UpdateCamera(const GameTimer& gt)
 {
 	float delta = mScrollSpeed * sin(mPhi) * gt.DeltaTime();
 
-	deltaCameraPostion.y = -delta;
-	deltaCameraPostion.z = -delta;
+	mDeltaCameraPostion.y = -delta;
+	mDeltaCameraPostion.z = -delta;
 
-	cameraPostion.y -= delta;
-	cameraPostion.z -= delta;
+	mCameraPostion.y -= delta;
+	mCameraPostion.z -= delta;
 
-	MathHelper::UpdatePosition(mGame->mView, deltaCameraPostion);
-
-	mGame->mPlayer.mCameraPosition = cameraPostion;
+	MathHelper::UpdatePosition(mGame->mView, mDeltaCameraPostion);
 }
 
 void World::BuildScene()

@@ -117,8 +117,8 @@ private:
 	XMFLOAT4 mWorldBounds;
 	XMFLOAT4X4 mWorldView;
 
-	XMFLOAT3 deltaCameraPostion;
-	XMFLOAT3 cameraPostion;
+	XMFLOAT3 mDeltaCameraPostion;
+	XMFLOAT3 mCameraPostion;
 	XMFLOAT3 mSpawnPosition;
 	XMFLOAT3 worldViewPosition;
 

@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['tangentu_0',['TangentU',['../struct_geometry_generator_1_1_vertex.html#a717df2eee4e35bb0eb8f4ecf262edf4f',1,'GeometryGenerator::Vertex']]],
-  ['texc_1',['TexC',['../struct_vertex.html#a43e8c374e56c6ed3acc708ba2de1c70c',1,'Vertex::TexC()'],['../struct_geometry_generator_1_1_vertex.html#ab18dadcdb6a57e997bfd6d0e53e426c6',1,'GeometryGenerator::Vertex::TexC()']]],
-  ['textransform_2',['TexTransform',['../struct_object_constants.html#a0a7f8e4817a18595707569b307060a42',1,'ObjectConstants::TexTransform()'],['../class_render_item.html#ac6799548474209d172cbb3d337f56074',1,'RenderItem::TexTransform()']]],
-  ['totaltime_3',['TotalTime',['../struct_pass_constants.html#a8b7dc8578d216518bff83264bc85d34c',1,'PassConstants']]]
+  ['size_0',['size',['../struct_d_d_s___p_i_x_e_l_f_o_r_m_a_t.html#adb357eb46848e57b8d89b59d31608f6c',1,'DDS_PIXELFORMAT::size()'],['../struct_d_d_s___h_e_a_d_e_r.html#a989502ea402a8e5939395a6b98ae9ce0',1,'DDS_HEADER::size()']]],
+  ['spotpower_1',['SpotPower',['../struct_light.html#a7202d90f1b073d3ac170c18451f0bc92',1,'Light']]],
+  ['startindexlocation_2',['StartIndexLocation',['../struct_submesh_geometry.html#a56f8aee51b11ee61a229679000a1aeb6',1,'SubmeshGeometry::StartIndexLocation()'],['../class_render_item.html#a979179c6dd354cd329563e3599245463',1,'RenderItem::StartIndexLocation()']]],
+  ['strength_3',['Strength',['../struct_light.html#a015096e9847bd33050b73a13c200a4c1',1,'Light']]],
+  ['swapchainbuffercount_4',['SwapChainBufferCount',['../class_d3_d_app.html#af4cd47b4bb3b28e1013e861355baf8e8',1,'D3DApp']]]
 ];

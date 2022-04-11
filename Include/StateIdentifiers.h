@@ -2,6 +2,9 @@
 
 namespace States
 {
+	/// <summary>
+	/// Enumeration for identifying different states
+	/// </summary>
 	enum ID
 	{
 		None,

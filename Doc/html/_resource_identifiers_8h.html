@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A2_Eric_Galway_101252535_W2022: Include/ResourceIdentifiers.h File Reference</title>
+<title>GAME3015 Final Assignment W2022 Eric Galway: Include/ResourceIdentifiers.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
+   <div id="projectname">GAME3015 Final Assignment W2022 Eric Galway<span id="projectnumber">&#160;3.0</span>
    </div>
-   <div id="projectbrief">Showcasing input handeling in Directx12</div>
+   <div id="projectbrief">Game made with DirectX 12 showcasing input handeling and a state machine</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -94,11 +94,14 @@ $(document).ready(function(){initNavTree('_resource_identifiers_8h.html',''); in
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle"><div class="title">ResourceIdentifiers.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &lt;map&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+</div>
 <p><a href="_resource_identifiers_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -108,16 +111,39 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_textures"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_textures.html">Textures</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_fonts"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_fonts.html">Fonts</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a0b4b00b191f3f47dafa3c24868171754"><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5">Textures::ID</a>, std::wstring &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_resource_identifiers_8h.html#a0b4b00b191f3f47dafa3c24868171754">TextureHolder</a></td></tr>
+<tr class="separator:a0b4b00b191f3f47dafa3c24868171754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7060195e1251b001c73df5cc509123a"><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="namespace_fonts.html#a240717ec0dc75e98501af734a02c396d">Fonts::ID</a>, std::wstring &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_resource_identifiers_8h.html#aa7060195e1251b001c73df5cc509123a">FontHolder</a></td></tr>
+<tr class="separator:aa7060195e1251b001c73df5cc509123a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a2cfe2099537d4e80b08437b4978301a5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5">Textures::ID</a> { <a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5ad1a0e749b8999f54809596206b3a2348">Textures::Eagle</a>
+<tr class="memitem:a2cfe2099537d4e80b08437b4978301a5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5">Textures::ID</a> { <br />
+&#160;&#160;<a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5ad1a0e749b8999f54809596206b3a2348">Textures::Eagle</a>
 , <a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a4c97457c9c6cbb65901f311d0afa82fa">Textures::Raptor</a>
 , <a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a6c78cd7357ece5bc1164456f4d63d167">Textures::Desert</a>
+, <a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5ae36e9d9ef3bd838c5d625da49a0e9922">Textures::TitleScreen</a>
+, <br />
+&#160;&#160;<a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5afaa93474c6eaed7f80a74f4f81552234">Textures::Arrow</a>
+, <a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a5439d0225b9a4289ac29589f5c7f59ea">Textures::PauseText</a>
+, <a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a06690db66eb89f81a5149ade3b73e37e">Textures::PlayText</a>
+, <a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a798bb85038e8221381d7602849b5621d">Textures::QuitText</a>
+, <br />
+&#160;&#160;<a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5aa092ebc7460df2d985020fd54c85df5f">Textures::MenuScreen</a>
+, <a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a05c30c7e065c4943671e1e946e8f4553">Textures::TitleText</a>
 , <a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5ad6bf97b41e18c15d87e7f158c854ea1c">Textures::NUM_TEXTURE_IDS</a>
+<br />
  }</td></tr>
 <tr class="memdesc:a2cfe2099537d4e80b08437b4978301a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for identifying textures.  <a href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5">More...</a><br /></td></tr>
 <tr class="separator:a2cfe2099537d4e80b08437b4978301a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a240717ec0dc75e98501af734a02c396d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_fonts.html#a240717ec0dc75e98501af734a02c396d">Fonts::ID</a> { <a class="el" href="namespace_fonts.html#a240717ec0dc75e98501af734a02c396da52f845eea0c76cc47d8748f6c47c1217">Fonts::Main</a>
+ }</td></tr>
+<tr class="separator:a240717ec0dc75e98501af734a02c396d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa63ede3e7371d4bc358f651428d23159"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159">RenderLayer</a> : int { <a class="el" href="_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159afaa90538de35640e4b1e31ccf35b6eb5">Opaque</a> = 0
 , <a class="el" href="_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159a3d971943089a3388c01fb297a32d9ba7">Transparent</a>
 , <a class="el" href="_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159ae93f994f01c537c4e2f7d8528c3eb5e9">Count</a>
@@ -125,6 +151,35 @@ Enumerations</h2></td></tr>
 <tr class="memdesc:aa63ede3e7371d4bc358f651428d23159"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration for categorizing rendering type of objects.  <a href="_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159">More...</a><br /></td></tr>
 <tr class="separator:aa63ede3e7371d4bc358f651428d23159"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="aa7060195e1251b001c73df5cc509123a" name="aa7060195e1251b001c73df5cc509123a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7060195e1251b001c73df5cc509123a">&#9670;&nbsp;</a></span>FontHolder</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::map&lt;<a class="el" href="namespace_fonts.html#a240717ec0dc75e98501af734a02c396d">Fonts::ID</a>, std::wstring&gt; <a class="el" href="_resource_identifiers_8h.html#aa7060195e1251b001c73df5cc509123a">FontHolder</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0b4b00b191f3f47dafa3c24868171754" name="a0b4b00b191f3f47dafa3c24868171754"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b4b00b191f3f47dafa3c24868171754">&#9670;&nbsp;</a></span>TextureHolder</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::map&lt;<a class="el" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5">Textures::ID</a>, std::wstring&gt; <a class="el" href="_resource_identifiers_8h.html#a0b4b00b191f3f47dafa3c24868171754">TextureHolder</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="aa63ede3e7371d4bc358f651428d23159" name="aa63ede3e7371d4bc358f651428d23159"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa63ede3e7371d4bc358f651428d23159">&#9670;&nbsp;</a></span>RenderLayer</h2>

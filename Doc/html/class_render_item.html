@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A2_Eric_Galway_101252535_W2022: RenderItem Class Reference</title>
+<title>GAME3015 Final Assignment W2022 Eric Galway: RenderItem Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
+   <div id="projectname">GAME3015 Final Assignment W2022 Eric Galway<span id="projectnumber">&#160;3.0</span>
    </div>
-   <div id="projectbrief">Showcasing input handeling in Directx12</div>
+   <div id="projectbrief">Game made with DirectX 12 showcasing input handeling and a state machine</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -112,6 +112,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9ce59736c0ef340b00a614ac039669df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fd195c473ef0bb6cb14ba62edebfe7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_render_item.html#a4fd195c473ef0bb6cb14ba62edebfe7a">UpdateTransform</a> (XMFLOAT3 position, XMFLOAT3 rotation, XMFLOAT3 scale)</td></tr>
 <tr class="separator:a4fd195c473ef0bb6cb14ba62edebfe7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a102c77485cb49e0308b4648484579e60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_render_item.html#a102c77485cb49e0308b4648484579e60">UpdatePosition</a> (XMFLOAT3 pos)</td></tr>
+<tr class="separator:a102c77485cb49e0308b4648484579e60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe099aba44dd5f585afad82aca47fb20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_render_item.html#abe099aba44dd5f585afad82aca47fb20">UpdateRotation</a> (XMFLOAT3 pos)</td></tr>
+<tr class="separator:abe099aba44dd5f585afad82aca47fb20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f5809c0105d6fd91e601bf05f38b7a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_render_item.html#a5f5809c0105d6fd91e601bf05f38b7a0">UpdateScale</a> (XMFLOAT3 pos)</td></tr>
+<tr class="separator:a5f5809c0105d6fd91e601bf05f38b7a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -135,6 +141,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:aade7ce124e3be6cb423d04f115748ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e4ddbefdc41b7efcad3c3a4b0ceccd9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_mesh_geometry.html">MeshGeometry</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_render_item.html#a7e4ddbefdc41b7efcad3c3a4b0ceccd9">Geo</a></td></tr>
 <tr class="separator:a7e4ddbefdc41b7efcad3c3a4b0ceccd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5406ffb1d5f412a73c814789bbbcc3c0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_render_item.html#a5406ffb1d5f412a73c814789bbbcc3c0">materialID</a></td></tr>
+<tr class="separator:a5406ffb1d5f412a73c814789bbbcc3c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a055ad735f3cfbefd4b2215242831c3d3" name="a055ad735f3cfbefd4b2215242831c3d3"></a>
@@ -218,6 +226,60 @@ Public Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_render_item.html">RenderItem</a> *&#160;</td>
           <td class="paramname"><em>renderItem</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a102c77485cb49e0308b4648484579e60" name="a102c77485cb49e0308b4648484579e60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a102c77485cb49e0308b4648484579e60">&#9670;&nbsp;</a></span>UpdatePosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RenderItem::UpdatePosition </td>
+          <td>(</td>
+          <td class="paramtype">XMFLOAT3&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe099aba44dd5f585afad82aca47fb20" name="abe099aba44dd5f585afad82aca47fb20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe099aba44dd5f585afad82aca47fb20">&#9670;&nbsp;</a></span>UpdateRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RenderItem::UpdateRotation </td>
+          <td>(</td>
+          <td class="paramtype">XMFLOAT3&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5f5809c0105d6fd91e601bf05f38b7a0" name="a5f5809c0105d6fd91e601bf05f38b7a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f5809c0105d6fd91e601bf05f38b7a0">&#9670;&nbsp;</a></span>UpdateScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RenderItem::UpdateScale </td>
+          <td>(</td>
+          <td class="paramtype">XMFLOAT3&#160;</td>
+          <td class="paramname"><em>pos</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -310,6 +372,20 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="struct_material.html">Material</a>* RenderItem::material</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5406ffb1d5f412a73c814789bbbcc3c0" name="a5406ffb1d5f412a73c814789bbbcc3c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5406ffb1d5f412a73c814789bbbcc3c0">&#9670;&nbsp;</a></span>materialID</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RenderItem::materialID</td>
         </tr>
       </table>
 </div><div class="memdoc">

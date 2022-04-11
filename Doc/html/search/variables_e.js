@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['rbitmask_0',['RBitMask',['../struct_d_d_s___p_i_x_e_l_f_o_r_m_a_t.html#a2d2f8c19c50ceb8677b0be2d1090c234',1,'DDS_PIXELFORMAT']]],
-  ['rendertargetsize_1',['RenderTargetSize',['../struct_pass_constants.html#aca6c8d20f6c92f8a117ef21bd7666687',1,'PassConstants']]],
-  ['reserved1_2',['reserved1',['../struct_d_d_s___h_e_a_d_e_r.html#a589e935e11a1d8193101741109710319',1,'DDS_HEADER']]],
-  ['reserved2_3',['reserved2',['../struct_d_d_s___h_e_a_d_e_r.html#a2b94becd3bfcb64930551d3bb4387198',1,'DDS_HEADER']]],
-  ['resource_4',['Resource',['../struct_texture.html#ae273d56b160aa483303d13b903e00122',1,'Texture']]],
-  ['resourcedimension_5',['resourceDimension',['../struct_d_d_s___h_e_a_d_e_r___d_x_t10.html#a9e52c1afbd5b8205619d1b89a367b438',1,'DDS_HEADER_DXT10']]],
-  ['rgbbitcount_6',['RGBBitCount',['../struct_d_d_s___p_i_x_e_l_f_o_r_m_a_t.html#af53071b3c2912f56e4b54533d8101951',1,'DDS_PIXELFORMAT']]],
-  ['roughness_7',['Roughness',['../struct_material_constants.html#ab931870a28dc4f2afdf7d6f565d06659',1,'MaterialConstants::Roughness()'],['../struct_material.html#a909d7c43062f35668676364d3873449d',1,'Material::Roughness()']]]
+  ['passcb_0',['PassCB',['../struct_frame_resource.html#a2a301e2320545cc025551247f9f60df5',1,'FrameResource']]],
+  ['pi_1',['Pi',['../class_math_helper.html#a988107c0e593a0e1c6aae304814aabf7',1,'MathHelper']]],
+  ['pitchorlinearsize_2',['pitchOrLinearSize',['../struct_d_d_s___h_e_a_d_e_r.html#a77410ea1d2209672fc6651b5322a9306',1,'DDS_HEADER']]],
+  ['player_3',['player',['../struct_state_1_1_context.html#a1c98434687748acdebf78fd80a4767ad',1,'State::Context']]],
+  ['pos_4',['Pos',['../struct_vertex.html#af07583772f2c7eee146e655826467dcb',1,'Vertex']]],
+  ['position_5',['Position',['../struct_light.html#a759c2228a71bfc669460ae4210a48e52',1,'Light::Position()'],['../struct_geometry_generator_1_1_vertex.html#ad31c2a7a30542745c70422a0cb34d22d',1,'GeometryGenerator::Vertex::Position()']]],
+  ['primitivetype_6',['PrimitiveType',['../class_render_item.html#ab3aad9050526250c4877956789e50b3a',1,'RenderItem']]],
+  ['proj_7',['Proj',['../struct_pass_constants.html#a8af99b882f26e3507717dacc0c957521',1,'PassConstants']]]
 ];

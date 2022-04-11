@@ -1,16 +1,10 @@
 var searchData=
 [
-  ['objcbindex_0',['ObjCBIndex',['../class_render_item.html#a4a4015284acd79469b70c358b6c1c2a1',1,'RenderItem']]],
-  ['objcbindex_1',['objCBIndex',['../class_game.html#a055965e53216b6ca6f37261eaf81fa3c',1,'Game']]],
-  ['objectcb_2',['ObjectCB',['../struct_frame_resource.html#adec81cdfb788278fac8ad38066e6c18f',1,'FrameResource']]],
-  ['objectconstants_3',['ObjectConstants',['../struct_object_constants.html',1,'']]],
-  ['oncommand_4',['onCommand',['../class_scene_node.html#ae360bd0e77746e5ff492cb398b5f6139',1,'SceneNode']]],
-  ['onkeypressed_5',['OnKeyPressed',['../class_d3_d_app.html#ae4c2c0fd683903f62315fb4ba4418cb5',1,'D3DApp']]],
-  ['onmousedown_6',['OnMouseDown',['../class_d3_d_app.html#afa0d546d52408a9b55866e6ba065ddae',1,'D3DApp']]],
-  ['onmousemove_7',['OnMouseMove',['../class_d3_d_app.html#aa5270048920cd8a62dc07c7ed5e97622',1,'D3DApp']]],
-  ['onmouseup_8',['OnMouseUp',['../class_d3_d_app.html#a98be07429ac3ffb5f76cbe831f9d94de',1,'D3DApp']]],
-  ['onresize_9',['OnResize',['../class_d3_d_app.html#a4c1b99cd01576c413d3a50d1435f1b8a',1,'D3DApp']]],
-  ['opaque_10',['Opaque',['../_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159afaa90538de35640e4b1e31ccf35b6eb5',1,'ResourceIdentifiers.h']]],
-  ['operator_28_29_11',['operator()',['../struct_aircraft_mover.html#a03c88dd460d71032dde9159124c4ec46',1,'AircraftMover']]],
-  ['operator_3d_12',['operator=',['../class_d3_d_app.html#a973e1436e4ba07338548073a49f8a253',1,'D3DApp::operator=()'],['../struct_frame_resource.html#a4d75d2a5a7bca5a0bd70a15b449c5776',1,'FrameResource::operator=()'],['../class_upload_buffer.html#a279ae8958cebcdb24f5e167a675ad9ce',1,'UploadBuffer::operator=()'],['../class_game.html#a9bda5763ea460634fef947be2530c8f5',1,'Game::operator=()']]]
+  ['name_0',['Name',['../struct_mesh_geometry.html#a9cfdc0d2b907a9059b32fccae59d9813',1,'MeshGeometry::Name()'],['../struct_material.html#a793dc9034c137caf3d8b3b4b0f9d451b',1,'Material::Name()'],['../struct_texture.html#aff942a6e6a80c06965b239a73ad04a2d',1,'Texture::Name()']]],
+  ['nearz_1',['NearZ',['../struct_pass_constants.html#affe3124795eccdba77dae8cef5399e7d',1,'PassConstants']]],
+  ['none_2',['None',['../namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0af5e99963224a9d7e0d16e4a782446ebf',1,'Category::None()'],['../namespace_states.html#a571a0dc62822f97bb9511eb013d8e1c3ae18ebe696f4559ff77e50030089b4787',1,'States::None()']]],
+  ['normal_3',['Normal',['../struct_vertex.html#a553ed48ae98dda36da8e57cfa53877d4',1,'Vertex::Normal()'],['../struct_geometry_generator_1_1_vertex.html#ab09e39b41f227072d8d24768b464eaa8',1,'GeometryGenerator::Vertex::Normal()']]],
+  ['normalsrvheapindex_4',['NormalSrvHeapIndex',['../struct_material.html#af6139531ff098c78d4d03d2fa232f27e',1,'Material']]],
+  ['num_5ftexture_5fids_5',['NUM_TEXTURE_IDS',['../namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5ad6bf97b41e18c15d87e7f158c854ea1c',1,'Textures']]],
+  ['numframesdirty_6',['NumFramesDirty',['../struct_material.html#aacbebebfe577cd18d8652a01e8fae8c0',1,'Material::NumFramesDirty()'],['../class_render_item.html#aca6ae2de91638af530fd5ce91fea3306',1,'RenderItem::NumFramesDirty()']]]
 ];

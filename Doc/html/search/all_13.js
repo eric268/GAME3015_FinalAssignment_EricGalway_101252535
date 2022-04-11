@@ -1,14 +1,21 @@
 var searchData=
 [
-  ['velocity_0',['velocity',['../struct_aircraft_mover.html#aa06d6e9f6b2b38df3e7f7863b3c97976',1,'AircraftMover']]],
-  ['vertex_1',['Vertex',['../struct_geometry_generator_1_1_vertex.html',1,'GeometryGenerator::Vertex'],['../struct_vertex.html',1,'Vertex'],['../struct_geometry_generator_1_1_vertex.html#aa102c6b22eed04a61aa0021149b198e5',1,'GeometryGenerator::Vertex::Vertex()'],['../struct_geometry_generator_1_1_vertex.html#a322406351e5c5e6acda529490c61996b',1,'GeometryGenerator::Vertex::Vertex(const DirectX::XMFLOAT3 &amp;p, const DirectX::XMFLOAT3 &amp;n, const DirectX::XMFLOAT3 &amp;t, const DirectX::XMFLOAT2 &amp;uv)'],['../struct_geometry_generator_1_1_vertex.html#a2df7807f385db53fb4bbb6f6f42e8493',1,'GeometryGenerator::Vertex::Vertex(float px, float py, float pz, float nx, float ny, float nz, float tx, float ty, float tz, float u, float v)']]],
-  ['vertexbufferbytesize_2',['VertexBufferByteSize',['../struct_mesh_geometry.html#a95d475544535050a64a841489a0e3269',1,'MeshGeometry']]],
-  ['vertexbuffercpu_3',['VertexBufferCPU',['../struct_mesh_geometry.html#a79e5e540605f4205197154469bf4194e',1,'MeshGeometry']]],
-  ['vertexbuffergpu_4',['VertexBufferGPU',['../struct_mesh_geometry.html#afc3be274ba79e6984225407560350438',1,'MeshGeometry']]],
-  ['vertexbufferuploader_5',['VertexBufferUploader',['../struct_mesh_geometry.html#a99726cbb8b6acc9599ccaae768032104',1,'MeshGeometry']]],
-  ['vertexbufferview_6',['VertexBufferView',['../struct_mesh_geometry.html#acec2bf9adf97ea1263702d66a69c8513',1,'MeshGeometry']]],
-  ['vertexbytestride_7',['VertexByteStride',['../struct_mesh_geometry.html#a809bd47a42dcf1f8512c55c663354fe9',1,'MeshGeometry']]],
-  ['vertices_8',['Vertices',['../struct_geometry_generator_1_1_mesh_data.html#a2a85f97f9a84b4f68d71cdcd41a7198b',1,'GeometryGenerator::MeshData']]],
-  ['view_9',['View',['../struct_pass_constants.html#a31fec7617b89727cc44c9802c57bb57a',1,'PassConstants']]],
-  ['viewproj_10',['ViewProj',['../struct_pass_constants.html#aa44b7dd1a9692065876bd8d2d6efb76c',1,'PassConstants']]]
+  ['tangentu_0',['TangentU',['../struct_geometry_generator_1_1_vertex.html#a717df2eee4e35bb0eb8f4ecf262edf4f',1,'GeometryGenerator::Vertex']]],
+  ['texc_1',['TexC',['../struct_vertex.html#a43e8c374e56c6ed3acc708ba2de1c70c',1,'Vertex::TexC()'],['../struct_geometry_generator_1_1_vertex.html#ab18dadcdb6a57e997bfd6d0e53e426c6',1,'GeometryGenerator::Vertex::TexC()']]],
+  ['textransform_2',['TexTransform',['../struct_object_constants.html#a0a7f8e4817a18595707569b307060a42',1,'ObjectConstants::TexTransform()'],['../class_render_item.html#ac6799548474209d172cbb3d337f56074',1,'RenderItem::TexTransform()']]],
+  ['texture_3',['Texture',['../struct_texture.html',1,'']]],
+  ['textureholder_4',['TextureHolder',['../_resource_identifiers_8h.html#a0b4b00b191f3f47dafa3c24868171754',1,'ResourceIdentifiers.h']]],
+  ['textures_5',['Textures',['../namespace_textures.html',1,'']]],
+  ['throwiffailed_6',['ThrowIfFailed',['../d3d_util_8h.html#af3892d76181a8a44edbd1a71a6ae9b97',1,'d3dUtil.h']]],
+  ['tick_7',['Tick',['../class_game_timer.html#ac02f02b90ae1c2d6a2834abb5069f367',1,'GameTimer']]],
+  ['title_8',['Title',['../namespace_states.html#a571a0dc62822f97bb9511eb013d8e1c3abe3968e68fb767032bf86cf4b08cb9e4',1,'States']]],
+  ['titlescreen_9',['TitleScreen',['../namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5ae36e9d9ef3bd838c5d625da49a0e9922',1,'Textures']]],
+  ['titlestate_10',['TitleState',['../class_title_state.html',1,'TitleState'],['../class_title_state.html#a98aa51d544ef29ed123a268e0e81b193',1,'TitleState::TitleState()']]],
+  ['titlestate_2ecpp_11',['TitleState.cpp',['../_title_state_8cpp.html',1,'']]],
+  ['titlestate_2eh_12',['TitleState.h',['../_title_state_8h.html',1,'']]],
+  ['titletext_13',['TitleText',['../namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a05c30c7e065c4943671e1e946e8f4553',1,'Textures']]],
+  ['tostring_14',['ToString',['../classd3d_util.html#ae0b7d841076df11833db2564c86faefe',1,'d3dUtil::ToString()'],['../class_dx_exception.html#a031a5ff549f043decbe96093e73dac27',1,'DxException::ToString()']]],
+  ['totaltime_15',['TotalTime',['../struct_pass_constants.html#a8b7dc8578d216518bff83264bc85d34c',1,'PassConstants::TotalTime()'],['../class_game_timer.html#a4d51c259eeb170d1841f84f41779592d',1,'GameTimer::TotalTime()']]],
+  ['transparent_16',['Transparent',['../_resource_identifiers_8h.html#aa63ede3e7371d4bc358f651428d23159a3d971943089a3388c01fb297a32d9ba7',1,'ResourceIdentifiers.h']]],
+  ['type_17',['Type',['../class_aircraft.html#a7dae28542933e088032b753600046acd',1,'Aircraft::Type()'],['../namespace_category.html#a2ff936dbd42aeae91fdfb6f8456a8ab0',1,'Category::Type()']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Game3015_A2_Eric_Galway_101252535_W2022: Include/SpriteNode.h Source File</title>
+<title>GAME3015 Final Assignment W2022 Eric Galway: Include/SpriteNode.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,9 +30,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Game3015_A2_Eric_Galway_101252535_W2022<span id="projectnumber">&#160;2.0</span>
+   <div id="projectname">GAME3015 Final Assignment W2022 Eric Galway<span id="projectnumber">&#160;3.0</span>
    </div>
-   <div id="projectbrief">Showcasing input handeling in Directx12</div>
+   <div id="projectbrief">Game made with DirectX 12 showcasing input handeling and a state machine</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -98,23 +98,29 @@ $(document).ready(function(){initNavTree('_sprite_node_8h_source.html',''); init
 <a href="_sprite_node_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="_scene_node_8h.html">SceneNode.h</a>&quot;</span>  </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="class_sprite_node.html">    7</a></span><span class="keyword">class </span><a class="code hl_class" href="class_sprite_node.html">SpriteNode</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_scene_node.html">SceneNode</a></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_function" href="class_sprite_node.html#a0f9529fa5cd03852ad18fb56c8fdcd66">SpriteNode</a>();</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_function" href="class_sprite_node.html#a0f9529fa5cd03852ad18fb56c8fdcd66">SpriteNode</a>(<span class="keywordtype">float</span> uScaling, <span class="keywordtype">float</span> vScaling, <a class="code hl_enumeration" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5">Textures::ID</a> <span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> DrawCurrent(<span class="keyword">const</span> <a class="code hl_class" href="class_game_timer.html">GameTimer</a>&amp; gt) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>};</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">class </span><a class="code hl_class" href="class_game.html">Game</a>;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_sprite_node.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="class_sprite_node.html">SpriteNode</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_scene_node.html">SceneNode</a></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_function" href="class_sprite_node.html#af9a13269b4f3d7a194e1826c704155dc">SpriteNode</a>(<a class="code hl_class" href="class_game.html">Game</a>* game);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_function" href="class_sprite_node.html#af9a13269b4f3d7a194e1826c704155dc">SpriteNode</a>(<a class="code hl_class" href="class_game.html">Game</a>* game, <span class="keywordtype">float</span> uScaling, <span class="keywordtype">float</span> vScaling, <a class="code hl_enumeration" href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5">Textures::ID</a> <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> DrawCurrent(<span class="keyword">const</span> <a class="code hl_class" href="class_game_timer.html">GameTimer</a>&amp; gt) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_class" href="class_game.html">Game</a>* mGame;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_class" href="class_render_item.html">RenderItem</a>* mSpriteNodeRenderItem;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>};</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
 <div class="ttc" id="a_scene_node_8h_html"><div class="ttname"><a href="_scene_node_8h.html">SceneNode.h</a></div></div>
+<div class="ttc" id="aclass_game_html"><div class="ttname"><a href="class_game.html">Game</a></div><div class="ttdoc">Game class that acts as application framework.</div><div class="ttdef"><b>Definition:</b> Game.h:23</div></div>
 <div class="ttc" id="aclass_game_timer_html"><div class="ttname"><a href="class_game_timer.html">GameTimer</a></div><div class="ttdef"><b>Definition:</b> GameTimer.h:9</div></div>
-<div class="ttc" id="aclass_scene_node_html"><div class="ttname"><a href="class_scene_node.html">SceneNode</a></div><div class="ttdoc">Class which all scene objects will inherit from.</div><div class="ttdef"><b>Definition:</b> SceneNode.h:23</div></div>
-<div class="ttc" id="aclass_sprite_node_html"><div class="ttname"><a href="class_sprite_node.html">SpriteNode</a></div><div class="ttdoc">Class that creates sprite nodes</div><div class="ttdef"><b>Definition:</b> SpriteNode.h:8</div></div>
-<div class="ttc" id="aclass_sprite_node_html_a0f9529fa5cd03852ad18fb56c8fdcd66"><div class="ttname"><a href="class_sprite_node.html#a0f9529fa5cd03852ad18fb56c8fdcd66">SpriteNode::SpriteNode</a></div><div class="ttdeci">SpriteNode()</div><div class="ttdoc">Default constructor for Sprite Node</div><div class="ttdef"><b>Definition:</b> SpriteNode.cpp:7</div></div>
-<div class="ttc" id="anamespace_textures_html_a2cfe2099537d4e80b08437b4978301a5"><div class="ttname"><a href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5">Textures::ID</a></div><div class="ttdeci">ID</div><div class="ttdoc">Enumeration for identifying textures.</div><div class="ttdef"><b>Definition:</b> ResourceIdentifiers.h:15</div></div>
+<div class="ttc" id="aclass_render_item_html"><div class="ttname"><a href="class_render_item.html">RenderItem</a></div><div class="ttdef"><b>Definition:</b> RenderItem.h:14</div></div>
+<div class="ttc" id="aclass_scene_node_html"><div class="ttname"><a href="class_scene_node.html">SceneNode</a></div><div class="ttdoc">Class which all scene objects will inherit from.</div><div class="ttdef"><b>Definition:</b> SceneNode.h:24</div></div>
+<div class="ttc" id="aclass_sprite_node_html"><div class="ttname"><a href="class_sprite_node.html">SpriteNode</a></div><div class="ttdoc">Class that creates sprite nodes</div><div class="ttdef"><b>Definition:</b> SpriteNode.h:10</div></div>
+<div class="ttc" id="aclass_sprite_node_html_af9a13269b4f3d7a194e1826c704155dc"><div class="ttname"><a href="class_sprite_node.html#af9a13269b4f3d7a194e1826c704155dc">SpriteNode::SpriteNode</a></div><div class="ttdeci">SpriteNode(Game *game)</div><div class="ttdoc">Default constructor for Sprite Node</div><div class="ttdef"><b>Definition:</b> SpriteNode.cpp:7</div></div>
+<div class="ttc" id="anamespace_textures_html_a2cfe2099537d4e80b08437b4978301a5"><div class="ttname"><a href="namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5">Textures::ID</a></div><div class="ttdeci">ID</div><div class="ttdoc">Enumeration for identifying textures.</div><div class="ttdef"><b>Definition:</b> ResourceIdentifiers.h:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

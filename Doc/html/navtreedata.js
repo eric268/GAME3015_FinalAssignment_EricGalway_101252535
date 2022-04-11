@@ -24,9 +24,9 @@
 */
 var NAVTREE =
 [
-  [ "Game3015_A2_Eric_Galway_101252535_W2022", "index.html", [
+  [ "GAME3015 Final Assignment W2022 Eric Galway", "index.html", [
     [ "Main Page", "index.html", [
-      [ "DirectX12 Engine Framework GAME3015 A2 W2022", "index.html#DirectX12", null ]
+      [ "DirectX12 Engine Framework GAME3015 Final Assignment W2022", "index.html#DirectX12", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -56,6 +56,7 @@ var NAVTREE =
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
         [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
@@ -67,8 +68,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_aircraft_8cpp.html",
-"class_game.html#a871400f233e46cc637f383106e89dd71",
-"struct_d_d_s___h_e_a_d_e_r___d_x_t10.html#a7208befc03e44222386ee54ee4fa9ec6"
+"class_d3_d_app.html#ab58c61812da3a6c656279c79c39f0600",
+"d3d_util_8h.html",
+"struct_pass_constants.html#aaae2d67cebf30e767a800a1e508e249a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

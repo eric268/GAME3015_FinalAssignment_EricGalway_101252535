@@ -41,15 +41,12 @@ public:
 
 	float GetClientWidth();
 	float GetClientHeight();
-
-	void AddTexture(Textures::ID id, std::wstring fileName);
 	void BuildFrameResources();
 	void BuildMaterials();
 	void BuildPSOs();
 	void InitalizeCamera(float radius, float theta, float phi);
 	void InitalizeState();
 	void LoadTextures();
-	void LoadText();
 
 	void BuildRootSignature();
 	void BuildDescriptorHeaps();

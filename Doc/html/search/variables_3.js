@@ -7,6 +7,7 @@ var searchData=
   ['diffusealbedo_4',['DiffuseAlbedo',['../struct_material_constants.html#a83cf6d979493301808d0e4b350c3e0a4',1,'MaterialConstants::DiffuseAlbedo()'],['../struct_material.html#a35fea10a83b154ec1e16d083e2d4e41f',1,'Material::DiffuseAlbedo()']]],
   ['diffusesrvheapindex_5',['DiffuseSrvHeapIndex',['../struct_material.html#ae0af64dd847942c26368b71faefe747e',1,'Material']]],
   ['direction_6',['Direction',['../struct_light.html#afd9b6884af30b8fdc7fee9a982572a0f',1,'Light']]],
-  ['drawargs_7',['DrawArgs',['../struct_mesh_geometry.html#a0b2c5e9269169fb7c5d838240957fd10',1,'MeshGeometry']]],
-  ['dxgiformat_8',['dxgiFormat',['../struct_d_d_s___h_e_a_d_e_r___d_x_t10.html#a7208befc03e44222386ee54ee4fa9ec6',1,'DDS_HEADER_DXT10']]]
+  ['doonce_7',['doOnce',['../class_game.html#a87f0bb2b7be99774183ddce1745a6ace',1,'Game']]],
+  ['drawargs_8',['DrawArgs',['../struct_mesh_geometry.html#a0b2c5e9269169fb7c5d838240957fd10',1,'MeshGeometry']]],
+  ['dxgiformat_9',['dxgiFormat',['../struct_d_d_s___h_e_a_d_e_r___d_x_t10.html#a7208befc03e44222386ee54ee4fa9ec6',1,'DDS_HEADER_DXT10']]]
 ];

@@ -28,12 +28,34 @@ var namespaces_dup =
       [ "CreateDDSTextureFromMemoryEx", "namespace_direct_x.html#a13b4faa7bfb3a14bd408730a0ea05628", null ],
       [ "CreateDDSTextureFromMemoryEx", "namespace_direct_x.html#a5839b6f2cb71965e2aeddef378e1fe6e", null ]
     ] ],
+    [ "Fonts", "namespace_fonts.html", [
+      [ "ID", "namespace_fonts.html#a240717ec0dc75e98501af734a02c396d", [
+        [ "Main", "namespace_fonts.html#a240717ec0dc75e98501af734a02c396da52f845eea0c76cc47d8748f6c47c1217", null ]
+      ] ]
+    ] ],
     [ "resourceIdentifier", "namespaceresource_identifier.html", null ],
+    [ "States", "namespace_states.html", [
+      [ "ID", "namespace_states.html#a571a0dc62822f97bb9511eb013d8e1c3", [
+        [ "None", "namespace_states.html#a571a0dc62822f97bb9511eb013d8e1c3ae18ebe696f4559ff77e50030089b4787", null ],
+        [ "Title", "namespace_states.html#a571a0dc62822f97bb9511eb013d8e1c3abe3968e68fb767032bf86cf4b08cb9e4", null ],
+        [ "Menu", "namespace_states.html#a571a0dc62822f97bb9511eb013d8e1c3a3d097da841211f87096e55962a1bd73f", null ],
+        [ "Game", "namespace_states.html#a571a0dc62822f97bb9511eb013d8e1c3a392b686639cb98b586bf0af7dc993633", null ],
+        [ "Loading", "namespace_states.html#a571a0dc62822f97bb9511eb013d8e1c3a2ab6dc64ee021d85a7be33ed811329df", null ],
+        [ "Pause", "namespace_states.html#a571a0dc62822f97bb9511eb013d8e1c3a7cbdc18ae28451f619eac360e384790a", null ]
+      ] ]
+    ] ],
     [ "Textures", "namespace_textures.html", [
       [ "ID", "namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5", [
         [ "Eagle", "namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5ad1a0e749b8999f54809596206b3a2348", null ],
         [ "Raptor", "namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a4c97457c9c6cbb65901f311d0afa82fa", null ],
         [ "Desert", "namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a6c78cd7357ece5bc1164456f4d63d167", null ],
+        [ "TitleScreen", "namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5ae36e9d9ef3bd838c5d625da49a0e9922", null ],
+        [ "Arrow", "namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5afaa93474c6eaed7f80a74f4f81552234", null ],
+        [ "PauseText", "namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a5439d0225b9a4289ac29589f5c7f59ea", null ],
+        [ "PlayText", "namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a06690db66eb89f81a5149ade3b73e37e", null ],
+        [ "QuitText", "namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a798bb85038e8221381d7602849b5621d", null ],
+        [ "MenuScreen", "namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5aa092ebc7460df2d985020fd54c85df5f", null ],
+        [ "TitleText", "namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5a05c30c7e065c4943671e1e946e8f4553", null ],
         [ "NUM_TEXTURE_IDS", "namespace_textures.html#a2cfe2099537d4e80b08437b4978301a5ad6bf97b41e18c15d87e7f158c854ea1c", null ]
       ] ]
     ] ]

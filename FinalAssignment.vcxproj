@@ -166,7 +166,6 @@
     <ClCompile Include="Source\State.cpp" />
     <ClCompile Include="Source\StateStack.cpp" />
     <ClCompile Include="Source\TitleState.cpp" />
-    <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -199,7 +198,6 @@
     <ClInclude Include="Include\StateIdentifiers.h" />
     <ClInclude Include="Include\StateStack.h" />
     <ClInclude Include="Include\TitleState.h" />
-    <ClInclude Include="Include\Utility.h" />
     <ClInclude Include="Include\World.h" />
   </ItemGroup>
   <ItemGroup>
